@@ -1,40 +1,5 @@
 [
   {
-    "title": "Rapid photonic processing of printed flexible perovskite solar cells for space applications",
-    "authors": [
-      "Mussakhan A. Aryslan",
-      "Yersain K. Nurmagambetov",
-      "Dinmukhamed Z. Sailau",
-      "Adilet T. Muratov",
-      "Hryhorii P. Parkhomenko",
-      "Yerassyl Yerlanuly",
-      "Asset S. Kusherbayev",
-      "Pablo F. Betancur",
-      "Teresa S. Ripolles",
-      "Chang-Qi Ma",
-      "Pablo P. Boix",
-      "Tri T. Pham",
-      "Maxim V. Zdorovets",
-      "Annie Ng",
-      "Askhat N. Jumabekov"
-    ],
-    "groupAuthors": [
-      "Pablo Franco Betancur",
-      "Teresa Ripollés Sanchis",
-      "Pablo P. Boix"
-    ],
-    "journal": "Solar Energy Materials and Solar Cells",
-    "publicationDate": "2027-01-01",
-    "year": 2027,
-    "volume": "309",
-    "issue": null,
-    "pages": "114703",
-    "doi": "10.1016/j.solmat.2026.114703",
-    "url": "https://doi.org/10.1016/j.solmat.2026.114703",
-    "type": "article",
-    "image": null
-  },
-  {
     "title": "Photon Recycling–Driven Photodetection Enhancement in Ni(AcO)\n                    <sub>2</sub>\n                    –MAPbBr\n                    <sub>3</sub>\n                    Nanocomposite Waveguides",
     "authors": [
       "Sandra Soriano‐Díaz",
@@ -140,40 +105,6 @@
     "pages": "e202600020",
     "doi": "10.1002/sstr.202600020",
     "url": "https://doi.org/10.1002/sstr.202600020",
-    "type": "article",
-    "image": null
-  },
-  {
-    "title": "Unravelling the Intrinsic Reactivity and Colloidal Instability in Tin‐Based Halide Perovskite Precursor Solutions",
-    "authors": [
-      "Jorge Pascual",
-      "Marion Flatken",
-      "Eros Radicchi",
-      "Mahmoud Aldamasy",
-      "Shuaifeng Hu",
-      "Omar E. Solis",
-      "Silver‐Hamill Turren‐Cruz",
-      "Guixiang Li",
-      "Armin Hoell",
-      "Susan Schorr",
-      "Meng Li",
-      "Filippo De Angelis",
-      "Artem Musiienko",
-      "André Dallmann",
-      "Antonio Abate"
-    ],
-    "groupAuthors": [
-      "Jorge Pascual Mielgo",
-      "Omar Eduardo Solis Luna"
-    ],
-    "journal": "Angewandte Chemie",
-    "publicationDate": "2026-03-24",
-    "year": 2026,
-    "volume": "138",
-    "issue": "18",
-    "pages": "e7703450",
-    "doi": "10.1002/ange.7703450",
-    "url": "https://doi.org/10.1002/ange.7703450",
     "type": "article",
     "image": null
   },
