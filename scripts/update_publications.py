@@ -33,9 +33,11 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 TEAM_FILE = ROOT / "data" / "publication_team.json"
+EXCLUDED_FILE = ROOT / "data" / "excluded_publications.json"
 OUTPUT_FILE = ROOT / "data" / "publications.json"
 
 MIN_PUBLICATION_DATE = date(2026, 1, 1)
+MAX_PUBLICATION_DATE = date.today()
 MIN_GROUP_AUTHORS = 2
 
 OPENALEX_BASE = "https://api.openalex.org"
@@ -90,6 +92,16 @@ def normalize_doi(value: str | None) -> str | None:
 
 def load_team() -> list[dict]:
     return json.loads(TEAM_FILE.read_text(encoding="utf-8"))
+
+def load_excluded_dois() -> set[str]:
+    if not EXCLUDED_FILE.exists():
+        return set()
+    values = json.loads(EXCLUDED_FILE.read_text(encoding="utf-8"))
+    return {
+        normalize_doi(value).lower()
+        for value in values
+        if normalize_doi(value)
+    }
 
 def build_member_indexes(team: list[dict]):
     by_orcid = {}
@@ -232,9 +244,15 @@ def fallback_openalex_date(work: dict) -> date | None:
             pass
     return None
 
-def make_record(work: dict, group_authors: list[str]) -> dict | None:
+def make_record(
+    work: dict,
+    group_authors: list[str],
+    excluded_dois: set[str],
+) -> dict | None:
     doi = normalize_doi(work.get("doi"))
     if not doi:
+        return None
+    if doi.lower() in excluded_dois:
         return None
 
     meta = crossref_metadata(doi)
@@ -247,7 +265,11 @@ def make_record(work: dict, group_authors: list[str]) -> dict | None:
             pass
 
     pub_date = pub_date or fallback_openalex_date(work)
-    if not pub_date or pub_date < MIN_PUBLICATION_DATE:
+    if (
+        not pub_date
+        or pub_date < MIN_PUBLICATION_DATE
+        or pub_date > MAX_PUBLICATION_DATE
+    ):
         return None
 
     oa_authors = [
@@ -275,8 +297,30 @@ def make_record(work: dict, group_authors: list[str]) -> dict | None:
         "image": None,
     }
 
+def remove_wiley_language_duplicates(records: list[dict]) -> list[dict]:
+    """
+    Wiley publica algunos artículos como pares equivalentes:
+    10.1002/ange.<suffix> (Angewandte Chemie)
+    10.1002/anie.<suffix> (Angewandte Chemie International Edition)
+
+    Si existen ambos DOI con el mismo sufijo, conserva la versión International Edition.
+    """
+    doi_set = {record["doi"].lower() for record in records if record.get("doi")}
+    cleaned = []
+
+    for record in records:
+        doi = record.get("doi", "").lower()
+        if doi.startswith("10.1002/ange."):
+            international_doi = doi.replace("10.1002/ange.", "10.1002/anie.", 1)
+            if international_doi in doi_set:
+                continue
+        cleaned.append(record)
+
+    return cleaned
+
 def main():
     team = load_team()
+    excluded_dois = load_excluded_dois()
     by_orcid, aliases = build_member_indexes(team)
 
     try:
@@ -290,13 +334,14 @@ def main():
         group_authors = identify_group_authors(work, by_orcid, aliases)
         if len(group_authors) < MIN_GROUP_AUTHORS:
             continue
-        record = make_record(work, group_authors)
+        record = make_record(work, group_authors, excluded_dois)
         if record:
             detected.append(record)
 
     by_doi = {r["doi"].lower(): r for r in detected}
+    deduplicated = remove_wiley_language_duplicates(list(by_doi.values()))
     final_records = sorted(
-        by_doi.values(),
+        deduplicated,
         key=lambda r: (r.get("publicationDate") or "", r.get("title") or ""),
         reverse=True,
     )
