@@ -12,6 +12,10 @@ data/publications.json
     Dataset que debe leer la web.
     Está precargado con publicaciones verificadas desde 01/01/2026 con >=2 miembros.
 
+data/excluded_publications.json
+    Lista manual de DOI que nunca deben aparecer en la web.
+    Para excluir una publicación, añade su DOI a este archivo y ejecuta el workflow.
+
 scripts/update_publications.py
     Actualiza publications.json usando OpenAlex + Crossref.
 
@@ -35,10 +39,14 @@ Luego:
 REGLAS
 ------
 MIN_PUBLICATION_DATE = 2026-01-01
+MAX_PUBLICATION_DATE = fecha actual
 MIN_GROUP_AUTHORS = 2
 
 - Artículos y reviews.
 - Se descartan publicaciones anteriores al 01/01/2026.
+- Se descartan publicaciones con fecha futura.
+- Los DOI incluidos en data/excluded_publications.json se excluyen permanentemente.
+- Si existen las versiones Wiley ange/anie del mismo artículo, se conserva anie (International Edition).
 - Dedupe por DOI.
 - Se intenta usar la primera fecha pública disponible en Crossref.
 - Los ORCID conocidos descubren trabajos.
