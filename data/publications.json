@@ -23,7 +23,11 @@
     "doi": "10.1002/nap2.70196",
     "url": "https://doi.org/10.1002/nap2.70196",
     "type": "article",
-    "image": null
+    "image": null,
+    "groupAuthorDisplayNames": [
+      "Pablo P. Boix",
+      "Rafael Abargues"
+    ]
   },
   {
     "title": "Triiodide Faujasites With Reactive, Ionic, Antimicrobial, and Catalytic Applications",
@@ -49,7 +53,11 @@
     "doi": "10.1002/sstr.70540",
     "url": "https://doi.org/10.1002/sstr.70540",
     "type": "article",
-    "image": null
+    "image": null,
+    "groupAuthorDisplayNames": [
+      "Miriam Minguez‐Avellan",
+      "Pablo P. Boix"
+    ]
   },
   {
     "title": "Sunlight‐Driven Green Synthesis of Platinum Nanoparticles From Double‐Vacancy Halide Perovskite Precursors for Methanol Reforming",
@@ -73,7 +81,11 @@
     "doi": "10.1002/chem.202503192",
     "url": "https://doi.org/10.1002/chem.202503192",
     "type": "article",
-    "image": null
+    "image": null,
+    "groupAuthorDisplayNames": [
+      "Kevin Mego",
+      "Pedro Atienzar"
+    ]
   },
   {
     "title": "Highly Transparent BiEDOT‐Based Conducting Polymers as Tailorable Hole Transport Materials for Perovskite Solar Cells",
@@ -106,7 +118,14 @@
     "doi": "10.1002/sstr.202600020",
     "url": "https://doi.org/10.1002/sstr.202600020",
     "type": "article",
-    "image": null
+    "image": null,
+    "groupAuthorDisplayNames": [
+      "Miriam Minguez‐Avellan",
+      "Pablo F. Betancur",
+      "Pablo P. Boix",
+      "Teresa S. Ripolles",
+      "Rafael Abargues"
+    ]
   },
   {
     "title": "Unravelling the Intrinsic Reactivity and Colloidal Instability in Tin‐Based Halide Perovskite Precursor Solutions",
@@ -140,7 +159,11 @@
     "doi": "10.1002/anie.7703450",
     "url": "https://doi.org/10.1002/anie.7703450",
     "type": "article",
-    "image": null
+    "image": null,
+    "groupAuthorDisplayNames": [
+      "Jorge Pascual",
+      "Omar E. Solis"
+    ]
   },
   {
     "title": "Transforming Device Efficiency and Stability in NiO‐Sputtered n–i–p Perovskite Solar Cells by Soft‐Landing and a Thin Spiro‐OMeTAD Buffer Layer",
@@ -172,7 +195,11 @@
     "doi": "10.1002/aenm.202503291",
     "url": "https://doi.org/10.1002/aenm.202503291",
     "type": "article",
-    "image": null
+    "image": null,
+    "groupAuthorDisplayNames": [
+      "Sudeshna Ghosh",
+      "Pablo P. Boix"
+    ]
   },
   {
     "title": "Rapid Laser-Based Deposition of PbI\n                    <sub>2</sub>\n                    /CsBr Inorganic Scaffolds for Hybrid Fabrication of Perovskite/Silicon Tandem Solar Cells",
@@ -202,7 +229,11 @@
     "doi": "10.1021/acsenergylett.5c04010",
     "url": "https://doi.org/10.1021/acsenergylett.5c04010",
     "type": "article",
-    "image": null
+    "image": null,
+    "groupAuthorDisplayNames": [
+      "Miriam Minguez-Avellan",
+      "Pablo P. Boix"
+    ]
   },
   {
     "title": "Ambient\n                    <i>operando</i>\n                    self-healing in tin perovskite solar cells",
@@ -234,6 +265,15 @@
     "doi": "10.1039/d5el00182j",
     "url": "https://doi.org/10.1039/d5el00182j",
     "type": "article",
-    "image": null
+    "image": null,
+    "groupAuthorDisplayNames": [
+      "Miriam Minguez-Avellan",
+      "Omar E. Solis",
+      "Pablo F. Betancur",
+      "Jorge Pascual",
+      "Teresa S. Ripolles",
+      "Rafael Abargues",
+      "Pablo P. Boix"
+    ]
   }
 ]
