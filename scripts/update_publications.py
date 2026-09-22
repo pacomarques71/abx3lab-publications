@@ -106,13 +106,22 @@ def load_excluded_dois() -> set[str]:
 def build_member_indexes(team: list[dict]):
     by_orcid = {}
     aliases = {}
+    aliases_by_member = {}
     for member in team:
         oid = normalize_orcid(member.get("orcid"))
         if oid:
             by_orcid[oid] = member["name"]
+
+        member_aliases = set()
         for alias in [member["name"], *member.get("aliases", [])]:
-            aliases[normalize_text(alias)] = member["name"]
-    return by_orcid, aliases
+            normalized = normalize_text(alias)
+            if normalized:
+                aliases[normalized] = member["name"]
+                member_aliases.add(normalized)
+
+        aliases_by_member[member["name"]] = member_aliases
+
+    return by_orcid, aliases, aliases_by_member
 
 def openalex_work_key(work: dict) -> str:
     doi = normalize_doi(work.get("doi"))
@@ -248,6 +257,7 @@ def make_record(
     work: dict,
     group_authors: list[str],
     excluded_dois: set[str],
+    aliases_by_member: dict[str, set[str]],
 ) -> dict | None:
     doi = normalize_doi(work.get("doi"))
     if not doi:
@@ -277,14 +287,29 @@ def make_record(
         for a in work.get("authorships", [])
         if (a.get("author") or {}).get("display_name")
     ]
+    rendered_authors = meta.get("authors") or oa_authors
+
+    # Store the exact author strings used in the rendered bibliography.
+    # This lets the frontend highlight "Omar E. Solis" while groupAuthors
+    # keeps the canonical identity "Omar Eduardo Solis Luna".
+    group_author_display_names = []
+    for author in rendered_authors:
+        normalized_author = normalize_text(author)
+        if any(
+            normalized_author in aliases_by_member.get(member, set())
+            for member in group_authors
+        ):
+            group_author_display_names.append(author)
+
     primary_location = work.get("primary_location") or {}
     source = primary_location.get("source") or {}
     biblio = work.get("biblio") or {}
 
     return {
         "title": meta.get("title") or work.get("title"),
-        "authors": meta.get("authors") or oa_authors,
+        "authors": rendered_authors,
         "groupAuthors": group_authors,
+        "groupAuthorDisplayNames": group_author_display_names,
         "journal": meta.get("journal") or source.get("display_name"),
         "publicationDate": pub_date.isoformat(),
         "year": pub_date.year,
@@ -321,7 +346,7 @@ def remove_wiley_language_duplicates(records: list[dict]) -> list[dict]:
 def main():
     team = load_team()
     excluded_dois = load_excluded_dois()
-    by_orcid, aliases = build_member_indexes(team)
+    by_orcid, aliases, aliases_by_member = build_member_indexes(team)
 
     try:
         works = discover_works(team)
@@ -334,7 +359,12 @@ def main():
         group_authors = identify_group_authors(work, by_orcid, aliases)
         if len(group_authors) < MIN_GROUP_AUTHORS:
             continue
-        record = make_record(work, group_authors, excluded_dois)
+        record = make_record(
+            work,
+            group_authors,
+            excluded_dois,
+            aliases_by_member,
+        )
         if record:
             detected.append(record)
 
