@@ -3,7 +3,7 @@
 Actualiza data/publications.json usando OpenAlex + Crossref.
 
 Reglas:
-- Fecha mínima: 2026-01-01.
+- Fecha bibliográfica mínima: 2026-01-01 (número de revista si está disponible).
 - Solo artículos/reviews.
 - Al menos 2 miembros del grupo.
 - ORCID prioritario; aliases como fallback.
@@ -25,6 +25,7 @@ import re
 import sys
 import time
 import unicodedata
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -138,24 +139,35 @@ def discover_works(team: list[dict]) -> dict[str, dict]:
 
         filters = (
             f"author.orcid:{orcid},"
-            f"from_publication_date:{MIN_PUBLICATION_DATE.isoformat()},"
             f"type:article|review"
         )
         params = {
             "filter": filters,
             "sort": "publication_date:desc",
             "per_page": "100",
+            "cursor": "*",
+            "select": "id,doi,title,authorships,primary_location,biblio,type,publication_date,publication_year",
         }
         if OPENALEX_API_KEY:
             params["api_key"] = OPENALEX_API_KEY
 
-        url = f"{OPENALEX_BASE}/works?{urlencode(params)}"
         print(f"Consultando OpenAlex: {member['name']} ({orcid})")
-        payload = fetch_json(url)
+        # OpenAlex dates early-online articles before their final journal issue.
+        # Discover the full history, then apply the bibliographic date in Crossref.
+        # Cursor pagination prevents the wider search from stopping at 100 works.
+        while True:
+            url = f"{OPENALEX_BASE}/works?{urlencode(params)}"
+            payload = fetch_json(url)
+            for work in payload.get("results", []):
+                works[openalex_work_key(work)] = work
+            cursor = (payload.get("meta") or {}).get("next_cursor")
+            if not cursor or not payload.get("results"):
+                break
+            if cursor == params["cursor"]:
+                raise RuntimeError("OpenAlex devolvió un cursor repetido.")
+            params["cursor"] = cursor
+            time.sleep(0.15)
         queried += 1
-
-        for work in payload.get("results", []):
-            works[openalex_work_key(work)] = work
 
         time.sleep(0.15)
 
@@ -207,15 +219,24 @@ def crossref_metadata(doi: str) -> dict:
         print(f"  Aviso: Crossref no disponible para {doi}: {exc}")
         return {}
 
-    dates = []
+    dates = {}
     for key in ("published-online", "published-print", "published", "issued"):
         parts = (msg.get(key) or {}).get("date-parts")
         if parts and parts[0]:
             parsed = date_from_parts(parts[0])
             if parsed:
-                dates.append(parsed)
+                dates[key] = parsed
 
-    first_date = min(dates) if dates else None
+    # Prefer the final issue date, not the earliest online appearance.
+    # Online-only journals may supply their bibliographic year in published/issued.
+    has_issue = bool(msg.get("volume") or msg.get("issue"))
+    if has_issue:
+        pub_date = (dates.get("published-print") or dates.get("published")
+                    or dates.get("issued") or dates.get("published-online"))
+    else:
+        pub_date = (dates.get("published-online") or dates.get("published")
+                    or dates.get("issued") or dates.get("published-print"))
+    online_date = dates.get("published-online")
 
     authors = []
     for author in msg.get("author", []) or []:
@@ -232,7 +253,8 @@ def crossref_metadata(doi: str) -> dict:
         "title": titles[0] if titles else None,
         "authors": authors,
         "journal": journals[0] if journals else None,
-        "publicationDate": first_date.isoformat() if first_date else None,
+        "publicationDate": pub_date.isoformat() if pub_date else None,
+        "onlinePublicationDate": online_date.isoformat() if online_date else None,
         "volume": msg.get("volume"),
         "issue": msg.get("issue"),
         "pages": msg.get("page") or msg.get("article-number"),
@@ -282,6 +304,13 @@ def make_record(
     ):
         return None
 
+    # Preserve the earliest known online/public appearance separately. OpenAlex
+    # can retain the exact online date when Crossref only supplies the issue year.
+    online_dates = [d for d in (fallback_openalex_date(work),
+                    date.fromisoformat(meta["onlinePublicationDate"])
+                    if meta.get("onlinePublicationDate") else None) if d]
+    online_date = min(online_dates) if online_dates else None
+
     oa_authors = [
         (a.get("author") or {}).get("display_name")
         for a in work.get("authorships", [])
@@ -312,6 +341,7 @@ def make_record(
         "groupAuthorDisplayNames": group_author_display_names,
         "journal": meta.get("journal") or source.get("display_name"),
         "publicationDate": pub_date.isoformat(),
+        "onlinePublicationDate": online_date.isoformat() if online_date else None,
         "year": pub_date.year,
         "volume": meta.get("volume") or biblio.get("volume"),
         "issue": meta.get("issue") or biblio.get("issue"),
@@ -354,19 +384,27 @@ def main():
         print(f"\nERROR: no se ha modificado publications.json.\n{exc}", file=sys.stderr)
         raise SystemExit(1)
 
-    detected = []
+    candidates = []
     for work in works.values():
         group_authors = identify_group_authors(work, by_orcid, aliases)
         if len(group_authors) < MIN_GROUP_AUTHORS:
             continue
-        record = make_record(
-            work,
-            group_authors,
-            excluded_dois,
-            aliases_by_member,
-        )
-        if record:
-            detected.append(record)
+        candidates.append((work, group_authors))
+
+    def build_record(candidate):
+        work, group_authors = candidate
+        return make_record(work, group_authors, excluded_dois, aliases_by_member)
+
+    print(f"Comprobando fechas bibliográficas de {len(candidates)} trabajos del grupo.")
+    detected = []
+    # Full-history discovery requires more Crossref lookups. Bound concurrency
+    # so the weekly job remains practical without flooding the metadata service.
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        for index, record in enumerate(pool.map(build_record, candidates), 1):
+            if record:
+                detected.append(record)
+            if index % 50 == 0:
+                print(f"  Revisados {index}/{len(candidates)} trabajos.")
 
     by_doi = {r["doi"].lower(): r for r in detected}
     deduplicated = remove_wiley_language_duplicates(list(by_doi.values()))

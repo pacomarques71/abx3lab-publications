@@ -43,12 +43,17 @@ MAX_PUBLICATION_DATE = fecha actual
 MIN_GROUP_AUTHORS = 2
 
 - Artículos y reviews.
-- Se descartan publicaciones anteriores al 01/01/2026.
+- Se descartan publicaciones con fecha bibliográfica anterior al 01/01/2026.
 - Se descartan publicaciones con fecha futura.
 - Los DOI incluidos en data/excluded_publications.json se excluyen permanentemente.
 - Si existen las versiones Wiley ange/anie del mismo artículo, se conserva anie (International Edition).
 - Dedupe por DOI.
-- Se intenta usar la primera fecha pública disponible en Crossref.
+- Si hay volumen o número asignado, se prioriza la fecha del número (published-print
+  de Crossref; en su defecto published/issued). Sin número, se prioriza la fecha online.
+- publicationDate y year reflejan ese criterio bibliográfico. La primera aparición
+  pública conocida se conserva por separado en onlinePublicationDate.
+- La búsqueda de OpenAlex recorre todas las páginas sin cortar por fecha online;
+  así se incluyen artículos online de 2025 asignados a números de 2026.
 - Los ORCID conocidos descubren trabajos.
 - Los miembros con ORCID=null pueden contar por aliases dentro de un trabajo ya descubierto.
 

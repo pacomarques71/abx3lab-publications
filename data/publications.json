@@ -1,5 +1,34 @@
 [
   {
+    "title": "Sunlight‐Driven Green Synthesis of Platinum Nanoparticles From Double‐Vacancy Halide Perovskite Precursors for Methanol Reforming",
+    "authors": [
+      "Kevin Mego",
+      "Saray Chacón‐Ruiz",
+      "Pedro Ruiz‐Campos",
+      "Herme G. Baldoví",
+      "Pedro Atienzar"
+    ],
+    "groupAuthors": [
+      "Froy Kevin Mego de la Cruz",
+      "Pedro Atienzar"
+    ],
+    "groupAuthorDisplayNames": [
+      "Kevin Mego",
+      "Pedro Atienzar"
+    ],
+    "journal": "Chemistry – A European Journal",
+    "publicationDate": "2026-08-24",
+    "onlinePublicationDate": "2026-05-11",
+    "year": 2026,
+    "volume": "32",
+    "issue": "32",
+    "pages": "e03192",
+    "doi": "10.1002/chem.202503192",
+    "url": "https://doi.org/10.1002/chem.202503192",
+    "type": "article",
+    "image": null
+  },
+  {
     "title": "Photon Recycling–Driven Photodetection Enhancement in Ni(AcO)\n                    <sub>2</sub>\n                    –MAPbBr\n                    <sub>3</sub>\n                    Nanocomposite Waveguides",
     "authors": [
       "Sandra Soriano‐Díaz",
@@ -19,7 +48,8 @@
       "Rafael Abargues"
     ],
     "journal": "Nanophotonics",
-    "publicationDate": "2026-07-02",
+    "publicationDate": "2026-07-13",
+    "onlinePublicationDate": "2026-07-02",
     "year": 2026,
     "volume": "15",
     "issue": "13",
@@ -50,40 +80,13 @@
     ],
     "journal": "Small Structures",
     "publicationDate": "2026-07-01",
+    "onlinePublicationDate": "2026-07-01",
     "year": 2026,
     "volume": "7",
     "issue": "7",
     "pages": "e70540",
     "doi": "10.1002/sstr.70540",
     "url": "https://doi.org/10.1002/sstr.70540",
-    "type": "article",
-    "image": null
-  },
-  {
-    "title": "Sunlight‐Driven Green Synthesis of Platinum Nanoparticles From Double‐Vacancy Halide Perovskite Precursors for Methanol Reforming",
-    "authors": [
-      "Kevin Mego",
-      "Saray Chacón‐Ruiz",
-      "Pedro Ruiz‐Campos",
-      "Herme G. Baldoví",
-      "Pedro Atienzar"
-    ],
-    "groupAuthors": [
-      "Froy Kevin Mego de la Cruz",
-      "Pedro Atienzar"
-    ],
-    "groupAuthorDisplayNames": [
-      "Kevin Mego",
-      "Pedro Atienzar"
-    ],
-    "journal": "Chemistry – A European Journal",
-    "publicationDate": "2026-05-11",
-    "year": 2026,
-    "volume": "32",
-    "issue": "32",
-    "pages": "e03192",
-    "doi": "10.1002/chem.202503192",
-    "url": "https://doi.org/10.1002/chem.202503192",
     "type": "article",
     "image": null
   },
@@ -119,7 +122,8 @@
       "Rafael Abargues"
     ],
     "journal": "Small Structures",
-    "publicationDate": "2026-04-29",
+    "publicationDate": "2026-05-01",
+    "onlinePublicationDate": "2026-04-29",
     "year": 2026,
     "volume": "7",
     "issue": "5",
@@ -157,7 +161,8 @@
       "Omar E. Solis"
     ],
     "journal": "Angewandte Chemie International Edition",
-    "publicationDate": "2026-03-23",
+    "publicationDate": "2026-04-27",
+    "onlinePublicationDate": "2026-03-23",
     "year": 2026,
     "volume": "65",
     "issue": "18",
@@ -193,7 +198,8 @@
       "Pablo P. Boix"
     ],
     "journal": "Advanced Energy Materials",
-    "publicationDate": "2026-02-18",
+    "publicationDate": "2026-04-01",
+    "onlinePublicationDate": "2026-02-18",
     "year": 2026,
     "volume": "16",
     "issue": "16",
@@ -227,13 +233,71 @@
       "Pablo P. Boix"
     ],
     "journal": "ACS Energy Letters",
-    "publicationDate": "2026-02-06",
+    "publicationDate": "2026-03-13",
+    "onlinePublicationDate": "2026-02-06",
     "year": 2026,
     "volume": "11",
     "issue": "3",
     "pages": "2798-2809",
     "doi": "10.1021/acsenergylett.5c04010",
     "url": "https://doi.org/10.1021/acsenergylett.5c04010",
+    "type": "article",
+    "image": null
+  },
+  {
+    "title": "OER Activity Promoted by Organic Ligand‐Free Cs\n                    <sub>2</sub>\n                    Pt(Cl, Br)\n                    <sub>6</sub>\n                    Perovskite Photocatalyst for Solar‐Driven Water Splitting",
+    "authors": [
+      "Kevin Mego",
+      "Pedro Ruiz‐Campos",
+      "Herme G. Baldoví",
+      "Pedro Atienzar"
+    ],
+    "groupAuthors": [
+      "Froy Kevin Mego de la Cruz",
+      "Pedro Atienzar"
+    ],
+    "groupAuthorDisplayNames": [
+      "Kevin Mego",
+      "Pedro Atienzar"
+    ],
+    "journal": "Advanced Energy and Sustainability Research",
+    "publicationDate": "2026-02-01",
+    "onlinePublicationDate": "2025-10-15",
+    "year": 2026,
+    "volume": "7",
+    "issue": "2",
+    "pages": "e202500105",
+    "doi": "10.1002/aesr.202500105",
+    "url": "https://doi.org/10.1002/aesr.202500105",
+    "type": "article",
+    "image": null
+  },
+  {
+    "title": "CsPbBr\n                    <sub>3</sub>\n                    nanocrystals supported on a partially oxidized Ti\n                    <sub>2</sub>\n                    N MXene for photothermal CO\n                    <sub>2</sub>\n                    conversion",
+    "authors": [
+      "Kevin Mego",
+      "Emanuela Accardo",
+      "Pedro Ruiz-Campos",
+      "Herme G. Baldoví",
+      "Pedro Atienzar"
+    ],
+    "groupAuthors": [
+      "Froy Kevin Mego de la Cruz",
+      "Pedro Atienzar"
+    ],
+    "groupAuthorDisplayNames": [
+      "Kevin Mego",
+      "Pedro Atienzar"
+    ],
+    "journal": "Materials Advances",
+    "publicationDate": "2026-01-01",
+    "onlinePublicationDate": "2025-12-29",
+    "year": 2026,
+    "volume": "7",
+    "issue": "4",
+    "pages": "2465-2480",
+    "doi": "10.1039/d5ma01122a",
+    "url": "https://doi.org/10.1039/d5ma01122a",
     "type": "article",
     "image": null
   },
@@ -271,6 +335,7 @@
     ],
     "journal": "EES Solar",
     "publicationDate": "2026-01-01",
+    "onlinePublicationDate": "2026-01-01",
     "year": 2026,
     "volume": "2",
     "issue": "2",
