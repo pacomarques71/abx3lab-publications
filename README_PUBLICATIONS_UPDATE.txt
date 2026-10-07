@@ -44,7 +44,15 @@ MIN_GROUP_AUTHORS = 2
 
 - Artículos y reviews.
 - Se descartan publicaciones con fecha bibliográfica anterior al 01/01/2026.
-- Se descartan publicaciones con fecha futura.
+- Artículos ya publicados online pero asignados a un número con fecha futura
+  (habitual en Elsevier: p. ej. volumen de enero de 2027 publicado online en
+  septiembre de 2026): se incluyen ya. Mientras el número sea futuro,
+  publicationDate y year usan la fecha online y la fecha del número se guarda en
+  issueDate. Cuando llega la fecha del número, pasan a la fecha del número.
+  Si Crossref no da fecha online, se usa la fecha de registro del DOI (created).
+- Se descartan solo las publicaciones que todavía no son públicas.
+- NO usar excluded_publications.json para publicaciones "futuras": la exclusión
+  es permanente y la publicación no aparecería nunca.
 - Los DOI incluidos en data/excluded_publications.json se excluyen permanentemente.
 - Si existen las versiones Wiley ange/anie del mismo artículo, se conserva anie (International Edition).
 - Dedupe por DOI.
