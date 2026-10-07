@@ -4,6 +4,9 @@ Actualiza data/publications.json usando OpenAlex + Crossref.
 
 Reglas:
 - Fecha bibliográfica mínima: 2026-01-01 (número de revista si está disponible).
+- Artículos ya publicados online pero asignados a un número futuro (p. ej.
+  Elsevier, volumen de 2027): se incluyen con su fecha online hasta que llega
+  la fecha del número; después pasan a la fecha del número.
 - Solo artículos/reviews.
 - Al menos 2 miembros del grupo.
 - ORCID prioritario; aliases como fallback.
@@ -220,7 +223,7 @@ def crossref_metadata(doi: str) -> dict:
         return {}
 
     dates = {}
-    for key in ("published-online", "published-print", "published", "issued"):
+    for key in ("published-online", "published-print", "published", "issued", "created"):
         parts = (msg.get(key) or {}).get("date-parts")
         if parts and parts[0]:
             parsed = date_from_parts(parts[0])
@@ -237,6 +240,10 @@ def crossref_metadata(doi: str) -> dict:
         pub_date = (dates.get("published-online") or dates.get("published")
                     or dates.get("issued") or dates.get("published-print"))
     online_date = dates.get("published-online")
+    # Fecha de registro del DOI en Crossref. Algunas editoriales (Elsevier) no
+    # depositan published-online y solo indican el número futuro; "created"
+    # aproxima entonces la fecha en que el artículo se hizo público.
+    created_date = dates.get("created")
 
     authors = []
     for author in msg.get("author", []) or []:
@@ -255,6 +262,7 @@ def crossref_metadata(doi: str) -> dict:
         "journal": journals[0] if journals else None,
         "publicationDate": pub_date.isoformat() if pub_date else None,
         "onlinePublicationDate": online_date.isoformat() if online_date else None,
+        "createdDate": created_date.isoformat() if created_date else None,
         "volume": msg.get("volume"),
         "issue": msg.get("issue"),
         "pages": msg.get("page") or msg.get("article-number"),
@@ -297,11 +305,7 @@ def make_record(
             pass
 
     pub_date = pub_date or fallback_openalex_date(work)
-    if (
-        not pub_date
-        or pub_date < MIN_PUBLICATION_DATE
-        or pub_date > MAX_PUBLICATION_DATE
-    ):
+    if not pub_date or pub_date < MIN_PUBLICATION_DATE:
         return None
 
     # Preserve the earliest known online/public appearance separately. OpenAlex
@@ -310,6 +314,21 @@ def make_record(
                     date.fromisoformat(meta["onlinePublicationDate"])
                     if meta.get("onlinePublicationDate") else None) if d]
     online_date = min(online_dates) if online_dates else None
+
+    # Número de revista con fecha futura: si el artículo ya es público, se muestra
+    # y ordena por su fecha online hasta que llegue la fecha del número.
+    issue_date = None
+    if pub_date > MAX_PUBLICATION_DATE:
+        # Sin fecha online pasada (Elsevier solo deposita el número futuro): usar
+        # la fecha de registro del DOI en Crossref como aproximación.
+        if (not online_date or online_date > MAX_PUBLICATION_DATE) and meta.get("createdDate"):
+            created = date.fromisoformat(meta["createdDate"])
+            if created <= MAX_PUBLICATION_DATE:
+                online_date = created
+        if not online_date or online_date > MAX_PUBLICATION_DATE:
+            return None
+        issue_date = pub_date
+        pub_date = online_date
 
     oa_authors = [
         (a.get("author") or {}).get("display_name")
@@ -342,6 +361,7 @@ def make_record(
         "journal": meta.get("journal") or source.get("display_name"),
         "publicationDate": pub_date.isoformat(),
         "onlinePublicationDate": online_date.isoformat() if online_date else None,
+        "issueDate": issue_date.isoformat() if issue_date else None,
         "year": pub_date.year,
         "volume": meta.get("volume") or biblio.get("volume"),
         "issue": meta.get("issue") or biblio.get("issue"),
