@@ -43,12 +43,40 @@ class PublicationDatesTest(unittest.TestCase):
         record = self.record({"published-online": {"date-parts": [[2026, 9, 1]]}}, "2026-09-01")
         self.assertEqual(record["publicationDate"], "2026-09-01")
 
-    def test_old_and_future_issue_dates_are_excluded(self):
-        for year in (2025, 2027):
-            with self.subTest(year=year):
-                self.assertIsNone(self.record({
-                    "volume": "7", "published-print": {"date-parts": [[year, 2]]},
-                }, "2025-10-15"))
+    def test_old_issue_dates_are_excluded(self):
+        self.assertIsNone(self.record({
+            "volume": "7", "published-print": {"date-parts": [[2025, 2]]},
+        }, "2025-10-15"))
+
+    def test_future_issue_not_yet_online_is_excluded(self):
+        self.assertIsNone(self.record({
+            "volume": "7", "published-print": {"date-parts": [[2027, 2]]},
+            "created": {"date-parts": [[2026, 11, 20]]},
+        }, "2027-02-01"))
+
+    def test_elsevier_future_issue_already_online_is_included(self):
+        # 10.1016/j.solmat.2026.114703: Crossref only has vol. 309 (January 2027)
+        # and the DOI registration date; no published-online.
+        metadata = {
+            "volume": "309", "article-number": "114703",
+            "published-print": {"date-parts": [[2027, 1]]},
+            "published": {"date-parts": [[2027, 1]]},
+            "issued": {"date-parts": [[2027, 1]]},
+            "created": {"date-parts": [[2026, 9, 17]]},
+        }
+        record = self.record(metadata, "2027-01-01")
+        self.assertEqual(record["publicationDate"], "2026-09-17")
+        self.assertEqual(record["onlinePublicationDate"], "2026-09-17")
+        self.assertEqual(record["issueDate"], "2027-01-01")
+        self.assertEqual(record["year"], 2026)
+
+        # Once the issue date has passed, the bibliographic date applies again.
+        work = {"doi": "https://doi.org/10.1016/example", "publication_date": "2027-01-01"}
+        with patch.object(updater, "fetch_json", return_value={"message": metadata}), \
+             patch.object(updater, "MAX_PUBLICATION_DATE", date(2027, 1, 15)):
+            later = updater.make_record(work, ["Pablo P. Boix", "Teresa Ripollés Sanchis"], set(), {})
+        self.assertEqual(later["publicationDate"], "2027-01-01")
+        self.assertIsNone(later["issueDate"])
 
     def test_discovery_reaches_older_pages_without_online_date_filter(self):
         pages = [
