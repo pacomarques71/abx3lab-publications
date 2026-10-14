@@ -1,0 +1,517 @@
+[
+  {
+    "title": "Compositional Engineering of Monocrystalline Metal Halide Perovskite Memristors for Multistate Non‐Volatile Operation",
+    "authors": [
+      "Ismael Fernandez‐Guillen",
+      "Miriam Minguez‐Avellan",
+      "Clara A. Aranda",
+      "Pedro Atienzar",
+      "Rafael Abargues",
+      "Teresa S. Ripolles",
+      "Pablo P. Boix"
+    ],
+    "groupAuthors": [
+      "Miriam Mínguez Avellán",
+      "Pedro Atienzar",
+      "Rafael Abargues López",
+      "Teresa Ripollés Sanchis",
+      "Pablo P. Boix"
+    ],
+    "groupAuthorDisplayNames": [
+      "Miriam Minguez‐Avellan",
+      "Pedro Atienzar",
+      "Rafael Abargues",
+      "Teresa S. Ripolles",
+      "Pablo P. Boix"
+    ],
+    "groupMembers": [
+      {
+        "name": "Miriam Mínguez Avellán",
+        "display": "Miriam Minguez‐Avellan",
+        "profile": "/equipo/#miriam-minguez"
+      },
+      {
+        "name": "Pedro Atienzar",
+        "display": "Pedro Atienzar",
+        "profile": "/equipo/#pedro-atienzar"
+      },
+      {
+        "name": "Rafael Abargues López",
+        "display": "Rafael Abargues",
+        "profile": "/equipo/#rafael-abargues"
+      },
+      {
+        "name": "Teresa Ripollés Sanchis",
+        "display": "Teresa S. Ripolles",
+        "profile": "/equipo/"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      }
+    ],
+    "journal": "Advanced Electronic Materials",
+    "publicationDate": "2025-12-01",
+    "onlinePublicationDate": "2025-11-19",
+    "issueDate": null,
+    "year": 2025,
+    "volume": "11",
+    "issue": "20",
+    "pages": "e00494",
+    "doi": "10.1002/aelm.202500494",
+    "url": "https://doi.org/10.1002/aelm.202500494",
+    "type": "article",
+    "image": null,
+    "openAccess": {
+      "status": "gold",
+      "url": "https://doi.org/10.1002/aelm.202500494",
+      "pdf": null,
+      "version": "publishedVersion"
+    },
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "themes": [],
+    "projects": [],
+    "featured": null
+  },
+  {
+    "title": "OER Activity Promoted by Organic Ligand‐Free Cs<sub>2</sub>Pt(Cl, Br)<sub>6</sub> Perovskite Photocatalyst for Solar‐Driven Water Splitting",
+    "authors": [
+      "Kevin Mego",
+      "Pedro Ruiz‐Campos",
+      "Herme G. Baldoví",
+      "Pedro Atienzar"
+    ],
+    "groupAuthors": [
+      "Froy Kevin Mego de la Cruz",
+      "Pedro Atienzar"
+    ],
+    "groupAuthorDisplayNames": [
+      "Kevin Mego",
+      "Pedro Atienzar"
+    ],
+    "groupMembers": [
+      {
+        "name": "Froy Kevin Mego de la Cruz",
+        "display": "Kevin Mego",
+        "profile": "/equipo/"
+      },
+      {
+        "name": "Pedro Atienzar",
+        "display": "Pedro Atienzar",
+        "profile": "/equipo/#pedro-atienzar"
+      }
+    ],
+    "journal": "Advanced Energy and Sustainability Research",
+    "publicationDate": "2025-10-15",
+    "onlinePublicationDate": "2025-10-15",
+    "issueDate": null,
+    "year": 2025,
+    "volume": "7",
+    "issue": "2",
+    "pages": null,
+    "doi": "10.1002/aesr.202500105",
+    "url": "https://doi.org/10.1002/aesr.202500105",
+    "type": "article",
+    "image": null,
+    "openAccess": {
+      "status": "gold",
+      "url": "https://doi.org/10.1002/aesr.202500105",
+      "pdf": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aesr.202500105",
+      "version": "publishedVersion"
+    },
+    "license": null,
+    "themes": [
+      "fotocatalisis"
+    ],
+    "projects": [],
+    "featured": null
+  },
+  {
+    "title": "Working Mechanisms of Triple-Oxide Mesoporous Hole-Transport-Layer-Free Printable Perovskite Solar Cells via Impedance Spectroscopy",
+    "authors": [
+      "Pablo F. Betancur",
+      "Maayan Sohmer",
+      "Iván Mora-Seró",
+      "Lioz Etgar",
+      "Pablo P. Boix"
+    ],
+    "groupAuthors": [
+      "Pablo Franco Betancur",
+      "Pablo P. Boix"
+    ],
+    "groupAuthorDisplayNames": [
+      "Pablo F. Betancur",
+      "Pablo P. Boix"
+    ],
+    "groupMembers": [
+      {
+        "name": "Pablo Franco Betancur",
+        "display": "Pablo F. Betancur",
+        "profile": "/equipo/#pablo-franco"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      }
+    ],
+    "journal": "The Journal of Physical Chemistry Letters",
+    "publicationDate": "2025-08-21",
+    "onlinePublicationDate": "2025-08-08",
+    "issueDate": null,
+    "year": 2025,
+    "volume": "16",
+    "issue": "33",
+    "pages": "8410-8417",
+    "doi": "10.1021/acs.jpclett.5c01405",
+    "url": "https://doi.org/10.1021/acs.jpclett.5c01405",
+    "type": "article",
+    "image": null,
+    "openAccess": {
+      "status": "hybrid",
+      "url": "https://doi.org/10.1021/acs.jpclett.5c01405",
+      "pdf": "https://pubs.acs.org/doi/pdf/10.1021/acs.jpclett.5c01405?ref=article_openPDF",
+      "version": "publishedVersion"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "themes": [
+      "fotovoltaica"
+    ],
+    "projects": [
+      "cns2023",
+      "flexwin",
+      "esgent"
+    ],
+    "featured": null
+  },
+  {
+    "title": "Photon Recycling Triggered Amplified Spontaneous Emission in MAPbBr<sub>3</sub>‐Ni(AcO)<sub>2</sub> Nanocomposite Waveguides",
+    "authors": [
+      "Sandra Soriano‐Díaz",
+      "Jaume Noguera‐Gómez",
+      "Juan P. Martínez‐Pastor",
+      "Pablo P. Boix",
+      "Rafael Abargues",
+      "Isaac Suárez"
+    ],
+    "groupAuthors": [
+      "Pablo P. Boix",
+      "Rafael Abargues López"
+    ],
+    "groupAuthorDisplayNames": [
+      "Pablo P. Boix",
+      "Rafael Abargues"
+    ],
+    "groupMembers": [
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      },
+      {
+        "name": "Rafael Abargues López",
+        "display": "Rafael Abargues",
+        "profile": "/equipo/#rafael-abargues"
+      }
+    ],
+    "journal": "Laser & Photonics Reviews",
+    "publicationDate": "2025-05-01",
+    "onlinePublicationDate": "2025-02-16",
+    "issueDate": null,
+    "year": 2025,
+    "volume": "19",
+    "issue": "10",
+    "pages": "2401920",
+    "doi": "10.1002/lpor.202401920",
+    "url": "https://doi.org/10.1002/lpor.202401920",
+    "type": "article",
+    "image": null,
+    "openAccess": {
+      "status": "hybrid",
+      "url": "https://doi.org/10.1002/lpor.202401920",
+      "pdf": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/lpor.202401920",
+      "version": "publishedVersion"
+    },
+    "license": "http://creativecommons.org/licenses/by-nc/4.0/",
+    "themes": [
+      "fotonica",
+      "materiales"
+    ],
+    "projects": [
+      "cns2023",
+      "flexwin",
+      "inkflex"
+    ],
+    "featured": null
+  },
+  {
+    "title": "Passivation Mechanism in Highly Luminescent Nanocomposite‐Based CH<sub>3</sub>NH<sub>3</sub>PbBr<sub>3</sub> Perovskite Nanocrystals",
+    "authors": [
+      "Jaume Noguera‐Gómez",
+      "Víctor Sagra‐Rodríguez",
+      "Vladimir S. Chirvony",
+      "Miriam Minguez‐Avellan",
+      "Mahesh Eledath‐Changarath",
+      "Juan F. Sánchez‐Royo",
+      "Juan P. Martínez‐Pastor",
+      "Pablo P. Boix",
+      "Rafael Abargues"
+    ],
+    "groupAuthors": [
+      "Víctor Sagra Rodríguez",
+      "Miriam Mínguez Avellán",
+      "Pablo P. Boix",
+      "Rafael Abargues López"
+    ],
+    "groupAuthorDisplayNames": [
+      "Víctor Sagra‐Rodríguez",
+      "Miriam Minguez‐Avellan",
+      "Pablo P. Boix",
+      "Rafael Abargues"
+    ],
+    "groupMembers": [
+      {
+        "name": "Víctor Sagra Rodríguez",
+        "display": "Víctor Sagra‐Rodríguez",
+        "profile": "/equipo/#victor-sagra"
+      },
+      {
+        "name": "Miriam Mínguez Avellán",
+        "display": "Miriam Minguez‐Avellan",
+        "profile": "/equipo/#miriam-minguez"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      },
+      {
+        "name": "Rafael Abargues López",
+        "display": "Rafael Abargues",
+        "profile": "/equipo/#rafael-abargues"
+      }
+    ],
+    "journal": "Small Science",
+    "publicationDate": "2025-05-01",
+    "onlinePublicationDate": "2025-01-22",
+    "issueDate": null,
+    "year": 2025,
+    "volume": "5",
+    "issue": "5",
+    "pages": "2400529",
+    "doi": "10.1002/smsc.202400529",
+    "url": "https://doi.org/10.1002/smsc.202400529",
+    "type": "article",
+    "image": null,
+    "openAccess": {
+      "status": "gold",
+      "url": "https://doi.org/10.1002/smsc.202400529",
+      "pdf": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/smsc.202400529",
+      "version": "publishedVersion"
+    },
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "themes": [
+      "materiales"
+    ],
+    "projects": [
+      "cns2023",
+      "flexwin"
+    ],
+    "featured": null
+  },
+  {
+    "title": "Straightforward and green synthesis of all-inorganic CsPbI 3 perovskite solar cells via nickel acetate incorporation",
+    "authors": [
+      "Jaume Noguera‐Gómez",
+      "Víctor Sagra‐Rodríguez",
+      "Marta Vallés‐Pelarda",
+      "Miriam Mínguez-Avellán",
+      "Sandy Sánchez",
+      "Rosario Vidal",
+      "Jaume‐Adrià Alberola‐Borràs",
+      "Rafael Abargues",
+      "Pablo P. Boix"
+    ],
+    "groupAuthors": [
+      "Víctor Sagra Rodríguez",
+      "Miriam Mínguez Avellán",
+      "Rafael Abargues López",
+      "Pablo P. Boix"
+    ],
+    "groupAuthorDisplayNames": [
+      "Víctor Sagra‐Rodríguez",
+      "Miriam Mínguez-Avellán",
+      "Rafael Abargues",
+      "Pablo P. Boix"
+    ],
+    "groupMembers": [
+      {
+        "name": "Víctor Sagra Rodríguez",
+        "display": "Víctor Sagra‐Rodríguez",
+        "profile": "/equipo/#victor-sagra"
+      },
+      {
+        "name": "Miriam Mínguez Avellán",
+        "display": "Miriam Mínguez-Avellán",
+        "profile": "/equipo/#miriam-minguez"
+      },
+      {
+        "name": "Rafael Abargues López",
+        "display": "Rafael Abargues",
+        "profile": "/equipo/#rafael-abargues"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      }
+    ],
+    "journal": "EES solar.",
+    "publicationDate": "2025-01-01",
+    "onlinePublicationDate": "2025-01-01",
+    "issueDate": null,
+    "year": 2025,
+    "volume": "1",
+    "issue": "5",
+    "pages": "868",
+    "doi": "10.1039/d5el00064e",
+    "url": "https://doi.org/10.1039/d5el00064e",
+    "type": "article",
+    "image": null,
+    "openAccess": {
+      "status": "diamond",
+      "url": "https://doi.org/10.1039/d5el00064e",
+      "pdf": "https://pubs.rsc.org/en/content/articlepdf/2025/el/d5el00064e",
+      "version": "publishedVersion"
+    },
+    "license": null,
+    "themes": [
+      "fotovoltaica",
+      "materiales"
+    ],
+    "projects": [
+      "hepaflex",
+      "esgent"
+    ],
+    "featured": null
+  },
+  {
+    "title": "High-performance biphasic Na<sub><i>x</i></sub> MnO<sub>2</sub> electrodes for cost-effective and high-power aqueous sodium batteries and capacitors",
+    "authors": [
+      "Andrii Boichuk",
+      "Tetiana Boichuk",
+      "Mahesh Eledath-Changarath",
+      "Marie Krečmarová",
+      "Rafael Abargues",
+      "Pablo P. Boix",
+      "María C. Asensio",
+      "Saïd Agouram",
+      "Juan F. Sánchez-Royo"
+    ],
+    "groupAuthors": [
+      "Rafael Abargues López",
+      "Pablo P. Boix"
+    ],
+    "groupAuthorDisplayNames": [
+      "Rafael Abargues",
+      "Pablo P. Boix"
+    ],
+    "groupMembers": [
+      {
+        "name": "Rafael Abargues López",
+        "display": "Rafael Abargues",
+        "profile": "/equipo/#rafael-abargues"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      }
+    ],
+    "journal": "Materials Advances",
+    "publicationDate": "2025-01-01",
+    "onlinePublicationDate": "2024-12-27",
+    "issueDate": null,
+    "year": 2025,
+    "volume": "6",
+    "issue": "3",
+    "pages": "1152-1163",
+    "doi": "10.1039/d4ma01150c",
+    "url": "https://doi.org/10.1039/d4ma01150c",
+    "type": "article",
+    "image": null,
+    "openAccess": {
+      "status": "gold",
+      "url": "https://doi.org/10.1039/d4ma01150c",
+      "pdf": "https://pubs.rsc.org/en/content/articlepdf/2025/ma/d4ma01150c",
+      "version": "publishedVersion"
+    },
+    "license": "http://creativecommons.org/licenses/by-nc/3.0/",
+    "themes": [],
+    "projects": [],
+    "featured": null
+  },
+  {
+    "title": "Digital flow platform for the synthesis of high-quality multi-material perovskites",
+    "authors": [
+      "Diego Iglesias",
+      "Cristopher Tinajero",
+      "Simone Marchetti",
+      "Jaume Luis-Gómez",
+      "Raúl Martínez Cuenca",
+      "Jose Fuentes Ballesteros",
+      "Clara Aranda",
+      "Alejandro Martínez Serra",
+      "M. C. Asensio",
+      "Rafael Abargues",
+      "Pablo P. Boix",
+      "Marcileia Zanatta",
+      "Víctor Sans"
+    ],
+    "groupAuthors": [
+      "Rafael Abargues López",
+      "Pablo P. Boix"
+    ],
+    "groupAuthorDisplayNames": [
+      "Rafael Abargues",
+      "Pablo P. Boix"
+    ],
+    "groupMembers": [
+      {
+        "name": "Rafael Abargues López",
+        "display": "Rafael Abargues",
+        "profile": "/equipo/#rafael-abargues"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      }
+    ],
+    "journal": "Digital Discovery",
+    "publicationDate": "2025-01-01",
+    "onlinePublicationDate": "2025-01-01",
+    "issueDate": null,
+    "year": 2025,
+    "volume": "4",
+    "issue": "7",
+    "pages": "1772",
+    "doi": "10.1039/d5dd00099h",
+    "url": "https://doi.org/10.1039/d5dd00099h",
+    "type": "article",
+    "image": null,
+    "openAccess": {
+      "status": "diamond",
+      "url": "https://doi.org/10.1039/d5dd00099h",
+      "pdf": "https://pubs.rsc.org/en/content/articlepdf/2025/dd/d5dd00099h",
+      "version": "publishedVersion"
+    },
+    "license": null,
+    "themes": [
+      "materiales"
+    ],
+    "projects": [],
+    "featured": null
+  }
+]

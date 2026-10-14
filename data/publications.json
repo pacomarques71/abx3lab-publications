@@ -21,6 +21,28 @@
       "Rafael Abargues",
       "Pablo P. Boix"
     ],
+    "groupMembers": [
+      {
+        "name": "Miriam Mínguez Avellán",
+        "display": "Miriam Minguez‐Avellan",
+        "profile": "/equipo/#miriam-minguez"
+      },
+      {
+        "name": "Víctor Sagra Rodríguez",
+        "display": "Víctor Sagra‐Rodríguez",
+        "profile": "/equipo/#victor-sagra"
+      },
+      {
+        "name": "Rafael Abargues López",
+        "display": "Rafael Abargues",
+        "profile": "/equipo/#rafael-abargues"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      }
+    ],
     "journal": "Advanced Optical Materials",
     "publicationDate": "2026-10-13",
     "onlinePublicationDate": "2026-10-13",
@@ -32,7 +54,27 @@
     "doi": "10.1002/adom.71901",
     "url": "https://doi.org/10.1002/adom.71901",
     "type": "article",
-    "image": null
+    "image": null,
+    "openAccess": {
+      "status": "hybrid",
+      "url": "https://doi.org/10.1002/adom.71901",
+      "pdf": null,
+      "version": "publishedVersion"
+    },
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "themes": [
+      "fotonica",
+      "materiales"
+    ],
+    "projects": [
+      "esgent"
+    ],
+    "featured": {
+      "order": 3,
+      "visual": "emission",
+      "title": "Unos pocos nanocristales pueden dominar la luz de todo el material",
+      "summary": "Mapas de fotoluminiscencia muestran que una pequeña fracción de nanocristales muy emisivos puede imponer la respuesta óptica de un nanocompuesto de perovskita y ocultar el comportamiento del material masivo."
+    }
   },
   {
     "title": "Rapid photonic processing of printed flexible perovskite solar cells for space applications",
@@ -63,6 +105,23 @@
       "Teresa S. Ripolles",
       "Pablo P. Boix"
     ],
+    "groupMembers": [
+      {
+        "name": "Pablo Franco Betancur",
+        "display": "Pablo F. Betancur",
+        "profile": "/equipo/#pablo-franco"
+      },
+      {
+        "name": "Teresa Ripollés Sanchis",
+        "display": "Teresa S. Ripolles",
+        "profile": "/equipo/"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      }
+    ],
     "journal": "Solar Energy Materials and Solar Cells",
     "publicationDate": "2026-09-17",
     "onlinePublicationDate": "2026-09-17",
@@ -74,7 +133,19 @@
     "doi": "10.1016/j.solmat.2026.114703",
     "url": "https://doi.org/10.1016/j.solmat.2026.114703",
     "type": "article",
-    "image": null
+    "image": null,
+    "openAccess": {
+      "status": "green",
+      "url": "https://doi.org/10.2139/ssrn.7051368",
+      "pdf": null,
+      "version": "acceptedVersion"
+    },
+    "license": null,
+    "themes": [
+      "fotovoltaica"
+    ],
+    "projects": [],
+    "featured": null
   },
   {
     "title": "Sunlight‐Driven Green Synthesis of Platinum Nanoparticles From Double‐Vacancy Halide Perovskite Precursors for Methanol Reforming",
@@ -93,6 +164,18 @@
       "Kevin Mego",
       "Pedro Atienzar"
     ],
+    "groupMembers": [
+      {
+        "name": "Froy Kevin Mego de la Cruz",
+        "display": "Kevin Mego",
+        "profile": "/equipo/"
+      },
+      {
+        "name": "Pedro Atienzar",
+        "display": "Pedro Atienzar",
+        "profile": "/equipo/#pedro-atienzar"
+      }
+    ],
     "journal": "Chemistry – A European Journal",
     "publicationDate": "2026-08-24",
     "onlinePublicationDate": "2026-05-11",
@@ -104,7 +187,20 @@
     "doi": "10.1002/chem.202503192",
     "url": "https://doi.org/10.1002/chem.202503192",
     "type": "article",
-    "image": null
+    "image": null,
+    "openAccess": {
+      "status": "hybrid",
+      "url": "https://doi.org/10.1002/chem.202503192",
+      "pdf": null,
+      "version": "publishedVersion"
+    },
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "themes": [
+      "fotocatalisis",
+      "materiales"
+    ],
+    "projects": [],
+    "featured": null
   },
   {
     "title": "Photon Recycling–Driven Photodetection Enhancement in Ni(AcO)<sub>2</sub>–MAPbBr<sub>3</sub> Nanocomposite Waveguides",
@@ -125,6 +221,18 @@
       "Pablo P. Boix",
       "Rafael Abargues"
     ],
+    "groupMembers": [
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      },
+      {
+        "name": "Rafael Abargues López",
+        "display": "Rafael Abargues",
+        "profile": "/equipo/#rafael-abargues"
+      }
+    ],
     "journal": "Nanophotonics",
     "publicationDate": "2026-07-13",
     "onlinePublicationDate": "2026-07-02",
@@ -136,7 +244,23 @@
     "doi": "10.1002/nap2.70196",
     "url": "https://doi.org/10.1002/nap2.70196",
     "type": "article",
-    "image": null
+    "image": null,
+    "openAccess": {
+      "status": "gold",
+      "url": "https://doi.org/10.1002/nap2.70196",
+      "pdf": null,
+      "version": "publishedVersion"
+    },
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "themes": [
+      "fotonica"
+    ],
+    "projects": [
+      "cns2023",
+      "flexwin",
+      "inkflex"
+    ],
+    "featured": null
   },
   {
     "title": "Triiodide Faujasites With Reactive, Ionic, Antimicrobial, and Catalytic Applications",
@@ -157,6 +281,18 @@
       "Miriam Minguez‐Avellan",
       "Pablo P. Boix"
     ],
+    "groupMembers": [
+      {
+        "name": "Miriam Mínguez Avellán",
+        "display": "Miriam Minguez‐Avellan",
+        "profile": "/equipo/#miriam-minguez"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      }
+    ],
     "journal": "Small Structures",
     "publicationDate": "2026-07-01",
     "onlinePublicationDate": "2026-07-01",
@@ -168,7 +304,20 @@
     "doi": "10.1002/sstr.70540",
     "url": "https://doi.org/10.1002/sstr.70540",
     "type": "article",
-    "image": null
+    "image": null,
+    "openAccess": {
+      "status": "gold",
+      "url": "https://doi.org/10.1002/sstr.70540",
+      "pdf": null,
+      "version": "publishedVersion"
+    },
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "themes": [
+      "fotocatalisis",
+      "materiales"
+    ],
+    "projects": [],
+    "featured": null
   },
   {
     "title": "Highly Transparent BiEDOT‐Based Conducting Polymers as Tailorable Hole Transport Materials for Perovskite Solar Cells",
@@ -201,6 +350,38 @@
       "Teresa S. Ripolles",
       "Rafael Abargues"
     ],
+    "groupMembers": [
+      {
+        "name": "Noemí Farinós Navajas",
+        "display": "Noemí Farinós‐Navajas",
+        "profile": "/equipo/#noemi-farinos"
+      },
+      {
+        "name": "Miriam Mínguez Avellán",
+        "display": "Miriam Minguez‐Avellan",
+        "profile": "/equipo/#miriam-minguez"
+      },
+      {
+        "name": "Pablo Franco Betancur",
+        "display": "Pablo F. Betancur",
+        "profile": "/equipo/#pablo-franco"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      },
+      {
+        "name": "Teresa Ripollés Sanchis",
+        "display": "Teresa S. Ripolles",
+        "profile": "/equipo/"
+      },
+      {
+        "name": "Rafael Abargues López",
+        "display": "Rafael Abargues",
+        "profile": "/equipo/#rafael-abargues"
+      }
+    ],
     "journal": "Small Structures",
     "publicationDate": "2026-05-01",
     "onlinePublicationDate": "2026-04-29",
@@ -212,7 +393,20 @@
     "doi": "10.1002/sstr.202600020",
     "url": "https://doi.org/10.1002/sstr.202600020",
     "type": "article",
-    "image": null
+    "image": null,
+    "openAccess": {
+      "status": "gold",
+      "url": "https://doi.org/10.1002/sstr.202600020",
+      "pdf": null,
+      "version": "publishedVersion"
+    },
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "themes": [
+      "fotovoltaica",
+      "materiales"
+    ],
+    "projects": [],
+    "featured": null
   },
   {
     "title": "Unravelling the Intrinsic Reactivity and Colloidal Instability in Tin‐Based Halide Perovskite Precursor Solutions",
@@ -241,6 +435,18 @@
       "Jorge Pascual",
       "Omar E. Solis"
     ],
+    "groupMembers": [
+      {
+        "name": "Jorge Pascual Mielgo",
+        "display": "Jorge Pascual",
+        "profile": "/equipo/#jorge-pascual"
+      },
+      {
+        "name": "Omar Eduardo Solis Luna",
+        "display": "Omar E. Solis",
+        "profile": "/equipo/#omar-solis"
+      }
+    ],
     "journal": "Angewandte Chemie International Edition",
     "publicationDate": "2026-04-27",
     "onlinePublicationDate": "2026-03-23",
@@ -252,7 +458,15 @@
     "doi": "10.1002/anie.7703450",
     "url": "https://doi.org/10.1002/anie.7703450",
     "type": "article",
-    "image": null
+    "image": null,
+    "openAccess": null,
+    "license": null,
+    "themes": [
+      "materiales",
+      "estabilidad"
+    ],
+    "projects": [],
+    "featured": null
   },
   {
     "title": "Transforming Device Efficiency and Stability in NiO‐Sputtered n–i–p Perovskite Solar Cells by Soft‐Landing and a Thin Spiro‐OMeTAD Buffer Layer",
@@ -279,6 +493,18 @@
       "Sudeshna Ghosh",
       "Pablo P. Boix"
     ],
+    "groupMembers": [
+      {
+        "name": "Sudeshna Ghosh",
+        "display": "Sudeshna Ghosh",
+        "profile": "/equipo/"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      }
+    ],
     "journal": "Advanced Energy Materials",
     "publicationDate": "2026-04-01",
     "onlinePublicationDate": "2026-02-18",
@@ -290,7 +516,23 @@
     "doi": "10.1002/aenm.202503291",
     "url": "https://doi.org/10.1002/aenm.202503291",
     "type": "article",
-    "image": null
+    "image": null,
+    "openAccess": {
+      "status": "bronze",
+      "url": "https://doi.org/10.1002/aenm.202503291",
+      "pdf": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aenm.202503291",
+      "version": "publishedVersion"
+    },
+    "license": null,
+    "themes": [
+      "fotovoltaica",
+      "estabilidad"
+    ],
+    "projects": [
+      "hepaflex",
+      "cns2023"
+    ],
+    "featured": null
   },
   {
     "title": "Rapid Laser-Based Deposition of PbI<sub>2</sub>/CsBr Inorganic Scaffolds for Hybrid Fabrication of Perovskite/Silicon Tandem Solar Cells",
@@ -315,6 +557,18 @@
       "Miriam Minguez-Avellan",
       "Pablo P. Boix"
     ],
+    "groupMembers": [
+      {
+        "name": "Miriam Mínguez Avellán",
+        "display": "Miriam Minguez-Avellan",
+        "profile": "/equipo/#miriam-minguez"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      }
+    ],
     "journal": "ACS Energy Letters",
     "publicationDate": "2026-03-13",
     "onlinePublicationDate": "2026-02-06",
@@ -326,36 +580,19 @@
     "doi": "10.1021/acsenergylett.5c04010",
     "url": "https://doi.org/10.1021/acsenergylett.5c04010",
     "type": "article",
-    "image": null
-  },
-  {
-    "title": "OER Activity Promoted by Organic Ligand‐Free Cs<sub>2</sub>Pt(Cl, Br)<sub>6</sub> Perovskite Photocatalyst for Solar‐Driven Water Splitting",
-    "authors": [
-      "Kevin Mego",
-      "Pedro Ruiz‐Campos",
-      "Herme G. Baldoví",
-      "Pedro Atienzar"
+    "image": null,
+    "openAccess": {
+      "status": "green",
+      "url": "https://research.tue.nl/en/publications/de2a9e6c-2fdc-42f2-9893-7a3168c6250a",
+      "pdf": null,
+      "version": "publishedVersion"
+    },
+    "license": null,
+    "themes": [
+      "fotovoltaica"
     ],
-    "groupAuthors": [
-      "Froy Kevin Mego de la Cruz",
-      "Pedro Atienzar"
-    ],
-    "groupAuthorDisplayNames": [
-      "Kevin Mego",
-      "Pedro Atienzar"
-    ],
-    "journal": "Advanced Energy and Sustainability Research",
-    "publicationDate": "2026-02-01",
-    "onlinePublicationDate": "2025-10-15",
-    "issueDate": null,
-    "year": 2026,
-    "volume": "7",
-    "issue": "2",
-    "pages": "e202500105",
-    "doi": "10.1002/aesr.202500105",
-    "url": "https://doi.org/10.1002/aesr.202500105",
-    "type": "article",
-    "image": null
+    "projects": [],
+    "featured": null
   },
   {
     "title": "CsPbBr<sub>3</sub> nanocrystals supported on a partially oxidized Ti<sub>2</sub>N MXene for photothermal CO<sub>2</sub> conversion",
@@ -374,6 +611,18 @@
       "Kevin Mego",
       "Pedro Atienzar"
     ],
+    "groupMembers": [
+      {
+        "name": "Froy Kevin Mego de la Cruz",
+        "display": "Kevin Mego",
+        "profile": "/equipo/"
+      },
+      {
+        "name": "Pedro Atienzar",
+        "display": "Pedro Atienzar",
+        "profile": "/equipo/#pedro-atienzar"
+      }
+    ],
     "journal": "Materials Advances",
     "publicationDate": "2026-01-01",
     "onlinePublicationDate": "2025-12-29",
@@ -385,7 +634,20 @@
     "doi": "10.1039/d5ma01122a",
     "url": "https://doi.org/10.1039/d5ma01122a",
     "type": "article",
-    "image": null
+    "image": null,
+    "openAccess": {
+      "status": "gold",
+      "url": "https://doi.org/10.1039/d5ma01122a",
+      "pdf": "https://pubs.rsc.org/en/content/articlepdf/2026/ma/d5ma01122a",
+      "version": "publishedVersion"
+    },
+    "license": "http://creativecommons.org/licenses/by/3.0/",
+    "themes": [
+      "fotocatalisis",
+      "materiales"
+    ],
+    "projects": [],
+    "featured": null
   },
   {
     "title": "Continuous optical–electrical field diagnostics separate environmental modulation from irreversible perovskite solar-cell failure",
@@ -403,7 +665,19 @@
       "Rafael Abargues",
       "Pablo P. Boix"
     ],
-    "journal": "Energy &amp; Environmental Science",
+    "groupMembers": [
+      {
+        "name": "Rafael Abargues López",
+        "display": "Rafael Abargues",
+        "profile": "/equipo/#rafael-abargues"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      }
+    ],
+    "journal": "Energy & Environmental Science",
     "publicationDate": "2026-01-01",
     "onlinePublicationDate": "2026-01-01",
     "issueDate": null,
@@ -414,17 +688,37 @@
     "doi": "10.1039/d6ee05477c",
     "url": "https://doi.org/10.1039/d6ee05477c",
     "type": "article",
-    "image": null
+    "image": null,
+    "openAccess": {
+      "status": "hybrid",
+      "url": "https://doi.org/10.1039/d6ee05477c",
+      "pdf": "https://pubs.rsc.org/ee/article-pdf/doi/10.1039/D6EE05477C/14827699/d6ee05477c.pdf",
+      "version": "publishedVersion"
+    },
+    "license": "http://creativecommons.org/licenses/by/3.0/",
+    "themes": [
+      "estabilidad",
+      "fotovoltaica"
+    ],
+    "projects": [
+      "hepaflex"
+    ],
+    "featured": {
+      "order": 2,
+      "visual": "field",
+      "title": "Separar el clima del fallo real en células solares al aire libre",
+      "summary": "La monitorización continua de señales ópticas y eléctricas en exterior distingue la variación reversible que causa el tiempo atmosférico del fallo irreversible de cada célula de perovskita."
+    }
   },
   {
-    "title": "Ambient <i>operando</i> self-healing in tin perovskite solar cells",
+    "title": "Ambient operando self-healing in tin perovskite solar cells",
     "authors": [
-      "Miriam Minguez-Avellan",
+      "Miriam Mínguez-Avellán",
       "Omar E. Solis",
-      "Noemi Farinós-Navajas",
+      "Noemi Farinós‐Navajas",
       "Pablo F. Betancur",
       "Jorge Pascual",
-      "Teresa S. Ripolles",
+      "Teresa S. Ripollés",
       "Rafael Abargues",
       "Pablo P. Boix"
     ],
@@ -439,26 +733,90 @@
       "Pablo P. Boix"
     ],
     "groupAuthorDisplayNames": [
-      "Miriam Minguez-Avellan",
+      "Miriam Mínguez-Avellán",
       "Omar E. Solis",
-      "Noemi Farinós-Navajas",
+      "Noemi Farinós‐Navajas",
       "Pablo F. Betancur",
       "Jorge Pascual",
-      "Teresa S. Ripolles",
+      "Teresa S. Ripollés",
       "Rafael Abargues",
       "Pablo P. Boix"
     ],
-    "journal": "EES Solar",
+    "groupMembers": [
+      {
+        "name": "Miriam Mínguez Avellán",
+        "display": "Miriam Mínguez-Avellán",
+        "profile": "/equipo/#miriam-minguez"
+      },
+      {
+        "name": "Omar Eduardo Solis Luna",
+        "display": "Omar E. Solis",
+        "profile": "/equipo/#omar-solis"
+      },
+      {
+        "name": "Noemí Farinós Navajas",
+        "display": "Noemi Farinós‐Navajas",
+        "profile": "/equipo/#noemi-farinos"
+      },
+      {
+        "name": "Pablo Franco Betancur",
+        "display": "Pablo F. Betancur",
+        "profile": "/equipo/#pablo-franco"
+      },
+      {
+        "name": "Jorge Pascual Mielgo",
+        "display": "Jorge Pascual",
+        "profile": "/equipo/#jorge-pascual"
+      },
+      {
+        "name": "Teresa Ripollés Sanchis",
+        "display": "Teresa S. Ripollés",
+        "profile": "/equipo/"
+      },
+      {
+        "name": "Rafael Abargues López",
+        "display": "Rafael Abargues",
+        "profile": "/equipo/#rafael-abargues"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      }
+    ],
+    "journal": "EES solar.",
     "publicationDate": "2026-01-01",
     "onlinePublicationDate": "2026-01-01",
     "issueDate": null,
     "year": 2026,
     "volume": "2",
     "issue": "2",
-    "pages": "360-368",
+    "pages": "360",
     "doi": "10.1039/d5el00182j",
     "url": "https://doi.org/10.1039/d5el00182j",
     "type": "article",
-    "image": null
+    "image": null,
+    "openAccess": {
+      "status": "diamond",
+      "url": "https://doi.org/10.1039/d5el00182j",
+      "pdf": "https://pubs.rsc.org/en/content/articlepdf/2026/el/d5el00182j",
+      "version": "publishedVersion"
+    },
+    "license": null,
+    "themes": [
+      "estabilidad",
+      "fotovoltaica"
+    ],
+    "projects": [
+      "phoenixpv",
+      "cns2023",
+      "esgent"
+    ],
+    "featured": {
+      "order": 1,
+      "visual": "healing",
+      "title": "Células solares sin plomo que se reparan solas",
+      "summary": "Bajo luz y aire ambiente, células de perovskita de estaño recuperan por sí solas la eficiencia perdida e incluso la superan; con el aditivo TEAI conservan el 80 % durante más de 25 horas, frente a menos de una sin él."
+    }
   }
 ]
