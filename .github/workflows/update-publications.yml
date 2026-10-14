@@ -4,6 +4,15 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 6 * * 1"
+  # Al editar los datos editoriales o el script, se regenera al momento.
+  push:
+    branches: [main]
+    paths:
+      - "data/publication_extras.json"
+      - "data/projects.json"
+      - "data/publication_team.json"
+      - "data/excluded_publications.json"
+      - "scripts/update_publications.py"
 
 permissions:
   contents: write
@@ -21,17 +30,20 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Run tests
+        run: python -m unittest discover -s tests
+
       - name: Update publications
         run: python scripts/update_publications.py
 
       - name: Commit changes if needed
         run: |
-          if git diff --quiet -- data/publications.json; then
+          git add data/publications.json data/publications_2025.json
+          if git diff --cached --quiet; then
             echo "No publication changes detected."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/publications.json
           git commit -m "chore: update publications"
           git push
