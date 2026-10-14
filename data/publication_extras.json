@@ -1,0 +1,68 @@
+{
+  "_info": "Datos editoriales de las publicaciones. themes: líneas de investigación (keywords = respaldo automático por título para artículos sin línea asignada). publications: por DOI en minúsculas; themes, projects (añadir a mano), excludeProjects, featured (destacado), image, data, code. members: enlace al perfil del equipo.",
+  "themes": [
+    {"key": "fotovoltaica", "label": "Fotovoltaica", "keywords": ["solar cell", "photovolta", "tandem", "solar module", "transport material"]},
+    {"key": "estabilidad", "label": "Estabilidad y autorreparación", "keywords": ["stabil", "degradation", "self-heal", "healing", "recover", "failure", "lifetime", "reliab"]},
+    {"key": "fotonica", "label": "Fotónica", "keywords": ["emission", "photolumin", "laser", "waveguide", "photodetect", "light-emitting", "photon recycling"]},
+    {"key": "fotocatalisis", "label": "Fotocatálisis", "keywords": ["photocataly", "catalytic", "catalys", "water splitting", "co2", "hydrogen", "reforming"]},
+    {"key": "materiales", "label": "Química de materiales", "keywords": ["nanocrystal", "nanocomposite", "precursor", "polymer", "synthesis", "colloid", "faujasite"]}
+  ],
+  "publications": {
+    "10.1002/adom.71901": {
+      "themes": ["fotonica", "materiales"],
+      "featured": {
+        "order": 3,
+        "visual": "emission",
+        "title": "Unos pocos nanocristales pueden dominar la luz de todo el material",
+        "summary": "Mapas de fotoluminiscencia muestran que una pequeña fracción de nanocristales muy emisivos puede imponer la respuesta óptica de un nanocompuesto de perovskita y ocultar el comportamiento del material masivo."
+      }
+    },
+    "10.1016/j.solmat.2026.114703": {"themes": ["fotovoltaica"]},
+    "10.1002/chem.202503192": {"themes": ["fotocatalisis", "materiales"]},
+    "10.1002/nap2.70196": {"themes": ["fotonica"]},
+    "10.1002/sstr.70540": {"themes": ["fotocatalisis", "materiales"]},
+    "10.1002/sstr.202600020": {"themes": ["fotovoltaica", "materiales"]},
+    "10.1002/anie.7703450": {"themes": ["materiales", "estabilidad"]},
+    "10.1002/aenm.202503291": {"themes": ["fotovoltaica", "estabilidad"]},
+    "10.1021/acsenergylett.5c04010": {"themes": ["fotovoltaica"]},
+    "10.1002/aesr.202500105": {"themes": ["fotocatalisis"]},
+    "10.1039/d5ma01122a": {"themes": ["fotocatalisis", "materiales"]},
+    "10.1039/d6ee05477c": {
+      "themes": ["estabilidad", "fotovoltaica"],
+      "featured": {
+        "order": 2,
+        "visual": "field",
+        "title": "Separar el clima del fallo real en células solares al aire libre",
+        "summary": "La monitorización continua de señales ópticas y eléctricas en exterior distingue la variación reversible que causa el tiempo atmosférico del fallo irreversible de cada célula de perovskita."
+      }
+    },
+    "10.1039/d5el00182j": {
+      "themes": ["estabilidad", "fotovoltaica"],
+      "featured": {
+        "order": 1,
+        "visual": "healing",
+        "title": "Células solares sin plomo que se reparan solas",
+        "summary": "Bajo luz y aire ambiente, células de perovskita de estaño recuperan por sí solas la eficiencia perdida e incluso la superan; con el aditivo TEAI conservan el 80 % durante más de 25 horas, frente a menos de una sin él."
+      }
+    }
+  },
+  "members": {
+    "Pablo P. Boix": {"profile": "/equipo/#pablo-boix"},
+    "Rafael Abargues López": {"profile": "/equipo/#rafael-abargues"},
+    "Pedro Atienzar": {"profile": "/equipo/#pedro-atienzar"},
+    "Teresa Ripollés Sanchis": {"profile": "/equipo/"},
+    "Fernando Ramiro Manzano": {"profile": "/equipo/#fernando-ramiro"},
+    "Isabelle Rodríguez": {"profile": "/equipo/"},
+    "Francisco Marqués Moros": {"profile": "/equipo/#francisco-marques"},
+    "Sudeshna Ghosh": {"profile": "/equipo/"},
+    "Jorge Pascual Mielgo": {"profile": "/equipo/#jorge-pascual"},
+    "Abinash Tiwari": {"profile": "/equipo/#abinash-tiwari"},
+    "Miriam Mínguez Avellán": {"profile": "/equipo/#miriam-minguez"},
+    "Omar Eduardo Solis Luna": {"profile": "/equipo/#omar-solis"},
+    "Pablo Franco Betancur": {"profile": "/equipo/#pablo-franco"},
+    "Noemí Farinós Navajas": {"profile": "/equipo/#noemi-farinos"},
+    "Froy Kevin Mego de la Cruz": {"profile": "/equipo/"},
+    "Cid Ortega Hernández": {"profile": "/equipo/#cid-ortega"},
+    "Víctor Sagra Rodríguez": {"profile": "/equipo/#victor-sagra"}
+  }
+}
