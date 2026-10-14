@@ -63,5 +63,32 @@ class TitleFallbackTest(unittest.TestCase):
         self.assertEqual(record["title"], previous)
 
 
+class CrossrefFailureTest(unittest.TestCase):
+    def test_previous_record_keeps_issue_date_and_projects(self):
+        work = {
+            "doi": "https://doi.org/10.1002/aesr.202500105",
+            "title": "Plain title",
+            "publication_date": "2025-10-15",
+            "primary_location": {"source": {"display_name": "Advanced Energy and Sustainability Research"}},
+        }
+        previous = {
+            "doi": "10.1002/aesr.202500105", "title": "Título previo",
+            "authors": ["Kevin Mego", "Pedro Atienzar"], "journal": "Advanced Energy and Sustainability Research",
+            "publicationDate": "2026-02-01", "onlinePublicationDate": "2025-10-15", "issueDate": None,
+            "volume": "7", "issue": "2", "projects": ["hyglec"],
+        }
+        with patch.object(updater, "fetch_json", side_effect=RuntimeError("HTTP Error 429")), \
+             patch.object(updater, "MAX_PUBLICATION_DATE", date(2026, 10, 14)), \
+             patch.dict(updater.PREVIOUS_RECORDS, {"10.1002/aesr.202500105": previous}, clear=True), \
+             patch.dict(updater.PREVIOUS_TITLES, {}, clear=True):
+            record = updater.make_record(work, ["Pedro Atienzar"], set(), {}, min_date=date(2025, 1, 1))
+        self.assertEqual(record["publicationDate"], "2026-02-01")
+        self.assertEqual(record["onlinePublicationDate"], "2025-10-15")
+        self.assertEqual(record["title"], "Título previo")
+        record = updater.apply_extras(record, {}, [])
+        self.assertEqual(record["projects"], ["hyglec"])
+        self.assertNotIn("_previousProjects", record)
+
+
 if __name__ == "__main__":
     unittest.main()
