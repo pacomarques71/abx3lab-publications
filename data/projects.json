@@ -1,0 +1,10 @@
+[
+  {"key": "phoenixpv", "name": "PhoenixPV", "url": "/proyectos/#phoenixpv", "grants": ["101171478"]},
+  {"key": "hepaflex", "name": "HEPAFLEX", "url": "/proyectos/#hepaflex", "grants": ["101122345"]},
+  {"key": "cns2023", "name": "CNS2023", "url": "/proyectos/#cns2023", "grants": ["CNS2023-144270"]},
+  {"key": "flexwin", "name": "FlexWin", "url": "/proyectos/#flexwin", "grants": ["PID2023-151880OB-C31"]},
+  {"key": "inkflex", "name": "InkFlex", "url": "/proyectos/#inkflex", "grants": ["PID2023-151880OB-C32"]},
+  {"key": "hyglec", "name": "HYGLEC", "url": "/proyectos/#hyglec", "grants": ["CPP2024-011890"]},
+  {"key": "esgent", "name": "Plan GenT", "url": "/proyectos/#esgent", "grants": ["ESGENT/010/2024", "CIESGT2024/010"]},
+  {"key": "inspire", "name": "INSPiRE", "url": "/proyectos/#inspire", "grants": ["ILINK25177"]}
+]
