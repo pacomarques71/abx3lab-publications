@@ -196,8 +196,8 @@ def discover_works(team: list[dict]) -> dict[str, dict]:
         params = {
             "filter": filters,
             "sort": "publication_date:desc",
-            "per_page": "100",
-            "cursor": "*",
+            "per_page": "200",
+            "page": "1",
             "select": "id,doi,title,authorships,primary_location,biblio,type,publication_date,publication_year",
         }
         if OPENALEX_API_KEY:
@@ -206,18 +206,22 @@ def discover_works(team: list[dict]) -> dict[str, dict]:
         print(f"Consultando OpenAlex: {member['name']} ({orcid})")
         # OpenAlex dates early-online articles before their final journal issue.
         # Discover the full history, then apply the bibliographic date in Crossref.
-        # Cursor pagination prevents the wider search from stopping at 100 works.
+        # Se recorren todas las páginas para no quedarse en los primeros 200 trabajos.
+        # Paginación por número de página (page=): desde octubre de 2026 OpenAlex
+        # exige API key para paginar con cursor= (HTTP 401 a partir de la 2.ª página).
+        # page= funciona sin clave hasta 10 000 resultados, de sobra por autor.
         while True:
             url = f"{OPENALEX_BASE}/works?{urlencode(params)}"
             payload = fetch_json(url)
-            for work in payload.get("results", []):
+            results = payload.get("results", [])
+            for work in results:
                 works[openalex_work_key(work)] = work
-            cursor = (payload.get("meta") or {}).get("next_cursor")
-            if not cursor or not payload.get("results"):
+            count = (payload.get("meta") or {}).get("count") or 0
+            page = int(params["page"])
+            seen = page * int(params["per_page"])
+            if not results or seen >= count or seen >= 10_000:
                 break
-            if cursor == params["cursor"]:
-                raise RuntimeError("OpenAlex devolvió un cursor repetido.")
-            params["cursor"] = cursor
+            params["page"] = str(page + 1)
             time.sleep(0.15)
         queried += 1
 
