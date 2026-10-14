@@ -8,6 +8,13 @@
     {"key": "materiales", "label": "Química de materiales", "keywords": ["nanocrystal", "nanocomposite", "precursor", "polymer", "synthesis", "colloid", "faujasite"]}
   ],
   "publications": {
+    "10.1002/aelm.202500494": {"themes": ["materiales"]},
+    "10.1021/acs.jpclett.5c01405": {"themes": ["fotovoltaica"]},
+    "10.1002/lpor.202401920": {"themes": ["fotonica", "materiales"]},
+    "10.1002/smsc.202400529": {"themes": ["materiales", "fotonica"]},
+    "10.1039/d5el00064e": {"themes": ["fotovoltaica", "materiales"]},
+    "10.1039/d4ma01150c": {"themes": ["materiales"]},
+    "10.1039/d5dd00099h": {"themes": ["materiales"]},
     "10.1002/adom.71901": {
       "themes": ["fotonica", "materiales"],
       "featured": {
