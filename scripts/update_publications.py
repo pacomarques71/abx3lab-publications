@@ -76,7 +76,15 @@ def fetch_json(url: str, retries: int = 3) -> dict:
         except (URLError, HTTPError, TimeoutError, json.JSONDecodeError) as exc:
             last_error = exc
             if attempt < retries - 1:
-                time.sleep(1.5 * (attempt + 1))
+                wait = 1.5 * (attempt + 1)
+                # Crossref limita las peticiones (429): esperar lo que indique.
+                if isinstance(exc, HTTPError) and exc.code in (429, 503):
+                    try:
+                        wait = max(wait, float(exc.headers.get("Retry-After") or 0))
+                    except (TypeError, ValueError):
+                        pass
+                    wait = max(wait, 4.0 * (attempt + 1))
+                time.sleep(min(wait, 30))
     raise RuntimeError(f"No se pudo consultar {url}: {last_error}")
 
 def normalize_text(value: str | None) -> str:
@@ -130,6 +138,38 @@ def clean_title(value: str | None) -> str | None:
     value = re.sub(r"\s+<(sub|sup)>", r"<\1>", value)
     value = _FORMULA_CONTINUATION.sub(r"</\1>", value)
     return value.strip() or None
+
+def load_previous_records() -> dict[str, dict]:
+    """Última versión publicada de cada registro, por DOI (ambos ficheros)."""
+    records = {}
+    for path in (OUTPUT_FILE, ARCHIVE_FILE):
+        if not path.exists():
+            continue
+        try:
+            for record in json.loads(path.read_text(encoding="utf-8")):
+                doi = normalize_doi(record.get("doi"))
+                if doi:
+                    records[doi.lower()] = record
+        except (OSError, json.JSONDecodeError):
+            continue
+    return records
+
+PREVIOUS_RECORDS: dict[str, dict] = {}
+
+def previous_as_meta(previous: dict) -> dict:
+    """Si Crossref falla, reutiliza los datos bibliográficos ya publicados."""
+    return {
+        "title": previous.get("title"),
+        "authors": previous.get("authors") or [],
+        "journal": previous.get("journal"),
+        "publicationDate": previous.get("issueDate") or previous.get("publicationDate"),
+        "onlinePublicationDate": previous.get("onlinePublicationDate"),
+        "volume": previous.get("volume"),
+        "issue": previous.get("issue"),
+        "pages": previous.get("pages"),
+        "license": previous.get("license"),
+        "awards": [],
+    }
 
 def load_previous_titles() -> dict[str, str]:
     """Títulos de la última versión publicada, por DOI.
@@ -283,7 +323,7 @@ def crossref_metadata(doi: str) -> dict:
     url = f"{CROSSREF_BASE}/works/{encoded}{suffix}"
 
     try:
-        msg = fetch_json(url, retries=2).get("message", {})
+        msg = fetch_json(url, retries=4).get("message", {})
     except Exception as exc:
         print(f"  Aviso: Crossref no disponible para {doi}: {exc}")
         return {}
@@ -374,6 +414,9 @@ def make_record(
         return None
 
     meta = crossref_metadata(doi)
+    previous = PREVIOUS_RECORDS.get(doi.lower())
+    if not meta and previous:
+        meta = previous_as_meta(previous)
     pub_date = None
 
     if meta.get("publicationDate"):
@@ -473,6 +516,7 @@ def make_record(
         "openAccess": open_access,
         "license": meta.get("license"),
         "awards": sorted(set((meta.get("awards") or []) + openalex_awards)),
+        "_previousProjects": (previous or {}).get("projects") or [],
     }
 
 def load_json(path: Path, default):
@@ -514,6 +558,10 @@ def apply_extras(record: dict, extras: dict, projects: list[dict]) -> dict:
     record["themes"] = themes
 
     linked = match_projects(record.pop("awards", []), projects)
+    # Vínculos ya verificados en una ejecución anterior (si Crossref falla ahora).
+    for key in record.pop("_previousProjects", []):
+        if key not in linked:
+            linked.append(key)
     for key in manual.get("projects", []):
         if key not in linked:
             linked.append(key)
@@ -567,6 +615,7 @@ def remove_wiley_language_duplicates(records: list[dict]) -> list[dict]:
 def main():
     team = load_team()
     PREVIOUS_TITLES.update(load_previous_titles())
+    PREVIOUS_RECORDS.update(load_previous_records())
     excluded_dois = load_excluded_dois()
     by_orcid, aliases, aliases_by_member = build_member_indexes(team)
 
@@ -592,7 +641,7 @@ def main():
     detected = []
     # Full-history discovery requires more Crossref lookups. Bound concurrency
     # so the weekly job remains practical without flooding the metadata service.
-    with ThreadPoolExecutor(max_workers=4) as pool:
+    with ThreadPoolExecutor(max_workers=3) as pool:
         for index, record in enumerate(pool.map(build_record, candidates), 1):
             if record:
                 detected.append(record)
