@@ -17,6 +17,7 @@
     "10.1039/d5dd00099h": {"themes": ["materiales"]},
     "10.1002/adom.71901": {
       "themes": ["fotonica", "materiales"],
+      "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-adom71901-ga-768x334.jpg",
       "featured": {
         "order": 3,
         "visual": "emission",
@@ -24,9 +25,30 @@
         "summary": "Mapas de fotoluminiscencia muestran que una pequeña fracción de nanocristales muy emisivos puede imponer la respuesta óptica de un nanocompuesto de perovskita y ocultar el comportamiento del material masivo."
       }
     },
-    "10.1016/j.solmat.2026.114703": {"themes": ["fotovoltaica"]},
-    "10.1002/chem.202503192": {"themes": ["fotocatalisis", "materiales"]},
-    "10.1002/nap2.70196": {"themes": ["fotonica"]},
+    "10.1016/j.solmat.2026.114703": {
+      "themes": ["fotovoltaica"],
+      "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-solmat114703-fig1-768x384.jpg",
+      "featured": {
+        "title": "Células solares impresas y flexibles, procesadas con luz para el espacio",
+        "summary": "Pulsos de luz intensa permiten procesar en muy poco tiempo células solares de perovskita impresas sobre sustratos flexibles, pensadas para aplicaciones espaciales."
+      }
+    },
+    "10.1002/chem.202503192": {
+      "themes": ["fotocatalisis", "materiales"],
+      "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-chem202503192-ga-768x433.jpg",
+      "featured": {
+        "title": "Nanopartículas de platino fabricadas con luz solar",
+        "summary": "Perovskitas de doble vacante sirven de precursor para formar, con luz solar simulada y a temperatura ambiente, nanopartículas de platino de menos de 3 nm muy activas para obtener hidrógeno a partir de metanol."
+      }
+    },
+    "10.1002/nap2.70196": {
+      "themes": ["fotonica"],
+      "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-nap270196-ga-768x494.jpg",
+      "featured": {
+        "title": "Reciclar la luz de la perovskita para detectar más",
+        "summary": "En guías de onda de un nanocompuesto de perovskita, los fotones reemitidos viajan milímetros hasta los electrodos y aumentan la fotocorriente del fotodetector en torno a un 60 %."
+      }
+    },
     "10.1002/sstr.70540": {"themes": ["fotocatalisis", "materiales"]},
     "10.1002/sstr.202600020": {"themes": ["fotovoltaica", "materiales"]},
     "10.1002/anie.7703450": {"themes": ["materiales", "estabilidad"]},
@@ -57,18 +79,18 @@
     "Pablo P. Boix": {"profile": "/equipo/#pablo-boix"},
     "Rafael Abargues López": {"profile": "/equipo/#rafael-abargues"},
     "Pedro Atienzar": {"profile": "/equipo/#pedro-atienzar"},
-    "Teresa Ripollés Sanchis": {"profile": "/equipo/"},
+    "Teresa Ripollés Sanchis": {"profile": "/equipo/#teresa-ripolles"},
     "Fernando Ramiro Manzano": {"profile": "/equipo/#fernando-ramiro"},
-    "Isabelle Rodríguez": {"profile": "/equipo/"},
+    "Isabelle Rodríguez": {"profile": "/equipo/#isabelle-rodriguez"},
     "Francisco Marqués Moros": {"profile": "/equipo/#francisco-marques"},
-    "Sudeshna Ghosh": {"profile": "/equipo/"},
+    "Sudeshna Ghosh": {"profile": "/equipo/#sudeshna-ghosh"},
     "Jorge Pascual Mielgo": {"profile": "/equipo/#jorge-pascual"},
     "Abinash Tiwari": {"profile": "/equipo/#abinash-tiwari"},
     "Miriam Mínguez Avellán": {"profile": "/equipo/#miriam-minguez"},
     "Omar Eduardo Solis Luna": {"profile": "/equipo/#omar-solis"},
     "Pablo Franco Betancur": {"profile": "/equipo/#pablo-franco"},
     "Noemí Farinós Navajas": {"profile": "/equipo/#noemi-farinos"},
-    "Froy Kevin Mego de la Cruz": {"profile": "/equipo/"},
+    "Froy Kevin Mego de la Cruz": {"profile": "/equipo/#kevin-mego"},
     "Cid Ortega Hernández": {"profile": "/equipo/#cid-ortega"},
     "Víctor Sagra Rodríguez": {"profile": "/equipo/#victor-sagra"}
   }
