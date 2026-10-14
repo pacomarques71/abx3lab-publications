@@ -94,6 +94,55 @@ def normalize_doi(value: str | None) -> str | None:
         .strip()
     ) or None
 
+# Títulos: Crossref los da en JATS, con <sub>/<sup>/<i> y saltos de línea e
+# indentación entre etiquetas (p. ej. "PbI\n      <sub>2</sub>\n      /CsBr").
+# Se dejan solo esas etiquetas de formato y se quitan los espacios que añade el
+# XML, para que la web muestre "PbI<sub>2</sub>/CsBr" y no "PbI ₂ /CsBr".
+TITLE_KEEP_TAGS = ("sub", "sup", "i", "b")
+# Tras un subíndice el espacio se conserva ("CO<sub>2</sub> conversion"), salvo
+# que siga la fórmula: un signo ("/CsBr", "–MAPbBr", "(Cl, Br)"), un elemento de
+# una letra suelto ("Ti<sub>2</sub>N MXene") o un elemento seguido de paréntesis
+# ("Cs<sub>2</sub>Pt(Cl, Br)<sub>6</sub>").
+_FORMULA_CONTINUATION = re.compile(
+    r"</(sub|sup)>\s+(?=[(\[/–—\-+·,.:;)]|[BCFHKNOPSUVWY](?![\w])|[A-Z][a-z]?[(\[])"
+)
+
+def clean_title(value: str | None) -> str | None:
+    if not value:
+        return value
+    keep = "|".join(TITLE_KEEP_TAGS)
+    # Quita cualquier otra etiqueta (<scp>, <mml:…>, <title>…) y conserva el texto.
+    value = re.sub(rf"<(?!/?(?:{keep})>)[^>]*>", "", value)
+    value = " ".join(value.split())
+    value = re.sub(rf"<({keep})>\s+", r"<\1>", value)
+    value = re.sub(rf"\s+</({keep})>", r"</\1>", value)
+    value = re.sub(r"\s+<(sub|sup)>", r"<\1>", value)
+    value = _FORMULA_CONTINUATION.sub(r"</\1>", value)
+    return value.strip() or None
+
+def load_previous_titles() -> dict[str, str]:
+    """Títulos de la última versión publicada, por DOI.
+
+    Si Crossref no responde, OpenAlex solo da el título en texto plano y pierde
+    los subíndices ("Ni(AcO) 2 –MAPbBr 3"). En ese caso se reutiliza el título
+    que ya teníamos para ese DOI.
+    """
+    if not OUTPUT_FILE.exists():
+        return {}
+    try:
+        records = json.loads(OUTPUT_FILE.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    titles = {}
+    for record in records:
+        doi = normalize_doi(record.get("doi"))
+        title = record.get("title")
+        if doi and title and ("<sub>" in title or "<sup>" in title):
+            titles[doi.lower()] = clean_title(title)
+    return titles
+
+PREVIOUS_TITLES: dict[str, str] = {}
+
 def load_team() -> list[dict]:
     return json.loads(TEAM_FILE.read_text(encoding="utf-8"))
 
@@ -354,7 +403,7 @@ def make_record(
     biblio = work.get("biblio") or {}
 
     return {
-        "title": meta.get("title") or work.get("title"),
+        "title": clean_title(meta.get("title")) or PREVIOUS_TITLES.get(doi.lower()) or clean_title(work.get("title")),
         "authors": rendered_authors,
         "groupAuthors": group_authors,
         "groupAuthorDisplayNames": group_author_display_names,
@@ -395,6 +444,7 @@ def remove_wiley_language_duplicates(records: list[dict]) -> list[dict]:
 
 def main():
     team = load_team()
+    PREVIOUS_TITLES.update(load_previous_titles())
     excluded_dois = load_excluded_dois()
     by_orcid, aliases, aliases_by_member = build_member_indexes(team)
 
