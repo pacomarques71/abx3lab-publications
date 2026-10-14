@@ -75,59 +75,6 @@
     "featured": null
   },
   {
-    "title": "OER Activity Promoted by Organic Ligand‐Free Cs<sub>2</sub>Pt(Cl, Br)<sub>6</sub> Perovskite Photocatalyst for Solar‐Driven Water Splitting",
-    "authors": [
-      "Kevin Mego",
-      "Pedro Ruiz‐Campos",
-      "Herme G. Baldoví",
-      "Pedro Atienzar"
-    ],
-    "groupAuthors": [
-      "Froy Kevin Mego de la Cruz",
-      "Pedro Atienzar"
-    ],
-    "groupAuthorDisplayNames": [
-      "Kevin Mego",
-      "Pedro Atienzar"
-    ],
-    "groupMembers": [
-      {
-        "name": "Froy Kevin Mego de la Cruz",
-        "display": "Kevin Mego",
-        "profile": "/equipo/"
-      },
-      {
-        "name": "Pedro Atienzar",
-        "display": "Pedro Atienzar",
-        "profile": "/equipo/#pedro-atienzar"
-      }
-    ],
-    "journal": "Advanced Energy and Sustainability Research",
-    "publicationDate": "2025-10-15",
-    "onlinePublicationDate": "2025-10-15",
-    "issueDate": null,
-    "year": 2025,
-    "volume": "7",
-    "issue": "2",
-    "pages": null,
-    "doi": "10.1002/aesr.202500105",
-    "url": "https://doi.org/10.1002/aesr.202500105",
-    "type": "article",
-    "image": null,
-    "openAccess": {
-      "status": "gold",
-      "url": "https://doi.org/10.1002/aesr.202500105",
-      "pdf": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aesr.202500105",
-      "version": "publishedVersion"
-    },
-    "license": null,
-    "themes": [
-      "fotocatalisis"
-    ],
-    "projects": [],
-    "featured": null
-  },
-  {
     "title": "Working Mechanisms of Triple-Oxide Mesoporous Hole-Transport-Layer-Free Printable Perovskite Solar Cells via Impedance Spectroscopy",
     "authors": [
       "Pablo F. Betancur",
@@ -321,15 +268,15 @@
     "featured": null
   },
   {
-    "title": "Straightforward and green synthesis of all-inorganic CsPbI 3 perovskite solar cells via nickel acetate incorporation",
+    "title": "Straightforward and green synthesis of all-inorganic CsPbI<sub>3</sub> perovskite solar cells <i>via</i> nickel acetate incorporation",
     "authors": [
-      "Jaume Noguera‐Gómez",
-      "Víctor Sagra‐Rodríguez",
-      "Marta Vallés‐Pelarda",
-      "Miriam Mínguez-Avellán",
+      "Jaume Noguera-Gómez",
+      "Víctor Sagra-Rodríguez",
+      "Marta Vallés-Pelarda",
+      "Miriam Minguez-Avellan",
       "Sandy Sánchez",
       "Rosario Vidal",
-      "Jaume‐Adrià Alberola‐Borràs",
+      "Jaume-Adrià Alberola-Borràs",
       "Rafael Abargues",
       "Pablo P. Boix"
     ],
@@ -340,20 +287,20 @@
       "Pablo P. Boix"
     ],
     "groupAuthorDisplayNames": [
-      "Víctor Sagra‐Rodríguez",
-      "Miriam Mínguez-Avellán",
+      "Víctor Sagra-Rodríguez",
+      "Miriam Minguez-Avellan",
       "Rafael Abargues",
       "Pablo P. Boix"
     ],
     "groupMembers": [
       {
         "name": "Víctor Sagra Rodríguez",
-        "display": "Víctor Sagra‐Rodríguez",
+        "display": "Víctor Sagra-Rodríguez",
         "profile": "/equipo/#victor-sagra"
       },
       {
         "name": "Miriam Mínguez Avellán",
-        "display": "Miriam Mínguez-Avellán",
+        "display": "Miriam Minguez-Avellan",
         "profile": "/equipo/#miriam-minguez"
       },
       {
@@ -367,14 +314,14 @@
         "profile": "/equipo/#pablo-boix"
       }
     ],
-    "journal": "EES solar.",
+    "journal": "EES Solar",
     "publicationDate": "2025-01-01",
     "onlinePublicationDate": "2025-01-01",
     "issueDate": null,
     "year": 2025,
     "volume": "1",
     "issue": "5",
-    "pages": "868",
+    "pages": "868-880",
     "doi": "10.1039/d5el00064e",
     "url": "https://doi.org/10.1039/d5el00064e",
     "type": "article",
@@ -385,7 +332,7 @@
       "pdf": "https://pubs.rsc.org/en/content/articlepdf/2025/el/d5el00064e",
       "version": "publishedVersion"
     },
-    "license": null,
+    "license": "http://creativecommons.org/licenses/by/3.0/",
     "themes": [
       "fotovoltaica",
       "materiales"
@@ -459,15 +406,15 @@
       "Cristopher Tinajero",
       "Simone Marchetti",
       "Jaume Luis-Gómez",
-      "Raúl Martínez Cuenca",
-      "Jose Fuentes Ballesteros",
-      "Clara Aranda",
+      "Raúl Martinez-Cuenca",
+      "Jose F. Fuentes-Ballesteros",
+      "Clara A. Aranda",
       "Alejandro Martínez Serra",
-      "M. C. Asensio",
+      "María C. Asensio",
       "Rafael Abargues",
       "Pablo P. Boix",
       "Marcileia Zanatta",
-      "Víctor Sans"
+      "Victor Sans"
     ],
     "groupAuthors": [
       "Rafael Abargues López",
@@ -496,7 +443,7 @@
     "year": 2025,
     "volume": "4",
     "issue": "7",
-    "pages": "1772",
+    "pages": "1772-1783",
     "doi": "10.1039/d5dd00099h",
     "url": "https://doi.org/10.1039/d5dd00099h",
     "type": "article",
@@ -507,7 +454,7 @@
       "pdf": "https://pubs.rsc.org/en/content/articlepdf/2025/dd/d5dd00099h",
       "version": "publishedVersion"
     },
-    "license": null,
+    "license": "http://creativecommons.org/licenses/by-nc/3.0/",
     "themes": [
       "materiales"
     ],

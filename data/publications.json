@@ -595,6 +595,59 @@
     "featured": null
   },
   {
+    "title": "OER Activity Promoted by Organic Ligand‐Free Cs<sub>2</sub>Pt(Cl, Br)<sub>6</sub> Perovskite Photocatalyst for Solar‐Driven Water Splitting",
+    "authors": [
+      "Kevin Mego",
+      "Pedro Ruiz‐Campos",
+      "Herme G. Baldoví",
+      "Pedro Atienzar"
+    ],
+    "groupAuthors": [
+      "Froy Kevin Mego de la Cruz",
+      "Pedro Atienzar"
+    ],
+    "groupAuthorDisplayNames": [
+      "Kevin Mego",
+      "Pedro Atienzar"
+    ],
+    "groupMembers": [
+      {
+        "name": "Froy Kevin Mego de la Cruz",
+        "display": "Kevin Mego",
+        "profile": "/equipo/"
+      },
+      {
+        "name": "Pedro Atienzar",
+        "display": "Pedro Atienzar",
+        "profile": "/equipo/#pedro-atienzar"
+      }
+    ],
+    "journal": "Advanced Energy and Sustainability Research",
+    "publicationDate": "2026-02-01",
+    "onlinePublicationDate": "2025-10-15",
+    "issueDate": null,
+    "year": 2026,
+    "volume": "7",
+    "issue": "2",
+    "pages": "e202500105",
+    "doi": "10.1002/aesr.202500105",
+    "url": "https://doi.org/10.1002/aesr.202500105",
+    "type": "article",
+    "image": null,
+    "openAccess": {
+      "status": "gold",
+      "url": "https://doi.org/10.1002/aesr.202500105",
+      "pdf": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aesr.202500105",
+      "version": "publishedVersion"
+    },
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "themes": [
+      "fotocatalisis"
+    ],
+    "projects": [],
+    "featured": null
+  },
+  {
     "title": "CsPbBr<sub>3</sub> nanocrystals supported on a partially oxidized Ti<sub>2</sub>N MXene for photothermal CO<sub>2</sub> conversion",
     "authors": [
       "Kevin Mego",
@@ -711,14 +764,14 @@
     }
   },
   {
-    "title": "Ambient operando self-healing in tin perovskite solar cells",
+    "title": "Ambient <i>operando</i> self-healing in tin perovskite solar cells",
     "authors": [
-      "Miriam Mínguez-Avellán",
+      "Miriam Minguez-Avellan",
       "Omar E. Solis",
-      "Noemi Farinós‐Navajas",
+      "Noemi Farinós-Navajas",
       "Pablo F. Betancur",
       "Jorge Pascual",
-      "Teresa S. Ripollés",
+      "Teresa S. Ripolles",
       "Rafael Abargues",
       "Pablo P. Boix"
     ],
@@ -733,19 +786,19 @@
       "Pablo P. Boix"
     ],
     "groupAuthorDisplayNames": [
-      "Miriam Mínguez-Avellán",
+      "Miriam Minguez-Avellan",
       "Omar E. Solis",
-      "Noemi Farinós‐Navajas",
+      "Noemi Farinós-Navajas",
       "Pablo F. Betancur",
       "Jorge Pascual",
-      "Teresa S. Ripollés",
+      "Teresa S. Ripolles",
       "Rafael Abargues",
       "Pablo P. Boix"
     ],
     "groupMembers": [
       {
         "name": "Miriam Mínguez Avellán",
-        "display": "Miriam Mínguez-Avellán",
+        "display": "Miriam Minguez-Avellan",
         "profile": "/equipo/#miriam-minguez"
       },
       {
@@ -755,7 +808,7 @@
       },
       {
         "name": "Noemí Farinós Navajas",
-        "display": "Noemi Farinós‐Navajas",
+        "display": "Noemi Farinós-Navajas",
         "profile": "/equipo/#noemi-farinos"
       },
       {
@@ -770,7 +823,7 @@
       },
       {
         "name": "Teresa Ripollés Sanchis",
-        "display": "Teresa S. Ripollés",
+        "display": "Teresa S. Ripolles",
         "profile": "/equipo/"
       },
       {
@@ -784,14 +837,14 @@
         "profile": "/equipo/#pablo-boix"
       }
     ],
-    "journal": "EES solar.",
+    "journal": "EES Solar",
     "publicationDate": "2026-01-01",
     "onlinePublicationDate": "2026-01-01",
     "issueDate": null,
     "year": 2026,
     "volume": "2",
     "issue": "2",
-    "pages": "360",
+    "pages": "360-368",
     "doi": "10.1039/d5el00182j",
     "url": "https://doi.org/10.1039/d5el00182j",
     "type": "article",
@@ -802,7 +855,7 @@
       "pdf": "https://pubs.rsc.org/en/content/articlepdf/2026/el/d5el00182j",
       "version": "publishedVersion"
     },
-    "license": null,
+    "license": "http://creativecommons.org/licenses/by/3.0/",
     "themes": [
       "estabilidad",
       "fotovoltaica"
