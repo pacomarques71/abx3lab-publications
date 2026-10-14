@@ -70,7 +70,9 @@
       "version": "publishedVersion"
     },
     "license": "http://creativecommons.org/licenses/by/4.0/",
-    "themes": [],
+    "themes": [
+      "materiales"
+    ],
     "projects": [],
     "featured": null
   },
@@ -259,7 +261,8 @@
     },
     "license": "http://creativecommons.org/licenses/by/4.0/",
     "themes": [
-      "materiales"
+      "materiales",
+      "fotonica"
     ],
     "projects": [
       "cns2023",
@@ -395,7 +398,9 @@
       "version": "publishedVersion"
     },
     "license": "http://creativecommons.org/licenses/by-nc/3.0/",
-    "themes": [],
+    "themes": [
+      "materiales"
+    ],
     "projects": [],
     "featured": null
   },
