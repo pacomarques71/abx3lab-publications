@@ -54,7 +54,7 @@
     "doi": "10.1002/adom.71901",
     "url": "https://doi.org/10.1002/adom.71901",
     "type": "article",
-    "image": null,
+    "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-adom71901-ga-768x334.jpg",
     "openAccess": {
       "status": "hybrid",
       "url": "https://doi.org/10.1002/adom.71901",
@@ -114,7 +114,7 @@
       {
         "name": "Teresa Ripollés Sanchis",
         "display": "Teresa S. Ripolles",
-        "profile": "/equipo/"
+        "profile": "/equipo/#teresa-ripolles"
       },
       {
         "name": "Pablo P. Boix",
@@ -133,7 +133,7 @@
     "doi": "10.1016/j.solmat.2026.114703",
     "url": "https://doi.org/10.1016/j.solmat.2026.114703",
     "type": "article",
-    "image": null,
+    "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-solmat114703-fig1-768x384.jpg",
     "openAccess": {
       "status": "green",
       "url": "https://doi.org/10.2139/ssrn.7051368",
@@ -145,7 +145,10 @@
       "fotovoltaica"
     ],
     "projects": [],
-    "featured": null
+    "featured": {
+      "title": "Células solares impresas y flexibles, procesadas con luz para el espacio",
+      "summary": "Pulsos de luz intensa permiten procesar en muy poco tiempo células solares de perovskita impresas sobre sustratos flexibles, pensadas para aplicaciones espaciales."
+    }
   },
   {
     "title": "Sunlight‐Driven Green Synthesis of Platinum Nanoparticles From Double‐Vacancy Halide Perovskite Precursors for Methanol Reforming",
@@ -168,7 +171,7 @@
       {
         "name": "Froy Kevin Mego de la Cruz",
         "display": "Kevin Mego",
-        "profile": "/equipo/"
+        "profile": "/equipo/#kevin-mego"
       },
       {
         "name": "Pedro Atienzar",
@@ -187,7 +190,7 @@
     "doi": "10.1002/chem.202503192",
     "url": "https://doi.org/10.1002/chem.202503192",
     "type": "article",
-    "image": null,
+    "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-chem202503192-ga-768x433.jpg",
     "openAccess": {
       "status": "hybrid",
       "url": "https://doi.org/10.1002/chem.202503192",
@@ -200,7 +203,10 @@
       "materiales"
     ],
     "projects": [],
-    "featured": null
+    "featured": {
+      "title": "Nanopartículas de platino fabricadas con luz solar",
+      "summary": "Perovskitas de doble vacante sirven de precursor para formar, con luz solar simulada y a temperatura ambiente, nanopartículas de platino de menos de 3 nm muy activas para obtener hidrógeno a partir de metanol."
+    }
   },
   {
     "title": "Photon Recycling–Driven Photodetection Enhancement in Ni(AcO)<sub>2</sub>–MAPbBr<sub>3</sub> Nanocomposite Waveguides",
@@ -244,7 +250,7 @@
     "doi": "10.1002/nap2.70196",
     "url": "https://doi.org/10.1002/nap2.70196",
     "type": "article",
-    "image": null,
+    "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-nap270196-ga-768x494.jpg",
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/nap2.70196",
@@ -260,7 +266,10 @@
       "flexwin",
       "inkflex"
     ],
-    "featured": null
+    "featured": {
+      "title": "Reciclar la luz de la perovskita para detectar más",
+      "summary": "En guías de onda de un nanocompuesto de perovskita, los fotones reemitidos viajan milímetros hasta los electrodos y aumentan la fotocorriente del fotodetector en torno a un 60 %."
+    }
   },
   {
     "title": "Triiodide Faujasites With Reactive, Ionic, Antimicrobial, and Catalytic Applications",
@@ -374,7 +383,7 @@
       {
         "name": "Teresa Ripollés Sanchis",
         "display": "Teresa S. Ripolles",
-        "profile": "/equipo/"
+        "profile": "/equipo/#teresa-ripolles"
       },
       {
         "name": "Rafael Abargues López",
@@ -497,7 +506,7 @@
       {
         "name": "Sudeshna Ghosh",
         "display": "Sudeshna Ghosh",
-        "profile": "/equipo/"
+        "profile": "/equipo/#sudeshna-ghosh"
       },
       {
         "name": "Pablo P. Boix",
@@ -614,7 +623,7 @@
       {
         "name": "Froy Kevin Mego de la Cruz",
         "display": "Kevin Mego",
-        "profile": "/equipo/"
+        "profile": "/equipo/#kevin-mego"
       },
       {
         "name": "Pedro Atienzar",
@@ -668,7 +677,7 @@
       {
         "name": "Froy Kevin Mego de la Cruz",
         "display": "Kevin Mego",
-        "profile": "/equipo/"
+        "profile": "/equipo/#kevin-mego"
       },
       {
         "name": "Pedro Atienzar",
@@ -824,7 +833,7 @@
       {
         "name": "Teresa Ripollés Sanchis",
         "display": "Teresa S. Ripolles",
-        "profile": "/equipo/"
+        "profile": "/equipo/#teresa-ripolles"
       },
       {
         "name": "Rafael Abargues López",
