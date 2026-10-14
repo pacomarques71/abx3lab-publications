@@ -79,10 +79,11 @@ class PublicationDatesTest(unittest.TestCase):
         self.assertIsNone(later["issueDate"])
 
     def test_discovery_reaches_older_pages_without_online_date_filter(self):
+        first_page = [{"doi": f"10.1002/new{i}"} for i in range(200)]
         pages = [
-            {"results": [{"doi": "10.1002/new"}], "meta": {"next_cursor": "next"}},
+            {"results": first_page, "meta": {"count": 201}},
             {"results": [{"doi": "10.1002/old", "publication_date": "2025-10-15"}],
-             "meta": {"next_cursor": None}},
+             "meta": {"count": 201}},
         ]
         with patch.object(updater, "fetch_json", side_effect=pages) as fetch, \
              patch.object(updater.time, "sleep"):
@@ -90,6 +91,9 @@ class PublicationDatesTest(unittest.TestCase):
         self.assertIn("doi:10.1002/old", works)
         self.assertEqual(fetch.call_count, 2)
         self.assertTrue(all("from_publication_date" not in call.args[0] for call in fetch.call_args_list))
+        # Sin cursor: OpenAlex pide API key para cursor= desde octubre de 2026.
+        self.assertTrue(all("cursor=" not in call.args[0] for call in fetch.call_args_list))
+        self.assertIn("page=2", fetch.call_args_list[1].args[0])
 
 
 if __name__ == "__main__":
