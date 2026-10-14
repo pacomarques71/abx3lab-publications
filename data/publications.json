@@ -1,5 +1,40 @@
 [
   {
+    "title": "Crossover From Excitonic to Bulk Emission in Metal Halide Perovskite Nanocomposites",
+    "authors": [
+      "Miriam Minguez‐Avellan",
+      "Alexandr Marunchenko",
+      "Víctor Sagra‐Rodríguez",
+      "Rafael Abargues",
+      "Pablo P. Boix",
+      "Ivan G. Scheblykin"
+    ],
+    "groupAuthors": [
+      "Miriam Mínguez Avellán",
+      "Víctor Sagra Rodríguez",
+      "Rafael Abargues López",
+      "Pablo P. Boix"
+    ],
+    "groupAuthorDisplayNames": [
+      "Miriam Minguez‐Avellan",
+      "Víctor Sagra‐Rodríguez",
+      "Rafael Abargues",
+      "Pablo P. Boix"
+    ],
+    "journal": "Advanced Optical Materials",
+    "publicationDate": "2026-10-13",
+    "onlinePublicationDate": "2026-10-13",
+    "issueDate": null,
+    "year": 2026,
+    "volume": null,
+    "issue": null,
+    "pages": "e71901",
+    "doi": "10.1002/adom.71901",
+    "url": "https://doi.org/10.1002/adom.71901",
+    "type": "article",
+    "image": null
+  },
+  {
     "title": "Rapid photonic processing of printed flexible perovskite solar cells for space applications",
     "authors": [
       "Mussakhan A. Aryslan",
@@ -72,11 +107,11 @@
     "image": null
   },
   {
-    "title": "Photon Recycling–Driven Photodetection Enhancement in Ni(AcO) 2 –MAPbBr 3 Nanocomposite Waveguides",
+    "title": "Photon Recycling–Driven Photodetection Enhancement in Ni(AcO)<sub>2</sub>–MAPbBr<sub>3</sub> Nanocomposite Waveguides",
     "authors": [
       "Sandra Soriano‐Díaz",
       "Jaume Noguera‐Gómez",
-      "Diego Ramı́rez Muñoz",
+      "Diego Ramírez‐Muñoz",
       "Pablo P. Boix",
       "Juan P. Martínez‐Pastor",
       "Rafael Abargues",
@@ -91,7 +126,7 @@
       "Rafael Abargues"
     ],
     "journal": "Nanophotonics",
-    "publicationDate": "2026-07-02",
+    "publicationDate": "2026-07-13",
     "onlinePublicationDate": "2026-07-02",
     "issueDate": null,
     "year": 2026,
@@ -258,7 +293,7 @@
     "image": null
   },
   {
-    "title": "Rapid Laser-Based Deposition of PbI\n                    <sub>2</sub>\n                    /CsBr Inorganic Scaffolds for Hybrid Fabrication of Perovskite/Silicon Tandem Solar Cells",
+    "title": "Rapid Laser-Based Deposition of PbI<sub>2</sub>/CsBr Inorganic Scaffolds for Hybrid Fabrication of Perovskite/Silicon Tandem Solar Cells",
     "authors": [
       "Suzana Kralj",
       "Kerem Artuk",
@@ -294,7 +329,7 @@
     "image": null
   },
   {
-    "title": "OER Activity Promoted by Organic Ligand‐Free Cs\n                    <sub>2</sub>\n                    Pt(Cl, Br)\n                    <sub>6</sub>\n                    Perovskite Photocatalyst for Solar‐Driven Water Splitting",
+    "title": "OER Activity Promoted by Organic Ligand‐Free Cs<sub>2</sub>Pt(Cl, Br)<sub>6</sub> Perovskite Photocatalyst for Solar‐Driven Water Splitting",
     "authors": [
       "Kevin Mego",
       "Pedro Ruiz‐Campos",
@@ -323,7 +358,7 @@
     "image": null
   },
   {
-    "title": "CsPbBr\n                    <sub>3</sub>\n                    nanocrystals supported on a partially oxidized Ti\n                    <sub>2</sub>\n                    N MXene for photothermal CO\n                    <sub>2</sub>\n                    conversion",
+    "title": "CsPbBr<sub>3</sub> nanocrystals supported on a partially oxidized Ti<sub>2</sub>N MXene for photothermal CO<sub>2</sub> conversion",
     "authors": [
       "Kevin Mego",
       "Emanuela Accardo",
@@ -382,7 +417,7 @@
     "image": null
   },
   {
-    "title": "Ambient\n                    <i>operando</i>\n                    self-healing in tin perovskite solar cells",
+    "title": "Ambient <i>operando</i> self-healing in tin perovskite solar cells",
     "authors": [
       "Miriam Minguez-Avellan",
       "Omar E. Solis",
