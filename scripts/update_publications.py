@@ -400,6 +400,23 @@ def fallback_openalex_date(work: dict) -> date | None:
             pass
     return None
 
+# OpenAlex no siempre da el PDF de la editorial aunque el artículo sea de acceso
+# abierto (pasa con muchos de Wiley). Si la versión abierta es la publicada y
+# Crossref confirma una licencia Creative Commons, el PDF de la editorial es libre:
+# se enlaza directamente para que aparezca «Texto completo».
+WILEY_DOI_PREFIXES = ("10.1002/", "10.1111/")
+
+
+def publisher_pdf(doi: str, best: dict, meta: dict) -> str | None:
+    if best.get("version") not in (None, "publishedVersion"):
+        return None
+    if not meta.get("license"):
+        return None
+    if doi.lower().startswith(WILEY_DOI_PREFIXES):
+        return f"https://onlinelibrary.wiley.com/doi/pdfdirect/{doi}"
+    return None
+
+
 def make_record(
     work: dict,
     group_authors: list[str],
@@ -485,7 +502,7 @@ def make_record(
         open_access = {
             "status": oa.get("oa_status"),
             "url": best.get("landing_page_url") or oa.get("oa_url"),
-            "pdf": best.get("pdf_url"),
+            "pdf": best.get("pdf_url") or publisher_pdf(doi, best, meta),
             "version": best.get("version"),
         }
 
