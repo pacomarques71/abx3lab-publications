@@ -66,7 +66,7 @@
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/aelm.202500494",
-      "pdf": null,
+      "pdf": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aelm.202500494",
       "version": "publishedVersion"
     },
     "license": "http://creativecommons.org/licenses/by/4.0/",

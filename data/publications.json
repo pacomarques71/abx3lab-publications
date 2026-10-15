@@ -58,7 +58,7 @@
     "openAccess": {
       "status": "hybrid",
       "url": "https://doi.org/10.1002/adom.71901",
-      "pdf": null,
+      "pdf": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/adom.71901",
       "version": "publishedVersion"
     },
     "license": "http://creativecommons.org/licenses/by/4.0/",
@@ -196,7 +196,7 @@
     "openAccess": {
       "status": "hybrid",
       "url": "https://doi.org/10.1002/chem.202503192",
-      "pdf": null,
+      "pdf": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/chem.202503192",
       "version": "publishedVersion"
     },
     "license": "http://creativecommons.org/licenses/by/4.0/",
@@ -257,7 +257,7 @@
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/nap2.70196",
-      "pdf": null,
+      "pdf": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/nap2.70196",
       "version": "publishedVersion"
     },
     "license": "http://creativecommons.org/licenses/by/4.0/",
@@ -321,7 +321,7 @@
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/sstr.70540",
-      "pdf": null,
+      "pdf": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/sstr.70540",
       "version": "publishedVersion"
     },
     "license": "http://creativecommons.org/licenses/by/4.0/",
@@ -410,7 +410,7 @@
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/sstr.202600020",
-      "pdf": null,
+      "pdf": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/sstr.202600020",
       "version": "publishedVersion"
     },
     "license": "http://creativecommons.org/licenses/by/4.0/",
