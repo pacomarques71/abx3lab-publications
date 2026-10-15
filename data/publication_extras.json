@@ -22,8 +22,8 @@
         "order": 3,
         "visual": "emission",
         "title": "Unos pocos nanocristales pueden dominar la luz de todo el material",
-        "summary": "Mapas de fotoluminiscencia muestran que una pequeña fracción de nanocristales muy emisivos puede imponer la respuesta óptica de un nanocompuesto de perovskita y ocultar la del material masivo.",
-        "summary_en": "Photoluminescence maps show that a small fraction of highly emissive nanocrystals can dictate the optical response of a perovskite nanocomposite and mask the behaviour of the bulk material."
+        "summary": "Mapas de fotoluminiscencia revelan que unos pocos nanocristales muy emisivos pueden dominar la respuesta óptica de un nanocompuesto de perovskita.",
+        "summary_en": "Photoluminescence maps reveal that a few highly emissive nanocrystals can dominate the optical response of a perovskite nanocomposite."
       }
     },
     "10.1016/j.solmat.2026.114703": {
@@ -31,8 +31,8 @@
       "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-solmat114703-fig1-768x384.jpg",
       "featured": {
         "title": "Células solares impresas y flexibles, procesadas con luz para el espacio",
-        "summary": "Pulsos de luz intensa permiten procesar en muy poco tiempo células solares de perovskita impresas sobre sustratos flexibles, pensadas para aplicaciones espaciales.",
-        "summary_en": "Intense pulsed light makes it possible to process printed perovskite solar cells on flexible substrates in a very short time, with space applications in mind."
+        "summary": "Pulsos de luz intensa procesan en muy poco tiempo células solares de perovskita impresas sobre sustratos flexibles, pensadas para el espacio.",
+        "summary_en": "Intense pulsed light processes printed perovskite solar cells on flexible substrates in a very short time, with space applications in mind."
       }
     },
     "10.1002/chem.202503192": {
@@ -40,8 +40,8 @@
       "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-chem202503192-ga-768x433.jpg",
       "featured": {
         "title": "Nanopartículas de platino fabricadas con luz solar",
-        "summary": "Perovskitas de doble vacante sirven de precursor para formar, con luz solar simulada y a temperatura ambiente, nanopartículas de platino de menos de 3 nm que producen hidrógeno a partir de metanol.",
-        "summary_en": "Double-vacancy perovskites act as precursors to form, under simulated sunlight at room temperature, sub-3 nm platinum nanoparticles that produce hydrogen from methanol."
+        "summary": "Bajo luz solar simulada, perovskitas de doble vacante forman nanopartículas de platino de menos de 3 nm que producen hidrógeno a partir de metanol.",
+        "summary_en": "Under simulated sunlight, double-vacancy perovskites form sub-3 nm platinum nanoparticles that produce hydrogen from methanol."
       }
     },
     "10.1002/nap2.70196": {
@@ -49,8 +49,8 @@
       "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-nap270196-ga-768x494.jpg",
       "featured": {
         "title": "Reciclar la luz de la perovskita para detectar más",
-        "summary": "En guías de onda de un nanocompuesto de perovskita, los fotones reemitidos viajan milímetros hasta los electrodos y aumentan la fotocorriente del fotodetector en torno a un 60 %.",
-        "summary_en": "In perovskite nanocomposite waveguides, re-emitted photons travel millimetres to the electrodes and boost the photocurrent of the photodetector by around 60%."
+        "summary": "En guías de onda de nanocompuesto de perovskita, los fotones reemitidos llegan a los electrodos y elevan la fotocorriente en torno a un 60 %.",
+        "summary_en": "In perovskite nanocomposite waveguides, re-emitted photons reach the electrodes and boost the photodetector’s photocurrent by around 60%."
       }
     },
     "10.1002/sstr.70540": {"themes": ["fotocatalisis", "materiales"]},
