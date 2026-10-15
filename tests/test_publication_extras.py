@@ -62,5 +62,24 @@ class ApplyExtrasTest(unittest.TestCase):
         self.assertIsNone(r["featured"])
 
 
+class PublisherPdfTest(unittest.TestCase):
+    CC = {"license": "http://creativecommons.org/licenses/by/4.0/"}
+
+    def test_wiley_open_access_gets_direct_pdf(self):
+        best = {"version": "publishedVersion", "pdf_url": None}
+        self.assertEqual(
+            updater.publisher_pdf("10.1002/sstr.202600020", best, self.CC),
+            "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/sstr.202600020",
+        )
+
+    def test_no_pdf_without_creative_commons_licence(self):
+        best = {"version": "publishedVersion"}
+        self.assertIsNone(updater.publisher_pdf("10.1002/anie.7703450", best, {"license": None}))
+
+    def test_no_publisher_pdf_for_accepted_manuscripts_or_other_publishers(self):
+        self.assertIsNone(updater.publisher_pdf("10.1002/x.1", {"version": "acceptedVersion"}, self.CC))
+        self.assertIsNone(updater.publisher_pdf("10.1016/j.x.1", {"version": "publishedVersion"}, self.CC))
+
+
 if __name__ == "__main__":
     unittest.main()
