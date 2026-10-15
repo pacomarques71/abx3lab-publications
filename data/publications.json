@@ -73,7 +73,8 @@
       "order": 3,
       "visual": "emission",
       "title": "Unos pocos nanocristales pueden dominar la luz de todo el material",
-      "summary": "Mapas de fotoluminiscencia muestran que una pequeña fracción de nanocristales muy emisivos puede imponer la respuesta óptica de un nanocompuesto de perovskita y ocultar el comportamiento del material masivo."
+      "summary": "Mapas de fotoluminiscencia muestran que una pequeña fracción de nanocristales muy emisivos puede imponer la respuesta óptica de un nanocompuesto de perovskita y ocultar el comportamiento del material masivo.",
+      "summary_en": "Photoluminescence maps show that a small fraction of highly emissive nanocrystals can dictate the optical response of a perovskite nanocomposite and mask the behaviour of the bulk material."
     }
   },
   {
@@ -147,7 +148,8 @@
     "projects": [],
     "featured": {
       "title": "Células solares impresas y flexibles, procesadas con luz para el espacio",
-      "summary": "Pulsos de luz intensa permiten procesar en muy poco tiempo células solares de perovskita impresas sobre sustratos flexibles, pensadas para aplicaciones espaciales."
+      "summary": "Pulsos de luz intensa permiten procesar en muy poco tiempo células solares de perovskita impresas sobre sustratos flexibles, pensadas para aplicaciones espaciales.",
+      "summary_en": "Intense pulsed light makes it possible to process printed perovskite solar cells on flexible substrates in a very short time, with space applications in mind."
     }
   },
   {
@@ -205,7 +207,8 @@
     "projects": [],
     "featured": {
       "title": "Nanopartículas de platino fabricadas con luz solar",
-      "summary": "Perovskitas de doble vacante sirven de precursor para formar, con luz solar simulada y a temperatura ambiente, nanopartículas de platino de menos de 3 nm muy activas para obtener hidrógeno a partir de metanol."
+      "summary": "Perovskitas de doble vacante sirven de precursor para formar, con luz solar simulada y a temperatura ambiente, nanopartículas de platino de menos de 3 nm muy activas para obtener hidrógeno a partir de metanol.",
+      "summary_en": "Double-vacancy perovskites act as precursors to form, under simulated sunlight and at room temperature, platinum nanoparticles smaller than 3 nm that are highly active in producing hydrogen from methanol."
     }
   },
   {
@@ -268,7 +271,8 @@
     ],
     "featured": {
       "title": "Reciclar la luz de la perovskita para detectar más",
-      "summary": "En guías de onda de un nanocompuesto de perovskita, los fotones reemitidos viajan milímetros hasta los electrodos y aumentan la fotocorriente del fotodetector en torno a un 60 %."
+      "summary": "En guías de onda de un nanocompuesto de perovskita, los fotones reemitidos viajan milímetros hasta los electrodos y aumentan la fotocorriente del fotodetector en torno a un 60 %.",
+      "summary_en": "In perovskite nanocomposite waveguides, re-emitted photons travel millimetres to the electrodes and boost the photocurrent of the photodetector by around 60%."
     }
   },
   {
