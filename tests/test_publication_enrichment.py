@@ -94,6 +94,48 @@ class FundingTests(unittest.TestCase):
         self.assertEqual(out["imageType"], "figure-1")
         self.assertEqual(status["image"]["type"], "figure-1")
 
+    def test_project_name_in_explicit_funding(self):
+        grant_text = "Funding was provided by the Horizon Europe HEPAFLEX project."
+        found = module.grants_in_text(grant_text, PROJECTS + [
+            {"key": "named-hepaflex", "grants": [], "fundingAliases": ["HEPAFLEX"]}
+        ])
+        self.assertEqual(found["named-hepaflex"], "HEPAFLEX")
+        self.assertNotIn("flexwin", found)
+
+    def test_project_alias_respects_word_boundaries(self):
+        p = [{"key": "hepaflex", "grants": ["101122345"],
+              "fundingAliases": ["HEPAFLEX"]}]
+        self.assertEqual(module.grants_in_text(
+            "Financial support from HEPAFLEX.", p), {"hepaflex": "HEPAFLEX"})
+        self.assertEqual(module.grants_in_text("NotHEPAFLEX2", p), {})
+
+    @patch.object(module, "request_url")
+    def test_semantic_scholar_open_access_pdf_fallback(self, fetch):
+        fetch.return_value = (
+            b'{"openAccessPdf":{"url":"https://repository.example.edu/article.pdf"}}',
+            "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1234/test",
+            "application/json")
+        rec = {"doi":"10.1234/test", "openAccess":{"pdf":None}}
+        urls = module.accessible_pdf_candidates(
+            {"locations":[{"pdf_url":"https://repo.example.org/open.pdf"}]},rec)
+        self.assertEqual(urls, ["https://repo.example.org/open.pdf",
+                               "https://repository.example.edu/article.pdf"])
+
+    def test_elsevier_first_page_funding_pdf(self):
+        import fitz
+        doc = fitz.open()
+        page = doc.new_page()
+        page.insert_text((72, 72), "Rapid photonic processing", fontsize=12)
+        page.insert_text((72, 120), "Funding", fontsize=12)
+        page.insert_text((72, 145), "This work was funded by the HEPAFLEX project.")
+        pdf = doc.tobytes()
+        doc.close()
+        sources = module.extract_funding_from_pdf(pdf, "https://repo.example.org/article.pdf")
+        self.assertTrue(sources)
+        found = module.grants_in_text(sources[0][1], [{"key":"hepaflex",
+                        "grants":["101122345"],"fundingAliases":["HEPAFLEX"]}])
+        self.assertEqual(found, {"hepaflex": "HEPAFLEX"})
+
     def test_toc_priority(self):
         markup = b'<div class="graphical-abstract"><img data-src="/images/article-toc.png"/></div>'
         self.assertEqual(module.graphical_abstract_from_html(markup, "https://example.org/a")[0],
