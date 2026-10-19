@@ -13,6 +13,8 @@ on:
       - "data/publication_team.json"
       - "data/excluded_publications.json"
       - "scripts/update_publications.py"
+      - "scripts/enrich_publications.py"
+      - "tests/test_publication_enrichment.py"
 
 permissions:
   contents: write
@@ -20,6 +22,10 @@ permissions:
 jobs:
   update-publications:
     runs-on: ubuntu-latest
+
+    env:
+      OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+      CROSSREF_MAILTO: ${{ vars.CROSSREF_MAILTO }}
 
     steps:
       - name: Checkout repository
@@ -30,15 +36,21 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install enrichment dependencies
+        run: python -m pip install "requests>=2.31,<3" "beautifulsoup4>=4.12,<5" "Pillow>=10.4,<13" "PyMuPDF>=1.24,<2"
+
       - name: Run tests
         run: python -m unittest discover -s tests
 
       - name: Update publications
         run: python scripts/update_publications.py
 
+      - name: Enrich funding evidence and licensed article images
+        run: python scripts/enrich_publications.py
+
       - name: Commit changes if needed
         run: |
-          git add data/publications.json data/publications_2025.json
+          git add data/publications.json data/publications_2025.json data/publication_evidence.json images/
           if git diff --cached --quiet; then
             echo "No publication changes detected."
             exit 0
