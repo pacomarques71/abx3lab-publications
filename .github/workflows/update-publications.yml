@@ -14,7 +14,12 @@ on:
       - "data/excluded_publications.json"
       - "scripts/update_publications.py"
       - "scripts/enrich_publications.py"
+      - ".github/workflows/update-publications.yml"
       - "tests/test_publication_enrichment.py"
+
+concurrency:
+  group: update-publications-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: write
