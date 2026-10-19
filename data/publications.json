@@ -76,7 +76,19 @@
       {
         "project": "esgent",
         "grant": "ESGENT/010/2024",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7221617658.pdf"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
         "source": "openalex"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7221617658.grobid-xml"
       }
     ],
     "projects": [
@@ -89,7 +101,7 @@
       "summary": "Mapas de fotoluminiscencia revelan que unos pocos nanocristales muy emisivos pueden dominar la respuesta óptica de un nanocompuesto de perovskita.",
       "summary_en": "Photoluminescence maps reveal that a few highly emissive nanocrystals can dominate the optical response of a perovskite nanocomposite."
     },
-    "fundingStatus": "metadata-only"
+    "fundingStatus": "text-checked"
   },
   {
     "title": "Rapid photonic processing of printed flexible perovskite solar cells for space applications",
@@ -292,9 +304,21 @@
         "source": "openalex"
       },
       {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7167087305.grobid-xml"
+      },
+      {
         "project": "flexwin",
         "grant": "PID2023‐151880OB‐C31",
         "source": "crossref"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7167087305.pdf"
       },
       {
         "project": "flexwin",
@@ -307,6 +331,12 @@
         "source": "openalex"
       },
       {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7167087305.grobid-xml"
+      },
+      {
         "project": "inkflex",
         "grant": "PID2023‐151880OB‐C32",
         "source": "crossref"
@@ -315,6 +345,12 @@
         "project": "inkflex",
         "grant": "PID2023‐151880OB‐C32",
         "source": "openalex"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023-151880OB-C32",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7167087305.grobid-xml"
       }
     ],
     "projects": [
@@ -327,7 +363,7 @@
       "summary": "En guías de onda de nanocompuesto de perovskita, los fotones reemitidos llegan a los electrodos y elevan la fotocorriente en torno a un 60 %.",
       "summary_en": "In perovskite nanocomposite waveguides, re-emitted photons reach the electrodes and boost the photodetector’s photocurrent by around 60%."
     },
-    "fundingStatus": "metadata-only"
+    "fundingStatus": "text-checked"
   },
   {
     "title": "Triiodide Faujasites With Reactive, Ionic, Antimicrobial, and Catalytic Applications",
@@ -609,12 +645,36 @@
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7130511261.pdf"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
         "source": "openalex"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7130511261.grobid-xml"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7130511261.pdf"
       },
       {
         "project": "hepaflex",
         "grant": "101122345",
         "source": "openalex"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7130511261.grobid-xml"
       }
     ],
     "projects": [
@@ -622,7 +682,7 @@
       "cns2023"
     ],
     "featured": null,
-    "fundingStatus": "metadata-only"
+    "fundingStatus": "text-checked"
   },
   {
     "title": "Rapid Laser-Based Deposition of PbI<sub>2</sub>/CsBr Inorganic Scaffolds for Hybrid Fabrication of Perovskite/Silicon Tandem Solar Cells",
@@ -727,7 +787,7 @@
     "url": "https://doi.org/10.1002/aesr.202500105",
     "openalexId": "https://openalex.org/W4415220258",
     "type": "article",
-    "image": null,
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-0d5a8817110ba10452a0.webp",
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/aesr.202500105",
@@ -741,7 +801,10 @@
     "fundingEvidence": [],
     "projects": [],
     "featured": null,
-    "fundingStatus": "metadata-only"
+    "fundingStatus": "text-checked",
+    "imageSource": "https://content.openalex.org/works/W4415220258.pdf",
+    "imageType": "figure-1",
+    "imageLicense": "http://creativecommons.org/licenses/by/4.0/"
   },
   {
     "title": "CsPbBr<sub>3</sub> nanocrystals supported on a partially oxidized Ti<sub>2</sub>N MXene for photothermal CO<sub>2</sub> conversion",
@@ -799,7 +862,7 @@
     "fundingEvidence": [],
     "projects": [],
     "featured": null,
-    "fundingStatus": "metadata-only"
+    "fundingStatus": "text-checked"
   },
   {
     "title": "Continuous optical–electrical field diagnostics separate environmental modulation from irreversible perovskite solar-cell failure",
@@ -863,6 +926,12 @@
         "project": "hepaflex",
         "grant": "101122345",
         "source": "openalex"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7220689702.grobid-xml"
       }
     ],
     "projects": [
@@ -874,7 +943,7 @@
       "title": "Separar el clima del fallo real en células solares al aire libre",
       "summary": "La monitorización continua de señales ópticas y eléctricas en exterior distingue la variación reversible que causa el tiempo atmosférico del fallo irreversible de cada célula de perovskita."
     },
-    "fundingStatus": "metadata-only"
+    "fundingStatus": "text-checked"
   },
   {
     "title": "Ambient <i>operando</i> self-healing in tin perovskite solar cells",
@@ -962,7 +1031,7 @@
     "url": "https://doi.org/10.1039/d5el00182j",
     "openalexId": "https://openalex.org/W7125242329",
     "type": "article",
-    "image": null,
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-c2d416e7ff943fb2334f.webp",
     "openAccess": {
       "status": "diamond",
       "url": "https://doi.org/10.1039/d5el00182j",
@@ -989,7 +1058,19 @@
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7125242329.pdf"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
         "source": "openalex"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7125242329.grobid-xml"
       },
       {
         "project": "esgent",
@@ -1006,6 +1087,12 @@
         "project": "esgent",
         "grant": "ESGENT/010/2024",
         "source": "openalex"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7125242329.grobid-xml"
       },
       {
         "project": "phoenixpv",
@@ -1035,6 +1122,9 @@
       "title": "Células solares sin plomo que se reparan solas",
       "summary": "Bajo luz y aire ambiente, células de perovskita de estaño recuperan por sí solas la eficiencia perdida e incluso la superan; con el aditivo TEAI conservan el 80 % durante más de 25 horas, frente a menos de una sin él."
     },
-    "fundingStatus": "text-checked"
+    "fundingStatus": "text-checked",
+    "imageSource": "https://content.openalex.org/works/W7125242329.pdf",
+    "imageType": "figure-1",
+    "imageLicense": "http://creativecommons.org/licenses/by/3.0/"
   }
 ]

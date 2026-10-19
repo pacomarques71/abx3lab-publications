@@ -1,7 +1,7 @@
 {
   "10.1002/adom.71901": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
         "project": "esgent",
@@ -11,7 +11,19 @@
       {
         "project": "esgent",
         "grant": "ESGENT/010/2024",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7221617658.pdf"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
         "source": "openalex"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7221617658.grobid-xml"
       }
     ],
     "image": null,
@@ -33,7 +45,7 @@
   },
   "10.1002/nap2.70196": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
         "project": "cns2023",
@@ -41,9 +53,21 @@
         "source": "openalex"
       },
       {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7167087305.grobid-xml"
+      },
+      {
         "project": "flexwin",
         "grant": "PID2023‐151880OB‐C31",
         "source": "crossref"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7167087305.pdf"
       },
       {
         "project": "flexwin",
@@ -56,6 +80,12 @@
         "source": "openalex"
       },
       {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7167087305.grobid-xml"
+      },
+      {
         "project": "inkflex",
         "grant": "PID2023‐151880OB‐C32",
         "source": "crossref"
@@ -64,6 +94,12 @@
         "project": "inkflex",
         "grant": "PID2023‐151880OB‐C32",
         "source": "openalex"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023-151880OB-C32",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7167087305.grobid-xml"
       }
     ],
     "image": null,
@@ -92,17 +128,41 @@
   },
   "10.1002/aenm.202503291": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7130511261.pdf"
+      },
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
         "source": "openalex"
       },
       {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7130511261.grobid-xml"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7130511261.pdf"
+      },
+      {
         "project": "hepaflex",
         "grant": "101122345",
         "source": "openalex"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7130511261.grobid-xml"
       }
     ],
     "image": null,
@@ -117,21 +177,27 @@
   },
   "10.1002/aesr.202500105": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [],
-    "image": null,
+    "image": {
+      "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-0d5a8817110ba10452a0.webp",
+      "source": "https://content.openalex.org/works/W4415220258.pdf",
+      "type": "figure-1",
+      "license": "http://creativecommons.org/licenses/by/4.0/",
+      "doi": "10.1002/aesr.202500105"
+    },
     "license": "http://creativecommons.org/licenses/by/4.0/"
   },
   "10.1039/d5ma01122a": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "image": null,
     "license": "http://creativecommons.org/licenses/by/3.0/"
   },
   "10.1039/d6ee05477c": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
         "project": "hepaflex",
@@ -142,6 +208,12 @@
         "project": "hepaflex",
         "grant": "101122345",
         "source": "openalex"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7220689702.grobid-xml"
       }
     ],
     "image": null,
@@ -165,7 +237,19 @@
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7125242329.pdf"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
         "source": "openalex"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7125242329.grobid-xml"
       },
       {
         "project": "esgent",
@@ -182,6 +266,12 @@
         "project": "esgent",
         "grant": "ESGENT/010/2024",
         "source": "openalex"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7125242329.grobid-xml"
       },
       {
         "project": "phoenixpv",
@@ -200,7 +290,13 @@
         "source": "openalex"
       }
     ],
-    "image": null,
+    "image": {
+      "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-c2d416e7ff943fb2334f.webp",
+      "source": "https://content.openalex.org/works/W7125242329.pdf",
+      "type": "figure-1",
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "doi": "10.1039/d5el00182j"
+    },
     "license": "http://creativecommons.org/licenses/by/3.0/"
   },
   "10.1002/aelm.202500494": {
@@ -212,7 +308,7 @@
   },
   "10.1021/acs.jpclett.5c01405": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
         "project": "cns2023",
@@ -222,7 +318,19 @@
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W4413052390.pdf"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
         "source": "openalex"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W4413052390.grobid-xml"
       },
       {
         "project": "esgent",
@@ -242,20 +350,44 @@
       {
         "project": "flexwin",
         "grant": "PID2023-151880OB-C31",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W4413052390.pdf"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
         "source": "openalex"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W4413052390.grobid-xml"
       }
     ],
-    "image": null,
+    "image": {
+      "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-d9841477b90afd819b22.webp",
+      "source": "https://content.openalex.org/works/W4413052390.pdf",
+      "type": "figure-1",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "doi": "10.1021/acs.jpclett.5c01405"
+    },
     "license": "https://creativecommons.org/licenses/by/4.0/"
   },
   "10.1002/lpor.202401920": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
         "project": "cns2023",
         "grant": "MCIN/CNS2023‐144270",
         "source": "crossref"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W4407624689.pdf"
       },
       {
         "project": "cns2023",
@@ -266,6 +398,12 @@
         "project": "cns2023",
         "grant": "MCIN/CNS2023‐144270",
         "source": "openalex"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W4407624689.grobid-xml"
       },
       {
         "project": "flexwin",
@@ -283,14 +421,32 @@
         "source": "openalex"
       },
       {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W4407624689.grobid-xml"
+      },
+      {
         "project": "inkflex",
         "grant": "PID2023‐151880OB‐C32",
         "source": "crossref"
       },
       {
         "project": "inkflex",
+        "grant": "PID2023-151880OB-C32",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W4407624689.pdf"
+      },
+      {
+        "project": "inkflex",
         "grant": "PID2023‐151880OB‐C32",
         "source": "openalex"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023-151880OB-C32",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W4407624689.grobid-xml"
       }
     ],
     "image": null,
@@ -298,7 +454,7 @@
   },
   "10.1002/smsc.202400529": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
         "project": "cns2023",
@@ -306,17 +462,47 @@
         "source": "openalex"
       },
       {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W4406778408.grobid-xml"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W4406778408.pdf"
+      },
+      {
         "project": "flexwin",
         "grant": "PID2023-151880OB-C31",
         "source": "openalex"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W4406778408.grobid-xml"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023-151880OB-C32",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W4406778408.grobid-xml"
       }
     ],
-    "image": null,
+    "image": {
+      "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-9b038e2fd11cd918fb56.webp",
+      "source": "https://content.openalex.org/works/W4406778408.pdf",
+      "type": "figure-1",
+      "license": "http://creativecommons.org/licenses/by/4.0/",
+      "doi": "10.1002/smsc.202400529"
+    },
     "license": "http://creativecommons.org/licenses/by/4.0/"
   },
   "10.1039/d5el00064e": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
         "project": "esgent",
@@ -344,14 +530,14 @@
   },
   "10.1039/d4ma01150c": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "image": null,
     "license": null
   },
   "10.1039/d5dd00099h": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "image": null,
     "license": null
