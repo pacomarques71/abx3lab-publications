@@ -33,6 +33,7 @@ TIMEOUT = 18
 MAX_PDF = 24 * 1024 * 1024
 MAX_IMAGE = 10 * 1024 * 1024
 CHECK_DAYS = 60
+FUNDING_MATCHER_VERSION = 2  # increment when grant parsing semantics change
 SECTION_NAMES = re.compile(r"acknowledg|funding|financial support|grant support|financial assistance|supporting fund|agradecim|financiaci", re.I)
 FIGURE_CAPTION = re.compile(r"^\s*(?:fig(?:ure)?\.?\s*1\b|figure\s+1\b)", re.I)
 ALLOWED_IMAGE_LICENSES = ("cc-by", "cc0", "public-domain", "cc-by-sa")
@@ -539,6 +540,10 @@ def enrich_entry(rec, projects, prev, extras):
         revisit = date.fromisoformat(prev.get("checked", "1900-01-01")) <= date.today() - timedelta(days=CHECK_DAYS)
     except ValueError:
         pass
+    # Recheck cached evidence after substantive parser upgrades; old text-checked
+    # status means the OLD matcher ran, not that the new matcher has been tried.
+    if prev.get("fundingMatcherVersion") != FUNDING_MATCHER_VERSION:
+        revisit = True
     # Retry unresolved articles weekly, whether they have missing projects or images.
     if prev.get("fundingStatus") != "text-checked":
         revisit = True
@@ -664,7 +669,8 @@ def enrich_entry(rec, projects, prev, extras):
     audit = {"checked": today if (revisit or needs_picture) else prev.get("checked", today),
              "fundingStatus": status, "fundingEvidence": rec["fundingEvidence"],
              "image": img_origin, "license": lic,
-             "wileyTdmStatus": wiley_status}
+             "wileyTdmStatus": wiley_status,
+             "fundingMatcherVersion": FUNDING_MATCHER_VERSION}
     return rec, audit
 
 
