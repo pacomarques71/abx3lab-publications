@@ -1,0 +1,53 @@
+name: Enrich existing publications
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/enrich-existing-publications.yml"
+
+concurrency:
+  group: update-publications-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      WILEY_TDM_TOKEN: ${{ secrets.WILEY_TDM_TOKEN }}
+      ELSEVIER_API_KEY: ${{ secrets.ELSEVIER_API_KEY }}
+      OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install "requests>=2.31,<3" "beautifulsoup4>=4.12,<5" "Pillow>=10.4,<13" "PyMuPDF>=1.24,<2"
+      - name: Run tests
+        run: python -m unittest discover -s tests
+      - name: Enrich known publications (no discovery / API paging)
+        run: python scripts/enrich_publications.py
+      - name: Commit evidence and images if changed
+        run: |
+          git add data/publications.json data/publications_2025.json data/publication_evidence.json
+          if [ -d images ]; then git add images/; fi
+          if git diff --cached --quiet; then
+            echo "No evidence changes detected."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: enrich existing publications"
+          if ! git push; then
+            git fetch origin main
+            git rebase origin/main
+            git push
+          fi
