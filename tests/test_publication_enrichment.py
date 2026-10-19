@@ -226,6 +226,34 @@ class FundingTests(unittest.TestCase):
         self.assertEqual(out["fundingStatus"], "text-checked")
         self.assertTrue(all(e["source"] == "wiley-tdm" for e in out["fundingEvidence"]))
 
+    def test_wiley_memristor_grants_without_extractable_heading(self):
+        """Grant identifiers in an unlabelled acknowledgement must be found."""
+        import fitz
+        doc = fitz.open()
+        page = doc.new_page()
+        page.insert_text((60, 80), "Conclusions and methods", fontsize=12)
+        page.insert_text((60, 125), "The authors thank their colleagues.", fontsize=11)
+        page.insert_text((60, 150), "The results are part of the grant CNS2023-144270", fontsize=11)
+        page.insert_text((60, 175), "and funding via ESGENT/010/2024 from Generalitat Valenciana.", fontsize=11)
+        pdf = doc.tobytes()
+        doc.close()
+        result = module.extract_funding_from_pdf(pdf, "https://example.org/memristors.pdf", PROJECTS)
+        found = {}
+        for _source, paragraph, _url in result:
+            found.update(module.grants_in_text(paragraph, PROJECTS))
+        self.assertEqual(set(found), {"cns2023", "esgent"})
+
+    def test_references_alone_do_not_fund_article(self):
+        import fitz
+        doc = fitz.open()
+        page = doc.new_page()
+        page.insert_text((60, 80), "References", fontsize=12)
+        page.insert_text((60, 120), "1. Supported by grant CNS2023-144270", fontsize=11)
+        pdf = doc.tobytes()
+        doc.close()
+        result = module.extract_funding_from_pdf(pdf, "https://example.org/references.pdf", PROJECTS)
+        self.assertFalse(result)
+
     def test_toc_priority(self):
         markup = b'<div class="graphical-abstract"><img data-src="/images/article-toc.png"/></div>'
         self.assertEqual(module.graphical_abstract_from_html(markup, "https://example.org/a")[0],
