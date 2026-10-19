@@ -54,38 +54,58 @@ def normalize(value):
 
 
 def grants_in_text(text, projects):
-    """Match explicit grant identifiers without merging adjacent years/numbers.
+    """Find full identifiers across punctuation/PDF line wraps, preserving boundaries.
 
-    Accept formatting variants (slashes, hyphens, line breaks) *inside* an ID,
-    but use boundaries in the ORIGINAL text. Normalizing the entire paragraph
-    first can falsely reject "CNS2023-144270 (2025)" or match unrelated codes.
+    A purely normalized string loses the distinction between "CNS...270 2026"
+    and "CNS...2702026". Match in a compact string but map each matched
+    character back to its actual source-text offset before testing boundaries.
+    This also handles PDF fonts that insert spaces inside otherwise valid IDs.
     """
-    text = unicodedata.normalize("NFKC", str(text or ""))
+    raw = unicodedata.normalize("NFKC", str(text or ""))
+    chars = []
+    offsets = []
+    for idx, char in enumerate(raw):
+        for expanded in char.upper():
+            if ("A" <= expanded <= "Z") or ("0" <= expanded <= "9"):
+                chars.append(expanded)
+                offsets.append(idx)
+    compact = "".join(chars)
     found = {}
     for project in projects:
         for identifier in project.get("grants", []):
-            # Split at letter/digit changes and formatting punctuation.
-            parts = re.findall(r"[A-Za-z]+|\d+", unicodedata.normalize("NFKC", str(identifier)))
-            if not parts:
+            grant = normalize(identifier)
+            if not grant:
                 continue
-            inner = r"[^A-Za-z0-9]*".join(re.escape(part) for part in parts)
-            # Numeric-only IDs may follow prefix letters (e.g. GA101122345),
-            # but may not be part of a longer numeric sequence.
-            before = r"(?<!\d)" if all(p.isdigit() for p in parts) else r"(?<![A-Za-z0-9])"
-            after = r"(?!\d)" if all(p.isdigit() for p in parts) else r"(?![A-Za-z0-9])"
-            if re.search(before + inner + after, text, re.I):
+            for match in re.finditer(re.escape(grant), compact):
+                first = offsets[match.start()]
+                last = offsets[match.end() - 1]
+                # Avoid accidentally merging codes from distant unrelated text.
+                if last - first > max(90, len(grant) * 5):
+                    continue
+                before = raw[first - 1:first] if first else ""
+                after = raw[last + 1:last + 2]
+                if grant.isdigit():
+                    # E.g. GA101122345 is acceptable, 91011223456 is not.
+                    if before.isdigit() or after.isdigit():
+                        continue
+                else:
+                    if (before and before.isascii() and before.isalnum()) or (
+                            after and after.isascii() and after.isalnum()):
+                        continue
                 found[project["key"]] = identifier
                 break
-    # Distinctive project names are evidence only within already identified
-    # funding/acknowledgement sections, never matched against article topics.
+            if project["key"] in found:
+                break
+    # Aliases are read exclusively from extracted funding/acknowledgement
+    # sections, never from titles/abstracts or arbitrary text.
     for project in projects:
         if project["key"] in found:
             continue
         for alias in project.get("fundingAliases", []):
             if len(alias) < 6:
                 continue
-            if re.search(r"(?<![A-Za-z0-9])" + re.escape(alias) + r"(?![A-Za-z0-9])",
-                         text, re.I):
+            if re.search(r"(?<![A-Za-z0-9])" + re.escape(alias)
+                         + r"(?![A-Za-z0-9])", raw, re.I):
                 found[project["key"]] = alias
                 break
     return found
