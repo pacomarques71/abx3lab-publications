@@ -242,6 +242,31 @@ def first_figure_from_pdf(pdf_bytes):
                 png = doc.extract_image(images[0][1])
                 doc.close()
                 return png.get("image")
+            # Vector figures do not have an embedded bitmap. Render only a
+            # graphics-rich region immediately above the Figure 1 caption,
+            # rejecting ordinary columns of text to avoid accidental screenshots.
+            try:
+                width = page.rect.width
+                left_col = caption[0] < width / 2
+                two_columns = (caption[2] - caption[0]) < width * .62
+                if two_columns:
+                    x0 = 30 if left_col else width / 2 + 5
+                    x1 = width / 2 - 5 if left_col else width - 30
+                else:
+                    x0, x1 = 30, width - 30
+                y1 = max(80, caption[1] - 8)
+                y0 = max(35, y1 - 225)
+                clip = fitz.Rect(x0, y0, x1, y1)
+                drawings = sum(1 for d in page.get_drawings()
+                               if d["rect"].intersects(clip))
+                body = page.get_text("text", clip=clip)
+                if drawings >= 12 and len(body) < 500 and clip.height > 120:
+                    out = page.get_pixmap(matrix=fitz.Matrix(1.8, 1.8),
+                                          clip=clip, alpha=False).tobytes("png")
+                    doc.close()
+                    return out
+            except (RuntimeError, ValueError, OSError):
+                pass
         doc.close()
     except (ImportError, ValueError, RuntimeError, OSError):
         return None
