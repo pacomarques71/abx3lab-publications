@@ -525,7 +525,9 @@ def enrich_entry(rec, projects, prev, extras):
     # When a Wiley TDM token is added later, revisit even previously checked
     # articles; metadata and OA repositories can miss additional grants.
     wiley_due = bool(WILEY_TDM_TOKEN and doi.startswith("10.1002/")
-                     and prev.get("wileyTdmStatus") != "success")
+                     and (prev.get("wileyTdmStatus") != "success"
+                          or prev.get("fundingStatus") != "text-checked"
+                          or revisit))
     if wiley_due:
         revisit = True
     needs_picture = not manual.get("image") and not prev.get("image")
