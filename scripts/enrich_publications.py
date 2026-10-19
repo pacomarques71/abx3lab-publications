@@ -54,41 +54,41 @@ def normalize(value):
 
 
 def grants_in_text(text, projects):
-    """Match full grant IDs with punctuation variants, not arbitrary project names or substrings."""
-    compact = normalize(text)
+    """Match explicit grant identifiers without merging adjacent years/numbers.
+
+    Accept formatting variants (slashes, hyphens, line breaks) *inside* an ID,
+    but use boundaries in the ORIGINAL text. Normalizing the entire paragraph
+    first can falsely reject "CNS2023-144270 (2025)" or match unrelated codes.
+    """
+    text = unicodedata.normalize("NFKC", str(text or ""))
     found = {}
     for project in projects:
         for identifier in project.get("grants", []):
-            grant = normalize(identifier)
-            if not grant:
+            # Split at letter/digit changes and formatting punctuation.
+            parts = re.findall(r"[A-Za-z]+|\d+", normalize(identifier))
+            if not parts:
                 continue
-            for match in re.finditer(re.escape(grant), compact):
-                before = compact[match.start() - 1:match.start()] if match.start() else ""
-                after = compact[match.end():match.end() + 1]
-                # Numeric ERC identifiers must not be part of longer numbers.
-                if grant.isdigit() and (before.isdigit() or after.isdigit()):
-                    continue
-                # Avoid matching C31 in C310 or a truncated textual identifier.
-                if not grant.isdigit() and (after.isdigit() and grant[-1].isdigit()):
-                    continue
+            inner = r"[^A-Za-z0-9]*".join(re.escape(part) for part in parts)
+            # Numeric-only IDs may follow prefix letters (e.g. GA101122345),
+            # but may not be part of a longer numeric sequence.
+            before = r"(?<!\d)" if all(p.isdigit() for p in parts) else r"(?<![A-Za-z0-9])"
+            after = r"(?!\d)" if all(p.isdigit() for p in parts) else r"(?![A-Za-z0-9])"
+            if re.search(before + inner + after, text, re.I):
                 found[project["key"]] = identifier
                 break
-            if project["key"] in found:
-                break
-    # Exact, distinctive project names explicitly written in a funding section
-    # are valid evidence even if no agreement number is mentioned.
-    # This is NEVER run against titles, abstracts, references or topic descriptions.
+    # Distinctive project names are evidence only within already identified
+    # funding/acknowledgement sections, never matched against article topics.
     for project in projects:
         if project["key"] in found:
             continue
         for alias in project.get("fundingAliases", []):
             if len(alias) < 6:
                 continue
-            if re.search(r"(?<![A-Za-z0-9])" + re.escape(alias) + r"(?![A-Za-z0-9])", text or "", re.I):
+            if re.search(r"(?<![A-Za-z0-9])" + re.escape(alias) + r"(?![A-Za-z0-9])",
+                         text, re.I):
                 found[project["key"]] = alias
                 break
     return found
-
 
 def request_url(url, max_bytes=MAX_PDF, accept=None, extra_headers=None):
     """Fetch bounded public HTTP(S) resources; never fetch private-network URLs."""
