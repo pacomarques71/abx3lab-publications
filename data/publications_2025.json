@@ -270,6 +270,12 @@
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
+        "source": "oa-pdf-funding-context",
+        "url": "https://content.openalex.org/works/W4407624689.pdf"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
         "source": "openalex"
       },
       {

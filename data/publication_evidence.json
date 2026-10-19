@@ -195,6 +195,12 @@
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
+        "source": "oa-pdf-funding-context",
+        "url": "https://content.openalex.org/works/W7130511261.pdf"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
         "source": "openalex"
       },
       {
@@ -207,6 +213,18 @@
         "project": "hepaflex",
         "grant": "101122345",
         "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7130511261.pdf"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "oa-pdf-funding-context",
+        "url": "https://content.openalex.org/works/W7130511261.pdf"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "HEPAFLEX",
+        "source": "oa-pdf-funding-context",
         "url": "https://content.openalex.org/works/W7130511261.pdf"
       },
       {
@@ -268,6 +286,12 @@
         "project": "hepaflex",
         "grant": "101122345",
         "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7220689702.pdf"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "oa-pdf-funding-context",
         "url": "https://content.openalex.org/works/W7220689702.pdf"
       },
       {
@@ -463,6 +487,12 @@
         "project": "cns2023",
         "grant": "CNS2023-144270",
         "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W4407624689.pdf"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "oa-pdf-funding-context",
         "url": "https://content.openalex.org/works/W4407624689.pdf"
       },
       {
