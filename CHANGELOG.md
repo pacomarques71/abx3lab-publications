@@ -80,3 +80,11 @@ Registro para coordinación entre ChatGPT, Claude y los editores de este reposit
 - Mejora general en scripts/enrich_publications.py: busca además cláusulas de financiación que mencionan códigos explícitos cerca de palabras como funded/grant/funding, incluso sin encabezado legible en PDF; excluye secciones de References. No fija asociaciones por DOI. Tests adicionales evitan falsos positivos por referencias y cubren ambos grants de Memristors.
 - **Verificar la ejecución automática posterior** para comprobar si corrige Memristors. Si sigue sin detectar los grants pese al PDF disponible, hace falta diagnóstico del orden del texto extraído (sin almacenar PDFs protegidos) antes de afirmar que se ha solucionado.
 - Elsevier sigue pendiente: la clave está disponible en Actions, pero Rapid Photonic Processing (10.1016/j.solmat.2026.114703) continúa metadata-only, sin HEPAFLEX, probablemente por restricciones de acceso al XML editorial.
+
+
+### 2026-10-19 — Resultado de verificación posterior a token Wiley y parser flexible
+
+- Run #44, https://github.com/pacomarques71/abx3lab-publications/actions/runs/39290190025, terminado SUCCESS, con pruebas, actualización, enriquecimiento y guardado superados.
+- El parser flexible del PDF de Wiley no ha recuperado todavía los grants de 10.1002/aelm.202500494, aunque su PDF sí se descarga por Wiley TDM; sigue metadata-only y projects=[]. Hay que diagnosticar si PyMuPDF extrae realmente las cadenas de los grants o si el propio PDF carece de ellas. **No declararlo solucionado ni incluir vínculos manuales como sustituto de automatización.**
+- 10.1002/sstr.202600020 sí está corregido automáticamente desde Wiley TDM con cinco grants. Recuento 10/20 publicaciones con proyectos (antes 9/20). 10.1016/j.solmat.2026.114703 continúa sin HEPAFLEX, a pesar de que la variable ELSEVIER_API_KEY está configurada. Acceso al XML del editor requiere investigación adicional.
+- Todos los secretos configurados fueron detectados de forma segura en el run anterior; nunca volcar claves en logs.
