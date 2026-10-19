@@ -529,6 +529,7 @@ def make_record(
         "pages": meta.get("pages") or biblio.get("first_page"),
         "doi": doi,
         "url": f"https://doi.org/{doi}",
+        "openalexId": work.get("id"),
         "type": "review" if work.get("type") == "review" else "article",
         "image": None,
         "openAccess": open_access,
