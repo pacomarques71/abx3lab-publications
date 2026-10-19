@@ -70,3 +70,13 @@ Registro para coordinación entre ChatGPT, Claude y los editores de este reposit
 - **Acción del usuario**: en GitHub repository Settings > Secrets and variables > Actions, crear WILEY_TDM_TOKEN con el token de la página oficial Wiley TDM. Luego ejecutar Update publications UNA sola vez, y revisar el log para comprobar acceso real. No garantiza que GitHub Actions herede la suscripción del CSIC; Wiley devuelve 404 si no hay permiso de lectura desde el servidor.
 - Para Elsevier, ELSEVIER_API_KEY es un secreto distinto; se necesita comprobar que está creado y que la clave tiene los permisos de ScienceDirect para recuperar XML desde los runners de GitHub.
 - Documentación Wiley: https://onlinelibrary.wiley.com/library-info/resources/text-and-datamining
+
+
+### 2026-10-19 — Verificación del primer run con Wiley TDM y mejora de lectura del PDF
+
+- La ejecución GitHub Actions #43 (39289221293) detectó WILEY_TDM_TOKEN, OPENALEX_API_KEY y ELSEVIER_API_KEY como configurados. Wiley TDM permitió descargar exitosamente PDFs, sin almacenarlos en GitHub. 40 tests aprobaron.
+- **Resultados confirmados en datos:** DOI 10.1002/sstr.202600020 incorpora HEPAFLEX, CNS2023, FlexWin, InkFlex y Plan GenT, todos con fuente wiley-tdm y grant ID. Recuento de publicaciones con proyecto pasa de 9 a 10 (20 totales); HEPAFLEX pasa de 3 a 4 y aparecen tres imágenes nuevas adicionales.
+- **Fallo aún abierto:** DOI 10.1002/aelm.202500494 descargó correctamente con Wiley, pero el PDF no produjo fundingEvidence porque el detector exigía encabezados reconocibles. La página oficial del editor muestra CNS2023-144270 y ESGENT/010/2024 en Acknowledgements: https://advanced.onlinelibrary.wiley.com/doi/10.1002/aelm.202500494
+- Mejora general en scripts/enrich_publications.py: busca además cláusulas de financiación que mencionan códigos explícitos cerca de palabras como funded/grant/funding, incluso sin encabezado legible en PDF; excluye secciones de References. No fija asociaciones por DOI. Tests adicionales evitan falsos positivos por referencias y cubren ambos grants de Memristors.
+- **Verificar la ejecución automática posterior** para comprobar si corrige Memristors. Si sigue sin detectar los grants pese al PDF disponible, hace falta diagnóstico del orden del texto extraído (sin almacenar PDFs protegidos) antes de afirmar que se ha solucionado.
+- Elsevier sigue pendiente: la clave está disponible en Actions, pero Rapid Photonic Processing (10.1016/j.solmat.2026.114703) continúa metadata-only, sin HEPAFLEX, probablemente por restricciones de acceso al XML editorial.
