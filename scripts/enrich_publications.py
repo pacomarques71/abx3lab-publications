@@ -267,6 +267,75 @@ def openalex_work(doi):
         return {}
 
 
+
+def openaire_grants(doi, projects):
+    """OpenAIRE Graph: linked grants for this exact DOI (never text-topic inference)."""
+    url = ("https://api.openaire.eu/graph/v4/research-products?"
+           "filter=" + quote("ids.doi:" + doi, safe=":") + "&page_size=2")
+    res = request_url(url, 2_000_000, "application/json")
+    if not res:
+        return []
+    try:
+        results = json.loads(res[0]).get("results") or []
+    except (ValueError, TypeError, AttributeError):
+        return []
+    found = []
+    for entry in results:
+        for grant in entry.get("grants") or []:
+            if not isinstance(grant, dict):
+                continue
+            codes = [str(grant.get(k) or "") for k in ("code", "grantCode", "projectCode", "number")]
+            for code in codes:
+                if not code:
+                    continue
+                for project, expected in grants_in_text(code, projects).items():
+                    ev = {"project": project, "grant": expected, "source": "openaire",
+                          "url": res[1].split("?")[0]}
+                    if ev not in found:
+                        found.append(ev)
+    return found
+
+
+def european_pmc_xml(doi):
+    """JATS from Europe PMC OA corpus, a no-key alternative for eligible papers."""
+    q = quote("DOI:" + doi)
+    search = request_url("https://www.ebi.ac.uk/europepmc/webservices/rest/search?"
+                         "query=" + q + "&format=json&pageSize=2", 400000, "application/json")
+    if not search:
+        return None
+    try:
+        entries = json.loads(search[0]).get("resultList", {}).get("result", [])
+    except (ValueError, TypeError, AttributeError):
+        return None
+    for entry in entries:
+        pmcid = entry.get("pmcid") or ""
+        if not re.fullmatch(r"PMC\d+", pmcid) or entry.get("isOpenAccess") != "Y":
+            continue
+        res = request_url("https://www.ebi.ac.uk/europepmc/webservices/rest/" + pmcid + "/fullTextXML",
+                          6_000_000, "application/xml")
+        if res:
+            return res
+    return None
+
+
+def extract_funding_from_pdf(pdf, url):
+    out = []
+    try:
+        import fitz
+        doc = fitz.open(stream=pdf, filetype="pdf")
+        for pg in list(doc)[-5:]:
+            txt = pg.get_text(sort=True)
+            match = re.search(r"(acknowledg(?:e)?ments?|funding|financial support)", txt, re.I)
+            if match:
+                body = txt[match.start():match.start() + 11000]
+                body = re.split(r"\n(?:REFERENCES|References|Bibliography)\s*\n", body, maxsplit=1)[0]
+                out.append(("oa-pdf", body, url))
+        doc.close()
+    except (ImportError, RuntimeError, ValueError, OSError):
+        pass
+    return out
+
+
 def enrich_entry(rec, projects, prev, extras):
     doi = rec["doi"].lower()
     manual = (extras.get("publications") or {}).get(doi, {})
@@ -296,36 +365,40 @@ def enrich_entry(rec, projects, prev, extras):
             print("  OpenAlex DOI lookup empty:", doi, flush=True)
         page = download_publisher_page(doi)
         sources = []
+        for ev in openaire_grants(doi, projects):
+            if ev not in evidence:
+                evidence.append(ev)
         if page:
             tx = section_text_from_html(page[0])
             if tx:
                 sources.append(("publisher-html", tx, page[1]))
-        if KEY and work.get("id"):
-            wid = str(work["id"]).rsplit("/", 1)[-1]
+        if KEY and (work.get("id") or rec.get("openalexId")):
+            wid = str(work.get("id") or rec["openalexId"]).rsplit("/", 1)[-1]
             xml = request_url("https://content.openalex.org/works/" + wid + ".grobid-xml?api_key=" + quote(KEY), 6_000_000)
             if xml:
                 tx = text_from_tei(xml[0])
                 if tx:
                     sources.append(("openalex-tei", tx, xml[1].split("?")[0]))
-        # Reuse full-text PDF link already exposed by the WordPress download button.
+        # Prefer the existing download button's PDF, then OpenAlex's OA copy (key).
         pdf = None
         pdfurl = (rec.get("openAccess") or {}).get("pdf")
-        if pdfurl and (revisit or needs_picture):
-            response = request_url(pdfurl)
+        urls = [pdfurl] if pdfurl else []
+        wid = str(work.get("id") or rec.get("openalexId") or "").rsplit("/", 1)[-1]
+        if KEY and re.fullmatch(r"W\d+", wid):
+            urls.append("https://content.openalex.org/works/" + wid + ".pdf?api_key=" + quote(KEY))
+        for candidate in urls:
+            response = request_url(candidate, MAX_PDF, "application/pdf")
             if response and response[0][:4] == b"%PDF":
-                pdf = response[0]
-                try:
-                    import fitz
-                    document = fitz.open(stream=pdf, filetype="pdf")
-                    for pg in list(document)[-4:]:
-                        txt = pg.get_text(sort=True)
-                        found = re.search(r"(acknowledg(?:e)?ments?|funding|financial support)", txt, re.I)
-                        if found:
-                            # Cut at subsequent standard boilerplate where possible.
-                            sources.append(("oa-pdf", txt[found.start():found.start() + 10000], pdfurl))
-                    document.close()
-                except (ImportError, RuntimeError, ValueError):
-                    pass
+                pdf, pdfurl = response[0], candidate.split("?")[0]
+                break
+        if pdf is not None:
+            sources.extend(extract_funding_from_pdf(pdf, pdfurl))
+        if not sources:
+            pmc = european_pmc_xml(doi)
+            if pmc:
+                tx = text_from_tei(pmc[0])
+                if tx:
+                    sources.append(("europe-pmc-jats", tx, pmc[1]))
         if sources:
             status = "text-checked"
             for name, tx, url in sources:
