@@ -41,6 +41,30 @@ class FundingTests(unittest.TestCase):
     def test_no_false_numeric_prefix(self):
         self.assertFalse(module.grants_in_text("Contract 91011223456", PROJECTS))
 
+    def test_grant_survives_year_after_punctuation(self):
+        p = [{"key": "cns2023", "grants": ["CNS2023-144270"]},
+             {"key": "esgent", "grants": ["ESGENT/010/2024"]}]
+        text = ("This work was funded by CNS2023-144270 (2026), "
+                "and ESGENT/010/2024 (2025).")
+        self.assertEqual(set(module.grants_in_text(text, p)), {"cns2023", "esgent"})
+
+    def test_numeric_grant_survives_following_year(self):
+        p = [{"key": "hepaflex", "grants": ["101122345"]}]
+        self.assertEqual(module.grants_in_text("Grant 101122345 (2024)", p),
+                         {"hepaflex": "101122345"})
+
+    def test_grant_does_not_match_a_longer_identifier(self):
+        p = [{"key": "cns2023", "grants": ["CNS2023-144270"]},
+             {"key": "hepaflex", "grants": ["101122345"]}]
+        self.assertEqual(module.grants_in_text(
+            "CNS2023-1442701 1011223456", p), {})
+
+    def test_grant_matching_survives_pdf_line_wrapping(self):
+        p = [{"key": "cns2023", "grants": ["CNS2023-144270"]}]
+        self.assertEqual(module.grants_in_text(
+            "Grant CNS2023-\n144270\nand other support", p),
+            {"cns2023": "CNS2023-144270"})
+
     def test_license_noncommercial_cannot_be_republished(self):
         rec = {"license": "https://creativecommons.org/licenses/by-nc/4.0"}
         self.assertIsNone(module.metadata_licenses(rec, {}))
