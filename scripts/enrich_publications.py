@@ -73,6 +73,18 @@ def grants_in_text(text, projects):
                 break
             if project["key"] in found:
                 break
+    # Exact, distinctive project names explicitly written in a funding section
+    # are valid evidence even if no agreement number is mentioned.
+    # This is NEVER run against titles, abstracts, references or topic descriptions.
+    for project in projects:
+        if project["key"] in found:
+            continue
+        for alias in project.get("fundingAliases", []):
+            if len(alias) < 6:
+                continue
+            if re.search(r"(?<![A-Za-z0-9])" + re.escape(alias) + r"(?![A-Za-z0-9])", text or "", re.I):
+                found[project["key"]] = alias
+                break
     return found
 
 
@@ -273,6 +285,37 @@ def first_figure_from_pdf(pdf_bytes):
     return None
 
 
+
+def accessible_pdf_candidates(work, rec):
+    """Use repository copies, not just the publisher's often bot-blocked PDF link."""
+    urls = [(rec.get("openAccess") or {}).get("pdf")]
+    for location in [work.get("best_oa_location") or {}, work.get("primary_location") or {}] + (work.get("locations") or []):
+        if not isinstance(location, dict):
+            continue
+        for key in ("pdf_url",):
+            urls.append(location.get(key))
+    # Semantic Scholar often lists a different public OA copy (including preprints).
+    doi = rec.get("doi", "")
+    if doi:
+        res = request_url(
+            "https://api.semanticscholar.org/graph/v1/paper/DOI:"
+            + quote(doi, safe="/") + "?fields=openAccessPdf,externalIds", 250000, "application/json"
+        )
+        if res:
+            try:
+                j = json.loads(res[0])
+                pdf = j.get("openAccessPdf") or {}
+                if isinstance(pdf, dict):
+                    urls.append(pdf.get("url"))
+            except (ValueError, TypeError, AttributeError):
+                pass
+    unique = []
+    for url in urls:
+        if url and url.startswith(("https://", "http://")) and url not in unique:
+            unique.append(url)
+    return unique[:7]
+
+
 def download_publisher_page(doi):
     result = request_url("https://doi.org/" + quote(doi, safe="/"), max_bytes=3_000_000,
                          accept="text/html")
@@ -348,12 +391,22 @@ def extract_funding_from_pdf(pdf, url):
     try:
         import fitz
         doc = fitz.open(stream=pdf, filetype="pdf")
-        for pg in list(doc)[-5:]:
+        # In Elsevier papers funding can appear near the front of the manuscript,
+        # rather than exclusively among its final pages.
+        for pg in list(doc)[:40]:
             txt = pg.get_text(sort=True)
-            match = re.search(r"(acknowledg(?:e)?ments?|funding|financial support)", txt, re.I)
-            if match:
-                body = txt[match.start():match.start() + 11000]
-                body = re.split(r"\n(?:REFERENCES|References|Bibliography)\s*\n", body, maxsplit=1)[0]
+            header = re.search(
+                r"(?im)^[ \t]*(?:acknowledg(?:e)?ments?|funding(?: information| statement)?|"
+                r"financial support)(?:[ \t]*[:.]|[ \t]*\n)",
+                txt
+            )
+            if header:
+                body = txt[header.start():header.start() + 11000]
+                body = re.split(
+                    r"(?im)^[ \t]*(?:references|bibliography|supplementary materials?|"
+                    r"author contributions|conflicts? of interest)(?:[ \t]*[:.]|[ \t]*\n)",
+                    body, maxsplit=1
+                )[0]
                 out.append(("oa-pdf", body, url))
         doc.close()
     except (ImportError, RuntimeError, ValueError, OSError):
@@ -404,10 +457,11 @@ def enrich_entry(rec, projects, prev, extras):
                 tx = text_from_tei(xml[0])
                 if tx:
                     sources.append(("openalex-tei", tx, xml[1].split("?")[0]))
-        # Prefer the existing download button's PDF, then OpenAlex's OA copy (key).
+        # Prefer publisher/repository OA copies and public preprints, then
+        # authenticated OpenAlex's PDF archive if one exists.
         pdf = None
-        pdfurl = (rec.get("openAccess") or {}).get("pdf")
-        urls = [pdfurl] if pdfurl else []
+        pdfurl = None
+        urls = accessible_pdf_candidates(work, rec)
         wid = str(work.get("id") or rec.get("openalexId") or "").rsplit("/", 1)[-1]
         if KEY and re.fullmatch(r"W\d+", wid):
             urls.append("https://content.openalex.org/works/" + wid + ".pdf?api_key=" + quote(KEY))
@@ -419,6 +473,7 @@ def enrich_entry(rec, projects, prev, extras):
         if pdf is not None:
             sources.extend(extract_funding_from_pdf(pdf, pdfurl))
         if not sources:
+            # Another legal OA full-text channel (JATS) for eligible papers.
             pmc = european_pmc_xml(doi)
             if pmc:
                 tx = text_from_tei(pmc[0])
