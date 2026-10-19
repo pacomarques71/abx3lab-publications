@@ -2,6 +2,7 @@ name: Enrich existing publications
 
 on:
   workflow_dispatch:
+  # One-time parser-version audit; can also be triggered manually when needed.
   push:
     branches: [main]
     paths:
