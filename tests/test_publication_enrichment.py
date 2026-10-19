@@ -45,6 +45,7 @@ class FundingTests(unittest.TestCase):
         rec = {"license": "https://creativecommons.org/licenses/by-nc/4.0"}
         self.assertIsNone(module.metadata_licenses(rec, {}))
 
+    @patch.object(module, "request_url", return_value=None)
     @patch.object(module, "download_publisher_page", return_value=None)
     @patch.object(module, "openalex_work", return_value={})
     def test_cached_evidence_restored_when_updater_has_no_awards(self, *_):
@@ -56,6 +57,7 @@ class FundingTests(unittest.TestCase):
         out, _ = module.enrich_entry(rec, PROJECTS, cache, {"publications": {}})
         self.assertEqual(out["projects"], ["cns2023"])
 
+    @patch.object(module, "request_url", return_value=None)
     @patch.object(module, "download_publisher_page", return_value=None)
     @patch.object(module, "openalex_work", return_value={})
     def test_manual_image_wins(self, *_):
