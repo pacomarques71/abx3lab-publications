@@ -46,3 +46,14 @@ Registro para coordinación entre ChatGPT, Claude y los editores de este reposit
 - tests/test_publication_enrichment.py comprueba el match exacto de HEPAFLEX, ausencia de falsos positivos en cadenas superpuestas, reconocimiento de Funding en primera página y fallback a repositorios.
 - **ALCANCE HONESTO:** si el propio texto completo de un artículo o metadatos de financiación no están disponibles para el robot, ninguna regla de texto puede demostrar automáticamente la asociación. No se atribuyen trabajos por temática ni se fijan vínculos DOI -> proyecto manuales. Queda pendiente verificar en la ejecución real si una de las nuevas fuentes expone el artículo Rapid Photonic Processing.
 - En caso de dudas, consultar el log del workflow y los campos fundingStatus/fundingEvidence; success no equivale a financiación comprobada.
+
+
+### 2026-10-19 — Fuente oficial Elsevier y depuración de coincidencias
+
+- Integración OPCIONAL del API oficial Elsevier TDM en scripts/enrich_publications.py para DOI 10.1016/*: lee el XML del artículo si existe autorización de acceso y extrae SOLO secciones de financiación/acknowledgements. El código no guarda el XML completo ni la clave; requiere secreto ELSEVIER_API_KEY en el repositorio GitHub (workflow actualizado). La API puede exigir habilitación de TDM y suscripción institucional; una clave no garantiza acceso desde el runner de GitHub.
+- El parser XML reconoce variantes acknowledgement/acknowledgment, secciones Elsevier ce:section, ce:acknowledgment, JATS y TEI; se agregan tests con XML sintético.
+- El extractor HTML evita buscar acrónimos en la totalidad del artículo al retirar el fallback al elemento article. No se atribuye proyecto si el nombre aparece solo en cuerpo/abstract/referencias.
+- Para las publicaciones sin PDF editorial, se buscan ubicaciones OA de OpenAlex y Semantic Scholar. La financiación se busca en todas las páginas para cubrir las declaraciones de Funding al inicio del manuscrito, sin usar temas del artículo como evidencia.
+- El identificador exacto de HEPAFLEX en data/projects.json es 101122345 y el alias específico es HEPAFLEX: coincidencias de palabra completa, únicamente en texto marcado como Funding/Acknowledgements.
+- **Estado de verificación:** la última ejecución confirmada antes de estos commits (#30) mantenía 9/20 publicaciones con vínculos y 10.1016/j.solmat.2026.114703 sin proyectos (metadata-only). Nuevos runs en GitHub Actions están en cola; estas modificaciones no pueden declararse validadas en producción hasta que terminen. No prometer que el DOI quedará enlazado sin una fuente de financiación accesible al proceso.
+- Guía para Elsevier: https://dev.elsevier.com/tecdoc_text_mining.html ; obtener API key oficial si la suscripción/condiciones lo permiten, guardar como GitHub Actions secret ELSEVIER_API_KEY y relanzar el workflow. No incluir la clave ni material protegido por copyright en la web.
