@@ -88,3 +88,19 @@ Registro para coordinación entre ChatGPT, Claude y los editores de este reposit
 - El parser flexible del PDF de Wiley no ha recuperado todavía los grants de 10.1002/aelm.202500494, aunque su PDF sí se descarga por Wiley TDM; sigue metadata-only y projects=[]. Hay que diagnosticar si PyMuPDF extrae realmente las cadenas de los grants o si el propio PDF carece de ellas. **No declararlo solucionado ni incluir vínculos manuales como sustituto de automatización.**
 - 10.1002/sstr.202600020 sí está corregido automáticamente desde Wiley TDM con cinco grants. Recuento 10/20 publicaciones con proyectos (antes 9/20). 10.1016/j.solmat.2026.114703 continúa sin HEPAFLEX, a pesar de que la variable ELSEVIER_API_KEY está configurada. Acceso al XML del editor requiere investigación adicional.
 - Todos los secretos configurados fueron detectados de forma segura en el run anterior; nunca volcar claves en logs.
+
+
+### 2026-10-19 — Alta del proyecto SPIN en GitHub (sin cambios en WordPress)
+
+- **Archivo modificado:** data/projects.json.
+- Se añade el proyecto `spin` (SPIN), referencia exacta `PID2025-172217OB-I00`, para que el pipeline existente asocie automáticamente las publicaciones cuyo Funding/Acknowledgements cite ese código. URL de navegación: `/proyectos/#spin` (Claude ya se encarga de la parte WordPress; no se ha modificado).
+- **Título:** Nanocomposites de perovskitas de estaño para una plataforma de fotónica integrada.
+- **Subtítulo:** Hacia una nueva generación de dispositivos fotónicos sostenibles basados en perovskitas sin plomo.
+- **Tipo:** Proyecto individual, Investigación orientada, tipo B.
+- **Vigencia:** 01/09/2026 a 31/08/2029, 36 meses.
+- **Entidad/centro:** Universitat de València, Instituto de Ciencia de Materiales (ICMUV).
+- **IP-1:** Isaac Suárez Álvarez. **IP-2:** Teresa S. Ripolles.
+- **Áreas:** Perovskitas sin plomo, Fotónica integrada, Guías de onda, Láseres, Fotónica topológica.
+- La descripción científica íntegra de SPIN se conserva en el nuevo objeto de data/projects.json para que Claude pueda reutilizarla.
+- **Decisión de detección:** no añadir fundingAliases con la palabra «SPIN» por ser un término corto y común en literatura científica; exigir el código oficial de financiación para evitar falsos positivos. No se han editado manualmente asociaciones de publicaciones ni código/diseño de la web.
+- Añadir entradas en data/projects.json dispara GitHub Actions automáticamente; comprobar el run si se necesita corroborar el enriquecimiento futuro.
