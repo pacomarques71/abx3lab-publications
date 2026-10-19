@@ -431,6 +431,7 @@ def make_record(
         return None
 
     meta = crossref_metadata(doi)
+    crossref_unavailable = not bool(meta)
     previous = PREVIOUS_RECORDS.get(doi.lower())
     if not meta and previous:
         meta = previous_as_meta(previous)
@@ -534,6 +535,8 @@ def make_record(
         "license": meta.get("license"),
         "awards": sorted(set((meta.get("awards") or []) + openalex_awards)),
         "_awardSources": {"crossref": meta.get("awards") or [], "openalex": openalex_awards},
+        # Exception: retain previous links only on a temporary Crossref outage.
+        "_previousProjects": (previous or {}).get("projects", []) if crossref_unavailable else [],
     }
 
 def load_json(path: Path, default):
@@ -584,6 +587,9 @@ def apply_extras(record: dict, extras: dict, projects: list[dict]) -> dict:
                 if match_projects([str(award)], [project]):
                     evidence.append({"project": project["key"], "grant": str(award), "source": source})
     record["fundingEvidence"] = evidence
+    for key in record.pop("_previousProjects", []):
+        if key not in linked:
+            linked.append(key)
     for key in manual.get("projects", []):
         if key not in linked:
             linked.append(key)
