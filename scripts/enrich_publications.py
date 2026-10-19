@@ -135,8 +135,8 @@ def section_text_from_html(html_bytes):
     for node in soup.find_all(re.compile("^h[1-6]$")):
         if not SECTION_NAMES.search(node.get_text(" ", strip=True)):
             continue
-        section = node.find_parent(["section", "article"])
-        if section and len(section.get_text(" ", strip=True)) < 12000:
+        section = node.find_parent("section")
+        if section and SECTION_NAMES.search((section.get("id") or "") + " " + node.get_text(" ", strip=True)) and len(section.get_text(" ", strip=True)) < 12000:
             output.append(section.get_text(" ", strip=True)[:8000])
         else:
             chunks = []
