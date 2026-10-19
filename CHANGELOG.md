@@ -57,3 +57,16 @@ Registro para coordinación entre ChatGPT, Claude y los editores de este reposit
 - El identificador exacto de HEPAFLEX en data/projects.json es 101122345 y el alias específico es HEPAFLEX: coincidencias de palabra completa, únicamente en texto marcado como Funding/Acknowledgements.
 - **Estado de verificación:** la última ejecución confirmada antes de estos commits (#30) mantenía 9/20 publicaciones con vínculos y 10.1016/j.solmat.2026.114703 sin proyectos (metadata-only). Nuevos runs en GitHub Actions están en cola; estas modificaciones no pueden declararse validadas en producción hasta que terminen. No prometer que el DOI quedará enlazado sin una fuente de financiación accesible al proceso.
 - Guía para Elsevier: https://dev.elsevier.com/tecdoc_text_mining.html ; obtener API key oficial si la suscripción/condiciones lo permiten, guardar como GitHub Actions secret ELSEVIER_API_KEY y relanzar el workflow. No incluir la clave ni material protegido por copyright en la web.
+
+
+### 2026-10-19 — Integración de Wiley TDM para vínculos automáticos
+
+- scripts/enrich_publications.py: añade WILEY_TDM_TOKEN opcional. Para DOI de Wiley (10.1002/*), intenta descargar temporalmente el PDF desde el endpoint oficial https://api.wiley.com/onlinelibrary/tdm/v1/articles/{doi}, usando el encabezado Wiley-TDM-Client-Token.
+- Sigue las redirecciones sin reenviar el token a hosts externos. Rechaza documentos que no sean PDF y respuestas de acceso denegado, y registra solo el código HTTP y DOI (nunca el token).
+- Analiza los agradecimientos del PDF para detectar automáticamente códigos de ayuda y nombres inequívocos de proyecto; la fuente se guarda como wiley-tdm en fundingEvidence sin almacenar texto completo protegido ni PDF en el repositorio.
+- Estado wileyTdmStatus (success, unavailable, not-configured) en data/publication_evidence.json. Permite revisar trabajos anteriores cuando se añade el token posteriormente y reintenta casos con acceso fallido.
+- .github/workflows/update-publications.yml: secreto WILEY_TDM_TOKEN en entorno de Actions; nunca almacenar en git ni en publicaciones.
+- tests/test_publication_enrichment.py: pruebas unitarias para PDF directo, redirecciones sin credenciales, 404 y correspondencia de dos subvenciones en el artículo Memristors.
+- **Acción del usuario**: en GitHub repository Settings > Secrets and variables > Actions, crear WILEY_TDM_TOKEN con el token de la página oficial Wiley TDM. Luego ejecutar Update publications UNA sola vez, y revisar el log para comprobar acceso real. No garantiza que GitHub Actions herede la suscripción del CSIC; Wiley devuelve 404 si no hay permiso de lectura desde el servidor.
+- Para Elsevier, ELSEVIER_API_KEY es un secreto distinto; se necesita comprobar que está creado y que la clave tiene los permisos de ScienceDirect para recuperar XML desde los runners de GitHub.
+- Documentación Wiley: https://onlinelibrary.wiley.com/library-info/resources/text-and-datamining
