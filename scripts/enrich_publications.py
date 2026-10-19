@@ -173,7 +173,7 @@ def text_from_tei(xml_bytes):
         tag = name(elem)
         if tag not in ("div", "note", "ack", "acknowledgement", "funding-group", "funding-statement"):
             continue
-        heading = " ".join(h.itertext() for h in elem if name(h) in ("head", "title"))
+        heading = " ".join(" ".join(h.itertext()) for h in elem if name(h) in ("head", "title"))
         kind = " ".join([elem.get("type", ""), elem.get("subtype", ""), heading])
         if tag in ("ack", "acknowledgement", "funding-group", "funding-statement") or SECTION_NAMES.search(kind):
             fragments.append(" ".join(elem.itertext())[:14000])
