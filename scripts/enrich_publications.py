@@ -65,7 +65,7 @@ def grants_in_text(text, projects):
     for project in projects:
         for identifier in project.get("grants", []):
             # Split at letter/digit changes and formatting punctuation.
-            parts = re.findall(r"[A-Za-z]+|\d+", normalize(identifier))
+            parts = re.findall(r"[A-Za-z]+|\d+", unicodedata.normalize("NFKC", str(identifier)))
             if not parts:
                 continue
             inner = r"[^A-Za-z0-9]*".join(re.escape(part) for part in parts)
