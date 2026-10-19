@@ -337,6 +337,12 @@
         "url": "https://content.openalex.org/works/W7167087305.grobid-xml"
       },
       {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/nap2.70196"
+      },
+      {
         "project": "inkflex",
         "grant": "PID2023‐151880OB‐C32",
         "source": "crossref"
@@ -408,7 +414,7 @@
     "url": "https://doi.org/10.1002/sstr.70540",
     "openalexId": "https://openalex.org/W7168046671",
     "type": "article",
-    "image": null,
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-b24173445c12bc6550f7.webp",
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/sstr.70540",
@@ -423,7 +429,10 @@
     "fundingEvidence": [],
     "projects": [],
     "featured": null,
-    "fundingStatus": "metadata-only"
+    "fundingStatus": "text-checked",
+    "imageSource": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/sstr.70540",
+    "imageType": "figure-1",
+    "imageLicense": "http://creativecommons.org/licenses/by/4.0/"
   },
   {
     "title": "Highly Transparent BiEDOT‐Based Conducting Polymers as Tailorable Hole Transport Materials for Perovskite Solar Cells",
@@ -500,7 +509,7 @@
     "url": "https://doi.org/10.1002/sstr.202600020",
     "openalexId": "https://openalex.org/W7159629719",
     "type": "article",
-    "image": null,
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-b2129ca14cd78576120a.webp",
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/sstr.202600020",
@@ -512,10 +521,50 @@
       "fotovoltaica",
       "materiales"
     ],
-    "fundingEvidence": [],
-    "projects": [],
+    "fundingEvidence": [
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/sstr.202600020"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/sstr.202600020"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/sstr.202600020"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/sstr.202600020"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023-151880OB-C32",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/sstr.202600020"
+      }
+    ],
+    "projects": [
+      "hepaflex",
+      "cns2023",
+      "flexwin",
+      "inkflex",
+      "esgent"
+    ],
     "featured": null,
-    "fundingStatus": "metadata-only"
+    "fundingStatus": "text-checked",
+    "imageSource": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/sstr.202600020",
+    "imageType": "figure-1",
+    "imageLicense": "http://creativecommons.org/licenses/by/4.0/"
   },
   {
     "title": "Unravelling the Intrinsic Reactivity and Colloidal Instability in Tin‐Based Halide Perovskite Precursor Solutions",

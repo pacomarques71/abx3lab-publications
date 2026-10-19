@@ -63,7 +63,7 @@
     "url": "https://doi.org/10.1002/aelm.202500494",
     "openalexId": "https://openalex.org/W4416392981",
     "type": "article",
-    "image": null,
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-0f8663c0062947b5c482.webp",
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/aelm.202500494",
@@ -77,7 +77,10 @@
     "fundingEvidence": [],
     "projects": [],
     "featured": null,
-    "fundingStatus": "metadata-only"
+    "fundingStatus": "metadata-only",
+    "imageSource": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aelm.202500494",
+    "imageType": "figure-1",
+    "imageLicense": "http://creativecommons.org/licenses/by/4.0/"
   },
   {
     "title": "Working Mechanisms of Triple-Oxide Mesoporous Hole-Transport-Layer-Free Printable Perovskite Solar Cells via Impedance Spectroscopy",
