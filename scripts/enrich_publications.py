@@ -532,10 +532,12 @@ def enrich_entry(rec, projects, prev, extras):
         # authenticated OpenAlex's PDF archive if one exists.
         pdf = None
         pdfurl = None
+        wiley_pdf_used = False
         if wiley_due:
             wiley_response = wiley_tdm_pdf(doi)
             if wiley_response:
                 pdf, pdfurl = wiley_response
+                wiley_pdf_used = True
                 wiley_status = "success"
                 sources.extend((("wiley-tdm", section, pdfurl)
                     for _source, section, _url in extract_funding_from_pdf(pdf, pdfurl)))
@@ -551,7 +553,7 @@ def enrich_entry(rec, projects, prev, extras):
             if response and response[0][:4] == b"%PDF":
                 pdf, pdfurl = response[0], candidate.split("?")[0]
                 break
-        if pdf is not None and wiley_status != "success":
+        if pdf is not None and not wiley_pdf_used:
             sources.extend(extract_funding_from_pdf(pdf, pdfurl))
         if not sources:
             # Another legal OA full-text channel (JATS) for eligible papers.
