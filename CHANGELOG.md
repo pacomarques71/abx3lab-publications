@@ -32,3 +32,17 @@ Registro para coordinación entre ChatGPT, Claude y los editores de este reposit
 - **Obstáculo operativo confirmado:** en el runner de GitHub, DOI.org, Wiley, RSC y ACS devuelven HTTP 403 a las peticiones de texto completo; el enlace PDF en la web no garantiza que un bot en GitHub Actions pueda descargarlo.
 - **CONFIGURACIÓN PENDIENTE (humana, una sola vez):** crear una API key gratuita en https://openalex.org/settings/api y guardarla como secret del repositorio GitHub Settings > Secrets and variables > Actions > New repository secret, nombre exacto OPENALEX_API_KEY. No revelar ni subir la clave a GitHub en archivos. Este paso desbloquea OpenAlex XML y PDF. Reejecutar luego Update publications desde Actions para comprobar cobertura.
 - Los casos siguen marcados como metadata-only mientras la fuente no sea accesible; la automatización nunca debe afirmar que el texto fue contrastado si no lo fue.
+
+
+### 2026-10-19 — Corrección de falsos negativos de proyectos (segunda intervención)
+
+**Informe del usuario:** el filtro WordPress no cambia de 9/20 publicaciones con proyecto tras ejecutar el pipeline con la API key OpenAlex; específicamente DOI 10.1016/j.solmat.2026.114703 debería reconocer HEPAFLEX y no aparece.
+
+**Causa verificada en el run #30:** data/publications.json tiene projects=[] para ese DOI, data/publication_evidence.json tiene fundingStatus=metadata-only y OpenAlex Content devuelve HTTP 404 para XML/PDF de ese trabajo; el enlace OA disponible en OpenAlex es un preprint SSRN cuya landing page no aparece como pdf descargable. Otros DOI Wiley también reciben 404 desde Content y 403 desde el sitio editorial. El run terminó en éxito sin haber podido leer estos agradecimientos.
+
+**Correcciones generales (sin hardcoding de DOI):**
+- data/projects.json incorpora fundingAliases para nombres propios distintivos (incluido HEPAFLEX); solo se analizan estas palabras en secciones reconocidas de Funding/Acknowledgements, NUNCA en título o abstract. Los códigos grant siguen siendo la fuente preferente y se conservan las evidencias en JSON.
+- scripts/enrich_publications.py examina secciones de financiación también en páginas iniciales del PDF, no solo las páginas finales, y amplia los PDF OA candidatos a copias de ubicaciones OpenAlex y de Semantic Scholar.
+- tests/test_publication_enrichment.py comprueba el match exacto de HEPAFLEX, ausencia de falsos positivos en cadenas superpuestas, reconocimiento de Funding en primera página y fallback a repositorios.
+- **ALCANCE HONESTO:** si el propio texto completo de un artículo o metadatos de financiación no están disponibles para el robot, ninguna regla de texto puede demostrar automáticamente la asociación. No se atribuyen trabajos por temática ni se fijan vínculos DOI -> proyecto manuales. Queda pendiente verificar en la ejecución real si una de las nuevas fuentes expone el artículo Rapid Photonic Processing.
+- En caso de dudas, consultar el log del workflow y los campos fundingStatus/fundingEvidence; success no equivale a financiación comprobada.
