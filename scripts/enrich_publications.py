@@ -26,6 +26,7 @@ EVIDENCE = DATA / "publication_evidence.json"
 RAW_IMAGES = "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/"
 KEY = os.getenv("OPENALEX_API_KEY", "").strip()
 ELSEVIER_KEY = os.getenv("ELSEVIER_API_KEY", "").strip()
+WILEY_TDM_TOKEN = os.getenv("WILEY_TDM_TOKEN", "").strip()
 HEADERS = {"User-Agent": "ABX3LabPublications/2.0 (scholarly metadata enrichment)",
            "Accept": "text/html,application/xml,application/pdf,image/*;q=0.8"}
 TIMEOUT = 18
@@ -302,6 +303,50 @@ def elsevier_article_funding(doi):
     return ("elsevier-tdm", tx, "https://doi.org/" + doi) if tx else None
 
 
+def wiley_tdm_pdf(doi):
+    """Retrieve an authorized Wiley PDF for transient TDM only.
+
+    The client token is sent exclusively to api.wiley.com. Wiley redirects
+    successful downloads; follow the redirected public HTTPS URL WITHOUT
+    forwarding the token to the CDN. Do not commit or cache the source PDF.
+    """
+    if not WILEY_TDM_TOKEN or not doi.lower().startswith("10.1002/"):
+        return None
+    url = "https://api.wiley.com/onlinelibrary/tdm/v1/articles/" + quote(doi, safe="/")
+    headers = {
+        "User-Agent": HEADERS["User-Agent"],
+        "Accept": "application/pdf",
+        "Wiley-TDM-Client-Token": WILEY_TDM_TOKEN,
+    }
+    try:
+        with requests.get(url, headers=headers, timeout=TIMEOUT,
+                          stream=True, allow_redirects=False) as response:
+            if response.status_code in (301, 302, 303, 307, 308):
+                destination = urljoin(url, response.headers.get("Location") or "")
+                parsed = urlparse(destination)
+                if parsed.scheme != "https" or not parsed.hostname:
+                    return None
+                # Do not send Wiley's TDM token to the redirected host.
+                result = request_url(destination, MAX_PDF, "application/pdf")
+                if result and result[0].startswith(b"%PDF"):
+                    return result[0], url
+                return None
+            if response.status_code != 200:
+                print("  Wiley TDM access:", response.status_code, "for", doi, flush=True)
+                return None
+            blob = bytearray()
+            for block in response.iter_content(65536):
+                blob.extend(block)
+                if len(blob) > MAX_PDF:
+                    return None
+            if bytes(blob).startswith(b"%PDF"):
+                return bytes(blob), url
+            print("  Wiley TDM returned no PDF:", doi, flush=True)
+    except requests.RequestException as exc:
+        print("  Wiley TDM download error:", type(exc).__name__, "for", doi, flush=True)
+    return None
+
+
 def accessible_pdf_candidates(work, rec):
     """Use repository copies, not just the publisher's often bot-blocked PDF link."""
     urls = [(rec.get("openAccess") or {}).get("pdf")]
@@ -447,12 +492,19 @@ def enrich_entry(rec, projects, prev, extras):
     # Retry unresolved articles weekly, whether they have missing projects or images.
     if prev.get("fundingStatus") != "text-checked":
         revisit = True
+    # When a Wiley TDM token is added later, revisit even previously checked
+    # articles; metadata and OA repositories can miss additional grants.
+    wiley_due = bool(WILEY_TDM_TOKEN and doi.startswith("10.1002/")
+                     and prev.get("wileyTdmStatus") != "success")
+    if wiley_due:
+        revisit = True
     needs_picture = not manual.get("image") and not prev.get("image")
     work = {}
     page = None
     status = prev.get("fundingStatus") or "metadata-only"
     img_origin = prev.get("image")
     lic = prev.get("license")
+    wiley_status = prev.get("wileyTdmStatus", "not-configured")
     if revisit or needs_picture:
         work = openalex_work(doi)
         if not work:
@@ -480,7 +532,17 @@ def enrich_entry(rec, projects, prev, extras):
         # authenticated OpenAlex's PDF archive if one exists.
         pdf = None
         pdfurl = None
-        urls = accessible_pdf_candidates(work, rec)
+        if wiley_due:
+            wiley_response = wiley_tdm_pdf(doi)
+            if wiley_response:
+                pdf, pdfurl = wiley_response
+                wiley_status = "success"
+                sources.extend((("wiley-tdm", section, pdfurl)
+                    for _source, section, _url in extract_funding_from_pdf(pdf, pdfurl)))
+                print("  Wiley TDM PDF retrieved:", doi, flush=True)
+            else:
+                wiley_status = "unavailable"
+        urls = accessible_pdf_candidates(work, rec) if pdf is None else []
         wid = str(work.get("id") or rec.get("openalexId") or "").rsplit("/", 1)[-1]
         if KEY and re.fullmatch(r"W\d+", wid):
             urls.append("https://content.openalex.org/works/" + wid + ".pdf?api_key=" + quote(KEY))
@@ -489,7 +551,7 @@ def enrich_entry(rec, projects, prev, extras):
             if response and response[0][:4] == b"%PDF":
                 pdf, pdfurl = response[0], candidate.split("?")[0]
                 break
-        if pdf is not None:
+        if pdf is not None and wiley_status != "success":
             sources.extend(extract_funding_from_pdf(pdf, pdfurl))
         if not sources:
             # Another legal OA full-text channel (JATS) for eligible papers.
@@ -505,7 +567,7 @@ def enrich_entry(rec, projects, prev, extras):
                     e = {"project": key, "grant": grant, "source": name, "url": url}
                     if e not in evidence:
                         evidence.append(e)
-        elif revisit:
+        elif revisit and status != "text-checked":
             status = "metadata-only"
         if needs_picture:
             lic = metadata_licenses(rec, work)
@@ -547,7 +609,8 @@ def enrich_entry(rec, projects, prev, extras):
         rec["imageLicense"] = img_origin["license"]
     audit = {"checked": today if (revisit or needs_picture) else prev.get("checked", today),
              "fundingStatus": status, "fundingEvidence": rec["fundingEvidence"],
-             "image": img_origin, "license": lic}
+             "image": img_origin, "license": lic,
+             "wileyTdmStatus": wiley_status}
     return rec, audit
 
 
