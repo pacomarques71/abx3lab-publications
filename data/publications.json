@@ -53,6 +53,7 @@
     "pages": "e71901",
     "doi": "10.1002/adom.71901",
     "url": "https://doi.org/10.1002/adom.71901",
+    "openalexId": "https://openalex.org/W7221617658",
     "type": "article",
     "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-adom71901-ga-768x334.jpg",
     "openAccess": {
@@ -146,6 +147,7 @@
     "pages": "114703",
     "doi": "10.1016/j.solmat.2026.114703",
     "url": "https://doi.org/10.1016/j.solmat.2026.114703",
+    "openalexId": "https://openalex.org/W7213419150",
     "type": "article",
     "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-solmat114703-fig1-768x384.jpg",
     "openAccess": {
@@ -206,6 +208,7 @@
     "pages": "e03192",
     "doi": "10.1002/chem.202503192",
     "url": "https://doi.org/10.1002/chem.202503192",
+    "openalexId": "https://openalex.org/W7160939812",
     "type": "article",
     "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-chem202503192-ga-768x433.jpg",
     "openAccess": {
@@ -226,7 +229,7 @@
       "summary": "Bajo luz solar simulada, perovskitas de doble vacante forman nanopartículas de platino de menos de 3 nm que producen hidrógeno a partir de metanol.",
       "summary_en": "Under simulated sunlight, double-vacancy perovskites form sub-3 nm platinum nanoparticles that produce hydrogen from methanol."
     },
-    "fundingStatus": "metadata-only"
+    "fundingStatus": "text-checked"
   },
   {
     "title": "Photon Recycling–Driven Photodetection Enhancement in Ni(AcO)<sub>2</sub>–MAPbBr<sub>3</sub> Nanocomposite Waveguides",
@@ -269,6 +272,7 @@
     "pages": "e70196",
     "doi": "10.1002/nap2.70196",
     "url": "https://doi.org/10.1002/nap2.70196",
+    "openalexId": "https://openalex.org/W7167087305",
     "type": "article",
     "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-nap270196-ga-768x494.jpg",
     "openAccess": {
@@ -366,6 +370,7 @@
     "pages": "e70540",
     "doi": "10.1002/sstr.70540",
     "url": "https://doi.org/10.1002/sstr.70540",
+    "openalexId": "https://openalex.org/W7168046671",
     "type": "article",
     "image": null,
     "openAccess": {
@@ -457,6 +462,7 @@
     "pages": "e202600020",
     "doi": "10.1002/sstr.202600020",
     "url": "https://doi.org/10.1002/sstr.202600020",
+    "openalexId": "https://openalex.org/W7159629719",
     "type": "article",
     "image": null,
     "openAccess": {
@@ -524,6 +530,7 @@
     "pages": "e7703450",
     "doi": "10.1002/anie.7703450",
     "url": "https://doi.org/10.1002/anie.7703450",
+    "openalexId": "https://openalex.org/W7140167765",
     "type": "article",
     "image": null,
     "openAccess": null,
@@ -584,6 +591,7 @@
     "pages": "e03291",
     "doi": "10.1002/aenm.202503291",
     "url": "https://doi.org/10.1002/aenm.202503291",
+    "openalexId": "https://openalex.org/W7130511261",
     "type": "article",
     "image": null,
     "openAccess": {
@@ -661,6 +669,7 @@
     "pages": "2798-2809",
     "doi": "10.1021/acsenergylett.5c04010",
     "url": "https://doi.org/10.1021/acsenergylett.5c04010",
+    "openalexId": "https://openalex.org/W7128054857",
     "type": "article",
     "image": null,
     "openAccess": {
@@ -716,6 +725,7 @@
     "pages": "e202500105",
     "doi": "10.1002/aesr.202500105",
     "url": "https://doi.org/10.1002/aesr.202500105",
+    "openalexId": "https://openalex.org/W4415220258",
     "type": "article",
     "image": null,
     "openAccess": {
@@ -772,6 +782,7 @@
     "pages": "2465-2480",
     "doi": "10.1039/d5ma01122a",
     "url": "https://doi.org/10.1039/d5ma01122a",
+    "openalexId": "https://openalex.org/W7117514834",
     "type": "article",
     "image": null,
     "openAccess": {
@@ -828,6 +839,7 @@
     "pages": null,
     "doi": "10.1039/d6ee05477c",
     "url": "https://doi.org/10.1039/d6ee05477c",
+    "openalexId": "https://openalex.org/W7220689702",
     "type": "article",
     "image": null,
     "openAccess": {
@@ -948,6 +960,7 @@
     "pages": "360-368",
     "doi": "10.1039/d5el00182j",
     "url": "https://doi.org/10.1039/d5el00182j",
+    "openalexId": "https://openalex.org/W7125242329",
     "type": "article",
     "image": null,
     "openAccess": {
@@ -970,12 +983,24 @@
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
+        "source": "europe-pmc-jats",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12848990/fullTextXML"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
         "source": "openalex"
       },
       {
         "project": "esgent",
         "grant": "ESGENT/010/2024",
         "source": "crossref"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "europe-pmc-jats",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12848990/fullTextXML"
       },
       {
         "project": "esgent",
@@ -986,6 +1011,12 @@
         "project": "phoenixpv",
         "grant": "101171478",
         "source": "crossref"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "101171478",
+        "source": "europe-pmc-jats",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12848990/fullTextXML"
       },
       {
         "project": "phoenixpv",
@@ -1004,6 +1035,6 @@
       "title": "Células solares sin plomo que se reparan solas",
       "summary": "Bajo luz y aire ambiente, células de perovskita de estaño recuperan por sí solas la eficiencia perdida e incluso la superan; con el aditivo TEAI conservan el 80 % durante más de 25 horas, frente a menos de una sin él."
     },
-    "fundingStatus": "metadata-only"
+    "fundingStatus": "text-checked"
   }
 ]

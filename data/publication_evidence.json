@@ -26,7 +26,7 @@
   },
   "10.1002/chem.202503192": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "image": null,
     "license": null
@@ -149,12 +149,18 @@
   },
   "10.1039/d5el00182j": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
         "source": "crossref"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "europe-pmc-jats",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12848990/fullTextXML"
       },
       {
         "project": "cns2023",
@@ -165,6 +171,12 @@
         "project": "esgent",
         "grant": "ESGENT/010/2024",
         "source": "crossref"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "europe-pmc-jats",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12848990/fullTextXML"
       },
       {
         "project": "esgent",
@@ -175,6 +187,12 @@
         "project": "phoenixpv",
         "grant": "101171478",
         "source": "crossref"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "101171478",
+        "source": "europe-pmc-jats",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12848990/fullTextXML"
       },
       {
         "project": "phoenixpv",
