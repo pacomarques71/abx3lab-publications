@@ -138,6 +138,32 @@ class FundingTests(unittest.TestCase):
                         "grants":["101122345"],"fundingAliases":["HEPAFLEX"]}])
         self.assertEqual(found, {"hepaflex": "HEPAFLEX"})
 
+    def test_elsevier_namespaced_funding_xml(self):
+        xml = b"""<full-text xmlns:ce="http://www.elsevier.com/xml/common/dtd">
+          <ce:acknowledgment>Horizon Europe project HEPAFLEX supported the work.</ce:acknowledgment>
+          </full-text>"""
+        evidence = module.text_from_tei(xml)
+        p = [{"key":"hepaflex", "grants":["101122345"], "fundingAliases":["HEPAFLEX"]}]
+        self.assertEqual(module.grants_in_text(evidence,p), {"hepaflex":"HEPAFLEX"})
+
+    def test_elsevier_authenticated_request(self):
+        xml = b"""<root xmlns:ce="http://www.elsevier.com/xml/common/dtd">
+                <ce:acknowledgment>Supported by HEPAFLEX.</ce:acknowledgment></root>"""
+        with patch.object(module,"ELSEVIER_KEY","secret-not-in-repo"), \
+             patch.object(module,"request_url",
+                 return_value=(xml,"https://api.elsevier.com/content/article/doi/test","text/xml")) as req:
+            source = module.elsevier_article_funding("10.1016/j.solmat.2026.114703")
+        self.assertEqual(source[0], "elsevier-tdm")
+        self.assertIn("HEPAFLEX",source[1])
+        self.assertEqual(req.call_args.kwargs["extra_headers"]["X-ELS-APIKey"], "secret-not-in-repo")
+
+    def test_funding_html_excludes_article_body_topics(self):
+        html = b"""<article><h2>Abstract</h2><p>HEPAFLEX is mentioned as a topic.</p>
+               <h2>Funding</h2><p>Supported by another programme.</p><h2>References</h2>
+               <p>HEPAFLEX grant appears in a cited reference.</p></article>"""
+        text = module.section_text_from_html(html)
+        self.assertNotIn("HEPAFLEX", text)
+
     def test_toc_priority(self):
         markup = b'<div class="graphical-abstract"><img data-src="/images/article-toc.png"/></div>'
         self.assertEqual(module.graphical_abstract_from_html(markup, "https://example.org/a")[0],
