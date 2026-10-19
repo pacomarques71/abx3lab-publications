@@ -447,28 +447,58 @@ def european_pmc_xml(doi):
     return None
 
 
-def extract_funding_from_pdf(pdf, url):
+def extract_funding_from_pdf(pdf, url, projects=None):
+    """Extract declarations of funding, including unlabelled Wiley PDF paragraphs.
+
+    The main pass identifies headed acknowledgement/funding sections. A second,
+    more conservative pass identifies passages containing both an explicitly
+    supported project grant identifier and language of financial support. This
+    is needed when PDF reading order breaks the section heading into columns.
+    Do not scan/reference-match titles or citation lists on their own.
+    """
     out = []
+    projects = projects or []
+    funding_phrases = re.compile(
+        r"(?i)\b(?:funded(?:\s+in\s+part|\s+partially)?\s+by|"
+        r"(?:financially\s+)?supported\s+by|funding\s+(?:from|via|by)|"
+        r"funding\s+(?:agreement|grant)|grant\s+(?:agreement|number|no\.?)|"
+        r"funding|financial\s+support|grants?|acknowledg(?:e)?ments?|"
+        r"part\s+of\s+the\s+grant)\b"
+    )
+    stop = re.compile(
+        r"(?im)^[ \t]*(?:references|bibliography|supplementary materials?|"
+        r"author contributions|conflicts? of interest|data availability)"
+        r"(?:[ \t]*[:.]|[ \t]*\n)"
+    )
     try:
         import fitz
         doc = fitz.open(stream=pdf, filetype="pdf")
-        # In Elsevier papers funding can appear near the front of the manuscript,
-        # rather than exclusively among its final pages.
         for pg in list(doc)[:40]:
             txt = pg.get_text(sort=True)
+            # Some publishers embed a heading mid-line or split it across
+            # a text block; requiring column 0 loses genuine declarations.
             header = re.search(
-                r"(?im)^[ \t]*(?:acknowledg(?:e)?ments?|funding(?: information| statement)?|"
-                r"financial support)(?:[ \t]*[:.]|[ \t]*\n)",
+                r"(?i)\b(?:acknowledg(?:e)?ments?|funding(?: information| statement)?|"
+                r"financial support)\b",
                 txt
             )
             if header:
                 body = txt[header.start():header.start() + 11000]
-                body = re.split(
-                    r"(?im)^[ \t]*(?:references|bibliography|supplementary materials?|"
-                    r"author contributions|conflicts? of interest)(?:[ \t]*[:.]|[ \t]*\n)",
-                    body, maxsplit=1
-                )[0]
-                out.append(("oa-pdf", body, url))
+                body = stop.split(body, maxsplit=1)[0]
+                if len(body.strip()) >= 35:
+                    out.append(("oa-pdf", body, url))
+            if projects:
+                # Only accept grants in a local, explicit funding statement.
+                # This catches grant IDs with PDF reading-order problems but
+                # avoids matching arbitrary mentions in the references.
+                refs = re.search(r"(?im)^[ \t]*references[ \t]*$", txt)
+                eligible = txt[:refs.start()] if refs else txt
+                for marker in funding_phrases.finditer(eligible):
+                    passage = eligible[max(0, marker.start()-220):marker.end()+450]
+                    if grants_in_text(passage, projects):
+                        entry = ("oa-pdf-funding-context", passage, url)
+                        if entry not in out:
+                            out.append(entry)
         doc.close()
     except (ImportError, RuntimeError, ValueError, OSError):
         pass
@@ -540,7 +570,7 @@ def enrich_entry(rec, projects, prev, extras):
                 wiley_pdf_used = True
                 wiley_status = "success"
                 sources.extend((("wiley-tdm", section, pdfurl)
-                    for _source, section, _url in extract_funding_from_pdf(pdf, pdfurl)))
+                    for _source, section, _url in extract_funding_from_pdf(pdf, pdfurl, projects)))
                 print("  Wiley TDM PDF retrieved:", doi, flush=True)
             else:
                 wiley_status = "unavailable"
@@ -554,7 +584,7 @@ def enrich_entry(rec, projects, prev, extras):
                 pdf, pdfurl = response[0], candidate.split("?")[0]
                 break
         if pdf is not None and not wiley_pdf_used:
-            sources.extend(extract_funding_from_pdf(pdf, pdfurl))
+            sources.extend(extract_funding_from_pdf(pdf, pdfurl, projects))
         if not sources:
             # Another legal OA full-text channel (JATS) for eligible papers.
             pmc = european_pmc_xml(doi)
