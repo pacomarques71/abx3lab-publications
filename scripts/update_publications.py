@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Actualiza data/publications.json usando OpenAlex + Crossref.
+Actualiza data/publications.json usando OpenAlex + Crossref; scripts/enrich_publications.py completa la evidencia y las imágenes.
 
 Reglas:
 - Fecha bibliográfica mínima: 2026-01-01 (número de revista si está disponible).
@@ -533,7 +533,7 @@ def make_record(
         "openAccess": open_access,
         "license": meta.get("license"),
         "awards": sorted(set((meta.get("awards") or []) + openalex_awards)),
-        "_previousProjects": (previous or {}).get("projects") or [],
+        "_awardSources": {"crossref": meta.get("awards") or [], "openalex": openalex_awards},
     }
 
 def load_json(path: Path, default):
@@ -575,10 +575,15 @@ def apply_extras(record: dict, extras: dict, projects: list[dict]) -> dict:
     record["themes"] = themes
 
     linked = match_projects(record.pop("awards", []), projects)
-    # Vínculos ya verificados en una ejecución anterior (si Crossref falla ahora).
-    for key in record.pop("_previousProjects", []):
-        if key not in linked:
-            linked.append(key)
+    # Asociaciones verificables: no heredar proyectos antiguos sin identificador/fuente.
+    award_sources = record.pop("_awardSources", {})
+    evidence = []
+    for source, awards in award_sources.items():
+        for award in awards:
+            for project in projects:
+                if match_projects([str(award)], [project]):
+                    evidence.append({"project": project["key"], "grant": str(award), "source": source})
+    record["fundingEvidence"] = evidence
     for key in manual.get("projects", []):
         if key not in linked:
             linked.append(key)
