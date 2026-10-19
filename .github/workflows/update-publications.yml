@@ -30,6 +30,7 @@ jobs:
 
     env:
       OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+      ELSEVIER_API_KEY: ${{ secrets.ELSEVIER_API_KEY }}
       CROSSREF_MAILTO: ${{ vars.CROSSREF_MAILTO }}
 
     steps:
