@@ -925,6 +925,12 @@
       {
         "project": "hepaflex",
         "grant": "101122345",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7220689702.pdf"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
         "source": "openalex"
       },
       {
