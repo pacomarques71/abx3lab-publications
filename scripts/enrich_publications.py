@@ -25,6 +25,7 @@ IMAGES = ROOT / "images"
 EVIDENCE = DATA / "publication_evidence.json"
 RAW_IMAGES = "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/"
 KEY = os.getenv("OPENALEX_API_KEY", "").strip()
+ELSEVIER_KEY = os.getenv("ELSEVIER_API_KEY", "").strip()
 HEADERS = {"User-Agent": "ABX3LabPublications/2.0 (scholarly metadata enrichment)",
            "Accept": "text/html,application/xml,application/pdf,image/*;q=0.8"}
 TIMEOUT = 18
@@ -88,7 +89,7 @@ def grants_in_text(text, projects):
     return found
 
 
-def request_url(url, max_bytes=MAX_PDF, accept=None):
+def request_url(url, max_bytes=MAX_PDF, accept=None, extra_headers=None):
     """Fetch bounded public HTTP(S) resources; never fetch private-network URLs."""
     from ipaddress import ip_address
     p = urlparse(url)
@@ -102,7 +103,7 @@ def request_url(url, max_bytes=MAX_PDF, accept=None):
     except ValueError:
         pass
     try:
-        r = requests.get(url, headers={**HEADERS, **({"Accept": accept} if accept else {})},
+        r = requests.get(url, headers={**HEADERS, **({"Accept": accept} if accept else {}), **(extra_headers or {})},
                          timeout=TIMEOUT, stream=True, allow_redirects=True)
         final = urlparse(r.url)
         if final.scheme not in ("http", "https") or not final.hostname:
@@ -186,11 +187,11 @@ def text_from_tei(xml_bytes):
     fragments = []
     for elem in root.iter():
         tag = name(elem)
-        if tag not in ("div", "note", "ack", "acknowledgement", "funding-group", "funding-statement"):
+        if tag not in ("div", "section", "sec", "note", "ack", "acknowledgement", "acknowledgment", "acknowledgments", "funding-group", "funding-statement"):
             continue
-        heading = " ".join(" ".join(h.itertext()) for h in elem if name(h) in ("head", "title"))
+        heading = " ".join(" ".join(h.itertext()) for h in elem if name(h) in ("head", "title", "section-title"))
         kind = " ".join([elem.get("type", ""), elem.get("subtype", ""), heading])
-        if tag in ("ack", "acknowledgement", "funding-group", "funding-statement") or SECTION_NAMES.search(kind):
+        if tag in ("ack", "acknowledgement", "acknowledgment", "acknowledgments", "funding-group", "funding-statement") or SECTION_NAMES.search(kind):
             fragments.append(" ".join(elem.itertext())[:14000])
     return "\n".join(dict.fromkeys(fragments))
 
@@ -284,6 +285,21 @@ def first_figure_from_pdf(pdf_bytes):
         return None
     return None
 
+
+
+def elsevier_article_funding(doi):
+    """Official Elsevier XML TDM API, optional authenticated access."""
+    if not ELSEVIER_KEY or not doi.lower().startswith("10.1016/"):
+        return None
+    url = "https://api.elsevier.com/content/article/doi/" + quote(doi, safe="/") + "?httpAccept=text/xml"
+    res = request_url(
+        url, 7_000_000, "application/xml,text/xml",
+        extra_headers={"X-ELS-APIKey": ELSEVIER_KEY}
+    )
+    if not res:
+        return None
+    tx = text_from_tei(res[0])
+    return ("elsevier-tdm", tx, "https://doi.org/" + doi) if tx else None
 
 
 def accessible_pdf_candidates(work, rec):
@@ -446,6 +462,9 @@ def enrich_entry(rec, projects, prev, extras):
         for ev in openaire_grants(doi, projects):
             if ev not in evidence:
                 evidence.append(ev)
+        official_xml = elsevier_article_funding(doi)
+        if official_xml:
+            sources.append(official_xml)
         if page:
             tx = section_text_from_html(page[0])
             if tx:
