@@ -96,6 +96,8 @@ def request_url(url, max_bytes=MAX_PDF, accept=None):
         if final.scheme not in ("http", "https") or not final.hostname:
             r.close()
             return None
+        if r.status_code >= 400:
+            print("  Fuente no disponible:", p.hostname, "HTTP", r.status_code, flush=True)
         r.raise_for_status()
         content = bytearray()
         for block in r.iter_content(65536):
@@ -105,7 +107,8 @@ def request_url(url, max_bytes=MAX_PDF, accept=None):
                 return None
         r.close()
         return bytes(content), r.url, r.headers.get("Content-Type", "")
-    except (requests.RequestException, ValueError):
+    except (requests.RequestException, ValueError) as exc:
+        print("  Descarga fallida:", p.hostname, type(exc).__name__, flush=True)
         return None
 
 
@@ -254,7 +257,7 @@ def download_publisher_page(doi):
 
 
 def openalex_work(doi):
-    url = "https://api.openalex.org/works/https://doi.org/" + quote(doi, safe="")
+    url = "https://api.openalex.org/works/https://doi.org/" + quote(doi, safe="/")
     if KEY:
         url += "?api_key=" + quote(KEY)
     res = request_url(url, 800000, "application/json")
@@ -289,6 +292,8 @@ def enrich_entry(rec, projects, prev, extras):
     lic = prev.get("license")
     if revisit or needs_picture:
         work = openalex_work(doi)
+        if not work:
+            print("  OpenAlex DOI lookup empty:", doi, flush=True)
         page = download_publisher_page(doi)
         sources = []
         if page:
