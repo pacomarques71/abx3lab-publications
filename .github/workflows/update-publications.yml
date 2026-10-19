@@ -50,7 +50,8 @@ jobs:
 
       - name: Commit changes if needed
         run: |
-          git add data/publications.json data/publications_2025.json data/publication_evidence.json images/
+          git add data/publications.json data/publications_2025.json data/publication_evidence.json
+          if [ -d images ]; then git add images/; fi
           if git diff --cached --quiet; then
             echo "No publication changes detected."
             exit 0
