@@ -89,3 +89,35 @@ La página Publications NO debe llamar a OpenAlex ni Crossref desde el navegador
 Debe leer únicamente data/publications.json.
 
 El script es quien actualiza ese JSON.
+
+
+ENRIQUECIMIENTO AUTOMATICO DE FINANCIACION E IMAGENES (19/10/2026)
+-----------------------------------------------------------
+El workflow ejecuta consecutivamente:
+  python scripts/update_publications.py
+  python scripts/enrich_publications.py
+
+El segundo script consulta la sección Funding/Acknowledgements de HTML
+editorial, OpenAlex TEI XML (si hay clave) y los PDF OA ya enlazados en la
+web. Combina esas evidencias con los códigos de data/projects.json y
+guarda sus fuentes en data/publication_evidence.json.
+
+Para mayor cobertura, crear una clave gratuita de OpenAlex y añadirla como
+secret GitHub Actions: OPENALEX_API_KEY. Sin clave funciona el modo
+alternativo HTML editorial / PDF de acceso abierto, pero puede haber
+falsos negativos si el editor bloquea el acceso automatizado.
+
+Si la publicación tiene una imagen manual en publication_extras.json,
+esta tiene preferencia. En caso contrario, solo cuando hay licencia de
+redistribución compatible, el script intenta conseguir un gráfico TOC
+o la primera figura de un PDF abierto (identificada por su pie). Guarda
+un WebP de 768px máximo en images/ y escribe image, imageSource,
+imageType e imageLicense en los JSON consumidos por la web.
+
+Los textos y gráficos inaccesibles NO se fuerzan con scraping agresivo.
+Los casos incompletos se reintentan automáticamente, y las imágenes
+no recuperables mantienen el visual de reserva de la web.
+
+IMPORTANTE: revisar CHANGELOG.md y CLAUDE.md antes de modificar este
+pipeline desde Claude o desde ChatGPT. Actualizar el registro de cambios
+cuando se edite el flujo. No editar a mano los archivos JSON generados.
