@@ -81,5 +81,41 @@
     "grants": [
       "ILINK25177"
     ]
+  },
+  {
+    "key": "spin",
+    "name": "SPIN",
+    "url": "/proyectos/#spin",
+    "grants": [
+      "PID2025-172217OB-I00"
+    ],
+    "title": "Nanocomposites de perovskitas de estaño para una plataforma de fotónica integrada",
+    "subtitle": "Hacia una nueva generación de dispositivos fotónicos sostenibles basados en perovskitas sin plomo",
+    "projectFormat": "Proyecto individual",
+    "researchOrientation": "Investigación orientada",
+    "projectType": "B",
+    "startDate": "2026-09-01",
+    "endDate": "2029-08-31",
+    "durationMonths": 36,
+    "institution": "Universitat de València",
+    "researchInstitute": "Instituto de Ciencia de Materiales de la Universitat de València (ICMUV)",
+    "principalInvestigators": [
+      {
+        "name": "Isaac Suárez Álvarez",
+        "role": "IP-1"
+      },
+      {
+        "name": "Teresa S. Ripolles",
+        "role": "IP-2"
+      }
+    ],
+    "description": "El proyecto SPIN, desarrollado en el Instituto de Ciencia de Materiales de la Universitat de València (ICMUV), tiene como objetivo desarrollar una plataforma de fotónica integrada basada en nanocomposites de perovskitas de haluro de estaño (Sn), como alternativa sostenible a los materiales que contienen plomo. La investigación se centra en la obtención de películas delgadas estables con propiedades ópticas controladas y en el desarrollo de técnicas de micro- y nanoestructuración para su integración en guías de onda y arquitecturas fotónicas avanzadas. Mediante la combinación de síntesis de materiales, fabricación de dispositivos y fotónica topológica, SPIN busca desarrollar fuentes de luz compactas, eficientes y de bajo coste, con potencial aplicación en telecomunicaciones, sensores y circuitos fotónicos integrados.",
+    "researchAreas": [
+      "Perovskitas sin plomo",
+      "Fotónica integrada",
+      "Guías de onda",
+      "Láseres",
+      "Fotónica topológica"
+    ]
   }
 ]
