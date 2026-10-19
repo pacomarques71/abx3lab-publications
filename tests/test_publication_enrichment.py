@@ -66,6 +66,34 @@ class FundingTests(unittest.TestCase):
         }})
         self.assertEqual(out["image"], "https://cdn/manual.jpg")
 
+    def test_keyed_openalex_xml_and_pdf_supply_projects_and_artwork(self):
+        xml = (b'<TEI><text><back><div type="acknowledgement">'
+               b'<head>Funding</head><p>Support from 101122345 and CNS2023-144270.</p>'
+               b'</div></back></text></TEI>')
+        def fake_fetch(url, *_args, **_kwargs):
+            if ".grobid-xml" in url:
+                return xml, "https://content.openalex.org/works/W123.grobid-xml", "application/xml"
+            if ".pdf" in url:
+                return b"%PDF-fake", "https://content.openalex.org/works/W123.pdf", "application/pdf"
+            return None
+        rec = {"doi": "10.1/example", "projects": [], "image": None,
+               "license": "https://creativecommons.org/licenses/by/4.0/",
+               "openAccess": None, "fundingEvidence": [], "openalexId": "https://openalex.org/W123"}
+        with patch.object(module, "KEY", "test-api-key"), \
+             patch.object(module, "openalex_work", return_value={"id": "https://openalex.org/W123"}), \
+             patch.object(module, "download_publisher_page", return_value=None), \
+             patch.object(module, "openaire_grants", return_value=[]), \
+             patch.object(module, "request_url", side_effect=fake_fetch), \
+             patch.object(module, "extract_funding_from_pdf", return_value=[]), \
+             patch.object(module, "first_figure_from_pdf", return_value=b"PNG-bytes"), \
+             patch.object(module, "extract_image_to_webp", return_value=True):
+            out, status = module.enrich_entry(rec, PROJECTS, {}, {"publications": {}})
+        self.assertEqual(set(out["projects"]), {"hepaflex", "cns2023"})
+        self.assertEqual(out["fundingStatus"], "text-checked")
+        self.assertTrue(out["image"].startswith(module.RAW_IMAGES))
+        self.assertEqual(out["imageType"], "figure-1")
+        self.assertEqual(status["image"]["type"], "figure-1")
+
     def test_toc_priority(self):
         markup = b'<div class="graphical-abstract"><img data-src="/images/article-toc.png"/></div>'
         self.assertEqual(module.graphical_abstract_from_html(markup, "https://example.org/a")[0],
