@@ -164,6 +164,68 @@ class FundingTests(unittest.TestCase):
         text = module.section_text_from_html(html)
         self.assertNotIn("HEPAFLEX", text)
 
+    def test_wiley_tdm_pdf_direct_success(self):
+        from unittest.mock import MagicMock
+        response = MagicMock()
+        response.status_code = 200
+        response.iter_content.return_value = [b"%PDF-a test document"]
+        response.__enter__.return_value = response
+        with patch.object(module, "WILEY_TDM_TOKEN", "test-token"), \
+             patch.object(module.requests, "get", return_value=response) as req:
+            pdf = module.wiley_tdm_pdf("10.1002/aelm.202500494")
+        self.assertEqual(pdf[0], b"%PDF-a test document")
+        self.assertIn("api.wiley.com/onlinelibrary/tdm/v1/articles/", pdf[1])
+        self.assertEqual(req.call_args.kwargs["headers"]["Wiley-TDM-Client-Token"], "test-token")
+        self.assertFalse(req.call_args.kwargs["allow_redirects"])
+
+    def test_wiley_redirect_does_not_forward_token(self):
+        from unittest.mock import MagicMock
+        response = MagicMock()
+        response.status_code = 302
+        response.headers = {"Location": "https://example.org/signed-pdf"}
+        response.__enter__.return_value = response
+        with patch.object(module, "WILEY_TDM_TOKEN", "confidential-test-token"), \
+             patch.object(module.requests, "get", return_value=response) as req, \
+             patch.object(module, "request_url", return_value=(
+                 b"%PDF-redirected", "https://example.org/signed-pdf", "application/pdf"
+             )) as redirected:
+            pdf = module.wiley_tdm_pdf("10.1002/sstr.202600020")
+        self.assertEqual(pdf[0], b"%PDF-redirected")
+        self.assertEqual(redirected.call_args.args[0], "https://example.org/signed-pdf")
+        self.assertNotIn("extra_headers", redirected.call_args.kwargs)
+        self.assertEqual(req.call_args.kwargs["headers"]["Wiley-TDM-Client-Token"], "confidential-test-token")
+
+    def test_wiley_access_denial_without_pdf(self):
+        from unittest.mock import MagicMock
+        response = MagicMock()
+        response.status_code = 404
+        response.__enter__.return_value = response
+        with patch.object(module, "WILEY_TDM_TOKEN", "test-token"), \
+             patch.object(module.requests, "get", return_value=response):
+            self.assertIsNone(module.wiley_tdm_pdf("10.1002/sstr.202600020"))
+
+    def test_wiley_funding_populates_missing_projects_from_full_text(self):
+        funding = ("acknowledgments", "CNS2023-144270 and ESGENT/010/2024 supported the work",
+                   "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aelm.202500494")
+        rec = {"doi": "10.1002/aelm.202500494", "projects": [],
+               "image": None, "openAccess": None, "fundingEvidence": []}
+        with patch.object(module, "WILEY_TDM_TOKEN", "test-token"), \
+             patch.object(module, "KEY", ""), \
+             patch.object(module, "openalex_work", return_value={}), \
+             patch.object(module, "download_publisher_page", return_value=None), \
+             patch.object(module, "openaire_grants", return_value=[]), \
+             patch.object(module, "wiley_tdm_pdf", return_value=(b"%PDF-stub", funding[2])), \
+             patch.object(module, "extract_funding_from_pdf", return_value=[funding]), \
+             patch.object(module, "accessible_pdf_candidates", return_value=[]), \
+             patch.object(module, "request_url", return_value=None), \
+             patch.object(module, "european_pmc_xml", return_value=None):
+            out, audit = module.enrich_entry(
+                rec, PROJECTS, {}, {"publications": {}})
+        self.assertEqual(set(out["projects"]), {"cns2023", "esgent"})
+        self.assertEqual(audit["wileyTdmStatus"], "success")
+        self.assertEqual(out["fundingStatus"], "text-checked")
+        self.assertTrue(all(e["source"] == "wiley-tdm" for e in out["fundingEvidence"]))
+
     def test_toc_priority(self):
         markup = b'<div class="graphical-abstract"><img data-src="/images/article-toc.png"/></div>'
         self.assertEqual(module.graphical_abstract_from_html(markup, "https://example.org/a")[0],
