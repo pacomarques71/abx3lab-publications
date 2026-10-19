@@ -992,6 +992,12 @@
       {
         "project": "hepaflex",
         "grant": "101122345",
+        "source": "europe-pmc-jats",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13651458/fullTextXML"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
         "source": "oa-pdf",
         "url": "https://content.openalex.org/works/W7220689702.pdf"
       },
@@ -1011,9 +1017,16 @@
         "grant": "101122345",
         "source": "openalex-tei",
         "url": "https://content.openalex.org/works/W7220689702.grobid-xml"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "101171478",
+        "source": "europe-pmc-jats",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13651458/fullTextXML"
       }
     ],
     "projects": [
+      "phoenixpv",
       "hepaflex"
     ],
     "featured": {
