@@ -1,0 +1,31 @@
+name: Diagnose publication funding access
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/diagnose_funding_access.py"
+      - ".github/workflows/diagnose-funding-access.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    env:
+      WILEY_TDM_TOKEN: ${{ secrets.WILEY_TDM_TOKEN }}
+      ELSEVIER_API_KEY: ${{ secrets.ELSEVIER_API_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Dependencies
+        run: python -m pip install "requests>=2.31,<3" "beautifulsoup4>=4.12,<5" "Pillow>=10.4,<13" "PyMuPDF>=1.24,<2"
+      - name: Inspect access and extraction without persisting full texts
+        run: python scripts/diagnose_funding_access.py
