@@ -95,6 +95,12 @@ def wiley_diagnostic():
         matches = set()
         for _kind, body, _source in sections:
             matches.update(enrich.grants_in_text(body, projects))
+        for index, (kind, body, _src) in enumerate(sections):
+            flags = digest_flags(body)
+            print("WILEY_DIAG: section=" + str(index)
+                + " type=" + kind + " length=" + str(len(body))
+                + " cns=" + str(flags["has_CNS2023_full"])
+                + " esgent=" + str(flags["has_ESGENT_full"]), flush=True)
         print("WILEY_DIAG: funding_sections=" + str(len(sections))
               + " matched_project_keys=" + ",".join(sorted(matches)), flush=True)
     finally:
