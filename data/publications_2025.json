@@ -73,8 +73,10 @@
     "themes": [
       "materiales"
     ],
+    "fundingEvidence": [],
     "projects": [],
-    "featured": null
+    "featured": null,
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Working Mechanisms of Triple-Oxide Mesoporous Hole-Transport-Layer-Free Printable Perovskite Solar Cells via Impedance Spectroscopy",
@@ -127,12 +129,45 @@
     "themes": [
       "fotovoltaica"
     ],
+    "fundingEvidence": [
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "crossref"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT 010/2024",
+        "source": "crossref"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT 010/2024",
+        "source": "openalex"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "crossref"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "openalex"
+      }
+    ],
     "projects": [
       "cns2023",
       "flexwin",
       "esgent"
     ],
-    "featured": null
+    "featured": null,
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Photon Recycling Triggered Amplified Spontaneous Emission in MAPbBr<sub>3</sub>‐Ni(AcO)<sub>2</sub> Nanocomposite Waveguides",
@@ -187,12 +222,55 @@
       "fotonica",
       "materiales"
     ],
+    "fundingEvidence": [
+      {
+        "project": "cns2023",
+        "grant": "MCIN/CNS2023‐144270",
+        "source": "crossref"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex"
+      },
+      {
+        "project": "cns2023",
+        "grant": "MCIN/CNS2023‐144270",
+        "source": "openalex"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023‐151880OB‐C31",
+        "source": "crossref"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "openalex"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023‐151880OB‐C31",
+        "source": "openalex"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023‐151880OB‐C32",
+        "source": "crossref"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023‐151880OB‐C32",
+        "source": "openalex"
+      }
+    ],
     "projects": [
       "cns2023",
       "flexwin",
       "inkflex"
     ],
-    "featured": null
+    "featured": null,
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Passivation Mechanism in Highly Luminescent Nanocomposite‐Based CH<sub>3</sub>NH<sub>3</sub>PbBr<sub>3</sub> Perovskite Nanocrystals",
@@ -264,11 +342,24 @@
       "materiales",
       "fotonica"
     ],
+    "fundingEvidence": [
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "openalex"
+      }
+    ],
     "projects": [
       "cns2023",
       "flexwin"
     ],
-    "featured": null
+    "featured": null,
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Straightforward and green synthesis of all-inorganic CsPbI<sub>3</sub> perovskite solar cells <i>via</i> nickel acetate incorporation",
@@ -340,11 +431,34 @@
       "fotovoltaica",
       "materiales"
     ],
+    "fundingEvidence": [
+      {
+        "project": "esgent",
+        "grant": "ESGENT 010/2024",
+        "source": "crossref"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "crossref"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "openalex"
+      }
+    ],
     "projects": [
       "hepaflex",
       "esgent"
     ],
-    "featured": null
+    "featured": null,
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "High-performance biphasic Na<sub><i>x</i></sub> MnO<sub>2</sub> electrodes for cost-effective and high-power aqueous sodium batteries and capacitors",
@@ -401,8 +515,10 @@
     "themes": [
       "materiales"
     ],
+    "fundingEvidence": [],
     "projects": [],
-    "featured": null
+    "featured": null,
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Digital flow platform for the synthesis of high-quality multi-material perovskites",
@@ -463,7 +579,9 @@
     "themes": [
       "materiales"
     ],
+    "fundingEvidence": [],
     "projects": [],
-    "featured": null
+    "featured": null,
+    "fundingStatus": "metadata-only"
   }
 ]

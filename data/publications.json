@@ -66,6 +66,18 @@
       "fotonica",
       "materiales"
     ],
+    "fundingEvidence": [
+      {
+        "project": "esgent",
+        "grant": "ESGENT010/2024",
+        "source": "crossref"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex"
+      }
+    ],
     "projects": [
       "esgent"
     ],
@@ -75,7 +87,8 @@
       "title": "Unos pocos nanocristales pueden dominar la luz de todo el material",
       "summary": "Mapas de fotoluminiscencia revelan que unos pocos nanocristales muy emisivos pueden dominar la respuesta óptica de un nanocompuesto de perovskita.",
       "summary_en": "Photoluminescence maps reveal that a few highly emissive nanocrystals can dominate the optical response of a perovskite nanocomposite."
-    }
+    },
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Rapid photonic processing of printed flexible perovskite solar cells for space applications",
@@ -145,12 +158,14 @@
     "themes": [
       "fotovoltaica"
     ],
+    "fundingEvidence": [],
     "projects": [],
     "featured": {
       "title": "Células solares impresas y flexibles, procesadas con luz para el espacio",
       "summary": "Pulsos de luz intensa procesan en muy poco tiempo células solares de perovskita impresas sobre sustratos flexibles, pensadas para el espacio.",
       "summary_en": "Intense pulsed light processes printed perovskite solar cells on flexible substrates in a very short time, with space applications in mind."
-    }
+    },
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Sunlight‐Driven Green Synthesis of Platinum Nanoparticles From Double‐Vacancy Halide Perovskite Precursors for Methanol Reforming",
@@ -204,12 +219,14 @@
       "fotocatalisis",
       "materiales"
     ],
+    "fundingEvidence": [],
     "projects": [],
     "featured": {
       "title": "Nanopartículas de platino fabricadas con luz solar",
       "summary": "Bajo luz solar simulada, perovskitas de doble vacante forman nanopartículas de platino de menos de 3 nm que producen hidrógeno a partir de metanol.",
       "summary_en": "Under simulated sunlight, double-vacancy perovskites form sub-3 nm platinum nanoparticles that produce hydrogen from methanol."
-    }
+    },
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Photon Recycling–Driven Photodetection Enhancement in Ni(AcO)<sub>2</sub>–MAPbBr<sub>3</sub> Nanocomposite Waveguides",
@@ -264,6 +281,38 @@
     "themes": [
       "fotonica"
     ],
+    "fundingEvidence": [
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023‐151880OB‐C31",
+        "source": "crossref"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "openalex"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023‐151880OB‐C31",
+        "source": "openalex"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023‐151880OB‐C32",
+        "source": "crossref"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023‐151880OB‐C32",
+        "source": "openalex"
+      }
+    ],
     "projects": [
       "cns2023",
       "flexwin",
@@ -273,7 +322,8 @@
       "title": "Reciclar la luz de la perovskita para detectar más",
       "summary": "En guías de onda de nanocompuesto de perovskita, los fotones reemitidos llegan a los electrodos y elevan la fotocorriente en torno a un 60 %.",
       "summary_en": "In perovskite nanocomposite waveguides, re-emitted photons reach the electrodes and boost the photodetector’s photocurrent by around 60%."
-    }
+    },
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Triiodide Faujasites With Reactive, Ionic, Antimicrobial, and Catalytic Applications",
@@ -329,8 +379,10 @@
       "fotocatalisis",
       "materiales"
     ],
+    "fundingEvidence": [],
     "projects": [],
-    "featured": null
+    "featured": null,
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Highly Transparent BiEDOT‐Based Conducting Polymers as Tailorable Hole Transport Materials for Perovskite Solar Cells",
@@ -418,8 +470,10 @@
       "fotovoltaica",
       "materiales"
     ],
+    "fundingEvidence": [],
     "projects": [],
-    "featured": null
+    "featured": null,
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Unravelling the Intrinsic Reactivity and Colloidal Instability in Tin‐Based Halide Perovskite Precursor Solutions",
@@ -478,8 +532,10 @@
       "materiales",
       "estabilidad"
     ],
+    "fundingEvidence": [],
     "projects": [],
-    "featured": null
+    "featured": null,
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Transforming Device Efficiency and Stability in NiO‐Sputtered n–i–p Perovskite Solar Cells by Soft‐Landing and a Thin Spiro‐OMeTAD Buffer Layer",
@@ -541,11 +597,24 @@
       "fotovoltaica",
       "estabilidad"
     ],
+    "fundingEvidence": [
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "openalex"
+      }
+    ],
     "projects": [
       "hepaflex",
       "cns2023"
     ],
-    "featured": null
+    "featured": null,
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Rapid Laser-Based Deposition of PbI<sub>2</sub>/CsBr Inorganic Scaffolds for Hybrid Fabrication of Perovskite/Silicon Tandem Solar Cells",
@@ -604,8 +673,10 @@
     "themes": [
       "fotovoltaica"
     ],
+    "fundingEvidence": [],
     "projects": [],
-    "featured": null
+    "featured": null,
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "OER Activity Promoted by Organic Ligand‐Free Cs<sub>2</sub>Pt(Cl, Br)<sub>6</sub> Perovskite Photocatalyst for Solar‐Driven Water Splitting",
@@ -657,8 +728,10 @@
     "themes": [
       "fotocatalisis"
     ],
+    "fundingEvidence": [],
     "projects": [],
-    "featured": null
+    "featured": null,
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "CsPbBr<sub>3</sub> nanocrystals supported on a partially oxidized Ti<sub>2</sub>N MXene for photothermal CO<sub>2</sub> conversion",
@@ -712,8 +785,10 @@
       "fotocatalisis",
       "materiales"
     ],
+    "fundingEvidence": [],
     "projects": [],
-    "featured": null
+    "featured": null,
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Continuous optical–electrical field diagnostics separate environmental modulation from irreversible perovskite solar-cell failure",
@@ -766,6 +841,18 @@
       "estabilidad",
       "fotovoltaica"
     ],
+    "fundingEvidence": [
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "crossref"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "openalex"
+      }
+    ],
     "projects": [
       "hepaflex"
     ],
@@ -774,7 +861,8 @@
       "visual": "field",
       "title": "Separar el clima del fallo real en células solares al aire libre",
       "summary": "La monitorización continua de señales ópticas y eléctricas en exterior distingue la variación reversible que causa el tiempo atmosférico del fallo irreversible de cada célula de perovskita."
-    }
+    },
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Ambient <i>operando</i> self-healing in tin perovskite solar cells",
@@ -873,6 +961,38 @@
       "estabilidad",
       "fotovoltaica"
     ],
+    "fundingEvidence": [
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "crossref"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "openalex"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "crossref"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "101171478",
+        "source": "crossref"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "101171478",
+        "source": "openalex"
+      }
+    ],
     "projects": [
       "phoenixpv",
       "cns2023",
@@ -883,6 +1003,7 @@
       "visual": "healing",
       "title": "Células solares sin plomo que se reparan solas",
       "summary": "Bajo luz y aire ambiente, células de perovskita de estaño recuperan por sí solas la eficiencia perdida e incluso la superan; con el aditivo TEAI conservan el 80 % durante más de 25 horas, frente a menos de una sin él."
-    }
+    },
+    "fundingStatus": "metadata-only"
   }
 ]
