@@ -59,6 +59,12 @@ class FundingTests(unittest.TestCase):
         self.assertEqual(module.grants_in_text(
             "CNS2023-1442701 1011223456", p), {})
 
+    def test_pdf_font_letter_spacing_for_gent_grant(self):
+        p = [{"key":"esgent", "grants":["ESGENT/010/2024"]}]
+        text = "Funded by E S G E N T /010/2024 (2025)."
+        self.assertEqual(module.grants_in_text(text, p),
+                         {"esgent":"ESGENT/010/2024"})
+
     def test_grant_matching_survives_pdf_line_wrapping(self):
         p = [{"key": "cns2023", "grants": ["CNS2023-144270"]}]
         self.assertEqual(module.grants_in_text(
