@@ -74,10 +74,19 @@
     "themes": [
       "materiales"
     ],
-    "fundingEvidence": [],
-    "projects": [],
+    "fundingEvidence": [
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aelm.202500494"
+      }
+    ],
+    "projects": [
+      "cns2023"
+    ],
     "featured": null,
-    "fundingStatus": "metadata-only",
+    "fundingStatus": "text-checked",
     "imageSource": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aelm.202500494",
     "imageType": "figure-1",
     "imageLicense": "http://creativecommons.org/licenses/by/4.0/"

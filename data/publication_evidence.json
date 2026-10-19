@@ -405,8 +405,15 @@
   },
   "10.1002/aelm.202500494": {
     "checked": "2026-10-19",
-    "fundingStatus": "metadata-only",
-    "fundingEvidence": [],
+    "fundingStatus": "text-checked",
+    "fundingEvidence": [
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aelm.202500494"
+      }
+    ],
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-0f8663c0062947b5c482.webp",
       "source": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aelm.202500494",
