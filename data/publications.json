@@ -89,6 +89,12 @@
         "grant": "ESGENT/010/2024",
         "source": "openalex-tei",
         "url": "https://content.openalex.org/works/W7221617658.grobid-xml"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/adom.71901"
       }
     ],
     "projects": [
@@ -308,6 +314,12 @@
         "grant": "CNS2023-144270",
         "source": "openalex-tei",
         "url": "https://content.openalex.org/works/W7167087305.grobid-xml"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/nap2.70196"
       },
       {
         "project": "flexwin",

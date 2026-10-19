@@ -80,10 +80,17 @@
         "grant": "CNS2023-144270",
         "source": "wiley-tdm",
         "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aelm.202500494"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aelm.202500494"
       }
     ],
     "projects": [
-      "cns2023"
+      "cns2023",
+      "esgent"
     ],
     "featured": null,
     "fundingStatus": "text-checked",
@@ -152,6 +159,12 @@
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
+        "source": "europe-pmc-jats",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12376095/fullTextXML"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
         "source": "oa-pdf",
         "url": "https://content.openalex.org/works/W4413052390.pdf"
       },
@@ -180,6 +193,12 @@
         "project": "flexwin",
         "grant": "PID2023-151880OB-C31",
         "source": "crossref"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "europe-pmc-jats",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12376095/fullTextXML"
       },
       {
         "project": "flexwin",
@@ -299,6 +318,12 @@
         "url": "https://content.openalex.org/works/W4407624689.grobid-xml"
       },
       {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/lpor.202401920"
+      },
+      {
         "project": "flexwin",
         "grant": "PID2023‐151880OB‐C31",
         "source": "crossref"
@@ -340,6 +365,12 @@
         "grant": "PID2023-151880OB-C32",
         "source": "openalex-tei",
         "url": "https://content.openalex.org/works/W4407624689.grobid-xml"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023-151880OB-C32",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/lpor.202401920"
       }
     ],
     "projects": [
@@ -434,6 +465,12 @@
         "url": "https://content.openalex.org/works/W4406778408.grobid-xml"
       },
       {
+        "project": "cns2023",
+        "grant": "CNS2023",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/smsc.202400529"
+      },
+      {
         "project": "flexwin",
         "grant": "PID2023-151880OB-C31",
         "source": "oa-pdf",
@@ -449,6 +486,12 @@
         "grant": "PID2023-151880OB-C31",
         "source": "openalex-tei",
         "url": "https://content.openalex.org/works/W4406778408.grobid-xml"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/smsc.202400529"
       },
       {
         "project": "inkflex",

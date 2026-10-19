@@ -24,11 +24,18 @@
         "grant": "ESGENT/010/2024",
         "source": "openalex-tei",
         "url": "https://content.openalex.org/works/W7221617658.grobid-xml"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/adom.71901"
       }
     ],
     "image": null,
     "license": null,
-    "wileyTdmStatus": "success"
+    "wileyTdmStatus": "success",
+    "fundingMatcherVersion": 2
   },
   "10.1016/j.solmat.2026.114703": {
     "checked": "2026-10-19",
@@ -36,7 +43,8 @@
     "fundingEvidence": [],
     "image": null,
     "license": null,
-    "wileyTdmStatus": "not-configured"
+    "wileyTdmStatus": "not-configured",
+    "fundingMatcherVersion": 2
   },
   "10.1002/chem.202503192": {
     "checked": "2026-10-19",
@@ -44,7 +52,8 @@
     "fundingEvidence": [],
     "image": null,
     "license": null,
-    "wileyTdmStatus": "success"
+    "wileyTdmStatus": "success",
+    "fundingMatcherVersion": 2
   },
   "10.1002/nap2.70196": {
     "checked": "2026-10-19",
@@ -60,6 +69,12 @@
         "grant": "CNS2023-144270",
         "source": "openalex-tei",
         "url": "https://content.openalex.org/works/W7167087305.grobid-xml"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/nap2.70196"
       },
       {
         "project": "flexwin",
@@ -113,7 +128,8 @@
     ],
     "image": null,
     "license": null,
-    "wileyTdmStatus": "success"
+    "wileyTdmStatus": "success",
+    "fundingMatcherVersion": 2
   },
   "10.1002/sstr.70540": {
     "checked": "2026-10-19",
@@ -127,7 +143,8 @@
       "doi": "10.1002/sstr.70540"
     },
     "license": "http://creativecommons.org/licenses/by/4.0/",
-    "wileyTdmStatus": "success"
+    "wileyTdmStatus": "success",
+    "fundingMatcherVersion": 2
   },
   "10.1002/sstr.202600020": {
     "checked": "2026-10-19",
@@ -172,7 +189,8 @@
       "doi": "10.1002/sstr.202600020"
     },
     "license": "http://creativecommons.org/licenses/by/4.0/",
-    "wileyTdmStatus": "success"
+    "wileyTdmStatus": "success",
+    "fundingMatcherVersion": 2
   },
   "10.1002/anie.7703450": {
     "checked": "2026-10-19",
@@ -180,7 +198,8 @@
     "fundingEvidence": [],
     "image": null,
     "license": null,
-    "wileyTdmStatus": "unavailable"
+    "wileyTdmStatus": "unavailable",
+    "fundingMatcherVersion": 2
   },
   "10.1002/aenm.202503291": {
     "checked": "2026-10-19",
@@ -241,7 +260,8 @@
     ],
     "image": null,
     "license": null,
-    "wileyTdmStatus": "unavailable"
+    "wileyTdmStatus": "unavailable",
+    "fundingMatcherVersion": 2
   },
   "10.1021/acsenergylett.5c04010": {
     "checked": "2026-10-19",
@@ -249,7 +269,8 @@
     "fundingEvidence": [],
     "image": null,
     "license": null,
-    "wileyTdmStatus": "not-configured"
+    "wileyTdmStatus": "not-configured",
+    "fundingMatcherVersion": 2
   },
   "10.1002/aesr.202500105": {
     "checked": "2026-10-19",
@@ -263,7 +284,8 @@
       "doi": "10.1002/aesr.202500105"
     },
     "license": "http://creativecommons.org/licenses/by/4.0/",
-    "wileyTdmStatus": "success"
+    "wileyTdmStatus": "success",
+    "fundingMatcherVersion": 2
   },
   "10.1039/d5ma01122a": {
     "checked": "2026-10-19",
@@ -271,7 +293,8 @@
     "fundingEvidence": [],
     "image": null,
     "license": "http://creativecommons.org/licenses/by/3.0/",
-    "wileyTdmStatus": "not-configured"
+    "wileyTdmStatus": "not-configured",
+    "fundingMatcherVersion": 2
   },
   "10.1039/d6ee05477c": {
     "checked": "2026-10-19",
@@ -320,7 +343,8 @@
     ],
     "image": null,
     "license": "http://creativecommons.org/licenses/by/3.0/",
-    "wileyTdmStatus": "not-configured"
+    "wileyTdmStatus": "not-configured",
+    "fundingMatcherVersion": 2
   },
   "10.1039/d5el00182j": {
     "checked": "2026-10-19",
@@ -401,7 +425,8 @@
       "doi": "10.1039/d5el00182j"
     },
     "license": "http://creativecommons.org/licenses/by/3.0/",
-    "wileyTdmStatus": "not-configured"
+    "wileyTdmStatus": "not-configured",
+    "fundingMatcherVersion": 2
   },
   "10.1002/aelm.202500494": {
     "checked": "2026-10-19",
@@ -410,6 +435,12 @@
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aelm.202500494"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
         "source": "wiley-tdm",
         "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aelm.202500494"
       }
@@ -422,7 +453,8 @@
       "doi": "10.1002/aelm.202500494"
     },
     "license": "http://creativecommons.org/licenses/by/4.0/",
-    "wileyTdmStatus": "success"
+    "wileyTdmStatus": "success",
+    "fundingMatcherVersion": 2
   },
   "10.1021/acs.jpclett.5c01405": {
     "checked": "2026-10-19",
@@ -432,6 +464,12 @@
         "project": "cns2023",
         "grant": "CNS2023-144270",
         "source": "crossref"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "europe-pmc-jats",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12376095/fullTextXML"
       },
       {
         "project": "cns2023",
@@ -464,6 +502,12 @@
         "project": "flexwin",
         "grant": "PID2023-151880OB-C31",
         "source": "crossref"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "europe-pmc-jats",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12376095/fullTextXML"
       },
       {
         "project": "flexwin",
@@ -491,7 +535,8 @@
       "doi": "10.1021/acs.jpclett.5c01405"
     },
     "license": "https://creativecommons.org/licenses/by/4.0/",
-    "wileyTdmStatus": "not-configured"
+    "wileyTdmStatus": "not-configured",
+    "fundingMatcherVersion": 2
   },
   "10.1002/lpor.202401920": {
     "checked": "2026-10-19",
@@ -531,6 +576,12 @@
         "url": "https://content.openalex.org/works/W4407624689.grobid-xml"
       },
       {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/lpor.202401920"
+      },
+      {
         "project": "flexwin",
         "grant": "PID2023‐151880OB‐C31",
         "source": "crossref"
@@ -572,11 +623,18 @@
         "grant": "PID2023-151880OB-C32",
         "source": "openalex-tei",
         "url": "https://content.openalex.org/works/W4407624689.grobid-xml"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023-151880OB-C32",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/lpor.202401920"
       }
     ],
     "image": null,
     "license": null,
-    "wileyTdmStatus": "success"
+    "wileyTdmStatus": "success",
+    "fundingMatcherVersion": 2
   },
   "10.1002/smsc.202400529": {
     "checked": "2026-10-19",
@@ -592,6 +650,12 @@
         "grant": "CNS2023-144270",
         "source": "openalex-tei",
         "url": "https://content.openalex.org/works/W4406778408.grobid-xml"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/smsc.202400529"
       },
       {
         "project": "flexwin",
@@ -611,6 +675,12 @@
         "url": "https://content.openalex.org/works/W4406778408.grobid-xml"
       },
       {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "wiley-tdm",
+        "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/smsc.202400529"
+      },
+      {
         "project": "inkflex",
         "grant": "PID2023-151880OB-C32",
         "source": "openalex-tei",
@@ -625,7 +695,8 @@
       "doi": "10.1002/smsc.202400529"
     },
     "license": "http://creativecommons.org/licenses/by/4.0/",
-    "wileyTdmStatus": "success"
+    "wileyTdmStatus": "success",
+    "fundingMatcherVersion": 2
   },
   "10.1039/d5el00064e": {
     "checked": "2026-10-19",
@@ -654,7 +725,8 @@
     ],
     "image": null,
     "license": "http://creativecommons.org/licenses/by/3.0/",
-    "wileyTdmStatus": "not-configured"
+    "wileyTdmStatus": "not-configured",
+    "fundingMatcherVersion": 2
   },
   "10.1039/d4ma01150c": {
     "checked": "2026-10-19",
@@ -662,7 +734,8 @@
     "fundingEvidence": [],
     "image": null,
     "license": null,
-    "wileyTdmStatus": "not-configured"
+    "wileyTdmStatus": "not-configured",
+    "fundingMatcherVersion": 2
   },
   "10.1039/d5dd00099h": {
     "checked": "2026-10-19",
@@ -670,6 +743,7 @@
     "fundingEvidence": [],
     "image": null,
     "license": null,
-    "wileyTdmStatus": "not-configured"
+    "wileyTdmStatus": "not-configured",
+    "fundingMatcherVersion": 2
   }
 }
