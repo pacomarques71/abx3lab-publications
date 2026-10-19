@@ -70,6 +70,23 @@ def wiley_diagnostic():
         headings = re.compile(r"acknowledg|funding|financial support", re.I)
         print("WILEY_DIAG: pages_with_funding_headings=" +
               str([i + 1 for i, t in enumerate(ordered) if headings.search(t)]), flush=True)
+        for idx, page_text in enumerate(ordered):
+            flags = digest_flags(page_text)
+            if not (flags["has_CNS2023_suffix"] or flags["has_ESGENT_text"]):
+                continue
+            refs = re.search(r"(?im)^[ \t]*(?:references|bibliography)[ \t]*$", page_text)
+            fund = re.search(r"(?i)\b(?:acknowledg(?:e)?ments?|funding|financial support)\b", page_text)
+            before_refs = page_text[:refs.start()] if refs else page_text
+            after_heading = page_text[fund.start():] if fund else ""
+            if refs and fund and fund.start() < refs.start():
+                after_heading = page_text[fund.start():refs.start()]
+            print("WILEY_DIAG: page=" + str(idx + 1)
+                + " refs_header_at=" + str(refs.start() if refs else -1)
+                + " funding_heading_at=" + str(fund.start() if fund else -1)
+                + " cns_before_refs=" + str(digest_flags(before_refs)["has_CNS2023_full"])
+                + " esgent_before_refs=" + str(digest_flags(before_refs)["has_ESGENT_full"])
+                + " cns_after_funding_heading=" + str(digest_flags(after_heading)["has_CNS2023_full"])
+                + " esgent_after_funding_heading=" + str(digest_flags(after_heading)["has_ESGENT_full"]), flush=True)
         projects = [
             {"key": "cns2023", "grants": ["CNS2023-144270"]},
             {"key": "esgent", "grants": ["ESGENT/010/2024", "CIESGT2024/010"]},
