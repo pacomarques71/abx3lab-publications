@@ -159,6 +159,21 @@ def image_diagnostic():
                              "image_count": len(images), "largest_image_sizes": images[:3]})
             print("IMAGE_DIAG: " + doi + " pages=" + str(len(doc))
                   + " candidates=" + str(info), flush=True)
+            # Dry-run the actual extraction on the latest three Wiley articles.
+            # Only dimensions/type are printed; no image bytes or article text.
+            from PIL import Image
+            import io
+            toc = enrich.toc_graphic_from_pdf(result[0])
+            fig = enrich.first_figure_from_pdf(result[0])
+            def dimensions(blob):
+                if not blob:
+                    return None
+                with Image.open(io.BytesIO(blob)) as img:
+                    return (img.width, img.height, img.mode)
+            print("IMAGE_DIAG: " + doi + " selected_type="
+                  + ("graphical-abstract" if toc else "figure-1" if fig else "none")
+                  + " toc_dimensions=" + str(dimensions(toc))
+                  + " figure1_dimensions=" + str(dimensions(fig)), flush=True)
         finally:
             doc.close()
 
