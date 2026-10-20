@@ -179,24 +179,50 @@ def section_text_from_html(html_bytes):
 
 
 def graphical_abstract_from_html(html_bytes, base_url):
+    """Only explicit TOC/graphical-abstract art, not generic social-share images."""
     soup = BeautifulSoup(html_bytes, "html.parser")
-    for candidate in soup.select("figure, div, section")[:2500]:
-        marker = " ".join(str(candidate.get(k, "")) for k in ("class", "id", "aria-label"))
-        if not re.search(r"(graphical.{0,8}abstract|toc[-_ ]?(image|graphic)|abstract[-_ ]?graphic)", marker, re.I):
-            continue
-        img = candidate.find("img")
-        if img:
-            src = img.get("data-src") or img.get("src") or img.get("data-original")
-            if src:
-                return urljoin(base_url, src), "graphical-abstract"
+    marker = re.compile(
+        r"graphical[\s_-]*abstract|abstract[\s_-]*graphic|"
+        r"(?:table[\s_-]*of[\s_-]*contents?|toc)[\s_-]*(?:graphic|image|figure|art)",
+        re.I
+    )
+    def image_url(img):
+        for attr in ("data-src", "data-original", "data-lazy-src", "src"):
+            u = img.get(attr)
+            if u and not u.startswith(("data:", "blob:")):
+                return urljoin(base_url, u)
+        pic = img.find_parent("picture")
+        for node in ([img] + (pic.find_all("source") if pic else [])):
+            srcset = node.get("data-srcset") or node.get("srcset") or ""
+            entries = [x.strip().split()[0] for x in srcset.split(",") if x.strip()]
+            if entries:
+                return urljoin(base_url, entries[-1])
+        return None
+    for node in soup.select("figure, picture, div, section")[:2500]:
+        marks = []
+        for attr in ("class", "id", "aria-label"):
+            value = node.get(attr, "")
+            marks.append(" ".join(value) if isinstance(value, list) else str(value))
+        caption = node.find("figcaption")
+        if caption:
+            marks.append(caption.get_text(" ", strip=True)[:100])
+        if marker.search(" ".join(marks)):
+            img = node.find("img")
+            url = image_url(img) if img else None
+            if url:
+                return url, "graphical-abstract"
+    for img in soup.select("img[alt], img[title]"):
+        if marker.search((img.get("alt") or "") + " " + (img.get("title") or "")):
+            url = image_url(img)
+            if url:
+                return url, "graphical-abstract"
     for meta in soup.select("meta[name], meta[property]"):
         key = (meta.get("name") or meta.get("property") or "").lower()
-        if "graphical" in key or "toc_image" in key:
-            u = meta.get("content")
-            if u and u.startswith(("http", "/")):
-                return urljoin(base_url, u), "graphical-abstract"
+        if marker.search(key):
+            url = meta.get("content")
+            if url and url.startswith(("http://", "https://", "/")):
+                return urljoin(base_url, url), "graphical-abstract"
     return None, None
-
 
 def text_from_tei(xml_bytes):
     """Read funding sections in both modern TEI and legacy wrapped TEI."""
@@ -246,7 +272,13 @@ def extract_image_to_webp(blob, path):
                 return False
             if img.width * img.height > 30000000:
                 return False
-            img = img.convert("RGB")
+            if img.mode in ("RGBA", "LA") or "transparency" in img.info:
+                overlay = img.convert("RGBA")
+                canvas = Image.new("RGB", overlay.size, "white")
+                canvas.paste(overlay, mask=overlay.getchannel("A"))
+                img = canvas
+            else:
+                img = img.convert("RGB")
             img.thumbnail((768, 768), Image.Resampling.LANCZOS)
             path.parent.mkdir(parents=True, exist_ok=True)
             img.save(path, "WEBP", quality=82, method=5)
@@ -549,13 +581,13 @@ def enrich_entry(rec, projects, prev, extras):
         revisit = True
     # When a Wiley TDM token is added later, revisit even previously checked
     # articles; metadata and OA repositories can miss additional grants.
+    needs_picture = not manual.get("image") and not prev.get("image")
     wiley_due = bool(WILEY_TDM_TOKEN and doi.startswith("10.1002/")
                      and (prev.get("wileyTdmStatus") != "success"
                           or prev.get("fundingStatus") != "text-checked"
-                          or revisit))
+                          or revisit or needs_picture))
     if wiley_due:
         revisit = True
-    needs_picture = not manual.get("image") and not prev.get("image")
     work = {}
     page = None
     status = prev.get("fundingStatus") or "metadata-only"
