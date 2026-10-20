@@ -107,6 +107,45 @@ def wiley_diagnostic():
         doc.close()
 
 
+def image_diagnostic():
+    """Read-only image layout checks for the three most recent Wiley papers."""
+    dois = (
+        "10.1002/adom.71901",
+        "10.1002/chem.202503192",
+        "10.1002/nap2.70196",
+    )
+    import fitz
+    for doi in dois:
+        result = enrich.wiley_tdm_pdf(doi)
+        if not result:
+            print("IMAGE_DIAG: " + doi + " pdf_access=false", flush=True)
+            continue
+        doc = fitz.open(stream=result[0], filetype="pdf")
+        try:
+            info = []
+            for i, page in enumerate(doc):
+                text = page.get_text("text", sort=True)
+                # Metadata only: don't print copyright content.
+                labels = []
+                if re.search(r"(?i)\bgraphical\s+abstract\b", text):
+                    labels.append("graphical_abstract")
+                if re.search(r"(?i)(?:table\s+of\s+contents?\s+(?:entry|graphic|image)|\bTOC\s+(?:graphic|image)\b)", text):
+                    labels.append("toc")
+                if re.search(r"(?i)\b(?:fig(?:ure)?\.?\s*1)\b", text):
+                    labels.append("figure1")
+                images = []
+                for xref in set(x[0] for x in page.get_images(full=True)):
+                    img = doc.extract_image(xref)
+                    images.append((img.get("width", 0), img.get("height", 0)))
+                images.sort(key=lambda x: x[0] * x[1], reverse=True)
+                info.append({"page": i + 1, "tags": labels,
+                             "image_count": len(images), "largest_image_sizes": images[:3]})
+            print("IMAGE_DIAG: " + doi + " pages=" + str(len(doc))
+                  + " candidates=" + str(info), flush=True)
+        finally:
+            doc.close()
+
+
 def elsevier_diagnostic():
     key = os.getenv("ELSEVIER_API_KEY", "")
     print("ELSEVIER_DIAG: key_configured=" + str(bool(key)), flush=True)
@@ -158,4 +197,5 @@ def elsevier_diagnostic():
 
 if __name__ == "__main__":
     wiley_diagnostic()
+    image_diagnostic()
     elsevier_diagnostic()
