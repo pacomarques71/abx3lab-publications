@@ -129,6 +129,23 @@ def image_diagnostic():
                 labels = []
                 if re.search(r"(?i)\bgraphical\s+abstract\b", text):
                     labels.append("graphical_abstract")
+                    matches = page.search_for("graphical abstract")
+                    blocks = page.get_text("blocks")
+                    graphic_drawings = [d["rect"] for d in page.get_drawings() if d.get("rect")]
+                    print("IMAGE_DIAG: " + doi + " page=" + str(i + 1)
+                          + " graphical_label_rects="
+                          + str([tuple(round(v,1) for v in z) for z in matches])
+                          + " page_size=" + str(tuple(round(v,1) for v in page.rect))
+                          + " drawings_total=" + str(len(graphic_drawings))
+                          + " drawings_below_label="
+                          + str(sum(bool(matches) and d.y0 > matches[0].y1 for d in graphic_drawings))
+                          + " label_block_lengths="
+                          + str([len(b[4]) for b in blocks
+                                 if matches and fitz.Rect(b[:4]).intersects(matches[0])])
+                          + " body_blocks="
+                          + str([(tuple(round(v,0) for v in b[:4]),len(b[4]))
+                                 for b in blocks if b[6]==0 and len(b[4])<200][:10]),
+                          flush=True)
                 if re.search(r"(?i)(?:table\s+of\s+contents?\s+(?:entry|graphic|image)|\bTOC\s+(?:graphic|image)\b)", text):
                     labels.append("toc")
                 if re.search(r"(?i)\b(?:fig(?:ure)?\.?\s*1)\b", text):
