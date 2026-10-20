@@ -318,6 +318,21 @@ class FundingTests(unittest.TestCase):
             self.assertIsNotNone(module.toc_graphic_from_pdf(pdf))
             fallback.assert_not_called()
 
+    def test_pdf_toc_vector_graphics_are_supported(self):
+        import fitz
+        doc = fitz.open()
+        page = doc.new_page(width=600, height=800)
+        page.insert_text((60, 120), "Graphical Abstract", fontsize=14)
+        for i in range(30):
+            x = 70 + (i % 10) * 34
+            y = 175 + (i // 10) * 38
+            page.draw_rect(fitz.Rect(x, y, x+24, y+26),
+                           color=(0.3, 0.3, 0.3), fill=(0.8, 0.9, 0.9))
+        pdf = doc.tobytes()
+        doc.close()
+        art = module.toc_graphic_from_pdf(pdf)
+        self.assertTrue(art and art.startswith(b"\x89PNG"))
+
     def test_pdf_footnote_graphical_abstract_not_toc(self):
         import fitz
         from PIL import Image
