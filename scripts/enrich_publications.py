@@ -287,6 +287,65 @@ def extract_image_to_webp(blob, path):
         return False
 
 
+def _render_pdf_clip(page, rect):
+    """Render a PDF region on an opaque white sRGB canvas."""
+    try:
+        import fitz
+        r = fitz.Rect(rect) & page.rect
+        if r.width < 130 or r.height < 70 or r.width / r.height > 6.5:
+            return None
+        pix = page.get_pixmap(clip=r, matrix=fitz.Matrix(2, 2),
+                              colorspace=fitz.csRGB, alpha=False)
+        return pix.tobytes("png")
+    except (ImportError, RuntimeError, ValueError, OSError):
+        return None
+
+
+def toc_graphic_from_pdf(pdf_bytes):
+    """Use labelled TOC graphics only, never incidental footnotes mentioning TOC."""
+    try:
+        import fitz
+        doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+        indices = sorted(set(range(min(3, len(doc)))) |
+                         set(range(max(0, len(doc)-2), len(doc))))
+        label = re.compile(r"(?i)^(?:graphical\s+abstract|(?:toc|table\s+of\s+contents?)\s*"
+                           r"(?:graphic|image|figure|art))\s*:?\s*$")
+        for idx in indices:
+            page = doc[idx]
+            for block in page.get_text("blocks"):
+                if len(block) < 7 or block[6] != 0:
+                    continue
+                title = " ".join(block[4].split())
+                if len(title) > 70 or not label.fullmatch(title):
+                    continue
+                rect = fitz.Rect(block[:4])
+                if rect.y0 > page.rect.height * .83:
+                    continue
+                images = [r for im in page.get_images(full=True)
+                          for r in page.get_image_rects(im[0])
+                          if r.width >= 130 and r.height >= 75]
+                # A close visual asset must accompany the standalone heading.
+                for direction in (1, -1):
+                    box = fitz.Rect(35, rect.y1 + 4, page.rect.width - 35,
+                                    min(page.rect.height - 40, rect.y1 + 320)) if direction == 1 else fitz.Rect(
+                                        35, max(40, rect.y0 - 320), page.rect.width - 35, rect.y0 - 4)
+                    nearby = [r for r in images if r.intersects(box)]
+                    if not nearby:
+                        continue
+                    candidate = fitz.Rect(min(r.x0 for r in nearby)-7,
+                                          min(r.y0 for r in nearby)-7,
+                                          max(r.x1 for r in nearby)+7,
+                                          max(r.y1 for r in nearby)+7) & box
+                    png = _render_pdf_clip(page, candidate)
+                    if png:
+                        doc.close()
+                        return png
+        doc.close()
+    except (ImportError, ValueError, RuntimeError, OSError):
+        return None
+    return None
+
+
 def first_figure_from_pdf(pdf_bytes):
     """Extract a raster figure near the *Figure 1* caption; never use a random publisher logo."""
     try:
@@ -306,9 +365,17 @@ def first_figure_from_pdf(pdf_bytes):
                         images.append((abs(dist), info[0]))
             if images:
                 images.sort()
-                png = doc.extract_image(images[0][1])
-                doc.close()
-                return png.get("image")
+                # PDF extract_image can turn alpha/CMYK overlays black and
+                # discard adjacent labels. Render the image's page rectangle.
+                chosen = images[0][1]
+                rectangles = page.get_image_rects(chosen)
+                closest = min(rectangles, key=lambda r: abs(caption[1]-r.y1))
+                clip = fitz.Rect(closest.x0-6, closest.y0-6, closest.x1+6,
+                                 min(caption[1]-4, closest.y1+6))
+                png = _render_pdf_clip(page, clip)
+                if png:
+                    doc.close()
+                    return png
             # Vector figures do not have an embedded bitmap. Render only a
             # graphics-rich region immediately above the Figure 1 caption,
             # rejecting ordinary columns of text to avoid accidental screenshots.
@@ -328,10 +395,10 @@ def first_figure_from_pdf(pdf_bytes):
                                if d["rect"].intersects(clip))
                 body = page.get_text("text", clip=clip)
                 if drawings >= 12 and len(body) < 500 and clip.height > 120:
-                    out = page.get_pixmap(matrix=fitz.Matrix(1.8, 1.8),
-                                          clip=clip, alpha=False).tobytes("png")
-                    doc.close()
-                    return out
+                    out = _render_pdf_clip(page, clip)
+                    if out:
+                        doc.close()
+                        return out
             except (RuntimeError, ValueError, OSError):
                 pass
         doc.close()
@@ -674,6 +741,10 @@ def enrich_entry(rec, projects, prev, extras):
                             blob = img_result[0]
                         else:
                             srcurl, typ = None, None
+                if blob is None and pdf:
+                    blob = toc_graphic_from_pdf(pdf)
+                    if blob:
+                        srcurl, typ = pdfurl, "graphical-abstract"
                 if blob is None and pdf:
                     blob = first_figure_from_pdf(pdf)
                     if blob:
