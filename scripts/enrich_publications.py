@@ -330,12 +330,26 @@ def toc_graphic_from_pdf(pdf_bytes):
                                     min(page.rect.height - 40, rect.y1 + 320)) if direction == 1 else fitz.Rect(
                                         35, max(40, rect.y0 - 320), page.rect.width - 35, rect.y0 - 4)
                     nearby = [r for r in images if r.intersects(box)]
-                    if not nearby:
-                        continue
-                    candidate = fitz.Rect(min(r.x0 for r in nearby)-7,
-                                          min(r.y0 for r in nearby)-7,
-                                          max(r.x1 for r in nearby)+7,
-                                          max(r.y1 for r in nearby)+7) & box
+                    if nearby:
+                        candidate = fitz.Rect(min(r.x0 for r in nearby)-7,
+                                              min(r.y0 for r in nearby)-7,
+                                              max(r.x1 for r in nearby)+7,
+                                              max(r.y1 for r in nearby)+7) & box
+                    else:
+                        # Publishers may encode their TOC entirely as vectors.
+                        # Require dense graphical content and little prose near
+                        # an exact standalone heading before rendering it.
+                        vectors = [d["rect"] for d in page.get_drawings()
+                                   if d["rect"].intersects(box)]
+                        if len(vectors) < 25:
+                            continue
+                        candidate = fitz.Rect(
+                            max(box.x0, min(r.x0 for r in vectors)-5),
+                            max(box.y0, min(r.y0 for r in vectors)-5),
+                            min(box.x1, max(r.x1 for r in vectors)+5),
+                            min(box.y1, max(r.y1 for r in vectors)+5))
+                        if len(page.get_text("text", clip=candidate)) > 180:
+                            continue
                     png = _render_pdf_clip(page, candidate)
                     if png:
                         doc.close()
