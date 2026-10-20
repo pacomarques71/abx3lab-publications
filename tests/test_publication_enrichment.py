@@ -284,6 +284,92 @@ class FundingTests(unittest.TestCase):
         result = module.extract_funding_from_pdf(pdf, "https://example.org/references.pdf", PROJECTS)
         self.assertFalse(result)
 
+    def test_graphical_abstract_alt_and_lazy_source(self):
+        html = b"""<figure><img alt="Graphical Abstract" data-src="/toc.png"
+                  src="/placeholder.gif"></figure>"""
+        self.assertEqual(
+            module.graphical_abstract_from_html(html, "https://publisher.example/doi/x"),
+            ("https://publisher.example/toc.png", "graphical-abstract"))
+
+    def test_generic_open_graph_image_is_not_toc(self):
+        html = b'<meta property="og:image" content="/publisher-logo.jpg">'
+        self.assertEqual(
+            module.graphical_abstract_from_html(html, "https://publisher.example"),
+            (None, None))
+
+    def test_pdf_toc_selection_before_figure_fallback(self):
+        import fitz
+        from PIL import Image
+        import io
+        pic = Image.new("RGB", (720, 320), "#edf3f4")
+        buf = io.BytesIO()
+        pic.save(buf, format="PNG")
+        doc = fitz.open()
+        p = doc.new_page(width=600, height=800)
+        p.insert_text((60, 130), "Graphical Abstract", fontsize=14)
+        p.insert_image(fitz.Rect(70, 160, 520, 360), stream=buf.getvalue())
+        p.insert_text((60, 500), "Figure 1. Example diagram", fontsize=12)
+        pdf = doc.tobytes()
+        doc.close()
+        toc = module.toc_graphic_from_pdf(pdf)
+        self.assertTrue(toc and toc.startswith(b"\x89PNG"))
+        with patch.object(module, "toc_graphic_from_pdf", return_value=toc), \
+             patch.object(module, "first_figure_from_pdf") as fallback:
+            self.assertIsNotNone(module.toc_graphic_from_pdf(pdf))
+            fallback.assert_not_called()
+
+    def test_pdf_footnote_graphical_abstract_not_toc(self):
+        import fitz
+        from PIL import Image
+        import io
+        pic = Image.new("RGB", (720, 320), "white")
+        buf = io.BytesIO()
+        pic.save(buf, format="PNG")
+        doc = fitz.open()
+        page = doc.new_page(width=600, height=800)
+        page.insert_text((60, 700), "See the graphical abstract on the publisher website.", fontsize=10)
+        page.insert_image(fitz.Rect(70, 610, 500, 680), stream=buf.getvalue())
+        pdf = doc.tobytes()
+        doc.close()
+        self.assertIsNone(module.toc_graphic_from_pdf(pdf))
+
+    def test_alpha_is_composited_on_white(self):
+        import io
+        from PIL import Image
+        with tempfile.TemporaryDirectory() as d:
+            img = Image.new("RGBA", (400, 220), (0, 0, 0, 0))
+            img.putpixel((200, 110), (0, 0, 0, 255))
+            buf = io.BytesIO()
+            img.save(buf, format="PNG")
+            output = Path(d) / "image.webp"
+            self.assertTrue(module.extract_image_to_webp(buf.getvalue(), output))
+            with Image.open(output) as res:
+                self.assertGreater(min(res.convert("RGB").getpixel((15, 15))), 245)
+                self.assertLess(max(res.convert("RGB").getpixel((200, 110))), 30)
+
+    def test_wiley_pdf_retry_for_missing_image_after_successful_funding(self):
+        rec = {"doi": "10.1002/nap2.70196", "projects": [],
+               "image": None, "license": "https://creativecommons.org/licenses/by/4.0/",
+               "openAccess": None, "fundingEvidence": []}
+        prev = {"checked": module.date.today().isoformat(),
+                "fundingStatus":"text-checked",
+                "fundingMatcherVersion":module.FUNDING_MATCHER_VERSION,
+                "fundingEvidence":[], "wileyTdmStatus":"success"}
+        with patch.object(module, "WILEY_TDM_TOKEN", "stub"), \
+             patch.object(module, "KEY", ""), \
+             patch.object(module, "wiley_tdm_pdf", return_value=(b"%PDF-fake", "https://api.wiley.com/test")) as call, \
+             patch.object(module, "openalex_work", return_value={}), \
+             patch.object(module, "download_publisher_page", return_value=None), \
+             patch.object(module, "openaire_grants", return_value=[]), \
+             patch.object(module, "accessible_pdf_candidates", return_value=[]), \
+             patch.object(module, "extract_funding_from_pdf", return_value=[]), \
+             patch.object(module, "first_figure_from_pdf", return_value=b"stub"), \
+             patch.object(module, "toc_graphic_from_pdf", return_value=None), \
+             patch.object(module, "extract_image_to_webp", return_value=True):
+            out, _ = module.enrich_entry(rec, PROJECTS, prev, {"publications": {}})
+        call.assert_called_once_with("10.1002/nap2.70196")
+        self.assertEqual(out["imageType"], "figure-1")
+
     def test_toc_priority(self):
         markup = b'<div class="graphical-abstract"><img data-src="/images/article-toc.png"/></div>'
         self.assertEqual(module.graphical_abstract_from_html(markup, "https://example.org/a")[0],
