@@ -1,5 +1,151 @@
 [
   {
+    "title": "Inducing Tunable Volatile Analog Switching in Nanocomposite-Based MAPbBr3 Perovskite Memristors for Synaptic Emulation",
+    "authors": [
+      "Pablo F. Betancur",
+      "Miriam Minguez-Avellan",
+      "Ismael Fernandez-Guillen",
+      "Jaume Noguera-Gómez",
+      "Fernando Ramiro-Manzano",
+      "Rafael Abargues",
+      "Teresa S. Ripolles",
+      "Pablo P. Boix"
+    ],
+    "groupAuthors": [
+      "Pablo Franco Betancur",
+      "Miriam Mínguez Avellán",
+      "Fernando Ramiro Manzano",
+      "Rafael Abargues López",
+      "Teresa Ripollés Sanchis",
+      "Pablo P. Boix"
+    ],
+    "groupAuthorDisplayNames": [
+      "Pablo F. Betancur",
+      "Miriam Minguez-Avellan",
+      "Fernando Ramiro-Manzano",
+      "Rafael Abargues",
+      "Teresa S. Ripolles",
+      "Pablo P. Boix"
+    ],
+    "groupMembers": [
+      {
+        "name": "Pablo Franco Betancur",
+        "display": "Pablo F. Betancur",
+        "profile": "/equipo/#pablo-franco"
+      },
+      {
+        "name": "Miriam Mínguez Avellán",
+        "display": "Miriam Minguez-Avellan",
+        "profile": "/equipo/#miriam-minguez"
+      },
+      {
+        "name": "Fernando Ramiro Manzano",
+        "display": "Fernando Ramiro-Manzano",
+        "profile": "/equipo/#fernando-ramiro"
+      },
+      {
+        "name": "Rafael Abargues López",
+        "display": "Rafael Abargues",
+        "profile": "/equipo/#rafael-abargues"
+      },
+      {
+        "name": "Teresa Ripollés Sanchis",
+        "display": "Teresa S. Ripolles",
+        "profile": "/equipo/#teresa-ripolles"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      }
+    ],
+    "journal": "ACS Applied Materials & Interfaces",
+    "publicationDate": "2026-10-22",
+    "onlinePublicationDate": "2026-10-22",
+    "issueDate": null,
+    "year": 2026,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": "10.1021/acsami.6c11506",
+    "url": "https://doi.org/10.1021/acsami.6c11506",
+    "openalexId": "https://openalex.org/W7223224027",
+    "type": "article",
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-3bb24e859ad2cd5ed4d2.webp",
+    "openAccess": {
+      "status": "hybrid",
+      "url": "https://doi.org/10.1021/acsami.6c11506",
+      "pdf": "https://pubs.acs.org/aamick/article-pdf/doi/10.1021/acsami.6c11506/68951289/am-2026-11506y.pdf",
+      "version": "publishedVersion"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "themes": [
+      "materiales"
+    ],
+    "fundingEvidence": [
+      {
+        "project": "esgent",
+        "grant": "ESGENT 010/2024",
+        "source": "crossref"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7223224027.pdf"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "oa-pdf-funding-context",
+        "url": "https://content.openalex.org/works/W7223224027.pdf"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7223224027.grobid-xml"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "15101171478",
+        "source": "crossref"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "101171478",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7223224027.pdf"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "101171478",
+        "source": "oa-pdf-funding-context",
+        "url": "https://content.openalex.org/works/W7223224027.pdf"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "101171478",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7223224027.grobid-xml"
+      }
+    ],
+    "projects": [
+      "phoenixpv",
+      "esgent"
+    ],
+    "featured": null,
+    "fundingStatus": "text-checked",
+    "imageSource": "https://content.openalex.org/works/W7223224027.pdf",
+    "imageType": "figure-1",
+    "imageLicense": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  {
     "title": "Crossover From Excitonic to Bulk Emission in Metal Halide Perovskite Nanocomposites",
     "authors": [
       "Miriam Minguez‐Avellan",
@@ -44,12 +190,12 @@
       }
     ],
     "journal": "Advanced Optical Materials",
-    "publicationDate": "2026-10-13",
-    "onlinePublicationDate": "2026-10-13",
+    "publicationDate": "2026-10-01",
+    "onlinePublicationDate": "2026-10-01",
     "issueDate": null,
     "year": 2026,
-    "volume": null,
-    "issue": null,
+    "volume": "14",
+    "issue": "39",
     "pages": "e71901",
     "doi": "10.1002/adom.71901",
     "url": "https://doi.org/10.1002/adom.71901",

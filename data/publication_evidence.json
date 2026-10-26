@@ -38,7 +38,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1016/j.solmat.2026.114703": {
-    "checked": "2026-10-20",
+    "checked": "2026-10-26",
     "fundingStatus": "metadata-only",
     "fundingEvidence": [],
     "image": null,
@@ -193,7 +193,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1002/anie.7703450": {
-    "checked": "2026-10-20",
+    "checked": "2026-10-26",
     "fundingStatus": "metadata-only",
     "fundingEvidence": [],
     "image": null,
@@ -202,7 +202,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1002/aenm.202503291": {
-    "checked": "2026-10-20",
+    "checked": "2026-10-26",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -264,7 +264,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1021/acsenergylett.5c04010": {
-    "checked": "2026-10-20",
+    "checked": "2026-10-26",
     "fundingStatus": "metadata-only",
     "fundingEvidence": [],
     "image": null,
@@ -288,7 +288,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d5ma01122a": {
-    "checked": "2026-10-20",
+    "checked": "2026-10-26",
     "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "image": null,
@@ -297,7 +297,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d6ee05477c": {
-    "checked": "2026-10-20",
+    "checked": "2026-10-26",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -539,7 +539,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1002/lpor.202401920": {
-    "checked": "2026-10-20",
+    "checked": "2026-10-26",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -699,7 +699,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d5el00064e": {
-    "checked": "2026-10-20",
+    "checked": "2026-10-26",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -729,7 +729,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d4ma01150c": {
-    "checked": "2026-10-20",
+    "checked": "2026-10-26",
     "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "image": null,
@@ -738,11 +738,78 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d5dd00099h": {
-    "checked": "2026-10-20",
+    "checked": "2026-10-26",
     "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "image": null,
     "license": null,
+    "wileyTdmStatus": "not-configured",
+    "fundingMatcherVersion": 2
+  },
+  "10.1021/acsami.6c11506": {
+    "checked": "2026-10-26",
+    "fundingStatus": "text-checked",
+    "fundingEvidence": [
+      {
+        "project": "esgent",
+        "grant": "ESGENT 010/2024",
+        "source": "crossref"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7223224027.pdf"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "oa-pdf-funding-context",
+        "url": "https://content.openalex.org/works/W7223224027.pdf"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7223224027.grobid-xml"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "15101171478",
+        "source": "crossref"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "101171478",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7223224027.pdf"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "101171478",
+        "source": "oa-pdf-funding-context",
+        "url": "https://content.openalex.org/works/W7223224027.pdf"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "101171478",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7223224027.grobid-xml"
+      }
+    ],
+    "image": {
+      "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-3bb24e859ad2cd5ed4d2.webp",
+      "source": "https://content.openalex.org/works/W7223224027.pdf",
+      "type": "figure-1",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "doi": "10.1021/acsami.6c11506"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/",
     "wileyTdmStatus": "not-configured",
     "fundingMatcherVersion": 2
   }
