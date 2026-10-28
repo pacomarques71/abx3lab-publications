@@ -40,6 +40,7 @@
       "summary_en": "Photoluminescence maps reveal that a few highly emissive nanocrystals can dominate the optical response of a perovskite nanocomposite."
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": null,
     "license": null,
@@ -56,6 +57,7 @@
       "summary_en": "Intense pulsed light processes printed perovskite solar cells on flexible substrates in a very short time, with space applications in mind."
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": null,
     "license": null,
@@ -72,6 +74,7 @@
       "summary_en": "Under simulated sunlight, double-vacancy perovskites form sub-3 nm platinum nanoparticles that produce hydrogen from methanol."
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": null,
     "license": null,
@@ -155,6 +158,7 @@
       "summary_en": "In perovskite nanocomposite waveguides, re-emitted photons reach the electrodes and boost the photodetector’s photocurrent by around 60%."
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": null,
     "license": null,
@@ -170,6 +174,7 @@
       "summary_en": "This clean postsynthetic solid reaction does not employ any additive, solvent, or protecting atmosphere and can be carried out in multigram scale, to obtain up to ≈25 wt% I 3 − loadings inside the zeolites, bench stable for months."
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-b24173445c12bc6550f7.webp",
@@ -222,6 +227,7 @@
       "summary_en": "Ultraviolet photoelectron spectroscopy (UPS) reveals a more favorable energy‐level alignment between the perovskite valence band and PBiEDOT‐PMMA than with PEDOT:PSS, which directly facilitates more efficient hole extraction and reduces interfacial energy barriers."
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-b2129ca14cd78576120a.webp",
@@ -243,6 +249,7 @@
       "summary_en": "We show that Sn precursors are intrinsically more reactive and sensitive to their chemical environment, exhibiting poorer colloidal stability compared to Pb and a strong inherent tendency to agglomerate."
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": null,
     "license": null,
@@ -311,6 +318,7 @@
       "summary_en": "The introduction of a biased grid and a buffer interface enable us to achieve a soft landing of NiO on the halide perovskite, thereby minimizing process‐induced interfacial damage."
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": null,
     "license": null,
@@ -326,6 +334,7 @@
       "summary_en": "Here, we demonstrate fast vapor-phase growth of PbI 2 /CsBr inorganic scaffolds from a single composite target using pulsed laser deposition."
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": 1,
     "tocChecked": null,
     "image": null,
     "license": null,
@@ -341,6 +350,7 @@
       "summary_en": "Also, photoluminescence (PL) studies reveals that Cs 2 PtBr 6 exhibits lower PL intensity and a longer emission lifetime (2.5 μs) compared to Cs 2 PtCl 6 (1.3 μs)."
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-0d5a8817110ba10452a0.webp",
@@ -362,6 +372,7 @@
       "summary_en": "Combining CsPbBr 3 with partially oxidized Ti 2 N MXene gives tunable CH 4 /CO selectivity, showing promising sustainable photothermal fuel production."
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": null,
     "license": "http://creativecommons.org/licenses/by/3.0/",
@@ -433,6 +444,7 @@
       "title": "Separar el clima del fallo real en células solares al aire libre"
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": null,
     "license": "http://creativecommons.org/licenses/by/3.0/",
@@ -524,6 +536,7 @@
       "title": "Células solares sin plomo que se reparan solas"
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-c2d416e7ff943fb2334f.webp",
@@ -555,6 +568,7 @@
     ],
     "featured": null,
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-0f8663c0062947b5c482.webp",
@@ -652,6 +666,7 @@
     ],
     "featured": null,
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": 1,
     "tocChecked": "2026-10-28",
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-d9841477b90afd819b22.webp",
@@ -759,6 +774,7 @@
     ],
     "featured": null,
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": null,
     "license": null,
@@ -818,6 +834,7 @@
     ],
     "featured": null,
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-9b038e2fd11cd918fb56.webp",
@@ -857,6 +874,7 @@
     ],
     "featured": null,
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": null,
     "license": "http://creativecommons.org/licenses/by/3.0/",
@@ -869,6 +887,7 @@
     "fundingEvidence": [],
     "featured": null,
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": null,
     "license": null,
@@ -881,6 +900,7 @@
     "fundingEvidence": [],
     "featured": null,
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": null,
     "license": null,
@@ -948,6 +968,7 @@
       "summary_en": "MAPbBr₃ nanocrystals embedded in nickel acetate enable volatile analog switching and synaptic behavior. In pattern recognition, they achieve up to 98% accuracy with a deeper network."
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": 1,
     "tocChecked": "2026-10-28",
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-3bb24e859ad2cd5ed4d2.webp",
@@ -1005,6 +1026,7 @@
       "summary_en": "A single perovskite memristor combines two mechanisms: ECM operates at lower voltages and withstands more cycles, while VCM retains data longer and increases resistance contrast."
     },
     "imageMatcherVersion": 6,
+    "acsTocMatcherVersion": null,
     "tocChecked": null,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-aa8dea63a48ba765f2e0.webp",
