@@ -137,6 +137,13 @@ def clean_title(value: str | None) -> str | None:
     value = re.sub(rf"\s+</({keep})>", r"</\1>", value)
     value = re.sub(r"\s+<(sub|sup)>", r"<\1>", value)
     value = _FORMULA_CONTINUATION.sub(r"</\1>", value)
+    # Crossref y OpenAlex también envían fórmulas como texto plano
+    # ("MAPbBr3"). Normalizar sales ABX3 conocidas sin tocar otros números,
+    # fechas, identificadores ni subíndices ya presentes en JATS.
+    value = re.sub(
+        r"\b((?:MA|FA|Cs|Rb|K)(?:Pb|Sn)(?:Br|Cl|I))([234])\b",
+        r"\1<sub>\2</sub>", value
+    )
     return value.strip() or None
 
 def load_previous_records() -> dict[str, dict]:
