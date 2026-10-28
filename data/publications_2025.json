@@ -519,7 +519,7 @@
     ],
     "featured": null,
     "fundingStatus": "text-checked",
-    "imageSource": "https://content.openalex.org/works/W4406778408.pdf",
+    "imageSource": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/smsc.202400529",
     "imageType": "figure-1",
     "imageLicense": "http://creativecommons.org/licenses/by/4.0/"
   },

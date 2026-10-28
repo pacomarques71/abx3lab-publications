@@ -109,7 +109,7 @@
       "summary_en": "A single perovskite memristor combines two mechanisms: ECM operates at lower voltages and withstands more cycles, while VCM retains data longer and increases resistance contrast."
     },
     "fundingStatus": "text-checked",
-    "imageSource": "https://content.openalex.org/works/W7223710651.pdf",
+    "imageSource": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/advs.78211",
     "imageType": "figure-1",
     "imageLicense": "http://creativecommons.org/licenses/by/4.0/"
   },
@@ -1162,7 +1162,7 @@
       "summary_en": "Also, photoluminescence (PL) studies reveals that Cs 2 PtBr 6 exhibits lower PL intensity and a longer emission lifetime (2.5 μs) compared to Cs 2 PtCl 6 (1.3 μs)."
     },
     "fundingStatus": "text-checked",
-    "imageSource": "https://content.openalex.org/works/W4415220258.pdf",
+    "imageSource": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aesr.202500105",
     "imageType": "figure-1",
     "imageLicense": "http://creativecommons.org/licenses/by/4.0/"
   },
