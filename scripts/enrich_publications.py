@@ -451,19 +451,20 @@ def toc_graphic_from_pdf(pdf_bytes):
                 for idx in range(n_pages-1, max(-1, n_pages-3), -1):
                     page = doc[idx]
                     visible_text = re.sub(r"\s+", " ", page.get_text("text")).strip()
-                    if len(visible_text) > 160:
-                        continue
-                    if re.search(r"\b(?:fig(?:ure)?\.?\s*\d+|scheme\s*\d+|"
-                                 r"references|bibliography|supporting\s+information)\b",
-                                 visible_text, re.I):
-                        continue
+                    isolated = (
+                        len(visible_text) <= 160 and
+                        not re.search(r"\b(?:fig(?:ure)?\.?\s*\d+|scheme\s*\d+|"
+                                      r"references|bibliography|"
+                                      r"supporting\s+information)\b",
+                                      visible_text, re.I)
+                    )
                     candidates = [
                         rect for rect in _toc_image_regions(page)
                         if (rect.width >= page.rect.width*.43
                             and rect.height >= 95
                             and rect.get_area() >= page.rect.get_area()*.075
                             and 1.1 <= rect.width/rect.height <= 6.5)
-                    ]
+                    ] if isolated else []
                     if len(candidates) == 1:
                         png = _toc_crop(page, candidates[0])
                         if png:
@@ -492,7 +493,7 @@ def toc_graphic_from_pdf(pdf_bytes):
                             if png:
                                 return png
                     # A final-page TOC may also consist entirely of vectors.
-                    if not candidates and len(visible_text) <= 160:
+                    if isolated and not candidates:
                         vectors = [draw["rect"] for draw in page.get_drawings()
                                    if 12 < draw["rect"].width < page.rect.width*.95
                                    and 7 < draw["rect"].height < page.rect.height*.9]
