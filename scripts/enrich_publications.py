@@ -620,12 +620,43 @@ def discover_abstract(doi, work, page):
     return value if len(value) >= 90 else ""
 
 
+SUMMARY_MAX_CHARS_EN = 210
+SUMMARY_MAX_CHARS_ES = 220
+
+
+def compact_summary(text, limit=SUMMARY_MAX_CHARS_EN):
+    """Keep a concise, grammatical statement rather than a long abstract excerpt.
+
+    Prefer sentences and complete independent clauses. Ellipsis is a last resort
+    only when a publisher supplies an unusually long, unpunctuated sentence.
+    """
+    text = re.sub(r"\s+", " ", text or "").strip()
+    if len(text) <= limit:
+        return text
+    sentences = re.split(r"(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÑ])", text)
+    if len(sentences) > 1 and len(sentences[0]) <= limit:
+        return sentences[0].strip()
+    # Preserve a whole finding before a subordinate clause or contrast.
+    cuts = list(re.finditer(
+        r";|,\s+(?=(?:whereas|while|which|although|enabling|allowing|"
+        r"mientras|aunque|lo que|que permite)\b)", text, re.I))
+    for match in reversed(cuts):
+        if 90 <= match.start() <= limit:
+            return text[:match.start()].rstrip(" ,;:—") + "."
+    # A sufficiently long comma-delimited enumeration is preferable to clipping
+    # at an arbitrary character. Avoid splitting short "Here, we..." phrases.
+    for match in reversed(list(re.finditer(r",\s+", text))):
+        if 90 <= match.start() <= limit:
+            return text[:match.start()].rstrip(" ,;:—") + "."
+    return text[:limit - 1].rsplit(" ", 1)[0].rstrip(" ,;:—") + "…"
+
+
 def summarize_abstract(abstract):
-    """Select a self-contained result sentence, not introductory boilerplate."""
+    """Choose a substantive, concise result statement for a 4–5 line card."""
     if not abstract:
         return ""
     sentences = re.split(r"(?<=[.!?])\s+(?=[A-Z])", abstract)
-    sentences = [s.strip() for s in sentences if len(s.strip()) > 35]
+    sentences = [sent.strip() for sent in sentences if len(sent.strip()) > 40]
     if not sentences:
         return ""
     markers = (
@@ -634,13 +665,15 @@ def summarize_abstract(abstract):
         ("stable", 3), ("we present", 4), ("here,", 4),
         ("improv", 3), ("increase", 3), ("reduc", 3),
     )
-    candidates = [(sum(weight for needle, weight in markers if needle in sent.lower()),
-                   i, sent) for i, sent in enumerate(sentences) if len(sent) <= 340]
-    if not candidates:
-        candidates = [(0, i, sent) for i, sent in enumerate(sentences)]
-    _, index, best = max(candidates, key=lambda item: (item[0], item[1]))
-    # One complete evidence-based sentence is preferable to arbitrary truncation.
-    return best if len(best) <= 350 else best[:290].rsplit(" ", 1)[0] + "…"
+    # Favor shorter scientific findings over long enumerations of measurements.
+    candidates = [
+        (sum(weight for needle, weight in markers if needle in sent.lower())
+         + (5 if 90 <= len(sent) <= SUMMARY_MAX_CHARS_EN else 0),
+         i, sent)
+        for i, sent in enumerate(sentences)
+    ]
+    _, _, chosen = max(candidates, key=lambda item: (item[0], item[1]))
+    return compact_summary(chosen, SUMMARY_MAX_CHARS_EN)
 
 
 def translate_summary_es(text):
@@ -664,8 +697,9 @@ def automatic_featured(abstract):
     summary_en = summarize_abstract(abstract)
     if not summary_en:
         return None
+    summary_es = translate_summary_es(summary_en) or summary_en
     return {
-        "summary": translate_summary_es(summary_en) or summary_en,
+        "summary": compact_summary(summary_es, SUMMARY_MAX_CHARS_ES),
         "summary_en": summary_en,
     }
 
