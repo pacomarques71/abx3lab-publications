@@ -279,6 +279,13 @@ def metadata_licenses(rec, oa_work):
     return None
 
 
+def publication_image_filename(doi, blob):
+    """Stable DOI and content hash, so new artwork always gets a fresh URL."""
+    article = hashlib.sha256(doi.lower().encode("utf-8")).hexdigest()[:20]
+    content = hashlib.sha256(blob).hexdigest()[:12]
+    return f"article-{article}-{content}.webp"
+
+
 def extract_image_to_webp(blob, path):
     from PIL import Image, ImageOps, UnidentifiedImageError
     if not blob or len(blob) > MAX_IMAGE:
@@ -1133,11 +1140,16 @@ def enrich_entry(rec, projects, prev, extras):
                     if blob:
                         srcurl, typ = pdfurl, "figure-1"
                 if blob:
-                    file_name = "article-" + hashlib.sha256(doi.encode()).hexdigest()[:20] + ".webp"
+                    # Content-addressed asset prevents stale GitHub/browser/CDN
+                    # caches when the genuine TOC replaces a provisional Figure 1.
+                    file_name = publication_image_filename(doi, blob)
                     target = IMAGES / file_name
                     if extract_image_to_webp(blob, target):
                         img_origin = {"url": RAW_IMAGES + file_name, "source": srcurl,
                                       "type": typ, "license": lic, "doi": doi}
+                elif doi == "10.1021/acsami.6c11506" and prior_image.get("type") == "figure-1":
+                    print("  TOC pendiente: no se pudo recuperar ni PDF ni imagen ACS para",
+                          doi, "- se mantiene figura 1 provisional", flush=True)
     exclude = set(manual.get("excludeProjects", []))
     keys = set(rec.get("projects") or []) | {e["project"] for e in evidence}
     keys |= set(manual.get("projects", []))
