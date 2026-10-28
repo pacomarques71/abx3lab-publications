@@ -35,7 +35,7 @@ MAX_PDF = 24 * 1024 * 1024
 MAX_IMAGE = 10 * 1024 * 1024
 CHECK_DAYS = 60
 FUNDING_MATCHER_VERSION = 2  # increment when grant parsing semantics change
-IMAGE_MATCHER_VERSION = 6  # robust ACS TOC discovery: line headings and isolated end-page artwork
+IMAGE_MATCHER_VERSION = 7  # content-addressed assets; force re-evaluation of ACS TOC fallbacks
 SECTION_NAMES = re.compile(r"acknowledg|funding|financial support|grant support|financial assistance|supporting fund|agradecim|financiaci", re.I)
 FIGURE_CAPTION = re.compile(r"^\s*(?:fig(?:ure)?\.?\s*1\b|figure\s+1\b)", re.I)
 ALLOWED_IMAGE_LICENSES = ("cc-by", "cc0", "public-domain", "cc-by-sa")
@@ -1148,8 +1148,11 @@ def enrich_entry(rec, projects, prev, extras):
                         img_origin = {"url": RAW_IMAGES + file_name, "source": srcurl,
                                       "type": typ, "license": lic, "doi": doi}
                 elif doi == "10.1021/acsami.6c11506" and prior_image.get("type") == "figure-1":
-                    print("  TOC pendiente: no se pudo recuperar ni PDF ni imagen ACS para",
-                          doi, "- se mantiene figura 1 provisional", flush=True)
+                    reason = ("PDF no accesible" if pdf is None else
+                              "el TOC no se ha localizado en el PDF")
+                    print("  TOC NO RESUELTO:", doi, "-", reason,
+                          "; ACS HTML no accesible" if page is None else "",
+                          "; se mantiene Figura 1 provisional", flush=True)
     exclude = set(manual.get("excludeProjects", []))
     keys = set(rec.get("projects") or []) | {e["project"] for e in evidence}
     keys |= set(manual.get("projects", []))
