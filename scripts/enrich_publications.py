@@ -35,7 +35,8 @@ MAX_PDF = 24 * 1024 * 1024
 MAX_IMAGE = 10 * 1024 * 1024
 CHECK_DAYS = 60
 FUNDING_MATCHER_VERSION = 2  # increment when grant parsing semantics change
-IMAGE_MATCHER_VERSION = 7  # content-addressed assets; force re-evaluation of ACS TOC fallbacks
+IMAGE_MATCHER_VERSION = 6  # other publishers retain their existing matching version
+ACS_TOC_MATCHER_VERSION = 1  # retry ACS TOCs independently of other image sources
 SECTION_NAMES = re.compile(r"acknowledg|funding|financial support|grant support|financial assistance|supporting fund|agradecim|financiaci", re.I)
 FIGURE_CAPTION = re.compile(r"^\s*(?:fig(?:ure)?\.?\s*1\b|figure\s+1\b)", re.I)
 ALLOWED_IMAGE_LICENSES = ("cc-by", "cc0", "public-domain", "cc-by-sa")
@@ -1022,8 +1023,10 @@ def enrich_entry(rec, projects, prev, extras):
     needs_picture = not manual.get("image") and (
         not prior_image or
         (prior_image.get("type") == "figure-1" and
-         (prev.get("imageMatcherVersion") != IMAGE_MATCHER_VERSION
-          or revisit or weekly_toc_retry))
+         (revisit or weekly_toc_retry or
+          (prev.get("acsTocMatcherVersion") != ACS_TOC_MATCHER_VERSION
+           if doi.startswith("10.1021/")
+           else prev.get("imageMatcherVersion") != IMAGE_MATCHER_VERSION)))
     )
     featured = rec.get("featured") or prev.get("featured")
     needs_summary = (rec.get("publicationDate", "") >= "2026-01-01" and
@@ -1047,23 +1050,26 @@ def enrich_entry(rec, projects, prev, extras):
             print("  OpenAlex DOI lookup empty:", doi, flush=True)
         page = download_publisher_page(doi)
         sources = []
-        for ev in openaire_grants(doi, projects):
-            if ev not in evidence:
-                evidence.append(ev)
-        official_xml = elsevier_article_funding(doi)
-        if official_xml:
-            sources.append(official_xml)
-        if page:
-            tx = section_text_from_html(page[0])
-            if tx:
-                sources.append(("publisher-html", tx, page[1]))
-        if KEY and (work.get("id") or rec.get("openalexId")):
-            wid = str(work.get("id") or rec["openalexId"]).rsplit("/", 1)[-1]
-            xml = request_url("https://content.openalex.org/works/" + wid + ".grobid-xml?api_key=" + quote(KEY), 6_000_000)
-            if xml:
-                tx = text_from_tei(xml[0])
+        # Existing text-checked funding evidence is cached. Re-running
+        # TEI/funder APIs solely to replace an image wastes OpenAlex quota.
+        if revisit:
+            for ev in openaire_grants(doi, projects):
+                if ev not in evidence:
+                    evidence.append(ev)
+            official_xml = elsevier_article_funding(doi)
+            if official_xml:
+                sources.append(official_xml)
+            if page:
+                tx = section_text_from_html(page[0])
                 if tx:
-                    sources.append(("openalex-tei", tx, xml[1].split("?")[0]))
+                    sources.append(("publisher-html", tx, page[1]))
+            if KEY and (work.get("id") or rec.get("openalexId")):
+                wid = str(work.get("id") or rec["openalexId"]).rsplit("/", 1)[-1]
+                xml = request_url("https://content.openalex.org/works/" + wid + ".grobid-xml?api_key=" + quote(KEY), 6_000_000)
+                if xml:
+                    tx = text_from_tei(xml[0])
+                    if tx:
+                        sources.append(("openalex-tei", tx, xml[1].split("?")[0]))
         # Prefer publisher/repository OA copies and public preprints, then
         # authenticated OpenAlex's PDF archive if one exists.
         pdf = None
@@ -1089,9 +1095,9 @@ def enrich_entry(rec, projects, prev, extras):
             if response and response[0][:4] == b"%PDF":
                 pdf, pdfurl = response[0], candidate.split("?")[0]
                 break
-        if pdf is not None and not wiley_pdf_used:
+        if pdf is not None and not wiley_pdf_used and revisit:
             sources.extend(extract_funding_from_pdf(pdf, pdfurl, projects))
-        if not sources:
+        if not sources and revisit:
             # Another legal OA full-text channel (JATS) for eligible papers.
             pmc = european_pmc_xml(doi)
             if pmc:
@@ -1172,6 +1178,8 @@ def enrich_entry(rec, projects, prev, extras):
              "fundingStatus": status, "fundingEvidence": rec["fundingEvidence"],
              "featured": featured,
              "imageMatcherVersion": IMAGE_MATCHER_VERSION,
+             "acsTocMatcherVersion": ACS_TOC_MATCHER_VERSION
+                                     if doi.startswith("10.1021/") else None,
              "tocChecked": today if acs_figure_fallback and needs_picture
                            else prev.get("tocChecked"),
              "image": img_origin, "license": lic,
