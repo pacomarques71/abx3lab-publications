@@ -35,7 +35,7 @@ MAX_PDF = 24 * 1024 * 1024
 MAX_IMAGE = 10 * 1024 * 1024
 CHECK_DAYS = 60
 FUNDING_MATCHER_VERSION = 2  # increment when grant parsing semantics change
-IMAGE_MATCHER_VERSION = 5  # check new ACS TOC label variants and schedule weekly retries
+IMAGE_MATCHER_VERSION = 6  # robust ACS TOC discovery: line headings and isolated end-page artwork
 SECTION_NAMES = re.compile(r"acknowledg|funding|financial support|grant support|financial assistance|supporting fund|agradecim|financiaci", re.I)
 FIGURE_CAPTION = re.compile(r"^\s*(?:fig(?:ure)?\.?\s*1\b|figure\s+1\b)", re.I)
 ALLOWED_IMAGE_LICENSES = ("cc-by", "cc0", "public-domain", "cc-by-sa")
@@ -319,64 +319,155 @@ def _render_pdf_clip(page, rect):
         return None
 
 
+def _toc_label_rects(page):
+    """Detect ACS TOC headings at line granularity, including split PDF blocks.
+
+    A whole-text-block exact match misses a real label when a PDF merges the
+    heading with another text line. Require label-shaped lines, not incidental
+    citations to graphical abstracts inside body paragraphs.
+    """
+    import fitz
+
+    pattern = re.compile(
+        r"(?ix)^\s*(?:"
+        r"(?:graphical|visual)\s+abstract"
+        r"|(?:(?:toc|table\s+of\s+contents?)(?:\s*\(toc\))?)"
+        r"(?:\s+(?:graphic|image|figure|art|entry|illustration))?"
+        r"|for\s+(?:the\s+)?(?:table\s+of\s+contents?|toc)"
+        r"(?:\s+(?:use\s+)?only)?"
+        r")\s*[:.\-–—]?\s*$"
+    )
+    labels = []
+    for block in page.get_text("dict").get("blocks", []):
+        if block.get("type") != 0:
+            continue
+        lines = []
+        for line in block.get("lines", []):
+            txt = re.sub(
+                r"\s+", " ",
+                " ".join(span.get("text", "") for span in line.get("spans", []))
+            ).strip()
+            if txt:
+                lines.append((txt, fitz.Rect(line["bbox"])))
+        # Some PDF layouts split 'For Table of Contents' and 'Only'.
+        for n, (txt, rect) in enumerate(lines):
+            variants = [(txt, rect)]
+            if n+1 < len(lines):
+                nxt, box = lines[n+1]
+                variants.append((txt+" "+nxt, rect | box))
+            for candidate, region in variants:
+                if pattern.fullmatch(candidate):
+                    labels.append(region)
+                    break
+    return labels
+
+
+def _toc_image_regions(page):
+    """Return placed artwork rectangles, not raw image xrefs or publisher logos."""
+    rects = []
+    for item in page.get_images(full=True):
+        for rect in page.get_image_rects(item[0]):
+            if rect.width >= 110 and rect.height >= 65:
+                if not any(abs(rect.x0-r.x0) < 2 and abs(rect.y0-r.y0) < 2
+                           and abs(rect.x1-r.x1) < 2 and abs(rect.y1-r.y1) < 2
+                           for r in rects):
+                    rects.append(rect)
+    return rects
+
+
+def _toc_crop(page, box, inset=5):
+    import fitz
+    clip = fitz.Rect(box.x0-inset, box.y0-inset,
+                     box.x1+inset, box.y1+inset) & page.rect
+    if clip.width < 100 or clip.height < 60:
+        return None
+    return _render_pdf_clip(page, clip)
+
+
 def toc_graphic_from_pdf(pdf_bytes):
-    """Use labelled TOC graphics only, never incidental footnotes mentioning TOC."""
+    """Locate publisher TOC artwork before considering Figure 1.
+
+    Use exact graphical-abstract headings first, including split lines. ACS
+    sometimes includes a separate final page with only the TOC artwork and
+    no searchable label; accept that layout with conservative safeguards.
+    """
     try:
         import fitz
-        doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-        indices = sorted(set(range(min(3, len(doc)))) |
-                         set(range(max(0, len(doc)-2), len(doc))))
-        label = re.compile(
-            r"(?i)^(?:(?:graphical|visual)\s+abstract|"
-            r"(?:toc|table\s+of\s+contents?)\s*(?:graphic|image|figure|art|entry)|"
-            r"for\s+(?:the\s+)?(?:table\s+of\s+contents?|toc)\s+(?:use\s+)?only"
-            r")\s*:?\s*$"
-        )
-        for idx in indices:
-            page = doc[idx]
-            for block in page.get_text("blocks"):
-                if len(block) < 7 or block[6] != 0:
-                    continue
-                title = " ".join(block[4].split())
-                if len(title) > 70 or not label.fullmatch(title):
-                    continue
-                rect = fitz.Rect(block[:4])
-                if rect.y0 > page.rect.height * .83 and idx < len(doc) - 2:
-                    continue
-                images = [r for im in page.get_images(full=True)
-                          for r in page.get_image_rects(im[0])
-                          if r.width >= 130 and r.height >= 75]
-                # A close visual asset must accompany the standalone heading.
-                for direction in (1, -1):
-                    box = fitz.Rect(35, rect.y1 + 4, page.rect.width - 35,
-                                    min(page.rect.height - 40, rect.y1 + 320)) if direction == 1 else fitz.Rect(
-                                        35, max(40, rect.y0 - 320), page.rect.width - 35, rect.y0 - 4)
-                    nearby = [r for r in images if r.intersects(box)]
+        with fitz.open(stream=pdf_bytes, filetype="pdf") as doc:
+            n_pages = len(doc)
+            page_ids = sorted(set(range(min(4, n_pages))) |
+                              set(range(max(0, n_pages-4), n_pages)))
+            # Explicit headings always have priority over unlabelled layouts.
+            for idx in page_ids:
+                page = doc[idx]
+                artworks = _toc_image_regions(page)
+                for label_rect in _toc_label_rects(page):
+                    # Do not select a random 'Figure 1' from a different
+                    # column: require overlap with a nearby heading-centered
+                    # strip extending above or below the heading.
+                    nearby = []
+                    for rect in artworks:
+                        vertical_gap = max(0, label_rect.y0-rect.y1,
+                                           rect.y0-label_rect.y1)
+                        horizontal_overlap = min(rect.x1, label_rect.x1+260) - max(
+                            rect.x0, label_rect.x0-260)
+                        if vertical_gap <= 420 and horizontal_overlap > 0:
+                            nearby.append((vertical_gap, -rect.get_area(), rect))
                     if nearby:
-                        candidate = fitz.Rect(min(r.x0 for r in nearby)-7,
-                                              min(r.y0 for r in nearby)-7,
-                                              max(r.x1 for r in nearby)+7,
-                                              max(r.y1 for r in nearby)+7) & box
-                    else:
-                        # Publishers may encode their TOC entirely as vectors.
-                        # Require dense graphical content and little prose near
-                        # an exact standalone heading before rendering it.
-                        vectors = [d["rect"] for d in page.get_drawings()
-                                   if d["rect"].intersects(box)]
-                        if len(vectors) < 25:
+                        chosen = min(nearby, key=lambda t: (t[0], t[1]))[2]
+                        png = _toc_crop(page, chosen)
+                        if png:
+                            return png
+                    # A vector TOC is also possible. Do not include text-heavy
+                    # page regions merely because they mention "TOC".
+                    for direction in (1, -1):
+                        box = (fitz.Rect(35, label_rect.y1+4,
+                                         page.rect.width-35,
+                                         min(page.rect.height-30, label_rect.y1+380))
+                               if direction == 1 else
+                               fitz.Rect(35, max(30, label_rect.y0-380),
+                                         page.rect.width-35, label_rect.y0-4))
+                        if box.is_empty or box.width < 100 or box.height < 65:
                             continue
-                        candidate = fitz.Rect(
-                            max(box.x0, min(r.x0 for r in vectors)-5),
-                            max(box.y0, min(r.y0 for r in vectors)-5),
-                            min(box.x1, max(r.x1 for r in vectors)+5),
-                            min(box.y1, max(r.y1 for r in vectors)+5))
-                        if len(page.get_text("text", clip=candidate)) > 180:
+                        vectors = [draw["rect"] for draw in page.get_drawings()
+                                   if draw["rect"].intersects(box)
+                                   and draw["rect"].width < page.rect.width*.97]
+                        if len(vectors) < 22:
                             continue
-                    png = _render_pdf_clip(page, candidate)
-                    if png:
-                        doc.close()
-                        return png
-        doc.close()
+                        region = fitz.Rect(min(v.x0 for v in vectors)-5,
+                                           min(v.y0 for v in vectors)-5,
+                                           max(v.x1 for v in vectors)+5,
+                                           max(v.y1 for v in vectors)+5) & box
+                        if len(page.get_text("text", clip=region)) > 200:
+                            continue
+                        png = _toc_crop(page, region)
+                        if png:
+                            return png
+
+            # A standalone, uncaptioned image on a short last page is typical
+            # of accepted ACS manuscripts. Require genuine page-level
+            # isolation; don't reclassify ordinary figures as a TOC.
+            if n_pages >= 2:
+                for idx in range(n_pages-1, max(-1, n_pages-3), -1):
+                    page = doc[idx]
+                    visible_text = re.sub(r"\s+", " ", page.get_text("text")).strip()
+                    if len(visible_text) > 160:
+                        continue
+                    if re.search(r"\b(?:fig(?:ure)?\.?\s*\d+|scheme\s*\d+|"
+                                 r"references|bibliography|supporting\s+information)\b",
+                                 visible_text, re.I):
+                        continue
+                    candidates = [
+                        rect for rect in _toc_image_regions(page)
+                        if (rect.width >= page.rect.width*.43
+                            and rect.height >= 95
+                            and rect.get_area() >= page.rect.get_area()*.075
+                            and 1.1 <= rect.width/rect.height <= 6.5)
+                    ]
+                    if len(candidates) == 1:
+                        png = _toc_crop(page, candidates[0])
+                        if png:
+                            return png
     except (ImportError, ValueError, RuntimeError, OSError):
         return None
     return None
