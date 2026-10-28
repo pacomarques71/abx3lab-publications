@@ -5,6 +5,7 @@ Ejecutar DESPUÉS de update_publications.py. No modifica contenidos de WordPress
 from __future__ import annotations
 
 import hashlib
+import html
 import io
 import json
 import os
@@ -34,6 +35,7 @@ MAX_PDF = 24 * 1024 * 1024
 MAX_IMAGE = 10 * 1024 * 1024
 CHECK_DAYS = 60
 FUNDING_MATCHER_VERSION = 2  # increment when grant parsing semantics change
+IMAGE_MATCHER_VERSION = 3  # retry old Figure 1 selections against ACS visual abstracts
 SECTION_NAMES = re.compile(r"acknowledg|funding|financial support|grant support|financial assistance|supporting fund|agradecim|financiaci", re.I)
 FIGURE_CAPTION = re.compile(r"^\s*(?:fig(?:ure)?\.?\s*1\b|figure\s+1\b)", re.I)
 ALLOWED_IMAGE_LICENSES = ("cc-by", "cc0", "public-domain", "cc-by-sa")
@@ -182,7 +184,7 @@ def graphical_abstract_from_html(html_bytes, base_url):
     """Only explicit TOC/graphical-abstract art, not generic social-share images."""
     soup = BeautifulSoup(html_bytes, "html.parser")
     marker = re.compile(
-        r"graphical[\s_-]*abstract|abstract[\s_-]*graphic|"
+        r"(?:graphical|visual)[\s_-]*abstract|abstract[\s_-]*graphic|"
         r"(?:table[\s_-]*of[\s_-]*contents?|toc)[\s_-]*(?:graphic|image|figure|art)",
         re.I
     )
@@ -308,7 +310,7 @@ def toc_graphic_from_pdf(pdf_bytes):
         doc = fitz.open(stream=pdf_bytes, filetype="pdf")
         indices = sorted(set(range(min(3, len(doc)))) |
                          set(range(max(0, len(doc)-2), len(doc))))
-        label = re.compile(r"(?i)^(?:graphical\s+abstract|(?:toc|table\s+of\s+contents?)\s*"
+        label = re.compile(r"(?i)^(?:(?:graphical|visual)\s+abstract|(?:toc|table\s+of\s+contents?)\s*"
                            r"(?:graphic|image|figure|art))\s*:?\s*$")
         for idx in indices:
             page = doc[idx]
@@ -529,6 +531,124 @@ def openalex_work(doi):
     except (ValueError, TypeError):
         return {}
 
+def abstract_from_openalex(work):
+    """Reconstruct a DOI-specific OpenAlex abstract from its inverted index."""
+    inv = work.get("abstract_inverted_index") or {}
+    if not isinstance(inv, dict) or not inv:
+        return ""
+    try:
+        maximum = max(pos for positions in inv.values() for pos in positions)
+        if maximum > 10000:
+            return ""
+        words = [""] * (maximum + 1)
+        for token, positions in inv.items():
+            for pos in positions:
+                words[pos] = token
+        return " ".join(words).strip()
+    except (ValueError, TypeError, IndexError, KeyError):
+        return ""
+
+
+def abstract_from_publisher(html_bytes):
+    """Read explicitly labeled abstracts; social previews are not scientific abstracts."""
+    soup = BeautifulSoup(html_bytes, "html.parser")
+    for meta in soup.select("meta[name], meta[property]"):
+        key = (meta.get("name") or meta.get("property") or "").lower()
+        if key in ("citation_abstract", "dc.description.abstract", "dc.description"):
+            value = meta.get("content") or ""
+            if len(value) >= 140:
+                return html.unescape(BeautifulSoup(value, "html.parser").get_text(" ", strip=True))
+    for node in soup.select("section[id*=abstract], section[class*=abstract]")[:12]:
+        val = node.get_text(" ", strip=True)
+        val = re.sub(r"^Abstract\s*", "", val, flags=re.I)
+        if 140 <= len(val) <= 7000:
+            return val
+    return ""
+
+
+def discover_abstract(doi, work, page):
+    """Find public article abstract: OpenAlex -> publisher -> Crossref -> Europe PMC."""
+    value = abstract_from_openalex(work)
+    if not value and page:
+        value = abstract_from_publisher(page[0])
+    if not value:
+        response = request_url(
+            "https://api.crossref.org/works/" + quote(doi, safe=""),
+            350000, "application/json"
+        )
+        if response:
+            try:
+                value = json.loads(response[0]).get("message", {}).get("abstract", "")
+            except (ValueError, AttributeError):
+                pass
+    if not value:
+        response = request_url(
+            "https://www.ebi.ac.uk/europepmc/webservices/rest/search?"
+            + "query=" + quote("DOI:" + doi) + "&resultType=core&format=json&pageSize=2",
+            500000, "application/json"
+        )
+        if response:
+            try:
+                entries = json.loads(response[0]).get("resultList", {}).get("result", [])
+                value = next((x.get("abstractText", "") for x in entries
+                              if x.get("doi", "").lower() == doi), "")
+            except (ValueError, TypeError, AttributeError):
+                pass
+    value = BeautifulSoup(html.unescape(value or ""), "html.parser").get_text(" ", strip=True)
+    value = re.sub(r"\s+", " ", value).strip()
+    return value if len(value) >= 90 else ""
+
+
+def summarize_abstract(abstract):
+    """Select a self-contained result sentence, not introductory boilerplate."""
+    if not abstract:
+        return ""
+    sentences = re.split(r"(?<=[.!?])\s+(?=[A-Z])", abstract)
+    sentences = [s.strip() for s in sentences if len(s.strip()) > 35]
+    if not sentences:
+        return ""
+    markers = (
+        ("achiev", 7), ("demonstrat", 6), ("reveal", 6),
+        ("result", 5), ("show", 5), ("enable", 4),
+        ("stable", 3), ("we present", 4), ("here,", 4),
+        ("improv", 3), ("increase", 3), ("reduc", 3),
+    )
+    candidates = [(sum(weight for needle, weight in markers if needle in sent.lower()),
+                   i, sent) for i, sent in enumerate(sentences) if len(sent) <= 340]
+    if not candidates:
+        candidates = [(0, i, sent) for i, sent in enumerate(sentences)]
+    _, index, best = max(candidates, key=lambda item: (item[0], item[1]))
+    # One complete evidence-based sentence is preferable to arbitrary truncation.
+    return best if len(best) <= 350 else best[:290].rsplit(" ", 1)[0] + "…"
+
+
+def translate_summary_es(text):
+    """Best-effort automatic translation; caller preserves English on outage."""
+    if not text:
+        return ""
+    endpoint = ("https://translate.googleapis.com/translate_a/single"
+                "?client=gtx&sl=en&tl=es&dt=t&q=" + quote(text, safe=""))
+    response = request_url(endpoint, 65000, "application/json")
+    if response:
+        try:
+            segments = json.loads(response[0])[0]
+            translated = "".join(segment[0] for segment in segments if segment and segment[0])
+            return translated.strip()
+        except (ValueError, TypeError, IndexError):
+            pass
+    return ""
+
+
+def automatic_featured(abstract):
+    summary_en = summarize_abstract(abstract)
+    if not summary_en:
+        return None
+    return {
+        "summary": translate_summary_es(summary_en) or summary_en,
+        "summary_en": summary_en,
+    }
+
+
 
 
 def openaire_grants(doi, projects):
@@ -662,7 +782,16 @@ def enrich_entry(rec, projects, prev, extras):
         revisit = True
     # When a Wiley TDM token is added later, revisit even previously checked
     # articles; metadata and OA repositories can miss additional grants.
-    needs_picture = not manual.get("image") and not prev.get("image")
+    prior_image = prev.get("image") or {}
+    needs_picture = not manual.get("image") and (
+        not prior_image or
+        (prior_image.get("type") == "figure-1" and
+         (prev.get("imageMatcherVersion") != IMAGE_MATCHER_VERSION or revisit))
+    )
+    featured = rec.get("featured") or prev.get("featured")
+    needs_summary = (rec.get("publicationDate", "") >= "2026-01-01" and
+                     (not isinstance(featured, dict) or
+                      not featured.get("summary") or not featured.get("summary_en")))
     wiley_due = bool(WILEY_TDM_TOKEN and doi.startswith("10.1002/")
                      and (prev.get("wileyTdmStatus") != "success"
                           or prev.get("fundingStatus") != "text-checked"
@@ -675,7 +804,7 @@ def enrich_entry(rec, projects, prev, extras):
     img_origin = prev.get("image")
     lic = prev.get("license")
     wiley_status = prev.get("wileyTdmStatus", "not-configured")
-    if revisit or needs_picture:
+    if revisit or needs_picture or needs_summary:
         work = openalex_work(doi)
         if not work:
             print("  OpenAlex DOI lookup empty:", doi, flush=True)
@@ -741,6 +870,14 @@ def enrich_entry(rec, projects, prev, extras):
                         evidence.append(e)
         elif revisit and status != "text-checked":
             status = "metadata-only"
+        if needs_summary:
+            abstract = discover_abstract(doi, work, page)
+            automatic = automatic_featured(abstract) if abstract else None
+            if automatic:
+                featured = {**automatic, **(featured or {})}
+                print("  Automated summary available:", doi, flush=True)
+            else:
+                print("  Abstract unavailable for automatic summary:", doi, flush=True)
         if needs_picture:
             lic = metadata_licenses(rec, work)
             if lic:
@@ -776,6 +913,7 @@ def enrich_entry(rec, projects, prev, extras):
     # Evidence contains codes, sources and links, never complete copyrighted acknowledgement text.
     rec["fundingEvidence"] = sorted(evidence, key=lambda e: (e["project"], e["source"], e["grant"]))
     rec["fundingStatus"] = status
+    rec["featured"] = featured
     if manual.get("image"):
         rec["image"] = manual["image"]
     elif img_origin:
@@ -783,8 +921,10 @@ def enrich_entry(rec, projects, prev, extras):
         rec["imageSource"] = img_origin["source"]
         rec["imageType"] = img_origin["type"]
         rec["imageLicense"] = img_origin["license"]
-    audit = {"checked": today if (revisit or needs_picture) else prev.get("checked", today),
+    audit = {"checked": today if (revisit or needs_picture or needs_summary) else prev.get("checked", today),
              "fundingStatus": status, "fundingEvidence": rec["fundingEvidence"],
+             "featured": featured,
+             "imageMatcherVersion": IMAGE_MATCHER_VERSION,
              "image": img_origin, "license": lic,
              "wileyTdmStatus": wiley_status,
              "fundingMatcherVersion": FUNDING_MATCHER_VERSION}
