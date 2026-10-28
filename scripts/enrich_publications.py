@@ -36,7 +36,7 @@ MAX_IMAGE = 10 * 1024 * 1024
 CHECK_DAYS = 60
 FUNDING_MATCHER_VERSION = 2  # increment when grant parsing semantics change
 IMAGE_MATCHER_VERSION = 6  # other publishers retain their existing matching version
-ACS_TOC_MATCHER_VERSION = 1  # retry ACS TOCs independently of other image sources
+ACS_TOC_MATCHER_VERSION = 2  # retry ACS TOCs independently of other image sources
 SECTION_NAMES = re.compile(r"acknowledg|funding|financial support|grant support|financial assistance|supporting fund|agradecim|financiaci", re.I)
 FIGURE_CAPTION = re.compile(r"^\s*(?:fig(?:ure)?\.?\s*1\b|figure\s+1\b)", re.I)
 ALLOWED_IMAGE_LICENSES = ("cc-by", "cc0", "public-domain", "cc-by-sa")
@@ -392,6 +392,62 @@ def _toc_crop(page, box, inset=5):
     return _render_pdf_clip(page, clip)
 
 
+def abstract_panel_toc_from_pdf(pdf_bytes):
+    """Extract genuine TOC artwork embedded beside the first-page abstract.
+
+    ACS PDF articles can include the graphical TOC inline in the abstract
+    panel, with no "Graphical Abstract" heading or final TOC page. Match an
+    embedded raster visually aligned with the first-page ABSTRACT heading,
+    and exclude journal logos, decorative icons and numbered figures.
+    """
+    try:
+        import fitz
+        from PIL import Image
+        with fitz.open(stream=pdf_bytes, filetype="pdf") as doc:
+            if not len(doc):
+                return None
+            page = doc[0]
+            heading_boxes = []
+            for block in page.get_text("dict").get("blocks", []):
+                if block.get("type") != 0:
+                    continue
+                for line in block.get("lines", []):
+                    value = " ".join(span.get("text", "") for span in line.get("spans", []))
+                    if re.match(r"(?i)^\s*ABSTRACT\s*:", value):
+                        heading_boxes.append(fitz.Rect(line["bbox"]))
+            if not heading_boxes:
+                return None
+            for heading in heading_boxes:
+                candidates = []
+                for meta in page.get_images(full=True):
+                    xref = meta[0]
+                    if meta[2] < 380 or meta[3] < 280:
+                        continue
+                    for rect in page.get_image_rects(xref):
+                        if not (
+                            rect.x0 >= page.rect.width * .57
+                            and rect.width >= 110
+                            and rect.height >= 100
+                            and heading.y0-18 <= rect.y0 <= heading.y0+75
+                            and rect.y1 < page.rect.height * .72
+                            and .70 <= rect.width/rect.height <= 2.2
+                        ):
+                            continue
+                        candidates.append((rect.get_area(), xref))
+                if candidates:
+                    _, xref = max(candidates)
+                    data = doc.extract_image(xref)["image"]
+                    with Image.open(io.BytesIO(data)) as picture:
+                        if min(picture.size) < 280:
+                            continue
+                        converted = io.BytesIO()
+                        picture.convert("RGB").save(converted, format="PNG")
+                        return converted.getvalue()
+    except (ImportError, ValueError, RuntimeError, OSError, KeyError):
+        return None
+    return None
+
+
 def toc_graphic_from_pdf(pdf_bytes):
     """Locate publisher TOC artwork before considering Figure 1.
 
@@ -399,6 +455,9 @@ def toc_graphic_from_pdf(pdf_bytes):
     sometimes includes a separate final page with only the TOC artwork and
     no searchable label; accept that layout with conservative safeguards.
     """
+    inline_toc = abstract_panel_toc_from_pdf(pdf_bytes)
+    if inline_toc:
+        return inline_toc
     try:
         import fitz
         with fitz.open(stream=pdf_bytes, filetype="pdf") as doc:
