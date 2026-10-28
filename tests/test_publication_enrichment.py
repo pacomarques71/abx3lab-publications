@@ -375,6 +375,25 @@ class FundingTests(unittest.TestCase):
             self.assertGreater(clip.y0, 145)
             self.assertGreater(clip.width, 400)
 
+    def test_acs_toc_appended_after_references(self):
+        import fitz
+        from PIL import Image
+        import io
+        stream = io.BytesIO()
+        Image.new("RGB", (850, 330), "#dff5f4").save(stream, format="PNG")
+        doc = fitz.open()
+        doc.new_page(width=600, height=800).insert_text(
+            (75, 110), "Article body", fontsize=12)
+        page = doc.new_page(width=600, height=800)
+        for i in range(25):
+            page.insert_text((50, 55+i*17), "References: Author, Journal, 2026.",
+                             fontsize=11)
+        page.insert_image(fitz.Rect(70, 565, 530, 745),
+                          stream=stream.getvalue())
+        pdf = doc.tobytes()
+        doc.close()
+        self.assertTrue(module.toc_graphic_from_pdf(pdf).startswith(b"\x89PNG"))
+
     def test_final_page_figure_is_not_mistaken_for_toc(self):
         import fitz
         from PIL import Image
