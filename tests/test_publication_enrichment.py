@@ -297,6 +297,45 @@ class FundingTests(unittest.TestCase):
             module.graphical_abstract_from_html(html, "https://publisher.example"),
             (None, None))
 
+    def test_acs_first_page_abstract_toc_takes_priority_over_figure_one(self):
+        import fitz
+        from PIL import Image
+        import io
+        b = io.BytesIO()
+        Image.new("RGB", (578, 562), "#eaf2e9").save(b, format="PNG")
+        doc = fitz.open()
+        page = doc.new_page(width=607, height=800)
+        page.insert_text((52, 262), "ABSTRACT: Research results for this study",
+                         fontsize=12)
+        page.insert_image(fitz.Rect(417, 255, 556, 390), stream=b.getvalue())
+        figpage = doc.new_page(width=607, height=800)
+        figpage.insert_text((55, 550), "Figure 1. Results", fontsize=12)
+        figpage.insert_image(fitz.Rect(110, 60, 500, 450), stream=b.getvalue())
+        pdf = doc.tobytes()
+        doc.close()
+        toc = module.toc_graphic_from_pdf(pdf)
+        self.assertIsNotNone(toc)
+        with Image.open(io.BytesIO(toc)) as im:
+            self.assertEqual(im.size, (578, 562))
+        with patch.object(module, "first_figure_from_pdf") as fallback:
+            self.assertIsNotNone(module.toc_graphic_from_pdf(pdf))
+            fallback.assert_not_called()
+
+    def test_no_toc_without_abstract_panel_image(self):
+        import fitz
+        from PIL import Image
+        import io
+        b = io.BytesIO()
+        Image.new("RGB", (578, 562), "white").save(b, format="PNG")
+        doc = fitz.open()
+        page = doc.new_page(width=607, height=800)
+        page.insert_text((52, 262), "ABSTRACT: Research results",
+                         fontsize=12)
+        page.insert_image(fitz.Rect(52, 10, 191, 145), stream=b.getvalue())
+        pdf = doc.tobytes()
+        doc.close()
+        self.assertIsNone(module.abstract_panel_toc_from_pdf(pdf))
+
     def test_pdf_toc_selection_before_figure_fallback(self):
         import fitz
         from PIL import Image
