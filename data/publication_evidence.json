@@ -39,7 +39,7 @@
       "summary": "Mapas de fotoluminiscencia revelan que unos pocos nanocristales muy emisivos pueden dominar la respuesta óptica de un nanocompuesto de perovskita.",
       "summary_en": "Photoluminescence maps reveal that a few highly emissive nanocrystals can dominate the optical response of a perovskite nanocomposite."
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": null,
     "license": null,
     "wileyTdmStatus": "success",
@@ -54,7 +54,7 @@
       "summary": "Pulsos de luz intensa procesan en muy poco tiempo células solares de perovskita impresas sobre sustratos flexibles, pensadas para el espacio.",
       "summary_en": "Intense pulsed light processes printed perovskite solar cells on flexible substrates in a very short time, with space applications in mind."
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": null,
     "license": null,
     "wileyTdmStatus": "not-configured",
@@ -69,7 +69,7 @@
       "summary": "Bajo luz solar simulada, perovskitas de doble vacante forman nanopartículas de platino de menos de 3 nm que producen hidrógeno a partir de metanol.",
       "summary_en": "Under simulated sunlight, double-vacancy perovskites form sub-3 nm platinum nanoparticles that produce hydrogen from methanol."
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": null,
     "license": null,
     "wileyTdmStatus": "success",
@@ -151,7 +151,7 @@
       "summary": "En guías de onda de nanocompuesto de perovskita, los fotones reemitidos llegan a los electrodos y elevan la fotocorriente en torno a un 60 %.",
       "summary_en": "In perovskite nanocomposite waveguides, re-emitted photons reach the electrodes and boost the photodetector’s photocurrent by around 60%."
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": null,
     "license": null,
     "wileyTdmStatus": "success",
@@ -165,7 +165,7 @@
       "summary": "Esta reacción sólida postsintética limpia no emplea ningún aditivo, disolvente o atmósfera protectora y se puede llevar a cabo en escala de multigramos, para obtener cargas de hasta ≈25% en peso de I 3 dentro de las zeolitas, estables en banco durante meses.",
       "summary_en": "This clean postsynthetic solid reaction does not employ any additive, solvent, or protecting atmosphere and can be carried out in multigram scale, to obtain up to ≈25 wt% I 3 − loadings inside the zeolites, bench stable for months."
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-b24173445c12bc6550f7.webp",
       "source": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/sstr.70540",
@@ -216,7 +216,7 @@
       "summary": "La espectroscopía fotoelectrónica ultravioleta (UPS) revela una alineación del nivel de energía más favorable entre la banda de valencia de perovskita y PBiEDOT-PMMA que con PEDOT:PSS, lo que facilita directamente una extracción de orificios más eficiente y reduce las barreras de energía interfaciales.",
       "summary_en": "Ultraviolet photoelectron spectroscopy (UPS) reveals a more favorable energy‐level alignment between the perovskite valence band and PBiEDOT‐PMMA than with PEDOT:PSS, which directly facilitates more efficient hole extraction and reduces interfacial energy barriers."
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-b2129ca14cd78576120a.webp",
       "source": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/sstr.202600020",
@@ -236,7 +236,7 @@
       "summary": "Mostramos que los precursores de Sn son intrínsecamente más reactivos y sensibles a su entorno químico, exhibiendo una estabilidad coloidal más pobre en comparación con el Pb y una fuerte tendencia inherente a aglomerarse.",
       "summary_en": "We show that Sn precursors are intrinsically more reactive and sensitive to their chemical environment, exhibiting poorer colloidal stability compared to Pb and a strong inherent tendency to agglomerate."
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": null,
     "license": null,
     "wileyTdmStatus": "unavailable",
@@ -303,7 +303,7 @@
       "summary": "La introducción de una rejilla polarizada y una interfaz de amortiguación nos permiten lograr un aterrizaje suave de NiO en la perovskita de haluro, minimizando así el daño interfacial inducido por el proceso.",
       "summary_en": "The introduction of a biased grid and a buffer interface enable us to achieve a soft landing of NiO on the halide perovskite, thereby minimizing process‐induced interfacial damage."
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": null,
     "license": null,
     "wileyTdmStatus": "unavailable",
@@ -317,7 +317,7 @@
       "summary": "Aquí, demostramos un rápido crecimiento en fase de vapor de andamios inorgánicos de PbI 2 /CsBr a partir de un único objetivo compuesto mediante deposición con láser pulsado.",
       "summary_en": "Here, we demonstrate fast vapor-phase growth of PbI 2 /CsBr inorganic scaffolds from a single composite target using pulsed laser deposition."
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": null,
     "license": null,
     "wileyTdmStatus": "not-configured",
@@ -331,7 +331,7 @@
       "summary": "Además, los estudios de fotoluminiscencia (PL) revelan que Cs 2 PtBr 6 exhibe una menor intensidad de PL y una vida útil de emisión más larga (2,5 μs) en comparación con Cs 2 PtCl 6 (1,3 μs).",
       "summary_en": "Also, photoluminescence (PL) studies reveals that Cs 2 PtBr 6 exhibits lower PL intensity and a longer emission lifetime (2.5 μs) compared to Cs 2 PtCl 6 (1.3 μs)."
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-0d5a8817110ba10452a0.webp",
       "source": "https://content.openalex.org/works/W4415220258.pdf",
@@ -351,7 +351,7 @@
       "summary": "La combinación de CsPbBr 3 con Ti 2 N MXene parcialmente oxidado proporciona una selectividad ajustable de CH 4 /CO, lo que muestra una prometedora producción sostenible de combustible fototérmico.",
       "summary_en": "Combining CsPbBr 3 with partially oxidized Ti 2 N MXene gives tunable CH 4 /CO selectivity, showing promising sustainable photothermal fuel production."
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": null,
     "license": "http://creativecommons.org/licenses/by/3.0/",
     "wileyTdmStatus": "not-configured",
@@ -381,8 +381,20 @@
       {
         "project": "hepaflex",
         "grant": "101122345",
+        "source": "oa-pdf",
+        "url": "https://infoscience.epfl.ch/bitstreams/a77b2420-9a34-4549-90ed-c3ccefd8ef1c/download"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
         "source": "oa-pdf-funding-context",
         "url": "https://content.openalex.org/works/W7220689702.pdf"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "oa-pdf-funding-context",
+        "url": "https://infoscience.epfl.ch/bitstreams/a77b2420-9a34-4549-90ed-c3ccefd8ef1c/download"
       },
       {
         "project": "hepaflex",
@@ -409,7 +421,7 @@
       "visual": "field",
       "title": "Separar el clima del fallo real en células solares al aire libre"
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": null,
     "license": "http://creativecommons.org/licenses/by/3.0/",
     "wileyTdmStatus": "not-configured",
@@ -499,7 +511,7 @@
       "visual": "healing",
       "title": "Células solares sin plomo que se reparan solas"
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-c2d416e7ff943fb2334f.webp",
       "source": "https://content.openalex.org/works/W7125242329.pdf",
@@ -529,7 +541,7 @@
       }
     ],
     "featured": null,
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-0f8663c0062947b5c482.webp",
       "source": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aelm.202500494",
@@ -625,7 +637,7 @@
       }
     ],
     "featured": null,
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-d9841477b90afd819b22.webp",
       "source": "https://content.openalex.org/works/W4413052390.pdf",
@@ -731,7 +743,7 @@
       }
     ],
     "featured": null,
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": null,
     "license": null,
     "wileyTdmStatus": "success",
@@ -789,7 +801,7 @@
       }
     ],
     "featured": null,
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-9b038e2fd11cd918fb56.webp",
       "source": "https://content.openalex.org/works/W4406778408.pdf",
@@ -827,7 +839,7 @@
       }
     ],
     "featured": null,
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": null,
     "license": "http://creativecommons.org/licenses/by/3.0/",
     "wileyTdmStatus": "not-configured",
@@ -838,7 +850,7 @@
     "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "featured": null,
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": null,
     "license": null,
     "wileyTdmStatus": "not-configured",
@@ -849,7 +861,7 @@
     "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "featured": null,
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": null,
     "license": null,
     "wileyTdmStatus": "not-configured",
@@ -915,7 +927,7 @@
       "summary": "Aquí, presentamos una estrategia de nanocompuestos en la que los nanocristales MAPbBr3 se sintetizan in situ dentro de una matriz de acetato de níquel a través de un proceso de un solo paso, sin recocido y sin guantera, lo que permite dispositivos memristivos estables al ambiente.",
       "summary_en": "Here, we present a nanocomposite strategy in which MAPbBr3 nanocrystals are synthesized in situ within a nickel acetate matrix through a one-step, annealing-free, and glovebox-free process, enabling ambient-stable memristive devices."
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-3bb24e859ad2cd5ed4d2.webp",
       "source": "https://content.openalex.org/works/W7223224027.pdf",
@@ -971,7 +983,7 @@
       "summary": "Los dispositivos accionados por ECM exhiben voltajes operativos bajos (+0,18/−0,3 V), alta resistencia (> 10 4 ciclos) y retención moderada (∼ 4 × 10 3 s), mientras que la conmutación VCM logra una retención de datos superior (∼ 7 × 10 3 s) y un mayor contraste de resistencia (∼ 10 5), aunque con voltajes operativos más altos y una estabilidad cíclica reducida.",
       "summary_en": "ECM‐driven devices exhibit low operating voltages (+0.18/−0.3 V), high endurance (> 10 4 cycles), and moderate retention (∼ 4 × 10 3 s), whereas VCM switching achieves superior data retention (∼ 7 × 10 3 s) and a higher resistance contrast (∼ 10 5 ), albeit with higher operating voltages and reduced cycling stability."
     },
-    "imageMatcherVersion": 3,
+    "imageMatcherVersion": 4,
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-aa8dea63a48ba765f2e0.webp",
       "source": "https://content.openalex.org/works/W7223710651.pdf",

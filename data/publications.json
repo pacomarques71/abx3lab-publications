@@ -1300,8 +1300,20 @@
       {
         "project": "hepaflex",
         "grant": "101122345",
+        "source": "oa-pdf",
+        "url": "https://infoscience.epfl.ch/bitstreams/a77b2420-9a34-4549-90ed-c3ccefd8ef1c/download"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
         "source": "oa-pdf-funding-context",
         "url": "https://content.openalex.org/works/W7220689702.pdf"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "oa-pdf-funding-context",
+        "url": "https://infoscience.epfl.ch/bitstreams/a77b2420-9a34-4549-90ed-c3ccefd8ef1c/download"
       },
       {
         "project": "hepaflex",
