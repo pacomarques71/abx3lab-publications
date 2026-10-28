@@ -1018,8 +1018,13 @@ def enrich_entry(rec, projects, prev, extras):
         )
     except ValueError:
         last_toc_check = date(1900, 1, 1)
-    weekly_toc_retry = (acs_figure_fallback and
-                        last_toc_check <= date.today() - timedelta(days=7))
+    # A lightweight scheduled retry for pending ACS TOCs avoids rerunning
+    # the entire OpenAlex publication discovery and grant enrichment.
+    forced_toc_retry = (acs_figure_fallback and
+                        os.getenv("ABX_RETRY_TOC", "").lower() == "true")
+    weekly_toc_retry = (forced_toc_retry or
+                        (acs_figure_fallback and
+                         last_toc_check <= date.today() - timedelta(days=7)))
     needs_picture = not manual.get("image") and (
         not prior_image or
         (prior_image.get("type") == "figure-1" and
@@ -1194,6 +1199,7 @@ def main():
     cache = load(EVIDENCE, {})
     updated = dict(cache)
     total, images = 0, 0
+    pending_acs_only = os.getenv("ABX_ONLY_PENDING_ACS_TOC", "").lower() == "true"
     for filename in ("publications.json", "publications_2025.json"):
         path = DATA / filename
         records = load(path, [])
@@ -1202,6 +1208,11 @@ def main():
             doi = rec.get("doi", "").lower()
             if not doi:
                 continue
+            if pending_acs_only:
+                previous_image = (cache.get(doi, {}).get("image") or {})
+                if (not doi.startswith("10.1021/") or
+                        previous_image.get("type") != "figure-1"):
+                    continue
             new_rec, evidence = enrich_entry(rec, projects, cache.get(doi, {}), extras)
             rec.update(new_rec)
             updated[doi] = evidence
