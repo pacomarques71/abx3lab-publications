@@ -441,6 +441,16 @@ class FundingTests(unittest.TestCase):
         doc.close()
         self.assertIsNone(module.toc_graphic_from_pdf(pdf))
 
+    def test_image_url_changes_when_figure_one_is_replaced_by_toc(self):
+        doi = "10.1021/acsami.6c11506"
+        fig = module.publication_image_filename(doi, b"figure one raster")
+        toc = module.publication_image_filename(doi, b"genuine ACS toc image")
+        self.assertNotEqual(fig, toc)
+        self.assertEqual(fig, module.publication_image_filename(
+            doi.upper(), b"figure one raster"))
+        self.assertTrue(fig.endswith(".webp"))
+        self.assertIn("article-", fig)
+
     def test_alpha_is_composited_on_white(self):
         import io
         from PIL import Image
