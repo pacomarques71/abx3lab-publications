@@ -400,6 +400,28 @@ class FundingTests(unittest.TestCase):
             ("https://pubs.acs.org/images/acs-visual.png", "graphical-abstract")
         )
 
+    def test_summary_never_exceeds_4_to_5_line_copy_budget(self):
+        paragraph = (
+            "ECM-driven devices exhibit low operating voltages (+0.18/-0.3 V), "
+            "high endurance (over 10000 cycles) and moderate retention, "
+            "whereas VCM switching achieves superior data retention and "
+            "a higher resistance contrast, albeit with higher operating "
+            "voltages and reduced cycling stability."
+        )
+        summary = module.summarize_abstract(
+            "These devices are used in many scientific applications. " + paragraph)
+        self.assertLessEqual(len(summary), module.SUMMARY_MAX_CHARS_EN)
+        self.assertGreater(len(summary), 65)
+        self.assertTrue(summary.endswith((".", "…")))
+        translated = ("Los dispositivos alcanzan una alta resistencia con bajo voltaje, "
+                      "mientras que otro modo proporciona mejor retención de datos "
+                      "pero necesita mayor voltaje y muestra menor estabilidad "
+                      "durante muchos ciclos de operación.")
+        self.assertLessEqual(
+            len(module.compact_summary(translated, module.SUMMARY_MAX_CHARS_ES)),
+            module.SUMMARY_MAX_CHARS_ES
+        )
+
     def test_automatic_summary_from_inverted_abstract(self):
         sentence = ("The nanocomposite memristor achieves 89% classification accuracy "
                     "with a linear readout and 98% with a deeper network.")
