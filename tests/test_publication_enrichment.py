@@ -385,6 +385,14 @@ class FundingTests(unittest.TestCase):
         call.assert_called_once_with("10.1002/nap2.70196")
         self.assertEqual(out["imageType"], "figure-1")
 
+    def test_acs_heading_followed_by_visual_graphic(self):
+        markup = b'<section><h2>Visual Abstract</h2>' \
+                 b'\n<div><img src="/toc/acs.png"></div></section>'
+        self.assertEqual(
+            module.graphical_abstract_from_html(markup, "https://pubs.acs.org/doi/article"),
+            ("https://pubs.acs.org/toc/acs.png", "graphical-abstract")
+        )
+
     def test_acs_visual_abstract_is_toc(self):
         markup = b'<div class="visual-abstract"><img data-src="/images/acs-visual.png"/></div>'
         self.assertEqual(
