@@ -50,7 +50,16 @@ jobs:
         run: python -m unittest discover -s tests
 
       - name: Update publications
-        run: python scripts/update_publications.py
+        run: |
+          set +e
+          python scripts/update_publications.py
+          status=$?
+          set -e
+          if [ "$status" -eq 75 ]; then
+            echo "::warning title=OpenAlex rate limited::HTTP 429 al actualizar artículos. Conservando JSON existentes y continuando la recuperación de imágenes."
+          elif [ "$status" -ne 0 ]; then
+            exit "$status"
+          fi
 
       - name: Enrich funding evidence and licensed article images
         run: python scripts/enrich_publications.py
