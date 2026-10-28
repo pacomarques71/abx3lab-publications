@@ -326,8 +326,12 @@ def toc_graphic_from_pdf(pdf_bytes):
         doc = fitz.open(stream=pdf_bytes, filetype="pdf")
         indices = sorted(set(range(min(3, len(doc)))) |
                          set(range(max(0, len(doc)-2), len(doc))))
-        label = re.compile(r"(?i)^(?:(?:graphical|visual)\s+abstract|(?:toc|table\s+of\s+contents?)\s*"
-                           r"(?:graphic|image|figure|art))\s*:?\s*$")
+        label = re.compile(
+            r"(?i)^(?:(?:graphical|visual)\s+abstract|"
+            r"(?:toc|table\s+of\s+contents?)\s*(?:graphic|image|figure|art|entry)|"
+            r"for\s+(?:the\s+)?(?:table\s+of\s+contents?|toc)\s+(?:use\s+)?only"
+            r")\s*:?\s*$"
+        )
         for idx in indices:
             page = doc[idx]
             for block in page.get_text("blocks"):
@@ -337,7 +341,7 @@ def toc_graphic_from_pdf(pdf_bytes):
                 if len(title) > 70 or not label.fullmatch(title):
                     continue
                 rect = fitz.Rect(block[:4])
-                if rect.y0 > page.rect.height * .83:
+                if rect.y0 > page.rect.height * .83 and idx < len(doc) - 2:
                     continue
                 images = [r for im in page.get_images(full=True)
                           for r in page.get_image_rects(im[0])
