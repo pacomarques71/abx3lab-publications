@@ -1,18 +1,83 @@
 {
   "_info": "Datos editoriales de las publicaciones. themes: líneas de investigación (keywords = respaldo automático por título para artículos sin línea asignada). publications: por DOI en minúsculas; themes, projects (añadir a mano), excludeProjects, featured (destacado), image, data, code. members: enlace al perfil del equipo.",
   "themes": [
-    {"key": "fotovoltaica", "label": "Fotovoltaica", "label_en": "Photovoltaics", "keywords": ["solar cell", "photovolta", "tandem", "solar module", "transport material"]},
-    {"key": "estabilidad", "label": "Estabilidad y autorreparación", "label_en": "Stability and self-healing", "keywords": ["stabil", "degradation", "self-heal", "healing", "recover", "failure", "lifetime", "reliab"]},
-    {"key": "fotonica", "label": "Fotónica", "label_en": "Photonics", "keywords": ["emission", "photolumin", "laser", "waveguide", "photodetect", "light-emitting", "photon recycling"]},
-    {"key": "fotocatalisis", "label": "Fotocatálisis", "label_en": "Photocatalysis", "keywords": ["photocataly", "catalytic", "catalys", "water splitting", "co2", "hydrogen", "reforming"]},
-    {"key": "materiales", "label": "Química de materiales", "label_en": "Materials chemistry", "keywords": ["nanocrystal", "nanocomposite", "precursor", "polymer", "synthesis", "colloid", "faujasite"]}
+    {
+      "key": "fotovoltaica",
+      "label": "Fotovoltaica",
+      "label_en": "Photovoltaics",
+      "keywords": [
+        "solar cell",
+        "photovolta",
+        "tandem",
+        "solar module",
+        "transport material"
+      ]
+    },
+    {
+      "key": "estabilidad",
+      "label": "Estabilidad y autorreparación",
+      "label_en": "Stability and self-healing",
+      "keywords": [
+        "stabil",
+        "degradation",
+        "self-heal",
+        "healing",
+        "recover",
+        "failure",
+        "lifetime",
+        "reliab"
+      ]
+    },
+    {
+      "key": "fotonica",
+      "label": "Fotónica",
+      "label_en": "Photonics",
+      "keywords": [
+        "emission",
+        "photolumin",
+        "laser",
+        "waveguide",
+        "photodetect",
+        "light-emitting",
+        "photon recycling"
+      ]
+    },
+    {
+      "key": "fotocatalisis",
+      "label": "Fotocatálisis",
+      "label_en": "Photocatalysis",
+      "keywords": [
+        "photocataly",
+        "catalytic",
+        "catalys",
+        "water splitting",
+        "co2",
+        "hydrogen",
+        "reforming"
+      ]
+    },
+    {
+      "key": "materiales",
+      "label": "Química de materiales",
+      "label_en": "Materials chemistry",
+      "keywords": [
+        "nanocrystal",
+        "nanocomposite",
+        "precursor",
+        "polymer",
+        "synthesis",
+        "colloid",
+        "faujasite"
+      ]
+    }
   ],
   "publications": {
     "10.1021/acsami.6c11506": {
       "featured": {
         "summary": "Nanocristales de MAPbBr₃ integrados en acetato de níquel permiten conmutación analógica volátil y funciones sinápticas. En reconocimiento de patrones alcanzan hasta un 98 % de precisión.",
         "summary_en": "MAPbBr₃ nanocrystals embedded in nickel acetate enable volatile analog switching and synaptic behavior. In pattern recognition, they achieve up to 98% accuracy with a deeper network."
-      }
+      },
+      "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-3bb24e859ad2cd5ed4d2-f9800f375d8a.webp"
     },
     "10.1002/advs.78211": {
       "featured": {
@@ -20,15 +85,49 @@
         "summary_en": "A single perovskite memristor combines two mechanisms: ECM operates at lower voltages and withstands more cycles, while VCM retains data longer and increases resistance contrast."
       }
     },
-    "10.1002/aelm.202500494": {"themes": ["materiales"]},
-    "10.1021/acs.jpclett.5c01405": {"themes": ["fotovoltaica"]},
-    "10.1002/lpor.202401920": {"themes": ["fotonica", "materiales"]},
-    "10.1002/smsc.202400529": {"themes": ["materiales", "fotonica"]},
-    "10.1039/d5el00064e": {"themes": ["fotovoltaica", "materiales"]},
-    "10.1039/d4ma01150c": {"themes": ["materiales"]},
-    "10.1039/d5dd00099h": {"themes": ["materiales"]},
+    "10.1002/aelm.202500494": {
+      "themes": [
+        "materiales"
+      ]
+    },
+    "10.1021/acs.jpclett.5c01405": {
+      "themes": [
+        "fotovoltaica"
+      ]
+    },
+    "10.1002/lpor.202401920": {
+      "themes": [
+        "fotonica",
+        "materiales"
+      ]
+    },
+    "10.1002/smsc.202400529": {
+      "themes": [
+        "materiales",
+        "fotonica"
+      ]
+    },
+    "10.1039/d5el00064e": {
+      "themes": [
+        "fotovoltaica",
+        "materiales"
+      ]
+    },
+    "10.1039/d4ma01150c": {
+      "themes": [
+        "materiales"
+      ]
+    },
+    "10.1039/d5dd00099h": {
+      "themes": [
+        "materiales"
+      ]
+    },
     "10.1002/adom.71901": {
-      "themes": ["fotonica", "materiales"],
+      "themes": [
+        "fotonica",
+        "materiales"
+      ],
       "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-adom71901-ga-768x334.jpg",
       "featured": {
         "order": 3,
@@ -39,7 +138,9 @@
       }
     },
     "10.1016/j.solmat.2026.114703": {
-      "themes": ["fotovoltaica"],
+      "themes": [
+        "fotovoltaica"
+      ],
       "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-solmat114703-fig1-768x384.jpg",
       "featured": {
         "title": "Células solares impresas y flexibles, procesadas con luz para el espacio",
@@ -48,7 +149,10 @@
       }
     },
     "10.1002/chem.202503192": {
-      "themes": ["fotocatalisis", "materiales"],
+      "themes": [
+        "fotocatalisis",
+        "materiales"
+      ],
       "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-chem202503192-ga-768x433.jpg",
       "featured": {
         "title": "Nanopartículas de platino fabricadas con luz solar",
@@ -57,7 +161,9 @@
       }
     },
     "10.1002/nap2.70196": {
-      "themes": ["fotonica"],
+      "themes": [
+        "fotonica"
+      ],
       "image": "https://abx3lab.ramiro-manzano.es/wp-content/uploads/2026/10/abx3lab-nap270196-ga-768x494.jpg",
       "featured": {
         "title": "Reciclar la luz de la perovskita para detectar más",
@@ -65,15 +171,51 @@
         "summary_en": "In perovskite nanocomposite waveguides, re-emitted photons reach the electrodes and boost the photodetector’s photocurrent by around 60%."
       }
     },
-    "10.1002/sstr.70540": {"themes": ["fotocatalisis", "materiales"]},
-    "10.1002/sstr.202600020": {"themes": ["fotovoltaica", "materiales"]},
-    "10.1002/anie.7703450": {"themes": ["materiales", "estabilidad"]},
-    "10.1002/aenm.202503291": {"themes": ["fotovoltaica", "estabilidad"]},
-    "10.1021/acsenergylett.5c04010": {"themes": ["fotovoltaica"]},
-    "10.1002/aesr.202500105": {"themes": ["fotocatalisis"]},
-    "10.1039/d5ma01122a": {"themes": ["fotocatalisis", "materiales"]},
+    "10.1002/sstr.70540": {
+      "themes": [
+        "fotocatalisis",
+        "materiales"
+      ]
+    },
+    "10.1002/sstr.202600020": {
+      "themes": [
+        "fotovoltaica",
+        "materiales"
+      ]
+    },
+    "10.1002/anie.7703450": {
+      "themes": [
+        "materiales",
+        "estabilidad"
+      ]
+    },
+    "10.1002/aenm.202503291": {
+      "themes": [
+        "fotovoltaica",
+        "estabilidad"
+      ]
+    },
+    "10.1021/acsenergylett.5c04010": {
+      "themes": [
+        "fotovoltaica"
+      ]
+    },
+    "10.1002/aesr.202500105": {
+      "themes": [
+        "fotocatalisis"
+      ]
+    },
+    "10.1039/d5ma01122a": {
+      "themes": [
+        "fotocatalisis",
+        "materiales"
+      ]
+    },
     "10.1039/d6ee05477c": {
-      "themes": ["estabilidad", "fotovoltaica"],
+      "themes": [
+        "estabilidad",
+        "fotovoltaica"
+      ],
       "featured": {
         "order": 2,
         "visual": "field",
@@ -82,7 +224,10 @@
       }
     },
     "10.1039/d5el00182j": {
-      "themes": ["estabilidad", "fotovoltaica"],
+      "themes": [
+        "estabilidad",
+        "fotovoltaica"
+      ],
       "featured": {
         "order": 1,
         "visual": "healing",
@@ -92,22 +237,56 @@
     }
   },
   "members": {
-    "Pablo P. Boix": {"profile": "/equipo/#pablo-boix"},
-    "Rafael Abargues López": {"profile": "/equipo/#rafael-abargues"},
-    "Pedro Atienzar": {"profile": "/equipo/#pedro-atienzar"},
-    "Teresa Ripollés Sanchis": {"profile": "/equipo/#teresa-ripolles"},
-    "Fernando Ramiro Manzano": {"profile": "/equipo/#fernando-ramiro"},
-    "Isabelle Rodríguez": {"profile": "/equipo/#isabelle-rodriguez"},
-    "Francisco Marqués Moros": {"profile": "/equipo/#francisco-marques"},
-    "Sudeshna Ghosh": {"profile": "/equipo/#sudeshna-ghosh"},
-    "Jorge Pascual Mielgo": {"profile": "/equipo/#jorge-pascual"},
-    "Abinash Tiwari": {"profile": "/equipo/#abinash-tiwari"},
-    "Miriam Mínguez Avellán": {"profile": "/equipo/#miriam-minguez"},
-    "Omar Eduardo Solis Luna": {"profile": "/equipo/#omar-solis"},
-    "Pablo Franco Betancur": {"profile": "/equipo/#pablo-franco"},
-    "Noemí Farinós Navajas": {"profile": "/equipo/#noemi-farinos"},
-    "Froy Kevin Mego de la Cruz": {"profile": "/equipo/#kevin-mego"},
-    "Cid Ortega Hernández": {"profile": "/equipo/#cid-ortega"},
-    "Víctor Sagra Rodríguez": {"profile": "/equipo/#victor-sagra"}
+    "Pablo P. Boix": {
+      "profile": "/equipo/#pablo-boix"
+    },
+    "Rafael Abargues López": {
+      "profile": "/equipo/#rafael-abargues"
+    },
+    "Pedro Atienzar": {
+      "profile": "/equipo/#pedro-atienzar"
+    },
+    "Teresa Ripollés Sanchis": {
+      "profile": "/equipo/#teresa-ripolles"
+    },
+    "Fernando Ramiro Manzano": {
+      "profile": "/equipo/#fernando-ramiro"
+    },
+    "Isabelle Rodríguez": {
+      "profile": "/equipo/#isabelle-rodriguez"
+    },
+    "Francisco Marqués Moros": {
+      "profile": "/equipo/#francisco-marques"
+    },
+    "Sudeshna Ghosh": {
+      "profile": "/equipo/#sudeshna-ghosh"
+    },
+    "Jorge Pascual Mielgo": {
+      "profile": "/equipo/#jorge-pascual"
+    },
+    "Abinash Tiwari": {
+      "profile": "/equipo/#abinash-tiwari"
+    },
+    "Miriam Mínguez Avellán": {
+      "profile": "/equipo/#miriam-minguez"
+    },
+    "Omar Eduardo Solis Luna": {
+      "profile": "/equipo/#omar-solis"
+    },
+    "Pablo Franco Betancur": {
+      "profile": "/equipo/#pablo-franco"
+    },
+    "Noemí Farinós Navajas": {
+      "profile": "/equipo/#noemi-farinos"
+    },
+    "Froy Kevin Mego de la Cruz": {
+      "profile": "/equipo/#kevin-mego"
+    },
+    "Cid Ortega Hernández": {
+      "profile": "/equipo/#cid-ortega"
+    },
+    "Víctor Sagra Rodríguez": {
+      "profile": "/equipo/#victor-sagra"
+    }
   }
 }

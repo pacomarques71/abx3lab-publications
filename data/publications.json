@@ -185,7 +185,7 @@
     "url": "https://doi.org/10.1021/acsami.6c11506",
     "openalexId": "https://openalex.org/W7223224027",
     "type": "article",
-    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-3bb24e859ad2cd5ed4d2.webp",
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-3bb24e859ad2cd5ed4d2-f9800f375d8a.webp",
     "openAccess": {
       "status": "hybrid",
       "url": "https://doi.org/10.1021/acsami.6c11506",
@@ -258,8 +258,8 @@
       "summary_en": "MAPbBr₃ nanocrystals embedded in nickel acetate enable volatile analog switching and synaptic behavior. In pattern recognition, they achieve up to 98% accuracy with a deeper network."
     },
     "fundingStatus": "text-checked",
-    "imageSource": "https://content.openalex.org/works/W7223224027.pdf",
-    "imageType": "figure-1",
+    "imageSource": "https://pubs.acs.org/aamick/article-pdf/doi/10.1021/acsami.6c11506/68951289/am-2026-11506y.pdf",
+    "imageType": "graphical-abstract",
     "imageLicense": "https://creativecommons.org/licenses/by/4.0/"
   },
   {

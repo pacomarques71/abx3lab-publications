@@ -971,9 +971,9 @@
     "acsTocMatcherVersion": 2,
     "tocChecked": "2026-10-28",
     "image": {
-      "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-3bb24e859ad2cd5ed4d2.webp",
-      "source": "https://content.openalex.org/works/W7223224027.pdf",
-      "type": "figure-1",
+      "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-3bb24e859ad2cd5ed4d2-f9800f375d8a.webp",
+      "source": "https://pubs.acs.org/aamick/article-pdf/doi/10.1021/acsami.6c11506/68951289/am-2026-11506y.pdf",
+      "type": "graphical-abstract",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "doi": "10.1021/acsami.6c11506"
     },
