@@ -138,7 +138,7 @@
     "doi": "10.1021/acs.jpclett.5c01405",
     "url": "https://doi.org/10.1021/acs.jpclett.5c01405",
     "openalexId": "https://openalex.org/W4413052390",
-    "type": "article",
+    "type": "review",
     "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-d9841477b90afd819b22.webp",
     "openAccess": {
       "status": "hybrid",
@@ -166,6 +166,12 @@
         "project": "cns2023",
         "grant": "CNS2023-144270",
         "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W4413052390.pdf"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
+        "source": "oa-pdf-funding-context",
         "url": "https://content.openalex.org/works/W4413052390.pdf"
       },
       {
@@ -204,6 +210,12 @@
         "project": "flexwin",
         "grant": "PID2023-151880OB-C31",
         "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W4413052390.pdf"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
+        "source": "oa-pdf-funding-context",
         "url": "https://content.openalex.org/works/W4413052390.pdf"
       },
       {
