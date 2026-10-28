@@ -224,7 +224,7 @@ def graphical_abstract_from_html(html_bytes, base_url):
             if getattr(sibling, "name", None) in ("h1", "h2", "h3", "h4", "h5", "h6"):
                 break
             img = sibling if getattr(sibling, "name", None) == "img" else (
-                sibling.find("img") if getattr(sibling, "find", None) else None)
+                sibling.find("img") if getattr(sibling, "name", None) else None)
             if img:
                 url = image_url(img)
                 if url:
