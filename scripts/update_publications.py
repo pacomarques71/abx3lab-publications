@@ -659,6 +659,15 @@ def main():
         works = discover_works(team)
     except Exception as exc:
         print(f"\nERROR: no se ha modificado publications.json.\n{exc}", file=sys.stderr)
+        # Temporary publisher-side rate limits must not prevent the separate
+        # enrichment stage from improving records already stored in GitHub.
+        # Exit 75 means "data source temporarily unavailable"; the workflow
+        # preserves both existing JSON files and continues only enrichment.
+        if "api.openalex.org" in str(exc) and ("429" in str(exc) or
+                                                "Too Many Requests" in str(exc)):
+            print("OpenAlex temporalmente limitado; se conserva el listado "
+                  "existente para poder revisar las imágenes.", file=sys.stderr)
+            raise SystemExit(75)
         raise SystemExit(1)
 
     candidates = []
