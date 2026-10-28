@@ -385,6 +385,57 @@ class FundingTests(unittest.TestCase):
         call.assert_called_once_with("10.1002/nap2.70196")
         self.assertEqual(out["imageType"], "figure-1")
 
+    def test_acs_visual_abstract_is_toc(self):
+        markup = b'<div class="visual-abstract"><img data-src="/images/acs-visual.png"/></div>'
+        self.assertEqual(
+            module.graphical_abstract_from_html(markup, "https://pubs.acs.org/doi/x"),
+            ("https://pubs.acs.org/images/acs-visual.png", "graphical-abstract")
+        )
+
+    def test_automatic_summary_from_inverted_abstract(self):
+        sentence = ("The nanocomposite memristor achieves 89% classification accuracy "
+                    "with a linear readout and 98% with a deeper network.")
+        tokens = sentence.split()
+        inverted = {token: [i] for i, token in enumerate(tokens)}
+        result = module.abstract_from_openalex({"abstract_inverted_index": inverted})
+        self.assertIn("89%", result)
+        with patch.object(module, "translate_summary_es",
+                          return_value="El memristor alcanza un 89 % de precisión.") as translator:
+            featured = module.automatic_featured(
+                "Perovskites are promising candidates for neuromorphic systems. "
+                + result)
+        self.assertIn("89%", featured["summary_en"])
+        self.assertIn("89 %", featured["summary"])
+        translator.assert_called_once()
+
+    def test_existing_figure_one_rechecked_for_acs_toc(self):
+        rec = {"doi": "10.1021/acsami.6c11506", "projects": [], "image": None,
+               "publicationDate": "2026-10-22", "license": "https://creativecommons.org/licenses/by/4.0/",
+               "openAccess": None, "fundingEvidence": []}
+        prior = {"image": {"url": "https://example.org/old.webp", "type": "figure-1",
+                           "source": "https://example.org/article.pdf", "license": rec["license"]},
+                 "imageMatcherVersion": 2, "featured": {
+                     "summary": "Texto existente", "summary_en": "Existing summary"},
+                 "checked": module.date.today().isoformat(),
+                 "fundingStatus": "text-checked", "fundingMatcherVersion": module.FUNDING_MATCHER_VERSION}
+        markup = b'<div class="visual-abstract"><img src="/assets/toc.png"></div>'
+        def mock_url(url, *args, **kwargs):
+            if url.endswith("/assets/toc.png"):
+                return b"PNG-bytes", url, "image/png"
+            return None
+        with patch.object(module, "KEY", ""), \
+             patch.object(module, "openalex_work", return_value={}), \
+             patch.object(module, "download_publisher_page",
+                          return_value=(markup, "https://pubs.acs.org/doi/abs/example", "text/html")), \
+             patch.object(module, "openaire_grants", return_value=[]), \
+             patch.object(module, "request_url", side_effect=mock_url), \
+             patch.object(module, "accessible_pdf_candidates", return_value=[]), \
+             patch.object(module, "extract_image_to_webp", return_value=True):
+            output, audit = module.enrich_entry(rec, PROJECTS, prior, {"publications": {}})
+        self.assertEqual(output["imageType"], "graphical-abstract")
+        self.assertEqual(output["featured"]["summary"], "Texto existente")
+        self.assertEqual(audit["imageMatcherVersion"], module.IMAGE_MATCHER_VERSION)
+
     def test_toc_priority(self):
         markup = b'<div class="graphical-abstract"><img data-src="/images/article-toc.png"/></div>'
         self.assertEqual(module.graphical_abstract_from_html(markup, "https://example.org/a")[0],
