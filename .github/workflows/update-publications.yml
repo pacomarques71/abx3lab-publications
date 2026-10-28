@@ -3,7 +3,8 @@ name: Update publications
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 6 * * 1"
+    - cron: "0 6 * * 1"  # Full publication discovery on Mondays
+    - cron: "0 8 * * 2-7"  # Lightweight ACS TOC retry on other days
   # Al editar los datos editoriales o el script, se regenera al momento.
   push:
     branches: [main]
@@ -50,6 +51,7 @@ jobs:
         run: python -m unittest discover -s tests
 
       - name: Update publications
+        if: github.event_name != 'schedule' || github.event.schedule == '0 6 * * 1'
         run: |
           set +e
           python scripts/update_publications.py
@@ -62,6 +64,9 @@ jobs:
           fi
 
       - name: Enrich funding evidence and licensed article images
+        env:
+          ABX_ONLY_PENDING_ACS_TOC: ${{ github.event_name == 'schedule' && github.event.schedule == '0 8 * * 2-7' }}
+          ABX_RETRY_TOC: ${{ github.event_name == 'schedule' && github.event.schedule == '0 8 * * 2-7' }}
         run: python scripts/enrich_publications.py
 
       - name: Commit changes if needed
