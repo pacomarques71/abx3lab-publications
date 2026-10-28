@@ -333,6 +333,65 @@ class FundingTests(unittest.TestCase):
         doc.close()
         self.assertTrue(module.toc_graphic_from_pdf(pdf).startswith(b"\x89PNG"))
 
+    def test_toc_headline_split_across_pdf_lines(self):
+        import fitz
+        from PIL import Image
+        import io
+        stream = io.BytesIO()
+        Image.new("RGB", (800, 320), "#edf3f4").save(stream, format="PNG")
+        doc = fitz.open()
+        page = doc.new_page(width=600, height=800)
+        page.insert_text((75, 110), "For Table of Contents", fontsize=14)
+        page.insert_text((75, 127), "Only", fontsize=14)
+        page.insert_image(fitz.Rect(75, 160, 510, 345),
+                          stream=stream.getvalue())
+        pdf = doc.tobytes()
+        doc.close()
+        self.assertTrue(module.toc_graphic_from_pdf(pdf).startswith(b"\x89PNG"))
+
+    def test_unlabelled_standalone_acs_toc_is_not_missed(self):
+        import fitz
+        from PIL import Image
+        import io
+        stream = io.BytesIO()
+        Image.new("RGB", (800, 320), "#edf3f4").save(stream, format="PNG")
+        doc = fitz.open()
+        page = doc.new_page(width=600, height=800)
+        page.insert_text((75, 110), "A research article", fontsize=14)
+        page.insert_text((75, 145), "Figure 1. Experimental results", fontsize=12)
+        page.insert_image(fitz.Rect(75, 165, 510, 345),
+                          stream=stream.getvalue())
+        tocpage = doc.new_page(width=600, height=800)
+        tocpage.insert_text((75, 110), "For graphical illustration", fontsize=11)
+        tocpage.insert_image(fitz.Rect(75, 155, 515, 365),
+                             stream=stream.getvalue())
+        pdf = doc.tobytes()
+        doc.close()
+        with patch.object(module, "_render_pdf_clip", wraps=module._render_pdf_clip) as render:
+            selected = module.toc_graphic_from_pdf(pdf)
+            self.assertTrue(selected and selected.startswith(b"\x89PNG"))
+            self.assertTrue(render.called)
+            clip = render.call_args.args[1]
+            self.assertGreater(clip.y0, 145)
+            self.assertGreater(clip.width, 400)
+
+    def test_final_page_figure_is_not_mistaken_for_toc(self):
+        import fitz
+        from PIL import Image
+        import io
+        stream = io.BytesIO()
+        Image.new("RGB", (800, 320), "#edf3f4").save(stream, format="PNG")
+        doc = fitz.open()
+        doc.new_page(width=600, height=800).insert_text(
+            (75, 110), "Research paper", fontsize=12)
+        page = doc.new_page(width=600, height=800)
+        page.insert_text((75, 110), "Figure 5. Results", fontsize=12)
+        page.insert_image(fitz.Rect(75, 155, 515, 365),
+                          stream=stream.getvalue())
+        pdf = doc.tobytes()
+        doc.close()
+        self.assertIsNone(module.toc_graphic_from_pdf(pdf))
+
     def test_pdf_toc_vector_graphics_are_supported(self):
         import fitz
         doc = fitz.open()
