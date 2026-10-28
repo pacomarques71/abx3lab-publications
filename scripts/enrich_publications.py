@@ -382,6 +382,35 @@ def toc_graphic_from_pdf(pdf_bytes):
     return None
 
 
+def diagnose_acs_toc_pdf(pdf_bytes):
+    """Log only heading-level evidence for missing ACS TOCs; never store full PDFs."""
+    if not pdf_bytes:
+        return
+    try:
+        import fitz
+        with fitz.open(stream=pdf_bytes, filetype="pdf") as doc:
+            pages = sorted(set(range(min(2, len(doc)))) |
+                           set(range(max(0, len(doc) - 3), len(doc))))
+            for index in pages:
+                page = doc[index]
+                headings = []
+                for block in page.get_text("blocks"):
+                    if len(block) < 7 or block[6] != 0:
+                        continue
+                    txt = " ".join(block[4].split())
+                    if re.search(r"\b(?:TOC|graphical abstract|visual abstract|table of contents)\b",
+                                 txt, re.I):
+                        headings.append((round(block[1]), txt[:90]))
+                images = [tuple(round(v) for v in rect)
+                          for entry in page.get_images(full=True)
+                          for rect in page.get_image_rects(entry[0])
+                          if rect.width > 100 and rect.height > 65]
+                print("  ACS TOC diagnostic page", index + 1, "of", len(doc),
+                      "labels=", headings[:8], "images=", images[:10], flush=True)
+    except (ImportError, RuntimeError, ValueError, OSError):
+        pass
+
+
 def first_figure_from_pdf(pdf_bytes):
     """Extract a raster figure near the *Figure 1* caption; never use a random publisher logo."""
     try:
@@ -955,6 +984,8 @@ def enrich_entry(rec, projects, prev, extras):
                     blob = toc_graphic_from_pdf(pdf)
                     if blob:
                         srcurl, typ = pdfurl, "graphical-abstract"
+                if blob is None and pdf and doi == "10.1021/acsami.6c11506":
+                    diagnose_acs_toc_pdf(pdf)
                 if blob is None and pdf:
                     blob = first_figure_from_pdf(pdf)
                     if blob:
