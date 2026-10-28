@@ -43,6 +43,17 @@ class CleanTitleTest(unittest.TestCase):
             "Sn‐based perovskitesx",
         )
 
+    def test_plain_formula_from_acs_and_archive(self):
+        expected = "Inducing Switching in MAPbBr<sub>3</sub> Perovskite Memristors"
+        self.assertEqual(updater.clean_title(
+            "Inducing Switching in MAPbBr3 Perovskite Memristors"), expected)
+        self.assertEqual(updater.clean_title(
+            "MAPbBr<sub>3</sub> nanocomposite"), "MAPbBr<sub>3</sub> nanocomposite")
+        self.assertEqual(updater.clean_title(
+            "FASnI3 and CsPbI3"), "FASnI<sub>3</sub> and CsPbI<sub>3</sub>")
+        self.assertEqual(updater.clean_title(
+            "Nanocomposites in 2026 and 1000 cycles"), "Nanocomposites in 2026 and 1000 cycles")
+
     def test_plain_title_unchanged(self):
         title = "Ambient operando self-healing in tin perovskite solar cells"
         self.assertEqual(updater.clean_title(title), title)
