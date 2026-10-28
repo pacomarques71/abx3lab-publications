@@ -8,6 +8,18 @@
     {"key": "materiales", "label": "Química de materiales", "label_en": "Materials chemistry", "keywords": ["nanocrystal", "nanocomposite", "precursor", "polymer", "synthesis", "colloid", "faujasite"]}
   ],
   "publications": {
+    "10.1021/acsami.6c11506": {
+      "featured": {
+        "summary": "Nanocristales de MAPbBr₃ integrados en acetato de níquel permiten conmutación analógica volátil y funciones sinápticas. En reconocimiento de patrones alcanzan hasta un 98 % de precisión.",
+        "summary_en": "MAPbBr₃ nanocrystals embedded in nickel acetate enable volatile analog switching and synaptic behavior. In pattern recognition, they achieve up to 98% accuracy with a deeper network."
+      }
+    },
+    "10.1002/advs.78211": {
+      "featured": {
+        "summary": "Un mismo memristor de perovskita combina dos mecanismos: ECM opera con menor voltaje y resiste más ciclos, mientras VCM prolonga la retención de datos y aumenta el contraste resistivo.",
+        "summary_en": "A single perovskite memristor combines two mechanisms: ECM operates at lower voltages and withstands more cycles, while VCM retains data longer and increases resistance contrast."
+      }
+    },
     "10.1002/aelm.202500494": {"themes": ["materiales"]},
     "10.1021/acs.jpclett.5c01405": {"themes": ["fotovoltaica"]},
     "10.1002/lpor.202401920": {"themes": ["fotonica", "materiales"]},
