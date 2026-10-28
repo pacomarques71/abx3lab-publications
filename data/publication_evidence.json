@@ -334,7 +334,7 @@
       "summary_en": "Here, we demonstrate fast vapor-phase growth of PbI 2 /CsBr inorganic scaffolds from a single composite target using pulsed laser deposition."
     },
     "imageMatcherVersion": 6,
-    "acsTocMatcherVersion": 1,
+    "acsTocMatcherVersion": 2,
     "tocChecked": null,
     "image": null,
     "license": null,
@@ -666,7 +666,7 @@
     ],
     "featured": null,
     "imageMatcherVersion": 6,
-    "acsTocMatcherVersion": 1,
+    "acsTocMatcherVersion": 2,
     "tocChecked": "2026-10-28",
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-d9841477b90afd819b22.webp",
@@ -968,7 +968,7 @@
       "summary_en": "MAPbBr₃ nanocrystals embedded in nickel acetate enable volatile analog switching and synaptic behavior. In pattern recognition, they achieve up to 98% accuracy with a deeper network."
     },
     "imageMatcherVersion": 6,
-    "acsTocMatcherVersion": 1,
+    "acsTocMatcherVersion": 2,
     "tocChecked": "2026-10-28",
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-3bb24e859ad2cd5ed4d2.webp",
