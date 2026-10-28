@@ -468,6 +468,45 @@ def toc_graphic_from_pdf(pdf_bytes):
                         png = _toc_crop(page, candidates[0])
                         if png:
                             return png
+                    # Some ACS versions append an uncaptioned landscape TOC
+                    # underneath references on the final PDF page. Search
+                    # that region even if the full page has dense prose.
+                    if len(visible_text) > 160 and idx == n_pages-1:
+                        for rect in _toc_image_regions(page):
+                            if (rect.y0 < page.rect.height*.51
+                                or rect.width < page.rect.width*.52
+                                or rect.height < 90
+                                or rect.width/rect.height < 1.25):
+                                continue
+                            band = fitz.Rect(0, max(0, rect.y0-85),
+                                             page.rect.width,
+                                             min(page.rect.height, rect.y1+85))
+                            neighbours = page.get_text("text", clip=band)
+                            if re.search(r"(?i)\b(?:fig(?:ure)?\.?\s*\d+|"
+                                         r"scheme\s*\d+|table\s*\d+)\b",
+                                         neighbours):
+                                continue
+                            if len(page.get_text("text", clip=rect)) > 130:
+                                continue
+                            png = _toc_crop(page, rect)
+                            if png:
+                                return png
+                    # A final-page TOC may also consist entirely of vectors.
+                    if not candidates and len(visible_text) <= 160:
+                        vectors = [draw["rect"] for draw in page.get_drawings()
+                                   if 12 < draw["rect"].width < page.rect.width*.95
+                                   and 7 < draw["rect"].height < page.rect.height*.9]
+                        if len(vectors) >= 25:
+                            box = fitz.Rect(min(v.x0 for v in vectors),
+                                            min(v.y0 for v in vectors),
+                                            max(v.x1 for v in vectors),
+                                            max(v.y1 for v in vectors))
+                            if (box.width >= page.rect.width*.42
+                                and box.height >= 100
+                                and 1.1 <= box.width/box.height <= 6.5):
+                                png = _toc_crop(page, box)
+                                if png:
+                                    return png
     except (ImportError, ValueError, RuntimeError, OSError):
         return None
     return None
