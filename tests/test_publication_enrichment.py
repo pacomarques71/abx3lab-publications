@@ -318,6 +318,21 @@ class FundingTests(unittest.TestCase):
             self.assertIsNotNone(module.toc_graphic_from_pdf(pdf))
             fallback.assert_not_called()
 
+    def test_acs_for_table_of_contents_only_pdf_heading(self):
+        import fitz
+        from PIL import Image
+        import io
+        image = Image.new("RGB", (700, 340), "#e4eded")
+        stream = io.BytesIO()
+        image.save(stream, format="PNG")
+        doc = fitz.open()
+        page = doc.new_page(width=600, height=800)
+        page.insert_text((70, 125), "For Table of Contents Only", fontsize=12)
+        page.insert_image(fitz.Rect(70, 150, 500, 360), stream=stream.getvalue())
+        pdf = doc.tobytes()
+        doc.close()
+        self.assertTrue(module.toc_graphic_from_pdf(pdf).startswith(b"\x89PNG"))
+
     def test_pdf_toc_vector_graphics_are_supported(self):
         import fitz
         doc = fitz.open()
