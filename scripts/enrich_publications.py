@@ -35,7 +35,7 @@ MAX_PDF = 24 * 1024 * 1024
 MAX_IMAGE = 10 * 1024 * 1024
 CHECK_DAYS = 60
 FUNDING_MATCHER_VERSION = 2  # increment when grant parsing semantics change
-IMAGE_MATCHER_VERSION = 4  # retry Figure 1 after improving ACS direct-page and heading extraction
+IMAGE_MATCHER_VERSION = 5  # check new ACS TOC label variants and schedule weekly retries
 SECTION_NAMES = re.compile(r"acknowledg|funding|financial support|grant support|financial assistance|supporting fund|agradecim|financiaci", re.I)
 FIGURE_CAPTION = re.compile(r"^\s*(?:fig(?:ure)?\.?\s*1\b|figure\s+1\b)", re.I)
 ALLOWED_IMAGE_LICENSES = ("cc-by", "cc0", "public-domain", "cc-by-sa")
@@ -871,10 +871,21 @@ def enrich_entry(rec, projects, prev, extras):
     # When a Wiley TDM token is added later, revisit even previously checked
     # articles; metadata and OA repositories can miss additional grants.
     prior_image = prev.get("image") or {}
+    acs_figure_fallback = (doi.startswith("10.1021/") and
+                           prior_image.get("type") == "figure-1")
+    try:
+        last_toc_check = date.fromisoformat(
+            prev.get("tocChecked") or prev.get("checked") or "1900-01-01"
+        )
+    except ValueError:
+        last_toc_check = date(1900, 1, 1)
+    weekly_toc_retry = (acs_figure_fallback and
+                        last_toc_check <= date.today() - timedelta(days=7))
     needs_picture = not manual.get("image") and (
         not prior_image or
         (prior_image.get("type") == "figure-1" and
-         (prev.get("imageMatcherVersion") != IMAGE_MATCHER_VERSION or revisit))
+         (prev.get("imageMatcherVersion") != IMAGE_MATCHER_VERSION
+          or revisit or weekly_toc_retry))
     )
     featured = rec.get("featured") or prev.get("featured")
     needs_summary = (rec.get("publicationDate", "") >= "2026-01-01" and
@@ -1015,6 +1026,8 @@ def enrich_entry(rec, projects, prev, extras):
              "fundingStatus": status, "fundingEvidence": rec["fundingEvidence"],
              "featured": featured,
              "imageMatcherVersion": IMAGE_MATCHER_VERSION,
+             "tocChecked": today if acs_figure_fallback and needs_picture
+                           else prev.get("tocChecked"),
              "image": img_origin, "license": lic,
              "wileyTdmStatus": wiley_status,
              "fundingMatcherVersion": FUNDING_MATCHER_VERSION}
