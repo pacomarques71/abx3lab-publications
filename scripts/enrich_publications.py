@@ -213,6 +213,22 @@ def graphical_abstract_from_html(html_bytes, base_url):
             url = image_url(img) if img else None
             if url:
                 return url, "graphical-abstract"
+    # ACS often labels the artwork with a "Visual Abstract" heading,
+    # while the figure wrapper itself has no descriptive CSS class.
+    for heading in soup.find_all(re.compile(r"^h[1-6]$")):
+        if not re.fullmatch(r"(?:visual|graphical)\s+abstract\s*:?",
+                            heading.get_text(" ", strip=True), flags=re.I):
+            continue
+        # A heading's immediately following block is the only trusted graphic.
+        for sibling in list(heading.next_siblings)[:5]:
+            if getattr(sibling, "name", None) in ("h1", "h2", "h3", "h4", "h5", "h6"):
+                break
+            img = sibling if getattr(sibling, "name", None) == "img" else (
+                sibling.find("img") if getattr(sibling, "find", None) else None)
+            if img:
+                url = image_url(img)
+                if url:
+                    return url, "graphical-abstract"
     for img in soup.select("img[alt], img[title]"):
         if marker.search((img.get("alt") or "") + " " + (img.get("title") or "")):
             url = image_url(img)
@@ -514,10 +530,15 @@ def accessible_pdf_candidates(work, rec):
 
 
 def download_publisher_page(doi):
-    result = request_url("https://doi.org/" + quote(doi, safe="/"), max_bytes=3_000_000,
-                         accept="text/html")
-    if result and ("html" in result[2].lower() or b"<html" in result[0][:2000].lower()):
-        return result
+    urls = ["https://doi.org/" + quote(doi, safe="/")]
+    # An ACS DOI redirect may be refused while its public abstract endpoint
+    # still serves the Visual Abstract. Try both, never treat PDFs as HTML.
+    if doi.lower().startswith("10.1021/"):
+        urls.append("https://pubs.acs.org/doi/abs/" + quote(doi, safe="/"))
+    for url in urls:
+        result = request_url(url, max_bytes=3_000_000, accept="text/html")
+        if result and ("html" in result[2].lower() or b"<html" in result[0][:2000].lower()):
+            return result
     return None
 
 
