@@ -105,8 +105,8 @@
       "esgent"
     ],
     "featured": {
-      "summary": "Los dispositivos accionados por ECM exhiben voltajes operativos bajos (+0,18/−0,3 V), alta resistencia (> 10 4 ciclos) y retención moderada (∼ 4 × 10 3 s), mientras que la conmutación VCM logra una retención de datos superior (∼ 7 × 10 3 s) y un mayor contraste de resistencia (∼ 10 5), aunque con voltajes operativos más altos y una estabilidad cíclica reducida.",
-      "summary_en": "ECM‐driven devices exhibit low operating voltages (+0.18/−0.3 V), high endurance (> 10 4 cycles), and moderate retention (∼ 4 × 10 3 s), whereas VCM switching achieves superior data retention (∼ 7 × 10 3 s) and a higher resistance contrast (∼ 10 5 ), albeit with higher operating voltages and reduced cycling stability."
+      "summary": "Un mismo memristor de perovskita combina dos mecanismos: ECM opera con menor voltaje y resiste más ciclos, mientras VCM prolonga la retención de datos y aumenta el contraste resistivo.",
+      "summary_en": "A single perovskite memristor combines two mechanisms: ECM operates at lower voltages and withstands more cycles, while VCM retains data longer and increases resistance contrast."
     },
     "fundingStatus": "text-checked",
     "imageSource": "https://content.openalex.org/works/W7223710651.pdf",
@@ -254,8 +254,8 @@
       "esgent"
     ],
     "featured": {
-      "summary": "Aquí, presentamos una estrategia de nanocompuestos en la que los nanocristales MAPbBr3 se sintetizan in situ dentro de una matriz de acetato de níquel a través de un proceso de un solo paso, sin recocido y sin guantera, lo que permite dispositivos memristivos estables al ambiente.",
-      "summary_en": "Here, we present a nanocomposite strategy in which MAPbBr3 nanocrystals are synthesized in situ within a nickel acetate matrix through a one-step, annealing-free, and glovebox-free process, enabling ambient-stable memristive devices."
+      "summary": "Nanocristales de MAPbBr₃ integrados en acetato de níquel permiten conmutación analógica volátil y funciones sinápticas. En reconocimiento de patrones alcanzan hasta un 98 % de precisión.",
+      "summary_en": "MAPbBr₃ nanocrystals embedded in nickel acetate enable volatile analog switching and synaptic behavior. In pattern recognition, they achieve up to 98% accuracy with a deeper network."
     },
     "fundingStatus": "text-checked",
     "imageSource": "https://content.openalex.org/works/W7223224027.pdf",
