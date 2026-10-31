@@ -582,7 +582,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1021/acs.jpclett.5c01405": {
-    "checked": "2026-10-30",
+    "checked": "2026-10-31",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -667,7 +667,7 @@
     "featured": null,
     "imageMatcherVersion": 6,
     "acsTocMatcherVersion": 2,
-    "tocChecked": "2026-10-30",
+    "tocChecked": "2026-10-31",
     "image": {
       "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-d9841477b90afd819b22-2c99751f9906.webp",
       "source": "https://content.openalex.org/works/W4413052390.pdf",
