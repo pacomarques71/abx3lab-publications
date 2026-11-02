@@ -67,6 +67,11 @@
       {
         "project": "esgent",
         "grant": "ESGENT/010/2024",
+        "source": "openalex"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
         "source": "openalex-tei",
         "url": "https://content.openalex.org/works/W7223710651.grobid-xml"
       },
@@ -257,10 +262,7 @@
       "summary": "Nanocristales de MAPbBr₃ integrados en acetato de níquel permiten conmutación analógica volátil y funciones sinápticas. En reconocimiento de patrones alcanzan hasta un 98 % de precisión.",
       "summary_en": "MAPbBr₃ nanocrystals embedded in nickel acetate enable volatile analog switching and synaptic behavior. In pattern recognition, they achieve up to 98% accuracy with a deeper network."
     },
-    "fundingStatus": "text-checked",
-    "imageSource": "https://pubs.acs.org/aamick/article-pdf/doi/10.1021/acsami.6c11506/68951289/am-2026-11506y.pdf",
-    "imageType": "graphical-abstract",
-    "imageLicense": "https://creativecommons.org/licenses/by/4.0/"
+    "fundingStatus": "text-checked"
   },
   {
     "title": "Crossover From Excitonic to Bulk Emission in Metal Halide Perovskite Nanocomposites",
@@ -1165,6 +1167,59 @@
     "imageSource": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aesr.202500105",
     "imageType": "figure-1",
     "imageLicense": "http://creativecommons.org/licenses/by/4.0/"
+  },
+  {
+    "title": "Pd(IV) nano-perovskites catalyze hydroaddition reactions to alkynes",
+    "authors": [
+      "Kevin Mego",
+      "Alejandro Serrano–Maldonado",
+      "Hermenegildo Garcia Baldovi",
+      "Antonio Leyva-Perez",
+      "Pedro Atienzar"
+    ],
+    "groupAuthors": [
+      "Froy Kevin Mego de la Cruz",
+      "Pedro Atienzar"
+    ],
+    "groupAuthorDisplayNames": [
+      "Kevin Mego",
+      "Pedro Atienzar"
+    ],
+    "groupMembers": [
+      {
+        "name": "Froy Kevin Mego de la Cruz",
+        "display": "Kevin Mego",
+        "profile": "/equipo/#kevin-mego"
+      },
+      {
+        "name": "Pedro Atienzar",
+        "display": "Pedro Atienzar",
+        "profile": "/equipo/#pedro-atienzar"
+      }
+    ],
+    "journal": "Materials Chemistry Frontiers",
+    "publicationDate": "2026-01-01",
+    "onlinePublicationDate": "2026-01-01",
+    "issueDate": null,
+    "year": 2026,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": "10.1039/d6qm00873a",
+    "url": "https://doi.org/10.1039/d6qm00873a",
+    "openalexId": "https://openalex.org/W7224124872",
+    "type": "article",
+    "image": null,
+    "openAccess": null,
+    "license": null,
+    "themes": [],
+    "fundingEvidence": [],
+    "projects": [],
+    "featured": {
+      "summary": "High-oxidation-state palladium species display remarkable catalytic activity in organic synthesis.",
+      "summary_en": "High-oxidation-state palladium species display remarkable catalytic activity in organic synthesis."
+    },
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "CsPbBr<sub>3</sub> nanocrystals supported on a partially oxidized Ti<sub>2</sub>N MXene for photothermal CO<sub>2</sub> conversion",
