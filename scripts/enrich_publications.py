@@ -39,6 +39,16 @@ IMAGE_MATCHER_VERSION = 6  # other publishers retain their existing matching ver
 ACS_TOC_MATCHER_VERSION = 2  # retry ACS TOCs independently of other image sources
 SECTION_NAMES = re.compile(r"acknowledg|funding|financial support|grant support|financial assistance|supporting fund|agradecim|financiaci", re.I)
 FIGURE_CAPTION = re.compile(r"^\s*(?:fig(?:ure)?\.?\s*1\b|figure\s+1\b)", re.I)
+# Pie de la Figura 1 dentro de una línea de texto del PDF. Admite el número de
+# línea de los manuscritos aceptados («12 Figure 1. …») y las letras de panel
+# que PyMuPDF une al pie («a) b) Figure 1. …»). Exige que tras el 1 venga
+# puntuación de pie o mayúscula, para no confundir el texto «Figure 1b shows»
+# o «Figure 1 shows» con el pie.
+FIGURE_ONE_LINE = re.compile(
+    r"^\s*(?:\d{1,4}\s+)?(?:\(?[a-z]\)\s*)*(?:Fig(?:ure)?|FIG(?:URE)?)\.?\s*1"
+    r"(?=\s*[.:|\u2013\u2014]|\s+[A-Z(]|\s*$)"
+)
+FIGURE_SCAN_PAGES = 20
 ALLOWED_IMAGE_LICENSES = ("cc-by", "cc0", "public-domain", "cc-by-sa")
 
 
@@ -609,17 +619,38 @@ def diagnose_acs_toc_pdf(pdf_bytes):
         pass
 
 
+def _figure_one_caption(page):
+    """Return (x0, y0, x1, y1) of the first Figure 1 caption line on a page.
+
+    x comes from the text block (column width); y from the caption line itself,
+    so a caption merged with panel labels or line numbers is located exactly.
+    """
+    try:
+        data = page.get_text("dict")
+    except (RuntimeError, ValueError):
+        return None
+    for block in data.get("blocks", []):
+        if block.get("type") != 0:
+            continue
+        bx0, _by0, bx1, _by1 = block["bbox"]
+        for line in block.get("lines", []):
+            text = "".join(span.get("text", "") for span in line.get("spans", []))
+            if FIGURE_ONE_LINE.search(text):
+                return (bx0, line["bbox"][1], bx1, line["bbox"][3])
+    return None
+
+
 def first_figure_from_pdf(pdf_bytes):
     """Extract a raster figure near the *Figure 1* caption; never use a random publisher logo."""
     try:
         import fitz
         doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-        for page in list(doc)[:7]:
-            blocks = page.get_text("blocks")
-            captions = [b for b in blocks if len(b) > 4 and b[6] == 0 and FIGURE_CAPTION.search(b[4])]
-            if not captions:
+        # Los manuscritos aceptados (RSC, repositorios) llevan portada y texto a
+        # doble espacio: la Figura 1 puede estar en la página 8 o 9.
+        for page in list(doc)[:FIGURE_SCAN_PAGES]:
+            caption = _figure_one_caption(page)
+            if not caption:
                 continue
-            caption = captions[0]
             images = []
             for info in page.get_images(full=True):
                 for rect in page.get_image_rects(info[0]):
