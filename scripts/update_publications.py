@@ -336,22 +336,26 @@ def crossref_metadata(doi: str) -> dict:
         return {}
 
     dates = {}
+    # Precisión de cada fecha: 1 = solo año, 2 = año y mes, 3 = día exacto.
+    # RSC deposita a menudo solo el año ([[2026]]), que se leería como 1 de enero.
+    precision = {}
     for key in ("published-online", "published-print", "published", "issued", "created"):
         parts = (msg.get(key) or {}).get("date-parts")
         if parts and parts[0]:
             parsed = date_from_parts(parts[0])
             if parsed:
                 dates[key] = parsed
+                precision[key] = len([x for x in parts[0] if x is not None][:3])
 
     # Prefer the final issue date, not the earliest online appearance.
     # Online-only journals may supply their bibliographic year in published/issued.
     has_issue = bool(msg.get("volume") or msg.get("issue"))
     if has_issue:
-        pub_date = (dates.get("published-print") or dates.get("published")
-                    or dates.get("issued") or dates.get("published-online"))
+        order = ("published-print", "published", "issued", "published-online")
     else:
-        pub_date = (dates.get("published-online") or dates.get("published")
-                    or dates.get("issued") or dates.get("published-print"))
+        order = ("published-online", "published", "issued", "published-print")
+    pub_key = next((k for k in order if dates.get(k)), None)
+    pub_date = dates.get(pub_key) if pub_key else None
     online_date = dates.get("published-online")
     # Fecha de registro del DOI en Crossref. Algunas editoriales (Elsevier) no
     # depositan published-online y solo indican el número futuro; "created"
@@ -385,7 +389,11 @@ def crossref_metadata(doi: str) -> dict:
         "awards": awards,
         "license": licenses[0] if licenses else None,
         "publicationDate": pub_date.isoformat() if pub_date else None,
-        "onlinePublicationDate": online_date.isoformat() if online_date else None,
+        "publicationDateYearOnly": bool(pub_key and precision.get(pub_key) == 1),
+        # Una fecha online de solo año no es una fecha online real: no se usa.
+        "onlinePublicationDate": (online_date.isoformat()
+                                  if online_date and precision.get("published-online", 3) > 1
+                                  else None),
         "createdDate": created_date.isoformat() if created_date else None,
         "volume": msg.get("volume"),
         "issue": msg.get("issue"),
@@ -450,15 +458,37 @@ def make_record(
         except ValueError:
             pass
 
-    pub_date = pub_date or fallback_openalex_date(work)
+    openalex_date = fallback_openalex_date(work)
+    pub_date = pub_date or openalex_date
     if not pub_date or pub_date < min_date:
         return None
 
+    # Crossref solo da el año (habitual en RSC: [[2026]]). Sin más, el artículo
+    # saldría fechado el 1 de enero y quedaría al final de la lista, fuera de
+    # «Selección reciente» y de la portada. OpenAlex copia ese mismo 1 de enero,
+    # así que no sirve. Se usa la fecha exacta más temprana del mismo año: la de
+    # OpenAlex si es real, o la de registro del DOI en Crossref (created), que en
+    # RSC coincide con la publicación online. Si el artículo salió online el año
+    # anterior (online en diciembre, volumen de enero), se mantiene el año del
+    # volumen y la fecha online se guarda aparte, como hasta ahora.
+    if meta.get("publicationDateYearOnly"):
+        year_start = date(pub_date.year, 1, 1)
+        if openalex_date == year_start:
+            openalex_date = None
+        created = (date.fromisoformat(meta["createdDate"])
+                   if meta.get("createdDate") else None)
+        exact = [d for d in (openalex_date, created)
+                 if d and d.year == pub_date.year and d <= MAX_PUBLICATION_DATE]
+        if exact:
+            pub_date = min(exact)
+
     # Preserve the earliest known online/public appearance separately. OpenAlex
     # can retain the exact online date when Crossref only supplies the issue year.
-    online_dates = [d for d in (fallback_openalex_date(work),
+    online_dates = [d for d in (openalex_date,
                     date.fromisoformat(meta["onlinePublicationDate"])
                     if meta.get("onlinePublicationDate") else None) if d]
+    if not online_dates and meta.get("publicationDateYearOnly"):
+        online_dates = [pub_date]
     online_date = min(online_dates) if online_dates else None
 
     # Número de revista con fecha futura: si el artículo ya es público, se muestra

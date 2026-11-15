@@ -54,6 +54,9 @@ MIN_GROUP_AUTHORS = 2
 - NO usar excluded_publications.json para publicaciones "futuras": la exclusión
   es permanente y la publicación no aparecería nunca.
 - Los DOI incluidos en data/excluded_publications.json se excluyen permanentemente.
+- Fechas de solo año (RSC deposita [[2026]] en Crossref y OpenAlex pone 1 de
+  enero): se usa la fecha exacta del mismo año de OpenAlex o, si no, la de
+  registro del DOI en Crossref (created). Así no quedan como «1 de enero».
 - Si existen las versiones Wiley ange/anie del mismo artículo, se conserva anie (International Edition).
 - Dedupe por DOI.
 - Si hay volumen o número asignado, se prioriza la fecha del número (published-print

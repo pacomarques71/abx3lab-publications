@@ -78,6 +78,54 @@ class PublicationDatesTest(unittest.TestCase):
         self.assertEqual(later["publicationDate"], "2027-01-01")
         self.assertIsNone(later["issueDate"])
 
+    def rsc_record(self, metadata, openalex_date, today=date(2026, 11, 15)):
+        work = {"doi": "https://doi.org/10.1039/d6ee05477c", "publication_date": openalex_date}
+        with patch.object(updater, "fetch_json", return_value={"message": metadata}), \
+             patch.object(updater, "MAX_PUBLICATION_DATE", today):
+            return updater.make_record(work, ["Rafael Abargues López", "Pablo P. Boix"], set(), {})
+
+    def test_rsc_year_only_uses_doi_registration_date(self):
+        # 10.1039/d6ee05477c (Energy Environ. Sci. 19, 7447): Crossref solo da
+        # [[2026]] y OpenAlex copia 2026-01-01. Salía fechado el 1 de enero, al
+        # final de la lista, fuera de «Selección reciente» y de la portada.
+        record = self.rsc_record({
+            "published-online": {"date-parts": [[2026]]},
+            "published": {"date-parts": [[2026]]},
+            "issued": {"date-parts": [[2026]]},
+            "created": {"date-parts": [[2026, 10, 6]]},
+        }, "2026-01-01")
+        self.assertEqual(record["publicationDate"], "2026-10-06")
+        self.assertEqual(record["onlinePublicationDate"], "2026-10-06")
+        self.assertIsNone(record["issueDate"])
+        self.assertEqual(record["year"], 2026)
+
+    def test_rsc_year_only_prefers_exact_openalex_date(self):
+        record = self.rsc_record({
+            "volume": "10", "published": {"date-parts": [[2026]]},
+            "created": {"date-parts": [[2026, 3, 4]]},
+        }, "2026-03-02")
+        self.assertEqual(record["publicationDate"], "2026-03-02")
+        self.assertEqual(record["onlinePublicationDate"], "2026-03-02")
+
+    def test_rsc_year_only_online_previous_year_keeps_volume_year(self):
+        record = self.rsc_record({
+            "volume": "7", "published": {"date-parts": [[2026]]},
+            "created": {"date-parts": [[2025, 12, 29]]},
+        }, "2025-12-29")
+        self.assertEqual(record["publicationDate"], "2026-01-01")
+        self.assertEqual(record["onlinePublicationDate"], "2025-12-29")
+        self.assertEqual(record["year"], 2026)
+
+    def test_month_precision_issue_date_is_unchanged(self):
+        record = self.rsc_record({
+            "volume": "7", "issue": "7",
+            "published-print": {"date-parts": [[2026, 7]]},
+            "published-online": {"date-parts": [[2026, 6, 20]]},
+            "created": {"date-parts": [[2026, 6, 20]]},
+        }, "2026-06-20")
+        self.assertEqual(record["publicationDate"], "2026-07-01")
+        self.assertEqual(record["onlinePublicationDate"], "2026-06-20")
+
     def test_discovery_reaches_older_pages_without_online_date_filter(self):
         first_page = [{"doi": f"10.1002/new{i}"} for i in range(200)]
         pages = [

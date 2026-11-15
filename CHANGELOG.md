@@ -2,6 +2,20 @@
 
 Registro para coordinación entre ChatGPT, Claude y los editores de este repositorio. Consultarlo antes de modificar el pipeline y actualizarlo con cada cambio.
 
+## 2026-11-15 — Artículos RSC con fecha de solo año (salían como 1 de enero)
+
+**Informe:** «Continuous optical–electrical field diagnostics separate environmental modulation from irreversible perovskite solar-cell failure», Energy Environ. Sci. 19 (21), 7447–7465, DOI 10.1039/d6ee05477c (Abargues, Boix) «no está en la web».
+
+**Causa verificada:** el artículo SÍ se detectaba (está en data/publications.json desde el 12/10/2026), pero con publicationDate 2026-01-01. Crossref (RSC) solo deposita el año: published-online/published/issued = [[2026]], sin volumen; created = 2026-10-06. OpenAlex copia 2026-01-01. date_from_parts convertía [[2026]] en 1 de enero, así que el artículo quedaba el último de la lista ordenada por fecha: fuera de «Selección reciente», de la portada (3 más recientes) y fechado «enero de 2026» en el Archivo. Afecta igual a los demás artículos RSC (10.1039/d6qm00873a, d5ma01122a, d5el00182j; en 2025, d5el00064e, d4ma01150c, d5dd00099h).
+
+**Arreglo (scripts/update_publications.py):**
+- crossref_metadata guarda la precisión de cada fecha y marca publicationDateYearOnly cuando la fecha elegida es de solo año. Una published-online de solo año ya no se usa como fecha online.
+- make_record: si la fecha es de solo año, usa la fecha exacta más temprana del mismo año entre OpenAlex (descartando su 1 de enero de relleno) y created (registro del DOI en Crossref, que en RSC coincide con la publicación online). Si el artículo salió online el año anterior (volumen del año siguiente), se mantiene el 1 de enero del volumen y la fecha online aparte, como antes.
+- Cuando la editorial deposite una fecha de número con mes o día, se usa esa (criterio de siempre). Las fechas con mes (p. ej. Wiley [[2026, 7]]) no cambian.
+- Tests: 4 nuevos en tests/test_publication_dates.py (72/72 OK), incluido el caso real de 10.1039/d6ee05477c.
+
+**Pendiente de verificar en Actions:** con el arreglo, el artículo de EES debería pasar a 2026-10-06 y los otros RSC a su fecha de registro del DOI.
+
 ## 2026-10-19 — Detección automática de financiación e imágenes
 
 - Se incorpora scripts/enrich_publications.py, ejecutado después de scripts/update_publications.py en GitHub Actions.
