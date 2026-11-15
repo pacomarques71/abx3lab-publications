@@ -522,6 +522,7 @@ class FundingTests(unittest.TestCase):
              patch.object(module, "extract_funding_from_pdf", return_value=[]), \
              patch.object(module, "first_figure_from_pdf", return_value=b"stub"), \
              patch.object(module, "toc_graphic_from_pdf", return_value=None), \
+             patch.object(module, "pmc_publisher_images", return_value=[]), \
              patch.object(module, "extract_image_to_webp", return_value=True):
             out, _ = module.enrich_entry(rec, PROJECTS, prev, {"publications": {}})
         call.assert_called_once_with("10.1002/nap2.70196")

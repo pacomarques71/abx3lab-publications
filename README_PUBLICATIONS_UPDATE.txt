@@ -110,6 +110,16 @@ secret GitHub Actions: OPENALEX_API_KEY. Sin clave funciona el modo
 alternativo HTML editorial / PDF de acceso abierto, pero puede haber
 falsos negativos si el editor bloquea el acceso automatizado.
 
+Orden de búsqueda de la imagen (solo con licencia CC reutilizable):
+  1. TOC de la web de la editorial
+  2. TOC del conjunto Open Access de PMC en AWS (pmc-oa-opendata), si el
+     artículo está en PMC
+  3. TOC dentro del PDF
+  4. Figura 1 original de PMC
+  5. Figura 1 renderizada desde el PDF (hasta 20 páginas; admite números de
+     línea de manuscritos aceptados)
+Los artículos de acceso cerrado sin licencia CC no reciben imagen automática.
+
 Si la publicación tiene una imagen manual en publication_extras.json,
 esta tiene preferencia. En caso contrario, solo cuando hay licencia de
 redistribución compatible, el script intenta conseguir un gráfico TOC

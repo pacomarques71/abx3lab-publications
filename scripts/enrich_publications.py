@@ -35,10 +35,20 @@ MAX_PDF = 24 * 1024 * 1024
 MAX_IMAGE = 10 * 1024 * 1024
 CHECK_DAYS = 60
 FUNDING_MATCHER_VERSION = 2  # increment when grant parsing semantics change
-IMAGE_MATCHER_VERSION = 6  # other publishers retain their existing matching version
+IMAGE_MATCHER_VERSION = 7  # 7: TOC/Figura 1 originales de PMC (AWS) y pie de Figura 1 en manuscritos aceptados
 ACS_TOC_MATCHER_VERSION = 2  # retry ACS TOCs independently of other image sources
 SECTION_NAMES = re.compile(r"acknowledg|funding|financial support|grant support|financial assistance|supporting fund|agradecim|financiaci", re.I)
 FIGURE_CAPTION = re.compile(r"^\s*(?:fig(?:ure)?\.?\s*1\b|figure\s+1\b)", re.I)
+# Pie de la Figura 1 dentro de una línea de texto del PDF. Admite el número de
+# línea de los manuscritos aceptados («12 Figure 1. …») y las letras de panel
+# que PyMuPDF une al pie («a) b) Figure 1. …»). Exige que tras el 1 venga
+# puntuación de pie o mayúscula, para no confundir el texto «Figure 1b shows»
+# o «Figure 1 shows» con el pie.
+FIGURE_ONE_LINE = re.compile(
+    r"^\s*(?:\d{1,4}\s+)?(?:\(?[a-z]\)\s*)*(?:Fig(?:ure)?|FIG(?:URE)?)\.?\s*1"
+    r"(?=\s*[.:|\u2013\u2014]|\s+[A-Z(]|\s*$)"
+)
+FIGURE_SCAN_PAGES = 20
 ALLOWED_IMAGE_LICENSES = ("cc-by", "cc0", "public-domain", "cc-by-sa")
 
 
@@ -609,17 +619,38 @@ def diagnose_acs_toc_pdf(pdf_bytes):
         pass
 
 
+def _figure_one_caption(page):
+    """Return (x0, y0, x1, y1) of the first Figure 1 caption line on a page.
+
+    x comes from the text block (column width); y from the caption line itself,
+    so a caption merged with panel labels or line numbers is located exactly.
+    """
+    try:
+        data = page.get_text("dict")
+    except (RuntimeError, ValueError):
+        return None
+    for block in data.get("blocks", []):
+        if block.get("type") != 0:
+            continue
+        bx0, _by0, bx1, _by1 = block["bbox"]
+        for line in block.get("lines", []):
+            text = "".join(span.get("text", "") for span in line.get("spans", []))
+            if FIGURE_ONE_LINE.search(text):
+                return (bx0, line["bbox"][1], bx1, line["bbox"][3])
+    return None
+
+
 def first_figure_from_pdf(pdf_bytes):
     """Extract a raster figure near the *Figure 1* caption; never use a random publisher logo."""
     try:
         import fitz
         doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-        for page in list(doc)[:7]:
-            blocks = page.get_text("blocks")
-            captions = [b for b in blocks if len(b) > 4 and b[6] == 0 and FIGURE_CAPTION.search(b[4])]
-            if not captions:
+        # Los manuscritos aceptados (RSC, repositorios) llevan portada y texto a
+        # doble espacio: la Figura 1 puede estar en la página 8 o 9.
+        for page in list(doc)[:FIGURE_SCAN_PAGES]:
+            caption = _figure_one_caption(page)
+            if not caption:
                 continue
-            caption = captions[0]
             images = []
             for info in page.get_images(full=True):
                 for rect in page.get_image_rects(info[0]):
@@ -965,6 +996,101 @@ def openaire_grants(doi, projects):
     return found
 
 
+PMC_OA_S3 = "https://pmc-oa-opendata.s3.amazonaws.com/"
+FIG_ONE_LABEL = re.compile(r"^\s*fig(?:ure)?\.?\s*1\s*[.:]?\s*$", re.I)
+
+
+def europe_pmc_open_access_id(doi):
+    """PMCID of the open-access copy of a DOI, via the Europe PMC search API."""
+    search = request_url("https://www.ebi.ac.uk/europepmc/webservices/rest/search?"
+                         "query=" + quote("DOI:" + doi) + "&format=json&pageSize=2",
+                         400000, "application/json")
+    if not search:
+        return None
+    try:
+        entries = json.loads(search[0]).get("resultList", {}).get("result", [])
+    except (ValueError, TypeError, AttributeError):
+        return None
+    for entry in entries:
+        pmcid = entry.get("pmcid") or ""
+        if re.fullmatch(r"PMC\d+", pmcid) and entry.get("isOpenAccess") == "Y":
+            return pmcid
+    return None
+
+
+def jats_toc_and_figure_one(xml_bytes):
+    """Graphic names of the TOC (graphical abstract) and of Figure 1 in JATS XML."""
+    try:
+        root = ET.fromstring(xml_bytes)
+    except ET.ParseError:
+        return None, None
+    def local(tag):
+        return tag.rsplit("}", 1)[-1]
+    def href(node):
+        for g in node.iter():
+            if local(g.tag) != "graphic" or g.get("content-type") == "thumb":
+                continue
+            for key, value in g.attrib.items():
+                if local(key) == "href" and value:
+                    return value
+        return None
+    toc = fig1 = None
+    for node in root.iter():
+        name = local(node.tag)
+        if (toc is None and name == "abstract" and
+                (node.get("abstract-type") or "").lower() in ("toc", "graphical", "graphical-abstract")):
+            toc = href(node)
+        elif fig1 is None and name == "fig":
+            label = next((c for c in node if local(c.tag) == "label"), None)
+            if label is not None and FIG_ONE_LABEL.match("".join(label.itertext())):
+                fig1 = href(node)
+    return toc, fig1
+
+
+def pmc_publisher_images(doi):
+    """Publisher TOC and Figure 1 from the PMC Open Access dataset on AWS.
+
+    NCBI publishes every PMC open-access article (JATS XML and the original
+    figure files) in a public S3 bucket. Unlike the publisher sites,
+    Europe PMC or PMC web pages, it does not block GitHub Actions. Returns a
+    list of (bytes, source_url, type) in priority order: TOC, then Figure 1.
+    """
+    pmcid = europe_pmc_open_access_id(doi)
+    if not pmcid:
+        return []
+    listing = request_url(PMC_OA_S3 + "?list-type=2&prefix=" + quote(pmcid + "."),
+                          2_000_000, "application/xml")
+    if not listing:
+        return []
+    keys = [k.decode("utf-8", "replace") for k in re.findall(rb"<Key>([^<]+)</Key>", listing[0])]
+    versions = sorted({int(m.group(1)) for k in keys
+                       for m in [re.match(re.escape(pmcid) + r"\.(\d+)/", k)] if m})
+    if not versions:
+        return []
+    folder = f"{pmcid}.{versions[-1]}/"
+    files = [k for k in keys if k.startswith(folder)]
+    xml = request_url(PMC_OA_S3 + folder + f"{pmcid}.{versions[-1]}.xml", 8_000_000,
+                      "application/xml")
+    if not xml:
+        return []
+    found = []
+    for name, typ in zip(jats_toc_and_figure_one(xml[0]), ("graphical-abstract", "figure-1")):
+        if not name:
+            continue
+        stem = re.sub(r"\.(?:jpe?g|gif|png|webp|tiff?)$", "", name.rsplit("/", 1)[-1], flags=re.I)
+        matches = [k for k in files
+                   if re.fullmatch(re.escape(folder + stem) + r"\.(?:jpe?g|png|webp|gif)", k, re.I)]
+        # Prefer full-size formats over the GIF thumbnails.
+        matches.sort(key=lambda k: k.lower().endswith(".gif"))
+        for key in matches:
+            url = PMC_OA_S3 + key
+            res = request_url(url, MAX_IMAGE, "image/*")
+            if res and res[0]:
+                found.append((res[0], url, typ))
+                break
+    return found
+
+
 def european_pmc_xml(doi):
     """JATS from Europe PMC OA corpus, a no-key alternative for eligible papers."""
     q = quote("DOI:" + doi)
@@ -1188,36 +1314,55 @@ def enrich_entry(rec, projects, prev, extras):
         if needs_picture:
             lic = metadata_licenses(rec, work)
             if lic:
+                def html_toc():
+                    if not page:
+                        return None
+                    url, kind = graphical_abstract_from_html(page[0], page[1])
+                    if not url:
+                        return None
+                    res = request_url(url, max_bytes=MAX_IMAGE, accept="image/*")
+                    if res and res[2].lower().startswith("image/"):
+                        return res[0], url, kind
+                    return None
+
+                pmc_cache = []
+                def pmc(kind):
+                    # Imágenes originales de la editorial en el conjunto Open Access
+                    # de PMC (artículos con financiación europea). Se consulta una
+                    # sola vez y solo si hace falta.
+                    if not pmc_cache:
+                        pmc_cache.append(pmc_publisher_images(doi))
+                    return next((i for i in pmc_cache[0] if i[2] == kind), None)
+
+                def pdf_toc():
+                    png = toc_graphic_from_pdf(pdf) if pdf else None
+                    return (png, pdfurl, "graphical-abstract") if png else None
+
+                def pdf_figure_one():
+                    if pdf and doi == "10.1021/acsami.6c11506":
+                        diagnose_acs_toc_pdf(pdf)
+                    png = first_figure_from_pdf(pdf) if pdf else None
+                    return (png, pdfurl, "figure-1") if png else None
+
+                # Orden: TOC (web de la editorial, PMC, PDF) y, si no hay TOC,
+                # Figura 1 (PMC, PDF). Si una imagen no se puede convertir (p. ej.
+                # demasiado pequeña), se prueba la siguiente fuente.
                 blob = None
-                typ = None
-                srcurl = None
-                if page:
-                    srcurl, typ = graphical_abstract_from_html(page[0], page[1])
-                    if srcurl:
-                        img_result = request_url(srcurl, max_bytes=MAX_IMAGE, accept="image/*")
-                        if img_result and img_result[2].lower().startswith("image/"):
-                            blob = img_result[0]
-                        else:
-                            srcurl, typ = None, None
-                if blob is None and pdf:
-                    blob = toc_graphic_from_pdf(pdf)
-                    if blob:
-                        srcurl, typ = pdfurl, "graphical-abstract"
-                if blob is None and pdf and doi == "10.1021/acsami.6c11506":
-                    diagnose_acs_toc_pdf(pdf)
-                if blob is None and pdf:
-                    blob = first_figure_from_pdf(pdf)
-                    if blob:
-                        srcurl, typ = pdfurl, "figure-1"
-                if blob:
+                for source in (html_toc, lambda: pmc("graphical-abstract"), pdf_toc,
+                               lambda: pmc("figure-1"), pdf_figure_one):
+                    found = source()
+                    if not found:
+                        continue
+                    candidate, srcurl, typ = found
                     # Content-addressed asset prevents stale GitHub/browser/CDN
                     # caches when the genuine TOC replaces a provisional Figure 1.
-                    file_name = publication_image_filename(doi, blob)
-                    target = IMAGES / file_name
-                    if extract_image_to_webp(blob, target):
+                    file_name = publication_image_filename(doi, candidate)
+                    if extract_image_to_webp(candidate, IMAGES / file_name):
+                        blob = candidate
                         img_origin = {"url": RAW_IMAGES + file_name, "source": srcurl,
                                       "type": typ, "license": lic, "doi": doi}
-                elif doi == "10.1021/acsami.6c11506" and prior_image.get("type") == "figure-1":
+                        break
+                if blob is None and doi == "10.1021/acsami.6c11506" and prior_image.get("type") == "figure-1":
                     reason = ("PDF no accesible" if pdf is None else
                               "el TOC no se ha localizado en el PDF")
                     print("  TOC NO RESUELTO:", doi, "-", reason,

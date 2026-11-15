@@ -2,6 +2,25 @@
 
 Registro para coordinación entre ChatGPT, Claude y los editores de este repositorio. Consultarlo antes de modificar el pipeline y actualizarlo con cada cambio.
 
+## 2026-11-15 — TOC y Figura 1: PMC Open Access y manuscritos aceptados
+
+**Informe:** tras el arreglo de fechas, los dos artículos RSC que entraron en «The latest» (10.1039/d6ee05477c, 10.1039/d6qm00873a) salían con la ilustración de reserva, sin TOC ni Figura 1.
+
+**Causas verificadas (diagnóstico en Actions, rama temporal diag-image, ya borrada):**
+- pubs.rsc.org, doi.org, europepmc.org y la web de PMC devuelven 403 o una página HTML al runner de GitHub: no se puede leer la TOC de la web de la editorial.
+- El único PDF accesible de d6ee05477c (repositorio EPFL / OpenAlex) es un manuscrito de 35 páginas sin TOC, con la Figura 1 en la página 8. first_figure_from_pdf solo miraba las 7 primeras páginas y exigía que el pie empezara el bloque de texto, lo que también fallaba con números de línea de los manuscritos aceptados («12 Figure 1.», d5el00064e) y con letras de panel unidas al pie («a) b) Figure 1.», d5ma01122a).
+- 10.1039/d6qm00873a es de acceso cerrado (OpenAlex: closed; sin licencia CC en Crossref). Por la regla 7 no se republica ninguna imagen suya: sigue la ilustración de reserva. No es un fallo.
+
+**Cambios (scripts/enrich_publications.py):**
+- Nueva fuente: conjunto Open Access de PMC en AWS (pmc-oa-opendata.s3.amazonaws.com, público y accesible desde Actions). Europe PMC da el PMCID; el JATS identifica la TOC (abstract-type toc/graphical) y la Figura 1 (label «Fig. 1»), y se descargan las imágenes originales de la editorial (no las miniaturas GIF).
+- Orden: TOC de la web de la editorial → TOC de PMC → TOC en el PDF → Figura 1 de PMC → Figura 1 renderizada del PDF. Si una imagen no se puede convertir, se prueba la siguiente fuente (antes se abandonaba).
+- Figura 1 en el PDF: se buscan los pies línea a línea (FIGURE_ONE_LINE), con número de línea o letras de panel delante y exigiendo puntuación o mayúscula tras el 1 (no confunde «Figure 1b shows»), y se miran hasta 20 páginas.
+- IMAGE_MATCHER_VERSION 6 → 7: las Figuras 1 automáticas se revisan una vez para buscar la TOC (las ACS siguen con su contador propio).
+- Sin cambios: solo licencias CC reutilizables (sin NC/ND); la imagen manual de publication_extras.json siempre tiene prioridad.
+- Tests: tests/test_publication_images.py (11 nuevos, sin red); 83/83 OK.
+
+**Resultado en la prueba (rama diag-image):** d6ee05477c y d5el00182j → TOC de PMC; d5ma01122a y d5el00064e → Figura 1 del PDF (antes sin imagen); advs.78211 y smsc.202400529 → la misma Figura 1, ahora el archivo original de PMC; las demás Figuras 1 de Wiley no cambian.
+
 ## 2026-11-15 — Artículos RSC con fecha de solo año (salían como 1 de enero)
 
 **Informe:** «Continuous optical–electrical field diagnostics separate environmental modulation from irreversible perovskite solar-cell failure», Energy Environ. Sci. 19 (21), 7447–7465, DOI 10.1039/d6ee05477c (Abargues, Boix) «no está en la web».
