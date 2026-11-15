@@ -14,7 +14,7 @@ Registro para coordinación entre ChatGPT, Claude y los editores de este reposit
 - Cuando la editorial deposite una fecha de número con mes o día, se usa esa (criterio de siempre). Las fechas con mes (p. ej. Wiley [[2026, 7]]) no cambian.
 - Tests: 4 nuevos en tests/test_publication_dates.py (72/72 OK), incluido el caso real de 10.1039/d6ee05477c.
 
-**Pendiente de verificar en Actions:** con el arreglo, el artículo de EES debería pasar a 2026-10-06 y los otros RSC a su fecha de registro del DOI.
+**Verificado en Actions (run 43701844018, commit del bot 65ab7c4):** solo cambian las fechas RSC: d6ee05477c 2026-10-06, d6qm00873a 2026-10-28, d5el00182j 2026-01-21; en 2025, d5el00064e 2025-09-08 y d5dd00099h 2025-05-30. d5ma01122a y d4ma01150c conservan el 1 de enero del volumen (salieron online el año anterior). Ninguna publicación añadida ni quitada.
 
 ## 2026-10-19 — Detección automática de financiación e imágenes
 
