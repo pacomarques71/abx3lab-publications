@@ -242,7 +242,7 @@
     "url": "https://doi.org/10.1021/acs.jpclett.5c01405",
     "openalexId": "https://openalex.org/W4413052390",
     "type": "review",
-    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-d9841477b90afd819b22-2c99751f9906.webp",
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-d9841477b90afd819b22-ed5cef05a2f6.webp",
     "openAccess": {
       "status": "hybrid",
       "url": "https://doi.org/10.1021/acs.jpclett.5c01405",
@@ -340,8 +340,8 @@
     ],
     "featured": null,
     "fundingStatus": "text-checked",
-    "imageSource": "https://content.openalex.org/works/W4413052390.pdf",
-    "imageType": "figure-1",
+    "imageSource": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12376095.1/jz5c01405_0006.jpg",
+    "imageType": "graphical-abstract",
     "imageLicense": "https://creativecommons.org/licenses/by/4.0/"
   },
   {

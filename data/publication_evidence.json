@@ -594,7 +594,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1021/acs.jpclett.5c01405": {
-    "checked": "2026-11-14",
+    "checked": "2026-11-15",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -679,11 +679,11 @@
     "featured": null,
     "imageMatcherVersion": 7,
     "acsTocMatcherVersion": 2,
-    "tocChecked": "2026-11-14",
+    "tocChecked": "2026-11-15",
     "image": {
-      "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-d9841477b90afd819b22-2c99751f9906.webp",
-      "source": "https://content.openalex.org/works/W4413052390.pdf",
-      "type": "figure-1",
+      "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-d9841477b90afd819b22-ed5cef05a2f6.webp",
+      "source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12376095.1/jz5c01405_0006.jpg",
+      "type": "graphical-abstract",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "doi": "10.1021/acs.jpclett.5c01405"
     },
