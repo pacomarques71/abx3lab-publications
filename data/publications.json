@@ -263,7 +263,7 @@
     "url": "https://doi.org/10.1002/advs.78211",
     "openalexId": "https://openalex.org/W7223710651",
     "type": "article",
-    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-aa8dea63a48ba765f2e0.webp",
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-aa8dea63a48ba765f2e0-ac4cd64b89b4.webp",
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/advs.78211",
@@ -328,7 +328,7 @@
       "summary_en": "A single perovskite memristor combines two mechanisms: ECM operates at lower voltages and withstands more cycles, while VCM retains data longer and increases resistance contrast."
     },
     "fundingStatus": "text-checked",
-    "imageSource": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/advs.78211",
+    "imageSource": "https://pmc-oa-opendata.s3.amazonaws.com/PMC13697020.1/ADVS-9999-e78211-g003.webp",
     "imageType": "figure-1",
     "imageLicense": "http://creativecommons.org/licenses/by/4.0/"
   },
@@ -372,7 +372,7 @@
     "url": "https://doi.org/10.1039/d6ee05477c",
     "openalexId": "https://openalex.org/W7220689702",
     "type": "article",
-    "image": null,
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-dfc6b4adf9565d66e661-5b035c30910d.webp",
     "openAccess": {
       "status": "hybrid",
       "url": "https://doi.org/10.1039/d6ee05477c",
@@ -449,7 +449,10 @@
       "visual": "field",
       "title": "Separar el clima del fallo real en células solares al aire libre"
     },
-    "fundingStatus": "text-checked"
+    "fundingStatus": "text-checked",
+    "imageSource": "https://pmc-oa-opendata.s3.amazonaws.com/PMC13651458.1/d6ee05477c-ga.webp",
+    "imageType": "graphical-abstract",
+    "imageLicense": "http://creativecommons.org/licenses/by/3.0/"
   },
   {
     "title": "Crossover From Excitonic to Bulk Emission in Metal Halide Perovskite Nanocomposites",
@@ -878,7 +881,7 @@
     "url": "https://doi.org/10.1002/sstr.70540",
     "openalexId": "https://openalex.org/W7168046671",
     "type": "article",
-    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-b24173445c12bc6550f7.webp",
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-b24173445c12bc6550f7-a224798f142f.webp",
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/sstr.70540",
@@ -976,7 +979,7 @@
     "url": "https://doi.org/10.1002/sstr.202600020",
     "openalexId": "https://openalex.org/W7159629719",
     "type": "article",
-    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-b2129ca14cd78576120a.webp",
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-b2129ca14cd78576120a-5db603d38dda.webp",
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/sstr.202600020",
@@ -1333,7 +1336,7 @@
     "url": "https://doi.org/10.1002/aesr.202500105",
     "openalexId": "https://openalex.org/W4415220258",
     "type": "article",
-    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-0d5a8817110ba10452a0.webp",
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-0d5a8817110ba10452a0-9f6e5c299796.webp",
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/aesr.202500105",
@@ -1351,7 +1354,7 @@
       "summary_en": "Also, photoluminescence (PL) studies reveals that Cs 2 PtBr 6 exhibits lower PL intensity and a longer emission lifetime (2.5 μs) compared to Cs 2 PtCl 6 (1.3 μs)."
     },
     "fundingStatus": "text-checked",
-    "imageSource": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aesr.202500105",
+    "imageSource": "https://content.openalex.org/works/W4415220258.pdf",
     "imageType": "figure-1",
     "imageLicense": "http://creativecommons.org/licenses/by/4.0/"
   },
@@ -1441,7 +1444,7 @@
     "url": "https://doi.org/10.1039/d5el00182j",
     "openalexId": "https://openalex.org/W7125242329",
     "type": "article",
-    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-c2d416e7ff943fb2334f.webp",
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-c2d416e7ff943fb2334f-ec3092bf1e20.webp",
     "openAccess": {
       "status": "diamond",
       "url": "https://doi.org/10.1039/d5el00182j",
@@ -1540,8 +1543,8 @@
       "title": "Células solares sin plomo que se reparan solas"
     },
     "fundingStatus": "text-checked",
-    "imageSource": "https://content.openalex.org/works/W7125242329.pdf",
-    "imageType": "figure-1",
+    "imageSource": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12848990.1/d5el00182j-ga.jpg",
+    "imageType": "graphical-abstract",
     "imageLicense": "http://creativecommons.org/licenses/by/3.0/"
   },
   {
@@ -1585,7 +1588,7 @@
     "url": "https://doi.org/10.1039/d5ma01122a",
     "openalexId": "https://openalex.org/W7117514834",
     "type": "article",
-    "image": null,
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-72029f8ef5dddac4f134-9ee58d2c3831.webp",
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1039/d5ma01122a",
@@ -1603,6 +1606,9 @@
       "summary": "La combinación de CsPbBr 3 con Ti 2 N MXene parcialmente oxidado proporciona una selectividad ajustable de CH 4 /CO, lo que muestra una prometedora producción sostenible de combustible fototérmico.",
       "summary_en": "Combining CsPbBr 3 with partially oxidized Ti 2 N MXene gives tunable CH 4 /CO selectivity, showing promising sustainable photothermal fuel production."
     },
-    "fundingStatus": "text-checked"
+    "fundingStatus": "text-checked",
+    "imageSource": "https://content.openalex.org/works/W7117514834.pdf",
+    "imageType": "figure-1",
+    "imageLicense": "http://creativecommons.org/licenses/by/3.0/"
   }
 ]
