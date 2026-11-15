@@ -102,6 +102,11 @@
       },
       {
         "project": "esgent",
+        "grant": "ESGENT 010/2024",
+        "source": "openalex"
+      },
+      {
+        "project": "esgent",
         "grant": "ESGENT/010/2024",
         "source": "openalex"
       },
@@ -130,6 +135,11 @@
       },
       {
         "project": "phoenixpv",
+        "grant": "15101171478",
+        "source": "openalex"
+      },
+      {
+        "project": "phoenixpv",
         "grant": "101171478",
         "source": "openalex-tei",
         "url": "https://content.openalex.org/works/W7223224027.grobid-xml"
@@ -144,6 +154,59 @@
       "summary_en": "MAPbBr₃ nanocrystals embedded in nickel acetate enable volatile analog switching and synaptic behavior. In pattern recognition, they achieve up to 98% accuracy with a deeper network."
     },
     "fundingStatus": "text-checked"
+  },
+  {
+    "title": "Pd( iv ) nano-perovskites catalyze hydroaddition reactions to alkynes",
+    "authors": [
+      "Kevin Mego",
+      "Alejandro Serrano-Maldonado",
+      "Herme G. Baldoví",
+      "Antonio Leyva-Pérez",
+      "Pedro Atienzar"
+    ],
+    "groupAuthors": [
+      "Froy Kevin Mego de la Cruz",
+      "Pedro Atienzar"
+    ],
+    "groupAuthorDisplayNames": [
+      "Kevin Mego",
+      "Pedro Atienzar"
+    ],
+    "groupMembers": [
+      {
+        "name": "Froy Kevin Mego de la Cruz",
+        "display": "Kevin Mego",
+        "profile": "/equipo/#kevin-mego"
+      },
+      {
+        "name": "Pedro Atienzar",
+        "display": "Pedro Atienzar",
+        "profile": "/equipo/#pedro-atienzar"
+      }
+    ],
+    "journal": "Materials Chemistry Frontiers",
+    "publicationDate": "2026-10-28",
+    "onlinePublicationDate": "2026-10-28",
+    "issueDate": null,
+    "year": 2026,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": "10.1039/d6qm00873a",
+    "url": "https://doi.org/10.1039/d6qm00873a",
+    "openalexId": "https://openalex.org/W7224124872",
+    "type": "article",
+    "image": null,
+    "openAccess": null,
+    "license": null,
+    "themes": [],
+    "fundingEvidence": [],
+    "projects": [],
+    "featured": {
+      "summary": "High-oxidation-state palladium species display remarkable catalytic activity in organic synthesis.",
+      "summary_en": "High-oxidation-state palladium species display remarkable catalytic activity in organic synthesis."
+    },
+    "fundingStatus": "metadata-only"
   },
   {
     "title": "Polarity‐Controlled Coexistence of Electrochemical Metallization and Valence Change Mechanisms in a Unified Metal Halide Perovskite Memristor",
@@ -235,6 +298,11 @@
       {
         "project": "phoenixpv",
         "grant": "101171478",
+        "source": "openalex"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "101171478",
         "source": "openalex-tei",
         "url": "https://content.openalex.org/works/W7223710651.grobid-xml"
       },
@@ -263,6 +331,125 @@
     "imageSource": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/advs.78211",
     "imageType": "figure-1",
     "imageLicense": "http://creativecommons.org/licenses/by/4.0/"
+  },
+  {
+    "title": "Continuous optical–electrical field diagnostics separate environmental modulation from irreversible perovskite solar-cell failure",
+    "authors": [
+      "Jaume Noguera-Gómez",
+      "Rafael Abargues",
+      "Pablo P. Boix",
+      "Sandy Sánchez-Alonso"
+    ],
+    "groupAuthors": [
+      "Rafael Abargues López",
+      "Pablo P. Boix"
+    ],
+    "groupAuthorDisplayNames": [
+      "Rafael Abargues",
+      "Pablo P. Boix"
+    ],
+    "groupMembers": [
+      {
+        "name": "Rafael Abargues López",
+        "display": "Rafael Abargues",
+        "profile": "/equipo/#rafael-abargues"
+      },
+      {
+        "name": "Pablo P. Boix",
+        "display": "Pablo P. Boix",
+        "profile": "/equipo/#pablo-boix"
+      }
+    ],
+    "journal": "Energy & Environmental Science",
+    "publicationDate": "2026-10-06",
+    "onlinePublicationDate": "2026-10-06",
+    "issueDate": null,
+    "year": 2026,
+    "volume": "19",
+    "issue": "21",
+    "pages": "7447-7465",
+    "doi": "10.1039/d6ee05477c",
+    "url": "https://doi.org/10.1039/d6ee05477c",
+    "openalexId": "https://openalex.org/W7220689702",
+    "type": "article",
+    "image": null,
+    "openAccess": {
+      "status": "hybrid",
+      "url": "https://doi.org/10.1039/d6ee05477c",
+      "pdf": "https://pubs.rsc.org/ee/article-pdf/doi/10.1039/D6EE05477C/14827699/d6ee05477c.pdf",
+      "version": "publishedVersion"
+    },
+    "license": "http://creativecommons.org/licenses/by/3.0/",
+    "themes": [
+      "estabilidad",
+      "fotovoltaica"
+    ],
+    "fundingEvidence": [
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "crossref"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "europe-pmc-jats",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13651458/fullTextXML"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7220689702.pdf"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "oa-pdf",
+        "url": "https://infoscience.epfl.ch/bitstreams/a77b2420-9a34-4549-90ed-c3ccefd8ef1c/download"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "oa-pdf-funding-context",
+        "url": "https://content.openalex.org/works/W7220689702.pdf"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "oa-pdf-funding-context",
+        "url": "https://infoscience.epfl.ch/bitstreams/a77b2420-9a34-4549-90ed-c3ccefd8ef1c/download"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "openalex"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7220689702.grobid-xml"
+      },
+      {
+        "project": "phoenixpv",
+        "grant": "101171478",
+        "source": "europe-pmc-jats",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13651458/fullTextXML"
+      }
+    ],
+    "projects": [
+      "phoenixpv",
+      "hepaflex"
+    ],
+    "featured": {
+      "summary": "La monitorización continua de señales ópticas y eléctricas en exterior distingue la variación reversible que causa el tiempo atmosférico del fallo irreversible de cada célula de perovskita.",
+      "summary_en": "The framework separates environmental response, irreversible failure, optical timing and cross-climate transfer within a single field-diagnostic workflow.",
+      "order": 2,
+      "visual": "field",
+      "title": "Separar el clima del fallo real en células solares al aire libre"
+    },
+    "fundingStatus": "text-checked"
   },
   {
     "title": "Crossover From Excitonic to Bulk Emission in Metal Halide Perovskite Nanocomposites",
@@ -1169,239 +1356,6 @@
     "imageLicense": "http://creativecommons.org/licenses/by/4.0/"
   },
   {
-    "title": "Pd( iv ) nano-perovskites catalyze hydroaddition reactions to alkynes",
-    "authors": [
-      "Kevin Mego",
-      "Alejandro Serrano-Maldonado",
-      "Herme G. Baldoví",
-      "Antonio Leyva-Pérez",
-      "Pedro Atienzar"
-    ],
-    "groupAuthors": [
-      "Froy Kevin Mego de la Cruz",
-      "Pedro Atienzar"
-    ],
-    "groupAuthorDisplayNames": [
-      "Kevin Mego",
-      "Pedro Atienzar"
-    ],
-    "groupMembers": [
-      {
-        "name": "Froy Kevin Mego de la Cruz",
-        "display": "Kevin Mego",
-        "profile": "/equipo/#kevin-mego"
-      },
-      {
-        "name": "Pedro Atienzar",
-        "display": "Pedro Atienzar",
-        "profile": "/equipo/#pedro-atienzar"
-      }
-    ],
-    "journal": "Materials Chemistry Frontiers",
-    "publicationDate": "2026-01-01",
-    "onlinePublicationDate": "2026-01-01",
-    "issueDate": null,
-    "year": 2026,
-    "volume": null,
-    "issue": null,
-    "pages": null,
-    "doi": "10.1039/d6qm00873a",
-    "url": "https://doi.org/10.1039/d6qm00873a",
-    "openalexId": "https://openalex.org/W7224124872",
-    "type": "article",
-    "image": null,
-    "openAccess": null,
-    "license": null,
-    "themes": [],
-    "fundingEvidence": [],
-    "projects": [],
-    "featured": {
-      "summary": "High-oxidation-state palladium species display remarkable catalytic activity in organic synthesis.",
-      "summary_en": "High-oxidation-state palladium species display remarkable catalytic activity in organic synthesis."
-    },
-    "fundingStatus": "metadata-only"
-  },
-  {
-    "title": "CsPbBr<sub>3</sub> nanocrystals supported on a partially oxidized Ti<sub>2</sub>N MXene for photothermal CO<sub>2</sub> conversion",
-    "authors": [
-      "Kevin Mego",
-      "Emanuela Accardo",
-      "Pedro Ruiz-Campos",
-      "Herme G. Baldoví",
-      "Pedro Atienzar"
-    ],
-    "groupAuthors": [
-      "Froy Kevin Mego de la Cruz",
-      "Pedro Atienzar"
-    ],
-    "groupAuthorDisplayNames": [
-      "Kevin Mego",
-      "Pedro Atienzar"
-    ],
-    "groupMembers": [
-      {
-        "name": "Froy Kevin Mego de la Cruz",
-        "display": "Kevin Mego",
-        "profile": "/equipo/#kevin-mego"
-      },
-      {
-        "name": "Pedro Atienzar",
-        "display": "Pedro Atienzar",
-        "profile": "/equipo/#pedro-atienzar"
-      }
-    ],
-    "journal": "Materials Advances",
-    "publicationDate": "2026-01-01",
-    "onlinePublicationDate": "2025-12-29",
-    "issueDate": null,
-    "year": 2026,
-    "volume": "7",
-    "issue": "4",
-    "pages": "2465-2480",
-    "doi": "10.1039/d5ma01122a",
-    "url": "https://doi.org/10.1039/d5ma01122a",
-    "openalexId": "https://openalex.org/W7117514834",
-    "type": "article",
-    "image": null,
-    "openAccess": {
-      "status": "gold",
-      "url": "https://doi.org/10.1039/d5ma01122a",
-      "pdf": "https://pubs.rsc.org/en/content/articlepdf/2026/ma/d5ma01122a",
-      "version": "publishedVersion"
-    },
-    "license": "http://creativecommons.org/licenses/by/3.0/",
-    "themes": [
-      "fotocatalisis",
-      "materiales"
-    ],
-    "fundingEvidence": [],
-    "projects": [],
-    "featured": {
-      "summary": "La combinación de CsPbBr 3 con Ti 2 N MXene parcialmente oxidado proporciona una selectividad ajustable de CH 4 /CO, lo que muestra una prometedora producción sostenible de combustible fototérmico.",
-      "summary_en": "Combining CsPbBr 3 with partially oxidized Ti 2 N MXene gives tunable CH 4 /CO selectivity, showing promising sustainable photothermal fuel production."
-    },
-    "fundingStatus": "text-checked"
-  },
-  {
-    "title": "Continuous optical–electrical field diagnostics separate environmental modulation from irreversible perovskite solar-cell failure",
-    "authors": [
-      "Jaume Noguera-Gómez",
-      "Rafael Abargues",
-      "Pablo P. Boix",
-      "Sandy Sánchez-Alonso"
-    ],
-    "groupAuthors": [
-      "Rafael Abargues López",
-      "Pablo P. Boix"
-    ],
-    "groupAuthorDisplayNames": [
-      "Rafael Abargues",
-      "Pablo P. Boix"
-    ],
-    "groupMembers": [
-      {
-        "name": "Rafael Abargues López",
-        "display": "Rafael Abargues",
-        "profile": "/equipo/#rafael-abargues"
-      },
-      {
-        "name": "Pablo P. Boix",
-        "display": "Pablo P. Boix",
-        "profile": "/equipo/#pablo-boix"
-      }
-    ],
-    "journal": "Energy & Environmental Science",
-    "publicationDate": "2026-01-01",
-    "onlinePublicationDate": "2026-01-01",
-    "issueDate": null,
-    "year": 2026,
-    "volume": "19",
-    "issue": "21",
-    "pages": "7447-7465",
-    "doi": "10.1039/d6ee05477c",
-    "url": "https://doi.org/10.1039/d6ee05477c",
-    "openalexId": "https://openalex.org/W7220689702",
-    "type": "article",
-    "image": null,
-    "openAccess": {
-      "status": "hybrid",
-      "url": "https://doi.org/10.1039/d6ee05477c",
-      "pdf": "https://pubs.rsc.org/ee/article-pdf/doi/10.1039/D6EE05477C/14827699/d6ee05477c.pdf",
-      "version": "publishedVersion"
-    },
-    "license": "http://creativecommons.org/licenses/by/3.0/",
-    "themes": [
-      "estabilidad",
-      "fotovoltaica"
-    ],
-    "fundingEvidence": [
-      {
-        "project": "hepaflex",
-        "grant": "101122345",
-        "source": "crossref"
-      },
-      {
-        "project": "hepaflex",
-        "grant": "101122345",
-        "source": "europe-pmc-jats",
-        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13651458/fullTextXML"
-      },
-      {
-        "project": "hepaflex",
-        "grant": "101122345",
-        "source": "oa-pdf",
-        "url": "https://content.openalex.org/works/W7220689702.pdf"
-      },
-      {
-        "project": "hepaflex",
-        "grant": "101122345",
-        "source": "oa-pdf",
-        "url": "https://infoscience.epfl.ch/bitstreams/a77b2420-9a34-4549-90ed-c3ccefd8ef1c/download"
-      },
-      {
-        "project": "hepaflex",
-        "grant": "101122345",
-        "source": "oa-pdf-funding-context",
-        "url": "https://content.openalex.org/works/W7220689702.pdf"
-      },
-      {
-        "project": "hepaflex",
-        "grant": "101122345",
-        "source": "oa-pdf-funding-context",
-        "url": "https://infoscience.epfl.ch/bitstreams/a77b2420-9a34-4549-90ed-c3ccefd8ef1c/download"
-      },
-      {
-        "project": "hepaflex",
-        "grant": "101122345",
-        "source": "openalex"
-      },
-      {
-        "project": "hepaflex",
-        "grant": "101122345",
-        "source": "openalex-tei",
-        "url": "https://content.openalex.org/works/W7220689702.grobid-xml"
-      },
-      {
-        "project": "phoenixpv",
-        "grant": "101171478",
-        "source": "europe-pmc-jats",
-        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13651458/fullTextXML"
-      }
-    ],
-    "projects": [
-      "phoenixpv",
-      "hepaflex"
-    ],
-    "featured": {
-      "summary": "La monitorización continua de señales ópticas y eléctricas en exterior distingue la variación reversible que causa el tiempo atmosférico del fallo irreversible de cada célula de perovskita.",
-      "summary_en": "The framework separates environmental response, irreversible failure, optical timing and cross-climate transfer within a single field-diagnostic workflow.",
-      "order": 2,
-      "visual": "field",
-      "title": "Separar el clima del fallo real en células solares al aire libre"
-    },
-    "fundingStatus": "text-checked"
-  },
-  {
     "title": "Ambient <i>operando</i> self-healing in tin perovskite solar cells",
     "authors": [
       "Miriam Minguez-Avellan",
@@ -1476,8 +1430,8 @@
       }
     ],
     "journal": "EES Solar",
-    "publicationDate": "2026-01-01",
-    "onlinePublicationDate": "2026-01-01",
+    "publicationDate": "2026-01-21",
+    "onlinePublicationDate": "2026-01-21",
     "issueDate": null,
     "year": 2026,
     "volume": "2",
@@ -1589,5 +1543,66 @@
     "imageSource": "https://content.openalex.org/works/W7125242329.pdf",
     "imageType": "figure-1",
     "imageLicense": "http://creativecommons.org/licenses/by/3.0/"
+  },
+  {
+    "title": "CsPbBr<sub>3</sub> nanocrystals supported on a partially oxidized Ti<sub>2</sub>N MXene for photothermal CO<sub>2</sub> conversion",
+    "authors": [
+      "Kevin Mego",
+      "Emanuela Accardo",
+      "Pedro Ruiz-Campos",
+      "Herme G. Baldoví",
+      "Pedro Atienzar"
+    ],
+    "groupAuthors": [
+      "Froy Kevin Mego de la Cruz",
+      "Pedro Atienzar"
+    ],
+    "groupAuthorDisplayNames": [
+      "Kevin Mego",
+      "Pedro Atienzar"
+    ],
+    "groupMembers": [
+      {
+        "name": "Froy Kevin Mego de la Cruz",
+        "display": "Kevin Mego",
+        "profile": "/equipo/#kevin-mego"
+      },
+      {
+        "name": "Pedro Atienzar",
+        "display": "Pedro Atienzar",
+        "profile": "/equipo/#pedro-atienzar"
+      }
+    ],
+    "journal": "Materials Advances",
+    "publicationDate": "2026-01-01",
+    "onlinePublicationDate": "2025-12-29",
+    "issueDate": null,
+    "year": 2026,
+    "volume": "7",
+    "issue": "4",
+    "pages": "2465-2480",
+    "doi": "10.1039/d5ma01122a",
+    "url": "https://doi.org/10.1039/d5ma01122a",
+    "openalexId": "https://openalex.org/W7117514834",
+    "type": "article",
+    "image": null,
+    "openAccess": {
+      "status": "gold",
+      "url": "https://doi.org/10.1039/d5ma01122a",
+      "pdf": "https://pubs.rsc.org/en/content/articlepdf/2026/ma/d5ma01122a",
+      "version": "publishedVersion"
+    },
+    "license": "http://creativecommons.org/licenses/by/3.0/",
+    "themes": [
+      "fotocatalisis",
+      "materiales"
+    ],
+    "fundingEvidence": [],
+    "projects": [],
+    "featured": {
+      "summary": "La combinación de CsPbBr 3 con Ti 2 N MXene parcialmente oxidado proporciona una selectividad ajustable de CH 4 /CO, lo que muestra una prometedora producción sostenible de combustible fototérmico.",
+      "summary_en": "Combining CsPbBr 3 with partially oxidized Ti 2 N MXene gives tunable CH 4 /CO selectivity, showing promising sustainable photothermal fuel production."
+    },
+    "fundingStatus": "text-checked"
   }
 ]
