@@ -1,5 +1,88 @@
 [
   {
+    "title": "High‐Performance Lead and Lead‐Free Inverted Perovskite Photodiodes: From Self‐Powered Optical Sensing to X‐Ray Detection",
+    "authors": [
+      "Humberto Emmanuel Sánchez‐Godoy",
+      "Fady Elhady",
+      "Davoud Raeyani",
+      "José Moreno‐Tanco",
+      "Víctor Sagra‐Rodríguez",
+      "Rafael Abargues",
+      "Silver‐Hamill Turren‐Cruz",
+      "Jose Marqués‐Hueso",
+      "Juan P. Martínez‐Pastor"
+    ],
+    "groupAuthors": [
+      "Víctor Sagra Rodríguez",
+      "Rafael Abargues López"
+    ],
+    "groupAuthorDisplayNames": [
+      "Víctor Sagra‐Rodríguez",
+      "Rafael Abargues"
+    ],
+    "groupMembers": [
+      {
+        "name": "Víctor Sagra Rodríguez",
+        "display": "Víctor Sagra‐Rodríguez",
+        "profile": "/equipo/#victor-sagra"
+      },
+      {
+        "name": "Rafael Abargues López",
+        "display": "Rafael Abargues",
+        "profile": "/equipo/#rafael-abargues"
+      }
+    ],
+    "journal": "Advanced Functional Materials",
+    "publicationDate": "2026-11-20",
+    "onlinePublicationDate": "2026-11-20",
+    "issueDate": null,
+    "year": 2026,
+    "volume": null,
+    "issue": null,
+    "pages": "e79536",
+    "doi": "10.1002/adfm.79536",
+    "url": "https://doi.org/10.1002/adfm.79536",
+    "openalexId": "https://openalex.org/W7237114715",
+    "type": "article",
+    "image": null,
+    "openAccess": {
+      "status": "bronze",
+      "url": "https://doi.org/10.1002/adfm.79536",
+      "pdf": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/adfm.79536",
+      "version": "publishedVersion"
+    },
+    "license": null,
+    "themes": [],
+    "fundingEvidence": [
+      {
+        "project": "inkflex",
+        "grant": "PID2023-151880OB-C32",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7237114715.pdf"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023-151880OB-C32",
+        "source": "oa-pdf-funding-context",
+        "url": "https://content.openalex.org/works/W7237114715.pdf"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023-151880OB-C32",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7237114715.grobid-xml"
+      }
+    ],
+    "projects": [
+      "inkflex"
+    ],
+    "featured": {
+      "summary": "Este estudio compara fotodiodos de triple catión, lo que demuestra que una pila de p-i-n que utiliza monocapas de MeO-2PACz y capas de transporte de C 60/BCP logra un rendimiento autoalimentado superior.",
+      "summary_en": "This study compares triple‐cation photodiodes, demonstrating that a p‐i‐n stack utilizing MeO‐2PACz monolayers and C 60 /BCP transport layers achieves superior self‐powered performance."
+    },
+    "fundingStatus": "text-checked"
+  },
+  {
     "title": "Inducing Tunable Volatile Analog Switching in Nanocomposite-Based MAPbBr<sub>3</sub> Perovskite Memristors for Synaptic Emulation",
     "authors": [
       "Pablo F. Betancur",
@@ -362,7 +445,7 @@
     ],
     "journal": "Energy & Environmental Science",
     "publicationDate": "2026-10-06",
-    "onlinePublicationDate": "2026-10-06",
+    "onlinePublicationDate": "2026-11-03",
     "issueDate": null,
     "year": 2026,
     "volume": "19",
@@ -995,8 +1078,18 @@
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
+        "source": "openalex"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
         "source": "wiley-tdm",
         "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/sstr.202600020"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex"
       },
       {
         "project": "esgent",
@@ -1007,8 +1100,18 @@
       {
         "project": "flexwin",
         "grant": "PID2023-151880OB-C31",
+        "source": "openalex"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
         "source": "wiley-tdm",
         "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/sstr.202600020"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "openalex"
       },
       {
         "project": "hepaflex",
@@ -1091,7 +1194,12 @@
     "openalexId": "https://openalex.org/W7140167765",
     "type": "article",
     "image": null,
-    "openAccess": null,
+    "openAccess": {
+      "status": "green",
+      "url": "https://ora.ox.ac.uk/objects/uuid:af4f41fa-621f-42eb-9101-69ab875f9789/files/r0r967642x",
+      "pdf": "https://ora.ox.ac.uk/objects/uuid:af4f41fa-621f-42eb-9101-69ab875f9789/files/r0r967642x",
+      "version": "acceptedVersion"
+    },
     "license": null,
     "themes": [
       "materiales",
@@ -1103,7 +1211,7 @@
       "summary": "Mostramos que los precursores de Sn son intrínsecamente más reactivos y sensibles a su entorno químico, exhibiendo una estabilidad coloidal más pobre en comparación con el Pb y una fuerte tendencia inherente a aglomerarse.",
       "summary_en": "We show that Sn precursors are intrinsically more reactive and sensitive to their chemical environment, exhibiting poorer colloidal stability compared to Pb and a strong inherent tendency to agglomerate."
     },
-    "fundingStatus": "metadata-only"
+    "fundingStatus": "text-checked"
   },
   {
     "title": "Transforming Device Efficiency and Stability in NiO‐Sputtered n–i–p Perovskite Solar Cells by Soft‐Landing and a Thin Spiro‐OMeTAD Buffer Layer",
@@ -1434,7 +1542,7 @@
     ],
     "journal": "EES Solar",
     "publicationDate": "2026-01-21",
-    "onlinePublicationDate": "2026-01-21",
+    "onlinePublicationDate": "2026-04-27",
     "issueDate": null,
     "year": 2026,
     "volume": "2",
@@ -1578,7 +1686,7 @@
     ],
     "journal": "Materials Advances",
     "publicationDate": "2026-01-01",
-    "onlinePublicationDate": "2025-12-29",
+    "onlinePublicationDate": "2026-01-01",
     "issueDate": null,
     "year": 2026,
     "volume": "7",

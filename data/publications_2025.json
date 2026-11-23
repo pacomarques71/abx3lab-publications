@@ -78,8 +78,18 @@
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
+        "source": "openalex"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
         "source": "wiley-tdm",
         "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aelm.202500494"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex"
       },
       {
         "project": "esgent",
@@ -726,7 +736,7 @@
     ],
     "journal": "Materials Advances",
     "publicationDate": "2025-01-01",
-    "onlinePublicationDate": "2024-12-27",
+    "onlinePublicationDate": "2025-01-01",
     "issueDate": null,
     "year": 2025,
     "volume": "6",

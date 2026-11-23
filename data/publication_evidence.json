@@ -48,7 +48,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1016/j.solmat.2026.114703": {
-    "checked": "2026-11-16",
+    "checked": "2026-11-23",
     "fundingStatus": "metadata-only",
     "fundingEvidence": [],
     "featured": {
@@ -194,8 +194,18 @@
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
+        "source": "openalex"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
         "source": "wiley-tdm",
         "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/sstr.202600020"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex"
       },
       {
         "project": "esgent",
@@ -206,8 +216,18 @@
       {
         "project": "flexwin",
         "grant": "PID2023-151880OB-C31",
+        "source": "openalex"
+      },
+      {
+        "project": "flexwin",
+        "grant": "PID2023-151880OB-C31",
         "source": "wiley-tdm",
         "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/sstr.202600020"
+      },
+      {
+        "project": "hepaflex",
+        "grant": "101122345",
+        "source": "openalex"
       },
       {
         "project": "hepaflex",
@@ -241,8 +261,8 @@
     "fundingMatcherVersion": 2
   },
   "10.1002/anie.7703450": {
-    "checked": "2026-11-16",
-    "fundingStatus": "metadata-only",
+    "checked": "2026-11-23",
+    "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "featured": {
       "summary": "Mostramos que los precursores de Sn son intrínsecamente más reactivos y sensibles a su entorno químico, exhibiendo una estabilidad coloidal más pobre en comparación con el Pb y una fuerte tendencia inherente a aglomerarse.",
@@ -257,7 +277,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1002/aenm.202503291": {
-    "checked": "2026-11-16",
+    "checked": "2026-11-23",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -326,7 +346,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1021/acsenergylett.5c04010": {
-    "checked": "2026-11-16",
+    "checked": "2026-11-23",
     "fundingStatus": "metadata-only",
     "fundingEvidence": [],
     "featured": {
@@ -386,7 +406,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d6ee05477c": {
-    "checked": "2026-11-16",
+    "checked": "2026-11-23",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -464,7 +484,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d5el00182j": {
-    "checked": "2026-11-16",
+    "checked": "2026-11-23",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -568,8 +588,18 @@
       {
         "project": "cns2023",
         "grant": "CNS2023-144270",
+        "source": "openalex"
+      },
+      {
+        "project": "cns2023",
+        "grant": "CNS2023-144270",
         "source": "wiley-tdm",
         "url": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002/aelm.202500494"
+      },
+      {
+        "project": "esgent",
+        "grant": "ESGENT/010/2024",
+        "source": "openalex"
       },
       {
         "project": "esgent",
@@ -692,7 +722,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1002/lpor.202401920": {
-    "checked": "2026-11-16",
+    "checked": "2026-11-23",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -900,7 +930,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d4ma01150c": {
-    "checked": "2026-11-16",
+    "checked": "2026-11-23",
     "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "featured": null,
@@ -913,7 +943,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d5dd00099h": {
-    "checked": "2026-11-16",
+    "checked": "2026-11-23",
     "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "featured": null,
@@ -1078,7 +1108,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d6qm00873a": {
-    "checked": "2026-11-16",
+    "checked": "2026-11-23",
     "fundingStatus": "metadata-only",
     "fundingEvidence": [],
     "featured": {
@@ -1091,6 +1121,41 @@
     "image": null,
     "license": null,
     "wileyTdmStatus": "not-configured",
+    "fundingMatcherVersion": 2
+  },
+  "10.1002/adfm.79536": {
+    "checked": "2026-11-23",
+    "fundingStatus": "text-checked",
+    "fundingEvidence": [
+      {
+        "project": "inkflex",
+        "grant": "PID2023-151880OB-C32",
+        "source": "oa-pdf",
+        "url": "https://content.openalex.org/works/W7237114715.pdf"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023-151880OB-C32",
+        "source": "oa-pdf-funding-context",
+        "url": "https://content.openalex.org/works/W7237114715.pdf"
+      },
+      {
+        "project": "inkflex",
+        "grant": "PID2023-151880OB-C32",
+        "source": "openalex-tei",
+        "url": "https://content.openalex.org/works/W7237114715.grobid-xml"
+      }
+    ],
+    "featured": {
+      "summary": "Este estudio compara fotodiodos de triple catión, lo que demuestra que una pila de p-i-n que utiliza monocapas de MeO-2PACz y capas de transporte de C 60/BCP logra un rendimiento autoalimentado superior.",
+      "summary_en": "This study compares triple‐cation photodiodes, demonstrating that a p‐i‐n stack utilizing MeO‐2PACz monolayers and C 60 /BCP transport layers achieves superior self‐powered performance."
+    },
+    "imageMatcherVersion": 7,
+    "acsTocMatcherVersion": null,
+    "tocChecked": null,
+    "image": null,
+    "license": null,
+    "wileyTdmStatus": "unavailable",
     "fundingMatcherVersion": 2
   }
 }
