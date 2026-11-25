@@ -137,6 +137,15 @@ class PmcImagesTests(unittest.TestCase):
         out, _, _ = self.enrich([(b"TOC", "https://s3/ga.webp", "graphical-abstract")], prev=prev)
         self.assertEqual(out["imageType"], "graphical-abstract")
 
+    def test_pmc_original_is_kept_when_pmc_fails_on_recheck(self):
+        prev = {"checked": module.date.today().isoformat(), "fundingStatus": "text-checked",
+                "fundingMatcherVersion": module.FUNDING_MATCHER_VERSION, "fundingEvidence": [],
+                "imageMatcherVersion": 1,
+                "image": {"url": "pmc-url", "source": "https://pmc-oa-opendata.s3.amazonaws.com/x/f1.jpg",
+                          "type": "figure-1", "license": "cc-by"}}
+        out, _, _ = self.enrich([], prev=prev)
+        self.assertEqual(out["image"], "pmc-url")
+
 
 if __name__ == "__main__":
     unittest.main()

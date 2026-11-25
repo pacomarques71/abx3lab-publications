@@ -19,6 +19,9 @@ Registro para coordinación entre ChatGPT, Claude y los editores de este reposit
 
 **Segunda corrección (mismo día):** en la primera ejecución (run 45591966254, commit del bot f2b1138), la Figura 1 de 10.1002/anie.7703450 salió cortada (solo la parte inferior). Es una figura vectorial y `first_figure_from_pdf` solo renderizaba los 225 pt inmediatamente encima del pie. Ahora prueba primero la región completa (desde el último párrafo de texto de la columna por encima del pie, o desde 50 pt bajo el borde superior, hasta 560 pt) y, si no parece una figura, la región corta de antes. IMAGE_MATCHER_VERSION 7 → 8: las Figuras 1 automáticas (no ACS) se revisan una vez. Test nuevo con una figura vectorial de 380 pt (93/93 OK).
 
+**Tercera corrección (mismo día):** en la revisión por la versión 8 (run 45592664883, commit del bot bb36730), Europe PMC (www.ebi.ac.uk) no respondió (ReadTimeout) y 10.1002/advs.78211 y 10.1002/smsc.202400529 perdieron la Figura 1 original de PMC, que pasó a renderizarse desde el PDF. Ahora, en una revisión, una Figura 1 de PMC nunca se sustituye por una renderizada del PDF. IMAGE_MATCHER_VERSION 8 → 9 para recuperar esas dos con PMC ya operativo. Test nuevo (94/94 OK).
+- Resultado de la versión 8 en las demás: anie.7703450 ya sale completa (paneles a y b); d5ma01122a y sstr.70540 se renderizan de nuevo con un encuadre casi igual (sstr.70540 sigue cortando el panel C por la derecha, como antes).
+
 **Limitaciones:** el derecho de reutilización es de los autores y su alcance puede variar según la revista y el formulario firmado; conviene confirmarlo con el autor de correspondencia. La Figura 1 renderizada del PDF se publica entera (sin recortar paneles).
 
 ## 2026-11-15 — TOC y Figura 1: PMC Open Access y manuscritos aceptados

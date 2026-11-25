@@ -35,7 +35,7 @@ MAX_PDF = 24 * 1024 * 1024
 MAX_IMAGE = 10 * 1024 * 1024
 CHECK_DAYS = 60
 FUNDING_MATCHER_VERSION = 2  # increment when grant parsing semantics change
-IMAGE_MATCHER_VERSION = 8  # 8: figuras vectoriales altas completas (antes, solo 225 pt sobre el pie); 7: TOC/Figura 1 de PMC y manuscritos aceptados
+IMAGE_MATCHER_VERSION = 9  # 9: recuperar Figuras 1 de PMC perdidas por un fallo de Europe PMC; 8: figuras vectoriales altas completas (antes, solo 225 pt sobre el pie); 7: TOC/Figura 1 de PMC y manuscritos aceptados
 ACS_TOC_MATCHER_VERSION = 2  # retry ACS TOCs independently of other image sources
 SECTION_NAMES = re.compile(r"acknowledg|funding|financial support|grant support|financial assistance|supporting fund|agradecim|financiaci", re.I)
 FIGURE_CAPTION = re.compile(r"^\s*(?:fig(?:ure)?\.?\s*1\b|figure\s+1\b)", re.I)
@@ -1444,6 +1444,13 @@ def enrich_entry(rec, projects, prev, extras):
                     if not found:
                         continue
                     candidate, srcurl, typ = found
+                    # Nunca sustituir la Figura 1 original de PMC por una renderizada
+                    # del PDF: si PMC no responde en una revisión (p. ej. Europe PMC
+                    # caído), se conserva la imagen anterior.
+                    if (typ == "figure-1" and prior_image.get("type") == "figure-1"
+                            and "pmc-oa-opendata" in str(prior_image.get("source", ""))
+                            and "pmc-oa-opendata" not in str(srcurl)):
+                        break
                     # Content-addressed asset prevents stale GitHub/browser/CDN
                     # caches when the genuine TOC replaces a provisional Figure 1.
                     file_name = publication_image_filename(doi, candidate)
