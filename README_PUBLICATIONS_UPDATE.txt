@@ -110,7 +110,8 @@ secret GitHub Actions: OPENALEX_API_KEY. Sin clave funciona el modo
 alternativo HTML editorial / PDF de acceso abierto, pero puede haber
 falsos negativos si el editor bloquea el acceso automatizado.
 
-Orden de búsqueda de la imagen (solo con licencia CC reutilizable):
+Orden de búsqueda de la imagen (con licencia CC reutilizable, o artículo de
+Wiley con licencia estándar; ver abajo):
   1. TOC de la web de la editorial
   2. TOC del conjunto Open Access de PMC en AWS (pmc-oa-opendata), si el
      artículo está en PMC
@@ -118,14 +119,23 @@ Orden de búsqueda de la imagen (solo con licencia CC reutilizable):
   4. Figura 1 original de PMC
   5. Figura 1 renderizada desde el PDF (hasta 20 páginas; admite números de
      línea de manuscritos aceptados)
-Los artículos de acceso cerrado sin licencia CC no reciben imagen automática.
+Los artículos de acceso cerrado sin licencia CC no reciben imagen automática,
+salvo los de Wiley (DOI 10.1002/) sin ninguna licencia Creative Commons
+(decisión del 25/11/2026): el acuerdo de cesión de Wiley permite a los autores
+reutilizar sus figuras sin modificarlas, sin fines comerciales y con el crédito
+completo. Esas imágenes llevan imageLicense «wiley-standard-author-reuse» e
+imageCredit con el aviso de copyright («© 2026 Wiley‑VCH GmbH»), leído del PDF
+o, si no aparece, deducido de la revista y del año de publicación online. La
+web lo muestra en el borde inferior de la figura. Los artículos de Wiley con
+licencia CC BY-NC o CC BY-ND siguen sin imagen automática.
 
 Si la publicación tiene una imagen manual en publication_extras.json,
 esta tiene preferencia. En caso contrario, solo cuando hay licencia de
 redistribución compatible, el script intenta conseguir un gráfico TOC
 o la primera figura de un PDF abierto (identificada por su pie). Guarda
 un WebP de 768px máximo en images/ y escribe image, imageSource,
-imageType e imageLicense en los JSON consumidos por la web.
+imageType e imageLicense (e imageCredit en los de Wiley con licencia
+estándar) en los JSON consumidos por la web.
 
 Los textos y gráficos inaccesibles NO se fuerzan con scraping agresivo.
 Los casos incompletos se reintentan automáticamente, y las imágenes

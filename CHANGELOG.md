@@ -2,6 +2,23 @@
 
 Registro para coordinación entre ChatGPT, Claude y los editores de este repositorio. Consultarlo antes de modificar el pipeline y actualizarlo con cada cambio.
 
+## 2026-11-25 — Imágenes de artículos de Wiley con licencia estándar (regla 7)
+
+**Informe:** el artículo nuevo «High‐Performance Lead and Lead‐Free Inverted Perovskite Photodiodes…» (Adv. Funct. Mater., 10.1002/adfm.79536, 20/11/2026) salía sin figura. No era un fallo: Crossref da la licencia estándar de Wiley (termsAndConditions) y OpenAlex lo marca *bronze* sin licencia, así que la regla 7 lo dejaba sin imagen.
+
+**Decisión de Paco:** admitir imágenes de Wiley con licencia estándar. El acuerdo de cesión de copyright / licencia exclusiva de Wiley permite a los autores reutilizar figuras sin pedir permiso, con crédito completo, sin modificarlas y sin fines comerciales; todos los artículos de la web los firman al menos dos miembros del grupo. En la figura debe verse, pequeño y en el borde inferior, «© 2026 Wiley‑VCH GmbH».
+
+**Cambios:**
+- scripts/enrich_publications.py: `wiley_standard_terms()` (DOI 10.1002/ sin ninguna licencia Creative Commons en Crossref ni OpenAlex) → licencia `wiley-standard-author-reuse`; se buscan TOC y Figura 1 por el mismo orden que siempre. `wiley_copyright()` lee el aviso «© AAAA Wiley-VCH GmbH / Wiley Periodicals LLC / John Wiley & Sons Ltd» del PDF (3 primeras páginas y la última); si no está, usa el año de publicación online y «Wiley‑VCH GmbH» para las revistas de Wiley‑VCH (lista WILEY_VCH_CODES) o «Wiley» para las demás. Se guarda en `image.credit` (publication_evidence.json) y en `imageCredit` (publications*.json). El guion de «Wiley‑VCH» es U+2011 (no se parte).
+- Sin cambios: artículos de otras editoriales sin licencia CC y artículos con CC BY-NC/ND (también de Wiley) siguen sin imagen automática; la imagen manual de publication_extras.json sigue teniendo prioridad.
+- CLAUDE.md (regla 7) y README_PUBLICATIONS_UPDATE.txt actualizados.
+- Tests: tests/test_publication_wiley.py (9 nuevos); 92/92 OK.
+- Web (Oxygen, Publicaciones ES/EN): el crédito del borde inferior de la figura usa `imageCredit` cuando existe («Imagen: Advanced Functional Materials · © 2026 Wiley‑VCH GmbH»), con el aviso de copyright sin pasar a mayúsculas.
+
+**Afecta además a:** 10.1002/aenm.202503291 y 10.1002/anie.7703450, que tampoco tenían licencia CC y pasan a recibir imagen.
+
+**Limitaciones:** el derecho de reutilización es de los autores y su alcance puede variar según la revista y el formulario firmado; conviene confirmarlo con el autor de correspondencia. La Figura 1 renderizada del PDF se publica entera (sin recortar paneles).
+
 ## 2026-11-15 — TOC y Figura 1: PMC Open Access y manuscritos aceptados
 
 **Informe:** tras el arreglo de fechas, los dos artículos RSC que entraron en «The latest» (10.1039/d6ee05477c, 10.1039/d6qm00873a) salían con la ilustración de reserva, sin TOC ni Figura 1.

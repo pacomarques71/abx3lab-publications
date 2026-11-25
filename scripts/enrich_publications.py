@@ -50,6 +50,29 @@ FIGURE_ONE_LINE = re.compile(
 )
 FIGURE_SCAN_PAGES = 20
 ALLOWED_IMAGE_LICENSES = ("cc-by", "cc0", "public-domain", "cc-by-sa")
+# Artículos de Wiley sin licencia Creative Commons (licencia estándar, con
+# cesión de copyright o licencia exclusiva): el acuerdo de Wiley permite a los
+# autores reutilizar figuras sin pedir permiso, sin modificarlas, sin fines
+# comerciales y con el crédito completo. Como todos los artículos de la web los
+# firman miembros del grupo, se admite su imagen con el aviso de copyright
+# («© 2026 Wiley‑VCH GmbH»), que la web muestra en el borde inferior.
+WILEY_STANDARD_LICENSE = "wiley-standard-author-reuse"
+# Revistas de Wiley‑VCH (código de revista del DOI 10.1002/<código>.<número>).
+WILEY_VCH_CODES = {
+    "adfm", "adma", "aenm", "advs", "anie", "ange", "smll", "smtd", "solr",
+    "sstr", "aelm", "adom", "admi", "aesr", "aisy", "adsu", "adts", "admt",
+    "lpor", "cssc", "cphc", "celc", "cctc", "chem", "ejic", "ejoc", "batt",
+    "ente", "pssa", "pssb", "pssr", "ppsc", "mame", "marc", "macp", "elsa",
+    "cplu", "asia", "open", "ctpp", "zaac", "adem", "apxr", "smsc", "eem2",
+}
+# Aviso de copyright del PDF de Wiley: «© 2026 Wiley-VCH GmbH»,
+# «© 2026 Wiley Periodicals LLC», «© 2026 John Wiley & Sons Ltd».
+WILEY_COPYRIGHT = re.compile(
+    r"(?:©|\(c\)|Copyright\s*©?)\s*((?:19|20)\d{2})\s+"
+    r"(Wiley[\s\u2010-\u2015-]*VCH\s+(?:Verlag\s+)?GmbH(?:\s*&\s*Co\.\s*KGaA)?|"
+    r"Wiley\s+Periodicals,?\s+LLC|John\s+Wiley\s*&\s*Sons,?\s+(?:Ltd|Inc)\.?)",
+    re.I,
+)
 
 
 def load(path, default):
@@ -288,6 +311,60 @@ def metadata_licenses(rec, oa_work):
                 if "nc" not in lic and "nd" not in lic:
                     return lic
     return None
+
+
+def wiley_standard_terms(doi, rec, oa_work):
+    """Artículo de Wiley sin ninguna licencia Creative Commons (ni siquiera NC/ND)."""
+    if not str(doi or "").lower().startswith("10.1002/"):
+        return False
+    licences = " ".join(str(x or "").lower() for x in (
+        rec.get("license"),
+        (oa_work.get("best_oa_location") or {}).get("license"),
+        (oa_work.get("primary_location") or {}).get("license"),
+    ))
+    return "creativecommons" not in licences and "cc-" not in licences
+
+
+def _clean_holder(holder):
+    holder = re.sub(r"\s+", " ", holder).strip().rstrip(".")
+    if re.match(r"wiley[\s\u2010-\u2015-]*vch", holder, re.I):
+        return "Wiley\u2011VCH GmbH"  # guion que no se parte al final de línea
+    if re.match(r"wiley\s+periodicals", holder, re.I):
+        return "Wiley Periodicals LLC"
+    if re.match(r"john\s+wiley", holder, re.I):
+        return "John Wiley & Sons Ltd"
+    return holder
+
+
+def wiley_copyright_from_pdf(pdf):
+    """Lee el aviso de copyright de la versión publicada (primeras y última páginas)."""
+    if not pdf:
+        return None
+    try:
+        import fitz
+        with fitz.open(stream=pdf, filetype="pdf") as doc:
+            pages = list(range(min(3, doc.page_count)))
+            if doc.page_count > 3:
+                pages.append(doc.page_count - 1)
+            for i in pages:
+                m = WILEY_COPYRIGHT.search(doc[i].get_text("text") or "")
+                if m:
+                    return f"\u00a9 {m.group(1)} {_clean_holder(m.group(2))}"
+    except (ImportError, RuntimeError, ValueError, OSError):
+        return None
+    return None
+
+
+def wiley_copyright(doi, rec, pdf=None):
+    """Aviso de copyright para el crédito de la imagen: del PDF o, si no, por la revista."""
+    from_pdf = wiley_copyright_from_pdf(pdf)
+    if from_pdf:
+        return from_pdf
+    year = str(rec.get("onlinePublicationDate") or rec.get("publicationDate")
+               or rec.get("year") or "")[:4]
+    code = str(doi).lower().split("/", 1)[-1].split(".", 1)[0]
+    holder = "Wiley\u2011VCH GmbH" if code in WILEY_VCH_CODES else "Wiley"
+    return f"\u00a9 {year} {holder}" if year.isdigit() else f"\u00a9 {holder}"
 
 
 def publication_image_filename(doi, blob):
@@ -1313,6 +1390,10 @@ def enrich_entry(rec, projects, prev, extras):
                 print("  Abstract unavailable for automatic summary:", doi, flush=True)
         if needs_picture:
             lic = metadata_licenses(rec, work)
+            credit = None
+            if not lic and wiley_standard_terms(doi, rec, work):
+                lic = WILEY_STANDARD_LICENSE
+                credit = wiley_copyright(doi, rec, pdf)
             if lic:
                 def html_toc():
                     if not page:
@@ -1361,6 +1442,8 @@ def enrich_entry(rec, projects, prev, extras):
                         blob = candidate
                         img_origin = {"url": RAW_IMAGES + file_name, "source": srcurl,
                                       "type": typ, "license": lic, "doi": doi}
+                        if credit:
+                            img_origin["credit"] = credit
                         break
                 if blob is None and doi == "10.1021/acsami.6c11506" and prior_image.get("type") == "figure-1":
                     reason = ("PDF no accesible" if pdf is None else
@@ -1376,9 +1459,12 @@ def enrich_entry(rec, projects, prev, extras):
     rec["fundingEvidence"] = sorted(evidence, key=lambda e: (e["project"], e["source"], e["grant"]))
     rec["fundingStatus"] = status
     rec["featured"] = featured
+    rec.pop("imageCredit", None)
     if manual.get("image"):
         rec["image"] = manual["image"]
     elif img_origin:
+        if img_origin.get("credit"):
+            rec["imageCredit"] = img_origin["credit"]
         rec["image"] = img_origin["url"]
         rec["imageSource"] = img_origin["source"]
         rec["imageType"] = img_origin["type"]

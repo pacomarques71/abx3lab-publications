@@ -1,0 +1,91 @@
+"""Imágenes de artículos de Wiley con licencia estándar y su aviso de copyright. Sin red."""
+import importlib.util
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+
+spec = importlib.util.spec_from_file_location(
+    "enrich_publications_wiley", Path(__file__).resolve().parents[1] / "scripts/enrich_publications.py"
+)
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+
+BRONZE = {"best_oa_location": {"license": None}, "primary_location": {"license": None}}
+
+
+def pdf_with(text):
+    import fitz
+    doc = fitz.open()
+    doc.new_page().insert_text((72, 72), "Research Article")
+    doc.new_page().insert_text((72, 760), text)
+    blob = doc.tobytes()
+    doc.close()
+    return blob
+
+
+class WileyStandardLicenceTests(unittest.TestCase):
+    def test_wiley_without_cc_licence_is_standard(self):
+        self.assertTrue(module.wiley_standard_terms("10.1002/adfm.79536", {"license": None}, BRONZE))
+
+    def test_wiley_with_cc_nc_licence_is_not_standard(self):
+        rec = {"license": "http://creativecommons.org/licenses/by-nc/4.0/"}
+        self.assertFalse(module.wiley_standard_terms("10.1002/lpor.202401920", rec, {}))
+
+    def test_other_publishers_are_not_affected(self):
+        self.assertFalse(module.wiley_standard_terms("10.1021/acsenergylett.5c04010", {"license": None}, {}))
+        self.assertFalse(module.wiley_standard_terms("10.1039/d6qm00873a", {"license": None}, {}))
+
+    def test_copyright_read_from_pdf(self):
+        pdf = pdf_with("Adv. Funct. Mater. 2026, e79536   © 2026 Wiley-VCH GmbH")
+        self.assertEqual(module.wiley_copyright("10.1002/adfm.79536", {}, pdf),
+                         "© 2026 Wiley‑VCH GmbH")
+
+    def test_copyright_periodicals_from_pdf(self):
+        pdf = pdf_with("© 2025 Wiley Periodicals LLC.")
+        self.assertEqual(module.wiley_copyright("10.1002/ente.1", {}, pdf),
+                         "© 2025 Wiley Periodicals LLC")
+
+    def test_copyright_fallback_uses_online_year_and_journal(self):
+        rec = {"onlinePublicationDate": "2025-09-30", "publicationDate": "2026-01-01"}
+        self.assertEqual(module.wiley_copyright("10.1002/aenm.202503291", rec, None),
+                         "© 2025 Wiley‑VCH GmbH")
+        self.assertEqual(module.wiley_copyright("10.1002/xyz.1", {"year": 2026}, None),
+                         "© 2026 Wiley")
+
+    def enrich(self, doi, license=None, work=BRONZE, pdf_figure=b"PDF-FIG1"):
+        rec = {"doi": doi, "projects": [], "image": None, "license": license,
+               "openAccess": None, "fundingEvidence": [], "publicationDate": "2026-11-20",
+               "onlinePublicationDate": "2026-11-20",
+               "featured": {"summary": "x", "summary_en": "x"}}
+        prev = {"checked": module.date.today().isoformat(), "fundingStatus": "text-checked",
+                "fundingMatcherVersion": module.FUNDING_MATCHER_VERSION, "fundingEvidence": []}
+        with patch.object(module, "KEY", ""), patch.object(module, "WILEY_TDM_TOKEN", ""), \
+             patch.object(module, "openalex_work", return_value=work), \
+             patch.object(module, "download_publisher_page", return_value=None), \
+             patch.object(module, "accessible_pdf_candidates", return_value=["https://repo.example/a.pdf"]), \
+             patch.object(module, "request_url", return_value=(b"%PDF-fake", "https://repo.example/a.pdf", "application/pdf")), \
+             patch.object(module, "pmc_publisher_images", return_value=[]), \
+             patch.object(module, "toc_graphic_from_pdf", return_value=None), \
+             patch.object(module, "first_figure_from_pdf", return_value=pdf_figure), \
+             patch.object(module, "extract_image_to_webp", return_value=True):
+            return module.enrich_entry(rec, [], prev, {"publications": {}})
+
+    def test_wiley_standard_article_gets_image_and_credit(self):
+        out, audit = self.enrich("10.1002/adfm.79536")
+        self.assertEqual(out["imageType"], "figure-1")
+        self.assertEqual(out["imageLicense"], module.WILEY_STANDARD_LICENSE)
+        self.assertEqual(out["imageCredit"], "© 2026 Wiley‑VCH GmbH")
+        self.assertEqual(audit["image"]["credit"], "© 2026 Wiley‑VCH GmbH")
+
+    def test_cc_by_article_has_no_copyright_credit(self):
+        out, _ = self.enrich("10.1002/advs.78211", license="http://creativecommons.org/licenses/by/4.0/")
+        self.assertTrue(out["image"])
+        self.assertNotIn("imageCredit", out)
+
+    def test_closed_article_of_other_publisher_still_has_no_image(self):
+        out, _ = self.enrich("10.1039/d6qm00873a")
+        self.assertIsNone(out.get("image"))
+
+
+if __name__ == "__main__":
+    unittest.main()

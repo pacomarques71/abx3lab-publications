@@ -8,7 +8,7 @@ Antes de modificar código, leer CHANGELOG.md y README_PUBLICATIONS_UPDATE.txt.
 4. No editar los JSON generados como solución duradera: corregir scripts o su configuración.
 5. La imagen manual de publication_extras.json tiene siempre prioridad sobre la automática.
 6. Los proyectos deben relacionarse por códigos acreditados en Funding/Acknowledgements, nunca por temática. No reintroducir la herencia indiscriminada de proyectos antiguos.
-7. No republicar imágenes sin una licencia de reutilización comprobable. Conservar la fuente y licencia.
+7. No republicar imágenes sin una licencia de reutilización comprobable. Conservar la fuente y licencia. Excepción (25/11/2026): los artículos de Wiley (DOI 10.1002/) sin licencia Creative Commons sí reciben imagen, amparada en el derecho de los autores a reutilizar sus figuras según el acuerdo de Wiley (sin modificarlas, sin fines comerciales y con crédito completo); siempre con imageCredit «© <año> Wiley‑VCH GmbH» (o el titular que figure en el PDF), que la web muestra en el borde inferior de la figura.
 8. OpenAlex TEI necesita un secreto OPENALEX_API_KEY en GitHub Actions, no guardar claves en el repo.
 9. Ejecutar tests y verificar GitHub Actions después de modificar el pipeline.
 10. **Actualizar CHANGELOG.md** con fecha, archivos afectados, propósito, decisiones y limitaciones cada vez que se modifique este flujo.
