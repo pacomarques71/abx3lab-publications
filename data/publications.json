@@ -44,7 +44,7 @@
     "url": "https://doi.org/10.1002/adfm.79536",
     "openalexId": "https://openalex.org/W7237114715",
     "type": "article",
-    "image": null,
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-c2c99cc26eb7ce9895fe-7cb8354c1452.webp",
     "openAccess": {
       "status": "bronze",
       "url": "https://doi.org/10.1002/adfm.79536",
@@ -80,7 +80,11 @@
       "summary": "Este estudio compara fotodiodos de triple catión, lo que demuestra que una pila de p-i-n que utiliza monocapas de MeO-2PACz y capas de transporte de C 60/BCP logra un rendimiento autoalimentado superior.",
       "summary_en": "This study compares triple‐cation photodiodes, demonstrating that a p‐i‐n stack utilizing MeO‐2PACz monolayers and C 60 /BCP transport layers achieves superior self‐powered performance."
     },
-    "fundingStatus": "text-checked"
+    "fundingStatus": "text-checked",
+    "imageCredit": "© 2026 Wiley‑VCH GmbH",
+    "imageSource": "https://content.openalex.org/works/W7237114715.pdf",
+    "imageType": "figure-1",
+    "imageLicense": "wiley-standard-author-reuse"
   },
   {
     "title": "Inducing Tunable Volatile Analog Switching in Nanocomposite-Based MAPbBr<sub>3</sub> Perovskite Memristors for Synaptic Emulation",
@@ -1193,7 +1197,7 @@
     "url": "https://doi.org/10.1002/anie.7703450",
     "openalexId": "https://openalex.org/W7140167765",
     "type": "article",
-    "image": null,
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-02075baa1bc4294d27b5-080ccd59fa0b.webp",
     "openAccess": {
       "status": "green",
       "url": "https://ora.ox.ac.uk/objects/uuid:af4f41fa-621f-42eb-9101-69ab875f9789/files/r0r967642x",
@@ -1211,7 +1215,11 @@
       "summary": "Mostramos que los precursores de Sn son intrínsecamente más reactivos y sensibles a su entorno químico, exhibiendo una estabilidad coloidal más pobre en comparación con el Pb y una fuerte tendencia inherente a aglomerarse.",
       "summary_en": "We show that Sn precursors are intrinsically more reactive and sensitive to their chemical environment, exhibiting poorer colloidal stability compared to Pb and a strong inherent tendency to agglomerate."
     },
-    "fundingStatus": "text-checked"
+    "fundingStatus": "text-checked",
+    "imageCredit": "© 2026 Wiley‑VCH GmbH",
+    "imageSource": "https://content.openalex.org/works/W7140167765.pdf",
+    "imageType": "figure-1",
+    "imageLicense": "wiley-standard-author-reuse"
   },
   {
     "title": "Transforming Device Efficiency and Stability in NiO‐Sputtered n–i–p Perovskite Solar Cells by Soft‐Landing and a Thin Spiro‐OMeTAD Buffer Layer",
@@ -1262,7 +1270,7 @@
     "url": "https://doi.org/10.1002/aenm.202503291",
     "openalexId": "https://openalex.org/W7130511261",
     "type": "article",
-    "image": null,
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-dada8e59261e09a3cf40-4f91ba019690.webp",
     "openAccess": {
       "status": "bronze",
       "url": "https://doi.org/10.1002/aenm.202503291",
@@ -1336,7 +1344,11 @@
       "summary": "La introducción de una rejilla polarizada y una interfaz de amortiguación nos permiten lograr un aterrizaje suave de NiO en la perovskita de haluro, minimizando así el daño interfacial inducido por el proceso.",
       "summary_en": "The introduction of a biased grid and a buffer interface enable us to achieve a soft landing of NiO on the halide perovskite, thereby minimizing process‐induced interfacial damage."
     },
-    "fundingStatus": "text-checked"
+    "fundingStatus": "text-checked",
+    "imageCredit": "© 2026 Wiley‑VCH GmbH",
+    "imageSource": "https://content.openalex.org/works/W7130511261.pdf",
+    "imageType": "figure-1",
+    "imageLicense": "wiley-standard-author-reuse"
   },
   {
     "title": "Rapid Laser-Based Deposition of PbI<sub>2</sub>/CsBr Inorganic Scaffolds for Hybrid Fabrication of Perovskite/Silicon Tandem Solar Cells",

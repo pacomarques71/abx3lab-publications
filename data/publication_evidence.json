@@ -48,7 +48,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1016/j.solmat.2026.114703": {
-    "checked": "2026-11-23",
+    "checked": "2026-11-25",
     "fundingStatus": "metadata-only",
     "fundingEvidence": [],
     "featured": {
@@ -261,7 +261,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1002/anie.7703450": {
-    "checked": "2026-11-23",
+    "checked": "2026-11-25",
     "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "featured": {
@@ -271,13 +271,20 @@
     "imageMatcherVersion": 7,
     "acsTocMatcherVersion": null,
     "tocChecked": null,
-    "image": null,
-    "license": null,
+    "image": {
+      "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-02075baa1bc4294d27b5-080ccd59fa0b.webp",
+      "source": "https://content.openalex.org/works/W7140167765.pdf",
+      "type": "figure-1",
+      "license": "wiley-standard-author-reuse",
+      "doi": "10.1002/anie.7703450",
+      "credit": "© 2026 Wiley‑VCH GmbH"
+    },
+    "license": "wiley-standard-author-reuse",
     "wileyTdmStatus": "unavailable",
     "fundingMatcherVersion": 2
   },
   "10.1002/aenm.202503291": {
-    "checked": "2026-11-23",
+    "checked": "2026-11-25",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -340,13 +347,20 @@
     "imageMatcherVersion": 7,
     "acsTocMatcherVersion": null,
     "tocChecked": null,
-    "image": null,
-    "license": null,
+    "image": {
+      "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-dada8e59261e09a3cf40-4f91ba019690.webp",
+      "source": "https://content.openalex.org/works/W7130511261.pdf",
+      "type": "figure-1",
+      "license": "wiley-standard-author-reuse",
+      "doi": "10.1002/aenm.202503291",
+      "credit": "© 2026 Wiley‑VCH GmbH"
+    },
+    "license": "wiley-standard-author-reuse",
     "wileyTdmStatus": "unavailable",
     "fundingMatcherVersion": 2
   },
   "10.1021/acsenergylett.5c04010": {
-    "checked": "2026-11-23",
+    "checked": "2026-11-25",
     "fundingStatus": "metadata-only",
     "fundingEvidence": [],
     "featured": {
@@ -406,7 +420,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d6ee05477c": {
-    "checked": "2026-11-23",
+    "checked": "2026-11-25",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -484,7 +498,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d5el00182j": {
-    "checked": "2026-11-23",
+    "checked": "2026-11-25",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -722,7 +736,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1002/lpor.202401920": {
-    "checked": "2026-11-23",
+    "checked": "2026-11-25",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -930,7 +944,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d4ma01150c": {
-    "checked": "2026-11-23",
+    "checked": "2026-11-25",
     "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "featured": null,
@@ -943,7 +957,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d5dd00099h": {
-    "checked": "2026-11-23",
+    "checked": "2026-11-25",
     "fundingStatus": "text-checked",
     "fundingEvidence": [],
     "featured": null,
@@ -1108,7 +1122,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1039/d6qm00873a": {
-    "checked": "2026-11-23",
+    "checked": "2026-11-25",
     "fundingStatus": "metadata-only",
     "fundingEvidence": [],
     "featured": {
@@ -1124,7 +1138,7 @@
     "fundingMatcherVersion": 2
   },
   "10.1002/adfm.79536": {
-    "checked": "2026-11-23",
+    "checked": "2026-11-25",
     "fundingStatus": "text-checked",
     "fundingEvidence": [
       {
@@ -1153,8 +1167,15 @@
     "imageMatcherVersion": 7,
     "acsTocMatcherVersion": null,
     "tocChecked": null,
-    "image": null,
-    "license": null,
+    "image": {
+      "url": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-c2c99cc26eb7ce9895fe-7cb8354c1452.webp",
+      "source": "https://content.openalex.org/works/W7237114715.pdf",
+      "type": "figure-1",
+      "license": "wiley-standard-author-reuse",
+      "doi": "10.1002/adfm.79536",
+      "credit": "© 2026 Wiley‑VCH GmbH"
+    },
+    "license": "wiley-standard-author-reuse",
     "wileyTdmStatus": "unavailable",
     "fundingMatcherVersion": 2
   }
