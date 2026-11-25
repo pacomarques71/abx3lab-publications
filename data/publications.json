@@ -283,7 +283,7 @@
     "url": "https://doi.org/10.1039/d6qm00873a",
     "openalexId": "https://openalex.org/W7224124872",
     "type": "article",
-    "image": null,
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/manual-d6qm00873a-toc.webp",
     "openAccess": null,
     "license": null,
     "themes": [],
@@ -293,7 +293,8 @@
       "summary": "High-oxidation-state palladium species display remarkable catalytic activity in organic synthesis.",
       "summary_en": "High-oxidation-state palladium species display remarkable catalytic activity in organic synthesis."
     },
-    "fundingStatus": "metadata-only"
+    "fundingStatus": "metadata-only",
+    "imageCredit": "© The Royal Society of Chemistry and the Chinese Chemical Society 2026"
   },
   {
     "title": "Polarity‐Controlled Coexistence of Electrochemical Metallization and Valence Change Mechanisms in a Unified Metal Halide Perovskite Memristor",
