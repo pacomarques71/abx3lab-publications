@@ -8,7 +8,7 @@ Registro para coordinación entre ChatGPT, Claude y los editores de este reposit
 
 **Cambios:**
 - images/manual-d6qm00873a-toc.webp: TOC enviada por Paco, recortada solo para quitar el marco discontinuo y el margen blanco (contenido completo, sin modificar), 1200 × 611 px.
-- data/publication_extras.json: «image» e «imageCredit» («© The Royal Society of Chemistry and the Chinese Chemical Society 2026», la línea de copyright de la revista).
+- data/publication_extras.json: «image» e «imageCredit» «© RSC & CCS 2026» (abreviatura de la línea de copyright de la revista, «© The Royal Society of Chemistry and the Chinese Chemical Society 2026», que no cabía en una línea en la tarjeta).
 - scripts/enrich_publications.py: una imagen manual puede llevar «imageCredit» opcional en publication_extras.json; se copia a imageCredit y la web lo muestra fijo en el borde inferior, como en las imágenes de Wiley. Test nuevo (95/95 OK).
 
 **Base:** la RSC permite a los autores reproducir partes de su artículo sin pedir permiso, con la referencia completa.
