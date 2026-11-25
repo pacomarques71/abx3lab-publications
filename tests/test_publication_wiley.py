@@ -115,5 +115,23 @@ class TallVectorFigureTests(unittest.TestCase):
             self.assertGreater(im.height, 2 * 360)
 
 
+class ManualImageCreditTests(unittest.TestCase):
+    @patch.object(module, "request_url", return_value=None)
+    @patch.object(module, "download_publisher_page", return_value=None)
+    @patch.object(module, "openalex_work", return_value={})
+    def test_manual_image_credit_is_published(self, *_):
+        rec = {"doi": "10.1039/d6qm00873a", "projects": [], "image": None, "license": None,
+               "openAccess": None, "fundingEvidence": [], "publicationDate": "2026-10-28",
+               "featured": {"summary": "x", "summary_en": "x"}}
+        prev = {"checked": module.date.today().isoformat(), "fundingStatus": "text-checked",
+                "fundingMatcherVersion": module.FUNDING_MATCHER_VERSION, "fundingEvidence": []}
+        extras = {"publications": {"10.1039/d6qm00873a": {
+            "image": "https://example.org/toc.webp",
+            "imageCredit": "\u00a9 The Royal Society of Chemistry and the Chinese Chemical Society 2026"}}}
+        out, _ = module.enrich_entry(rec, [], prev, extras)
+        self.assertEqual(out["image"], "https://example.org/toc.webp")
+        self.assertIn("Royal Society of Chemistry", out["imageCredit"])
+
+
 if __name__ == "__main__":
     unittest.main()

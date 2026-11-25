@@ -1478,6 +1478,10 @@ def enrich_entry(rec, projects, prev, extras):
     rec.pop("imageCredit", None)
     if manual.get("image"):
         rec["image"] = manual["image"]
+        # Imagen manual sin licencia CC: aviso de copyright opcional en
+        # publication_extras.json («imageCredit»), que la web muestra fijo.
+        if manual.get("imageCredit"):
+            rec["imageCredit"] = manual["imageCredit"]
     elif img_origin:
         if img_origin.get("credit"):
             rec["imageCredit"] = img_origin["credit"]

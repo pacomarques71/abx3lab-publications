@@ -2,6 +2,17 @@
 
 Registro para coordinación entre ChatGPT, Claude y los editores de este repositorio. Consultarlo antes de modificar el pipeline y actualizarlo con cada cambio.
 
+## 2026-11-25 — Imagen manual para 10.1039/d6qm00873a (Materials Chemistry Frontiers) y crédito de imágenes manuales
+
+**Petición de Paco:** el artículo «Pd(iv) nano-perovskites catalyze hydroaddition reactions to alkynes» (Mater. Chem. Front., acceso cerrado, sin licencia CC) no tenía imagen; envió el resumen gráfico (TOC) para ponerlo a mano.
+
+**Cambios:**
+- images/manual-d6qm00873a-toc.webp: TOC enviada por Paco, recortada solo para quitar el marco discontinuo y el margen blanco (contenido completo, sin modificar), 1200 × 611 px.
+- data/publication_extras.json: «image» e «imageCredit» («© The Royal Society of Chemistry and the Chinese Chemical Society 2026», la línea de copyright de la revista).
+- scripts/enrich_publications.py: una imagen manual puede llevar «imageCredit» opcional en publication_extras.json; se copia a imageCredit y la web lo muestra fijo en el borde inferior, como en las imágenes de Wiley. Test nuevo (95/95 OK).
+
+**Base:** la RSC permite a los autores reproducir partes de su artículo sin pedir permiso, con la referencia completa.
+
 ## 2026-11-25 — Imágenes de artículos de Wiley con licencia estándar (regla 7)
 
 **Informe:** el artículo nuevo «High‐Performance Lead and Lead‐Free Inverted Perovskite Photodiodes…» (Adv. Funct. Mater., 10.1002/adfm.79536, 20/11/2026) salía sin figura. No era un fallo: Crossref da la licencia estándar de Wiley (termsAndConditions) y OpenAlex lo marca *bronze* sin licencia, así que la regla 7 lo dejaba sin imagen.
