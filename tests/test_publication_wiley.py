@@ -87,5 +87,33 @@ class WileyStandardLicenceTests(unittest.TestCase):
         self.assertIsNone(out.get("image"))
 
 
+class TallVectorFigureTests(unittest.TestCase):
+    def tall_vector_pdf(self):
+        """Página A4 a dos columnas: párrafo arriba, figura vectorial de 380 pt y pie."""
+        import fitz
+        doc = fitz.open()
+        page = doc.new_page(width=595, height=842)
+        para = ("Body text of the article that explains the experiment in detail. " * 8).strip()
+        page.insert_textbox(fitz.Rect(40, 60, 290, 170), para, fontsize=8)
+        for i in range(40):  # figura vectorial: barras y líneas entre y=190 y y=570
+            y = 190 + i * 9.5
+            page.draw_rect(fitz.Rect(50, y, 60 + i * 5, y + 6), color=(0.6, 0, 0), fill=(0.9, 0.6, 0.1))
+        page.draw_line((45, 192), (280, 192), color=(0, 0, 0))
+        page.insert_text((60, 200), "a)", fontsize=9)
+        page.insert_text((40, 590), "Figure 1. Complexation energies in DMF and DMSO.", fontsize=8)
+        blob = doc.tobytes()
+        doc.close()
+        return blob
+
+    def test_tall_vector_figure_is_rendered_whole(self):
+        from PIL import Image
+        import io
+        png = module.first_figure_from_pdf(self.tall_vector_pdf())
+        self.assertIsNotNone(png)
+        with Image.open(io.BytesIO(png)) as im:
+            # Renderizado a 2x: la figura (≈380 pt) debe caber entera, no solo 225 pt.
+            self.assertGreater(im.height, 2 * 360)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -35,7 +35,7 @@ MAX_PDF = 24 * 1024 * 1024
 MAX_IMAGE = 10 * 1024 * 1024
 CHECK_DAYS = 60
 FUNDING_MATCHER_VERSION = 2  # increment when grant parsing semantics change
-IMAGE_MATCHER_VERSION = 7  # 7: TOC/Figura 1 originales de PMC (AWS) y pie de Figura 1 en manuscritos aceptados
+IMAGE_MATCHER_VERSION = 8  # 8: figuras vectoriales altas completas (antes, solo 225 pt sobre el pie); 7: TOC/Figura 1 de PMC y manuscritos aceptados
 ACS_TOC_MATCHER_VERSION = 2  # retry ACS TOCs independently of other image sources
 SECTION_NAMES = re.compile(r"acknowledg|funding|financial support|grant support|financial assistance|supporting fund|agradecim|financiaci", re.I)
 FIGURE_CAPTION = re.compile(r"^\s*(?:fig(?:ure)?\.?\s*1\b|figure\s+1\b)", re.I)
@@ -760,16 +760,25 @@ def first_figure_from_pdf(pdf_bytes):
                 else:
                     x0, x1 = 30, width - 30
                 y1 = max(80, caption[1] - 8)
-                y0 = max(35, y1 - 225)
-                clip = fitz.Rect(x0, y0, x1, y1)
-                drawings = sum(1 for d in page.get_drawings()
-                               if d["rect"].intersects(clip))
-                body = page.get_text("text", clip=clip)
-                if drawings >= 12 and len(body) < 500 and clip.height > 120:
-                    out = _render_pdf_clip(page, clip)
-                    if out:
-                        doc.close()
-                        return out
+                # Las figuras vectoriales altas (p. ej. Angewandte) ocupan más de
+                # 225 pt: primero se prueba la región completa, desde el párrafo de
+                # texto más cercano por encima del pie (o desde el margen superior),
+                # y si no parece una figura, la región corta de siempre.
+                top = 50  # por debajo de la cabecera de página de la revista
+                for b in page.get_text("blocks"):
+                    if (len(b) > 6 and b[6] == 0 and b[3] <= y1 and b[2] > x0 and b[0] < x1
+                            and len(" ".join(str(b[4]).split())) >= 250):
+                        top = max(top, b[3] + 4)
+                drawn = page.get_drawings()
+                for y0, max_text in ((max(top, y1 - 560), 1400), (max(35, y1 - 225), 500)):
+                    clip = fitz.Rect(x0, y0, x1, y1)
+                    drawings = sum(1 for d in drawn if d["rect"].intersects(clip))
+                    body = page.get_text("text", clip=clip)
+                    if drawings >= 12 and len(body) < max_text and clip.height > 120:
+                        out = _render_pdf_clip(page, clip)
+                        if out:
+                            doc.close()
+                            return out
             except (RuntimeError, ValueError, OSError):
                 pass
         doc.close()

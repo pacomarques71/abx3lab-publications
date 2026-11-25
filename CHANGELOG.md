@@ -17,6 +17,8 @@ Registro para coordinación entre ChatGPT, Claude y los editores de este reposit
 
 **Afecta además a:** 10.1002/aenm.202503291 y 10.1002/anie.7703450, que tampoco tenían licencia CC y pasan a recibir imagen.
 
+**Segunda corrección (mismo día):** en la primera ejecución (run 45591966254, commit del bot f2b1138), la Figura 1 de 10.1002/anie.7703450 salió cortada (solo la parte inferior). Es una figura vectorial y `first_figure_from_pdf` solo renderizaba los 225 pt inmediatamente encima del pie. Ahora prueba primero la región completa (desde el último párrafo de texto de la columna por encima del pie, o desde 50 pt bajo el borde superior, hasta 560 pt) y, si no parece una figura, la región corta de antes. IMAGE_MATCHER_VERSION 7 → 8: las Figuras 1 automáticas (no ACS) se revisan una vez. Test nuevo con una figura vectorial de 380 pt (93/93 OK).
+
 **Limitaciones:** el derecho de reutilización es de los autores y su alcance puede variar según la revista y el formulario firmado; conviene confirmarlo con el autor de correspondencia. La Figura 1 renderizada del PDF se publica entera (sin recortar paneles).
 
 ## 2026-11-15 — TOC y Figura 1: PMC Open Access y manuscritos aceptados
