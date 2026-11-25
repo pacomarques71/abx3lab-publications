@@ -630,7 +630,7 @@
     "url": "https://doi.org/10.1002/smsc.202400529",
     "openalexId": "https://openalex.org/W4406778408",
     "type": "article",
-    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-9b038e2fd11cd918fb56-b0209874776f.webp",
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-9b038e2fd11cd918fb56-afa7e55551bc.webp",
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/smsc.202400529",
@@ -697,7 +697,7 @@
     ],
     "featured": null,
     "fundingStatus": "text-checked",
-    "imageSource": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12087776.1/SMSC-5-2400529-g008.jpg",
+    "imageSource": "https://content.openalex.org/works/W4406778408.pdf",
     "imageType": "figure-1",
     "imageLicense": "http://creativecommons.org/licenses/by/4.0/"
   },

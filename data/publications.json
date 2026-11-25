@@ -350,7 +350,7 @@
     "url": "https://doi.org/10.1002/advs.78211",
     "openalexId": "https://openalex.org/W7223710651",
     "type": "article",
-    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-aa8dea63a48ba765f2e0-ac4cd64b89b4.webp",
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-aa8dea63a48ba765f2e0-e6e642a85945.webp",
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/advs.78211",
@@ -415,7 +415,7 @@
       "summary_en": "A single perovskite memristor combines two mechanisms: ECM operates at lower voltages and withstands more cycles, while VCM retains data longer and increases resistance contrast."
     },
     "fundingStatus": "text-checked",
-    "imageSource": "https://pmc-oa-opendata.s3.amazonaws.com/PMC13697020.1/ADVS-9999-e78211-g003.webp",
+    "imageSource": "https://content.openalex.org/works/W7223710651.pdf",
     "imageType": "figure-1",
     "imageLicense": "http://creativecommons.org/licenses/by/4.0/"
   },
@@ -968,7 +968,7 @@
     "url": "https://doi.org/10.1002/sstr.70540",
     "openalexId": "https://openalex.org/W7168046671",
     "type": "article",
-    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-b24173445c12bc6550f7-a224798f142f.webp",
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-b24173445c12bc6550f7-3128289a04a5.webp",
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1002/sstr.70540",
@@ -1197,7 +1197,7 @@
     "url": "https://doi.org/10.1002/anie.7703450",
     "openalexId": "https://openalex.org/W7140167765",
     "type": "article",
-    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-02075baa1bc4294d27b5-080ccd59fa0b.webp",
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-02075baa1bc4294d27b5-84e52ab52c01.webp",
     "openAccess": {
       "status": "green",
       "url": "https://ora.ox.ac.uk/objects/uuid:af4f41fa-621f-42eb-9101-69ab875f9789/files/r0r967642x",
@@ -1708,7 +1708,7 @@
     "url": "https://doi.org/10.1039/d5ma01122a",
     "openalexId": "https://openalex.org/W7117514834",
     "type": "article",
-    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-72029f8ef5dddac4f134-9ee58d2c3831.webp",
+    "image": "https://raw.githubusercontent.com/pacomarques71/abx3lab-publications/main/images/article-72029f8ef5dddac4f134-0a76884d4a87.webp",
     "openAccess": {
       "status": "gold",
       "url": "https://doi.org/10.1039/d5ma01122a",
